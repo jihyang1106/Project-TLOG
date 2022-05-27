@@ -2,6 +2,6 @@
 <main>
 	<div class="container">
 	<!-- 본문 내용 작성하기 -->
-	hihi
+	홈페이지
 	</div>
 </main>
