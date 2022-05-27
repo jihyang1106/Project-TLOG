@@ -2,6 +2,6 @@
 <main>
 	<div class="container">
 	<!-- 본문 내용 작성하기 -->
-	홈페이지
+	홈페이지ㄹㄹ
 	</div>
 </main>
