@@ -26,4 +26,9 @@ public class LogServiceImpl implements LogService{
 		return dao.selectLogDetail(tNum);
 	}
 
+	@Override
+	public List<LogVO> selectFollowLog(int userNum) {
+		return dao.selectFollowLog(userNum);
+	}
+
 }
