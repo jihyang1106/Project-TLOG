@@ -29,24 +29,41 @@ function logDetail(tNum){
 			글 내용 div(임시)
 		</div>
 		=========================================================
-		<!-- 컨트롤러 작업: 로그인 안했을때 좋아요많은글 불러오기, 로그인했을때 팔로워 최신글 불러오기
-						 - 클릭 시(ajax로 travelDetail 뿌리기) -->
+		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
+		<div>
 			<c:forEach var="vo" items="${logList}">
 				<ul id='log_ul' onclick="logDetail(${vo.tNum})">
-					<li>coverImg경로수정: ${vo.coverImg}</li>
-					<li>tTitle: ${vo.tTitle}</li>
+					<li>${vo.coverImg}</li>
+					<li>${vo.tTitle}</li>
 					<li>${vo.startDate}</li>
 					<li>${vo.endDate}</li>
-					<li>likeNum: ${vo.likeNum}</li>
-					<li>profileImg경로수정: ${vo.profileImg}</li>
-					<li>userNick: ${vo.userNick}</li>
-					<li>tag: 
+					<li>${vo.likeNum}</li>
+					<li>${vo.profileImg}</li>
+					<li>${vo.userNick}</li>
+					<li>
 						<c:forEach var="tag" items="${vo.tagList}">
 							${tag}&nbsp;
 						</c:forEach>
 					</li>
 				</ul>
 			</c:forEach>
+		</div>
+		=========================================================
+		<!-- 팔로워 많은 유저 리스트 -->
+		<div>
+			<c:forEach var="vo" items="${followedUser}">
+				<ul>
+					<li>${vo.userNum}</li>
+					<li>${vo.profileImg}</li>
+					<li>${vo.userNick}</li>
+					<li>${vo.followerNum}</li>
+					<li>
+						<c:forEach var="tag" items="${vo.tagList}" end="2"><!-- 태그3개(임시) -->
+							${tag}&nbsp;
+						</c:forEach>
+					</li>
+				</ul>
+			</c:forEach>
+		</div>
 		
-		내가 팔로우하는 유저 글 불러오기
 	</div>
