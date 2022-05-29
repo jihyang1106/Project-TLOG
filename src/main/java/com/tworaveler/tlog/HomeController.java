@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class HomeController {
+	
 	@GetMapping("/") 
 	public ModelAndView home() { 
 		ModelAndView mav  = new ModelAndView();
