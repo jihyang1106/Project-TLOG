@@ -1,4 +1,4 @@
-package com.tworaveler.tlog.log;
+package com.tworaveler.tlog.vo;
 
 import java.util.List;
 

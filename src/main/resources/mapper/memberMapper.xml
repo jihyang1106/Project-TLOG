@@ -3,23 +3,5 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.member.MemberDAO">
-	<!-- 메인) 팔로워 많은 유저 -->
-	<select id='FollowedUser' resultType='com.tworaveler.tlog.member.MemberVO'>
-		SELECT 	COUNT(A.userNum) AS followerNum, A.followingNum AS userNum, 
-				B.userNick, B.profileImg
-        FROM 	followUser A
-        JOIN 	user B
-        ON		B.userNum=A.followingNum
-        GROUP 	BY followingNum
-        ORDER 	BY followerNum DESC
-        LIMIT 	6
-	</select>
-	<!-- userNum의 태그 리스트 -->
-	<select id='selectmyTag' resultType='String'>
-		SELECT 	B.tagName
-		FROM 	myTag A
-		JOIN	tagWord B
-		ON		B.tagNum=A.tagNum
-		WHERE	A.userNum=#{param1}
-	</select>
+	
 </mapper>

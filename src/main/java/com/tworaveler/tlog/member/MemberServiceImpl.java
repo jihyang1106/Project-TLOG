@@ -6,19 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.tworaveler.tlog.vo.MemberVO;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Inject
 	MemberDAO dao;
 
-	@Override
-	public List<MemberVO> FollowedUser() {
-		return dao.FollowedUser();
-	}
-
-	@Override
-	public List<String> selectmyTag(int userNum) {
-		return dao.selectmyTag(userNum);
-	}
-	
 }

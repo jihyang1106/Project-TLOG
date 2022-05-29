@@ -42,7 +42,7 @@ function logDetail(tNum){
 					<li>${vo.userNick}</li>
 					<li>
 						<c:forEach var="tag" items="${vo.tagList}">
-							${tag}&nbsp;
+							<span onclick="location.href='/logShare/logList?searchKey=tag&searchWord=${tag}'">${tag}</span>&nbsp;
 						</c:forEach>
 					</li>
 				</ul>
@@ -59,11 +59,19 @@ function logDetail(tNum){
 					<li>${vo.followerNum}</li>
 					<li>
 						<c:forEach var="tag" items="${vo.tagList}" end="2"><!-- 태그3개(임시) -->
-							${tag}&nbsp;
+							<span onclick="location.href='/logShare/logList?searchKey=tag&searchWord=${tag}'">${tag}</span>&nbsp;
 						</c:forEach>
 					</li>
 				</ul>
 			</c:forEach>
 		</div>
-		
+		=========================================================
+		<!-- 태그 리스트 -->
+		<div>
+			<ul>
+				<c:forEach var="tag" items="${tagList}">
+					<li onclick="location.href='/logShare/logList?searchKey=tag&searchWord=${tag}'">${tag}</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
