@@ -8,7 +8,7 @@ spring:
   
   datasource: # Mybatis dataSource DB 연결
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-1.ccibfzyyg2bg.us-west-1.rds.amazonaws.com
+    url: jdbc:mysql://database-1.ccibfzyyg2bg.us-west-1.rds.amazonaws.com/tLogDB?characterEncoding=utf-8
     username: admin
     password: tlogadmin
   
@@ -18,5 +18,5 @@ spring:
  
 mybatis: 
   #mybatis에서 팩키지 생략 할 수 있도록 설정
-  type-aliases-package: com.tworaveler.tlog
+  type-aliases-package: com.tworaveler.tlog.vo
   mapper-locations: mapper/*Mapper.xml
