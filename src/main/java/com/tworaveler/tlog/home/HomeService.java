@@ -18,6 +18,9 @@ public interface HomeService {
 	// tNum의 글내용 리스트
 	public List<LogVO> selectLogDetail(int tNum);
 
+	// tNum의 태그된 유저 리스트
+	public List<LogVO> selectTagUsers(int tNum);
+
 	// tNum의 태그 리스트
 	public List<String> selectTagAll();
 

@@ -65,6 +65,10 @@ public class HomeController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/home/logDetail", method = RequestMethod.GET)
 	public List<LogVO> logDetail(@RequestParam("tNum") int tNum) {
-		return service.selectLogDetail(tNum);
+		List<LogVO> detailList = service.selectLogDetail(tNum);
+		for(LogVO vo : detailList) {
+			vo.setTagUserList(service.selectTagUsers(tNum));
+		}
+		return detailList;
 	}
 }

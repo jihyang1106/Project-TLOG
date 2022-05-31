@@ -49,4 +49,9 @@ public class HomeServiceImpl implements HomeService{
 		return dao.selectmyTag(userNum);
 	}
 
+	@Override
+	public List<LogVO> selectTagUsers(int tNum) {
+		return dao.selectTagUsers(tNum);
+	}
+
 }

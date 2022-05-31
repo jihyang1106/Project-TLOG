@@ -15,7 +15,12 @@ function logDetail(tNum){
 				tag += "<li>"+data[i].tImg+"</li>";
 				tag += "<li>"+data[i].tContent+"</li>";
 				tag += "<li>"+data[i].tPlace+"</li>";
-				tag += "<li>"+data[i].isCoverImg+"</li></ul>";
+				tag += "<li>"+data[i].isCoverImg+"</li>";
+				tag += "<li>";
+				for(j=0; j<data[i].tagUserList.length; j++){
+					tag += "<span value='"+data[i].tagUserList[j].userNum+"'>"+data[i].tagUserList[j].userNick+"&nbsp;</span>";
+				}
+				tag += "</li></ul>";
 			}
 			$("#detail_div").html(tag);
 		}
