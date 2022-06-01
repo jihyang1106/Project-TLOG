@@ -9,3 +9,6 @@
 	
 	--theme-deepblue : rgb(42, 76, 211);
 }
+.container{
+	min-height:85vh;
+}

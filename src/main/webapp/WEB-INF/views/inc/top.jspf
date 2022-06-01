@@ -15,9 +15,8 @@
 	<!-- 폰트어썸 CDN -->
 	<script src="https://kit.fontawesome.com/71aed6da77.js" crossorigin="anonymous"></script>
 	<!------------ 프로젝트 CSS, JS ------------>
-	<link rel="stylesheet" href="/css/base.css" type="text/css">
-	<link rel="stylesheet" href="/css/top.css" type="text/css">
-	<link rel="stylesheet" href="/css/bottom.css" type="text/css">
+	<link rel="stylesheet" href="/css/inc/base.css" type="text/css">
+	<link rel="stylesheet" href="/css/inc/top.css" type="text/css">
 	<!-- Pavicon -->
 	<link rel="shortcut icon" href="/img/pavicon.png" type="image/x-icon">
 </head>
@@ -25,9 +24,9 @@
 <div class="top" id='top'>
 	<!-- 헤더, nav바 작성하기 -->
 	<header>
-		ggggg
+		
 	</header>
 	<nav>
-		nnnn
+		
 	</nav>
 </div>

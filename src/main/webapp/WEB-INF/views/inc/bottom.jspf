@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="bottom">
+<link rel="stylesheet" href="/css/inc/bottom.css" type="text/css">
+<div class="bottom" id='bottom'>
 	<footer id='footer'>
 		<!-- 푸터 작성하기 -->
-		bbbb
 	</footer>
 </div>
 </body>
