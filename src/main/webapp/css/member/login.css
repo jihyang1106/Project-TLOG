@@ -12,6 +12,7 @@
     font-style: normal;
 }
 #loginContainer{
+	clear:both;
 	font-family: 'NanumSquare';
 	width:50vw;
 	height:60vh;
