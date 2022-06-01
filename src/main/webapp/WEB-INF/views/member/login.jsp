@@ -3,7 +3,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <main id="loginContainer">
 	<div id="logoContainer">
-		<img src="/img/member/logo2.png" id="logo">
+		<a href="/"><img src="/img/member/logo2.png" id="logo"></a>
 	</div>
 	<div id="loginInfoContainer">
 		<p id="loginTitle">로그인</p>

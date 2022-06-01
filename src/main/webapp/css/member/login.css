@@ -20,14 +20,13 @@
  	left: 50%;
  	transform: translate(-50%, -50%);
  	border-radius:25px;
- 	box-shadow:0 0 20px rgba(0,0,0,50%);
+ 	box-shadow:0 0 30px rgba(122, 140, 226, 60%);
 }
 /*=====로고 영역=========*/
 #logoContainer{
 	width:50%;
 	height:100%;
 	float:left;
-	background-color:rgba(0,0,0,10%);
 	border-top-left-radius:25px;
 	border-bottom-left-radius:25px;
 	position:relative;
@@ -41,6 +40,12 @@
 	left:50%;
 	margin-top:-100px;
 	margin-left:-100px;	
+	transition:0.3s;
+	border-radius:60%;
+}
+#logo:hover{
+	border-radius:100%;
+	box-shadow:0 0 50px rgba(122, 140, 226, 80%);
 }
 /*=====로그인 입력, 버튼 영역=========*/
 #loginInfoContainer{
@@ -51,7 +56,7 @@
 	border-top-right-radius:25px;
 	border-bottom-right-radius:25px;
 	text-align:center;
-	background-color:rgba(0,0,0,30%);
+	background-color:rgba(122, 140, 226, 50%);
 }
 #loginTitle{
 	font-family: 'HaenamFont';
@@ -59,7 +64,7 @@
 	font-weight:900;
 	letter-spacing:5px;
 	margin: 85px 0px;
-	color:rgba(0,0,0,60%);
+	color:rgb(42, 76, 211);
 }
 #loginFrm ul{
 	margin:0 !important;
@@ -70,4 +75,10 @@
  	height:50px;
  	margin:10px 0px;
  	border-radius:10px;
+ 	box-shadow:0 0 20px rgba(122, 140, 226, 60%);
+ 	transition:0.3s;
+}
+.otherLogin img:hover{
+	width:310px; 
+ 	height:55px;
 }
