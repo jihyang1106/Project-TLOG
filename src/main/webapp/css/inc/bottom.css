@@ -1,0 +1,6 @@
+@charset "UTF-8";
+#footer{
+	height:100px;
+	background-color:rgba(0,0,0,30%);
+	position:relative;
+}
