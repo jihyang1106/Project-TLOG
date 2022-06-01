@@ -1,0 +1,11 @@
+@charset "UTF-8";
+:root{
+	/* 메인컬러 */
+	--theme-lightblue : rgba(122, 140, 226,100%);
+	--theme-lightblue-80 : rgba(122, 140, 226, 80%);
+	--theme-lightblue-70 : rgba(122, 140, 226, 70%);
+	--theme-lightblue-60 : rgba(122, 140, 226, 60%);
+	--theme-lightblue-50 : rgba(122, 140, 226, 50%);
+	
+	--theme-deepblue : rgb(42, 76, 211);
+}
