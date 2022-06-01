@@ -1,6 +1,5 @@
 package com.tworaveler.tlog;
 
-import java.security.Provider.Service;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,15 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tworaveler.tlog.home.HomeService;
-import com.tworaveler.tlog.member.MemberService;
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.log.LogService;
+import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Controller
 public class HomeController {
 	@Inject
-	HomeService service;
+	LogService service;
 	
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 

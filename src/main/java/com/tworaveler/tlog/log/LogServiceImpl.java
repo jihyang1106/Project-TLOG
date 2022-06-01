@@ -1,4 +1,4 @@
-package com.tworaveler.tlog.home;
+package com.tworaveler.tlog.log;
 
 import java.util.List;
 
@@ -6,13 +6,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Service
-public class HomeServiceImpl implements HomeService{
+public class LogServiceImpl implements LogService{
 	@Inject
-	HomeDAO dao;
+	LogDAO dao;
 
 	@Override
 	public List<LogVO> selectLikeLog() {
@@ -52,6 +51,21 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public List<LogVO> selectTagUsers(int tNum) {
 		return dao.selectTagUsers(tNum);
+	}
+
+	@Override
+	public List<LogVO> selectLogLists(int startNum, int limit) {
+		return dao.selectLogLists(startNum, limit);
+	}
+
+	@Override
+	public List<LogVO> selectSearchLists(String searchKey, String string, int startNum, int limitNum) {
+		return dao.selectSearchLists(searchKey, string, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> selectSearchListsTag(String string, int startNum, int limitNum) {
+		return dao.selectSearchListsTag(string, startNum, limitNum);
 	}
 
 }

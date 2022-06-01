@@ -1,4 +1,4 @@
-package com.tworaveler.tlog.vo;
+package com.tworaveler.tlog.log;
 
 import java.util.List;
 
@@ -182,6 +182,4 @@ public class LogVO {
 	public void setTagUserList(List<LogVO> tagUserList) {
 		this.tagUserList = tagUserList;
 	}
-	
-	
 }

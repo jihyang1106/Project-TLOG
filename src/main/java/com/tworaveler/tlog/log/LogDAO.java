@@ -1,16 +1,15 @@
-package com.tworaveler.tlog.home;
+package com.tworaveler.tlog.log;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Mapper
 @Repository
-public interface HomeDAO {
+public interface LogDAO {
 	// 메인: 최신 글 리스트
 	public List<LogVO> selectLikeLog();
 
@@ -34,4 +33,13 @@ public interface HomeDAO {
 
 	// userNum의 태그 리스트
 	public List<String> selectmyTag(int userNum);
+
+	// 무한스크롤 리스트
+	public List<LogVO> selectLogLists(int startNum, int limit);
+
+	// 무한스크롤 검색 리스트 - 제목/작성자
+	public List<LogVO> selectSearchLists(String searchKey, String string, int startNum, int limitNum);
+
+	// 무한스크롤 검색 리스트 - 태그
+	public List<LogVO> selectSearchListsTag(String string, int startNum, int limitNum);
 }

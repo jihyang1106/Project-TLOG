@@ -47,7 +47,7 @@ function logDetail(tNum){
 					<li>${vo.userNick}</li>
 					<li>
 						<c:forEach var="tag" items="${vo.tagList}">
-							<span onclick="location.href='/logShare/logList?searchKey=tag&searchWord=${tag}'">${tag}</span>&nbsp;
+							<span onclick="location.href='/logShare/logList/search?searchKey=tag&searchWord=${tag}'">${tag}</span>&nbsp;
 						</c:forEach>
 					</li>
 				</ul>
@@ -75,7 +75,7 @@ function logDetail(tNum){
 		<div>
 			<ul>
 				<c:forEach var="tag" items="${tagList}">
-					<li onclick="location.href='/logShare/logList?searchKey=tag&searchWord=${tag}'">${tag}</li>
+					<li onclick="location.href='/logShare/logList/search?searchKey=tag&searchWord=${tag}'">${tag}</li>
 				</c:forEach>
 			</ul>
 		</div>
