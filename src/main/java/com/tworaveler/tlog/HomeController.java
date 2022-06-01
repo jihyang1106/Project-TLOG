@@ -1,6 +1,5 @@
 package com.tworaveler.tlog;
 
-import java.security.Provider.Service;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tworaveler.tlog.home.HomeService;
-import com.tworaveler.tlog.member.MemberService;
 import com.tworaveler.tlog.vo.LogVO;
 import com.tworaveler.tlog.vo.MemberVO;
 
@@ -27,19 +25,19 @@ public class HomeController {
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
-		session.setAttribute("logStatus", "Y"); //ì„ì‹œ
+		session.setAttribute("logStatus", "Y"); //ÀÓ½Ã
 
-		//(1) tLog 10ê°œ
+		//(1) tLog 10°³
 		if(session.getAttribute("logStatus").equals("Y")) {
-			//íŒ”ë¡œì‰ tLog
-			List<LogVO> logList = service.selectFollowLog(1); //ì„ì‹œ(logId)
-			//voë§ˆë‹¤ tNumì˜ íƒœê·¸ë¦¬ìŠ¤íŠ¸ ë„£ê¸°
+			//ÆÈ·ÎÀ× tLog
+			List<LogVO> logList = service.selectFollowLog(1); //ÀÓ½Ã(logId)
+			//vo¸¶´Ù tNumÀÇ ÅÂ±×¸®½ºÆ® ³Ö±â
 			for(LogVO vo : logList) {
 				vo.setTagList(service.selectLogTag(vo.gettNum()));
 			}
 			mav.addObject("logList", logList);
 		}else {
-			//ì¢‹ì•„ìš”ìˆœ tLog
+			//ÁÁ¾Æ¿ä¼ø tLog
 			List<LogVO> logList = service.selectLikeLog();
 			for(LogVO vo : logList) {
 				vo.setTagList(service.selectLogTag(vo.gettNum()));
@@ -47,14 +45,14 @@ public class HomeController {
 			mav.addObject("logList", logList);
 		}
 		
-		//(2) íŒ”ë¡œì›Œ ë§ì€ ìœ ì €
+		//(2) ÆÈ·Î¿ö ¸¹Àº À¯Àú
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
 			vo.setTagList(service.selectmyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);
 		
-		//(3) íƒœê·¸ ë¦¬ìŠ¤íŠ¸
+		//(3) ÅÂ±× ¸®½ºÆ®
 		List<String> tagList = service.selectTagAll();
 		mav.addObject("tagList", tagList);
 		
@@ -65,6 +63,10 @@ public class HomeController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/home/logDetail", method = RequestMethod.GET)
 	public List<LogVO> logDetail(@RequestParam("tNum") int tNum) {
-		return service.selectLogDetail(tNum);
+		List<LogVO> detailList = service.selectLogDetail(tNum);
+		for(LogVO vo : detailList) {
+			vo.setTagUserList(service.selectTagUsers(tNum));
+		}
+		return detailList;
 	}
 }

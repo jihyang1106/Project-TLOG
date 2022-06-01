@@ -34,6 +34,8 @@ public class LogVO {
 	private String userNick;
 	private String profileImg;
 	
+	//tagUser
+	private List<LogVO> tagUserList;
 	
 	
 	public int getLikeNum() {
@@ -173,6 +175,12 @@ public class LogVO {
 	}
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
+	}
+	public List<LogVO> getTagUserList() {
+		return tagUserList;
+	}
+	public void setTagUserList(List<LogVO> tagUserList) {
+		this.tagUserList = tagUserList;
 	}
 	
 	
