@@ -1,0 +1,73 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css%27');
+    font-weight:normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HaenamFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/HaenamFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#loginContainer{
+	font-family: 'NanumSquare';
+	width:50vw;
+	height:60vh;
+	position:absolute;
+	top: 50%;
+ 	left: 50%;
+ 	transform: translate(-50%, -50%);
+ 	border-radius:25px;
+ 	box-shadow:0 0 20px rgba(0,0,0,50%);
+}
+/*=====로고 영역=========*/
+#logoContainer{
+	width:50%;
+	height:100%;
+	float:left;
+	background-color:rgba(0,0,0,10%);
+	border-top-left-radius:25px;
+	border-bottom-left-radius:25px;
+	position:relative;
+}
+#logo{
+	width:200px;
+	height:200px;
+	display:block;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;	
+}
+/*=====로그인 입력, 버튼 영역=========*/
+#loginInfoContainer{
+	width:50%;
+	height:100%;
+	display:inline-block;
+	text-align:center;
+	border-top-right-radius:25px;
+	border-bottom-right-radius:25px;
+	text-align:center;
+	background-color:rgba(0,0,0,30%);
+}
+#loginTitle{
+	font-family: 'HaenamFont';
+	font-size:2.5em;
+	font-weight:900;
+	letter-spacing:5px;
+	margin: 85px 0px;
+	color:rgba(0,0,0,60%);
+}
+#loginFrm ul{
+	margin:0 !important;
+	list-style-type:none;
+}
+.otherLogin img{
+ 	width:300px; 
+ 	height:50px;
+ 	margin:10px 0px;
+ 	border-radius:10px;
+}
