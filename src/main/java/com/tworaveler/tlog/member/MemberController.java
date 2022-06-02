@@ -1,17 +1,25 @@
 package com.tworaveler.tlog.member;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
+	
 	/*
 	 * // 로그인 폼
 	 * 
-	 * @GetMapping("login") public String login() { return "/member/login"; } // 카카오
-	 * 로그인
+	 * @GetMapping("login") public String login() { return "/member/login"; } //
+	 * 카카오로그인
 	 * 
 	 * @GetMapping("kakaologin") public String kakaologin(HttpServletResponse
 	 * response, String code, HttpSession session, HttpServletResponse res,
@@ -30,12 +38,11 @@ public class MemberController {
 	 * ); out.flush(); return "redirect:login"; } session.setAttribute("userInfo",
 	 * userInfo); session.setAttribute("accessToken", accessToken);
 	 * session.setAttribute("refreshToken", refreshToken);
-	 * session.setAttribute("kakao", "true"); setLogCookie(res, session);
-	 * if(userInfo.getVerify()==1) { return "redirect:/admin/adminMain"; }else {
-	 * return "redirect:/"; } }else { redirect.addFlashAttribute("kakaoVO",
-	 * kakaoVO); return "redirect:signup"; } } // 구글 로그인
+	 * session.setAttribute("kakao", "true"); if(userInfo.getVerify()==1) { return
+	 * "redirect:/admin/adminMain"; }else { return "redirect:/"; } }else{
+	 * redirect.addFlashAttribute("kakaoVO", kakaoVO); return "redirect:signup"; } }
 	 */
-	
+	// 구글 로그인
 	@GetMapping("login")
 	public String loginForm() {
 		return "member/login";
