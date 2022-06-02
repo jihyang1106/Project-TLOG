@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Mapper
 @Repository

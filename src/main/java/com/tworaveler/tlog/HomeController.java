@@ -13,15 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-import com.tworaveler.tlog.home.HomeService;
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
-=======
 import com.tworaveler.tlog.log.LogService;
 import com.tworaveler.tlog.log.LogVO;
 import com.tworaveler.tlog.member.MemberVO;
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
 
 @Controller
 public class HomeController {
@@ -31,19 +25,19 @@ public class HomeController {
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
-		session.setAttribute("logStatus", "Y"); //ÀÓ½Ã
+		session.setAttribute("logStatus", "Y"); //ì„ì‹œ
 
-		//(1) tLog 10°³
+		//(1) tLog 10ê°œ
 		if(session.getAttribute("logStatus").equals("Y")) {
-			//ÆÈ·ÎÀ× tLog
-			List<LogVO> logList = service.selectFollowLog(1); //ÀÓ½Ã(logId)
-			//vo¸¶´Ù tNumÀÇ ÅÂ±×¸®½ºÆ® ³Ö±â
+			//íŒ”ë¡œì‰ tLog
+			List<LogVO> logList = service.selectFollowLog(1); //ì„ì‹œ(logId)
+			//voë§ˆë‹¤ tNumì˜ íƒœê·¸ë¦¬ìŠ¤íŠ¸ ë„£ê¸°
 			for(LogVO vo : logList) {
 				vo.setTagList(service.selectLogTag(vo.gettNum()));
 			}
 			mav.addObject("logList", logList);
 		}else {
-			//ÁÁ¾Æ¿ä¼ø tLog
+			//ì¢‹ì•„ìš”ìˆœ tLog
 			List<LogVO> logList = service.selectLikeLog();
 			for(LogVO vo : logList) {
 				vo.setTagList(service.selectLogTag(vo.gettNum()));
@@ -51,20 +45,15 @@ public class HomeController {
 			mav.addObject("logList", logList);
 		}
 		
-		//(2) ÆÈ·Î¿ö ¸¹Àº À¯Àú
+		//(2) íŒ”ë¡œì›Œ ë§ì€ ìœ ì €
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
 			vo.setTagList(service.selectMyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);
 		
-<<<<<<< HEAD
-		//(3) ÅÂ±× ¸®½ºÆ®
-		List<String> tagList = service.selectTagAll();
-=======
 		//(3) íƒœê·¸ ë¦¬ìŠ¤íŠ¸
 		List<LogVO> tagList = service.selectTagAll();
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
 		mav.addObject("tagList", tagList);
 		
 		mav.setViewName("/home");

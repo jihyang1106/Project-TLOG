@@ -1,28 +1,13 @@
 @charset "UTF-8";
 #mypageContainer{
-	min-height:83vh;
-	overflow-y:auto;
+	min-height:80vh;
 }
 /*=============슬라이드바================*/
-#mypageSlideSection{
-	width:25%;
-	height:85vh;
-	float:left;
-	background-color:lightblue;
-	position:relative;
-}
 #mypageSlidebar{
-	list-style-type:none;
-}
-#tab li{
-	width:100%;
-	text-align:center;
+	width:20%;
+	float:left;
 }
 /*=============마이페이지 컨텐츠================*/
 #mypageContent{
-	width:75%;
-	height:85vh;
 	display:inline-block;	
-	background-color:green;
-	position:relative;
 }

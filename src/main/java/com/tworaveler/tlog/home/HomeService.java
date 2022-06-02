@@ -2,8 +2,8 @@ package com.tworaveler.tlog.home;
 
 import java.util.List;
 
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 public interface HomeService {
 	// 메인: 최신 글 리스트

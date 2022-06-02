@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.tworaveler.tlog.vo.LogVO;
-import com.tworaveler.tlog.vo.MemberVO;
+import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Service
 public class HomeServiceImpl implements HomeService{

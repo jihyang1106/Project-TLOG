@@ -36,11 +36,7 @@ public class LogVO {
 	
 	//tagUser
 	private List<LogVO> tagUserList;
-<<<<<<< HEAD:src/main/java/com/tworaveler/tlog/vo/LogVO.java
-	
-=======
 	private int tagged;	
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03:src/main/java/com/tworaveler/tlog/log/LogVO.java
 	
 	public int getLikeNum() {
 		return likeNum;
@@ -186,11 +182,6 @@ public class LogVO {
 	public void setTagUserList(List<LogVO> tagUserList) {
 		this.tagUserList = tagUserList;
 	}
-<<<<<<< HEAD:src/main/java/com/tworaveler/tlog/vo/LogVO.java
-	
-	
-}
-=======
 	public int getTagged() {
 		return tagged;
 	}
@@ -198,4 +189,3 @@ public class LogVO {
 		this.tagged = tagged;
 	}
 }
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03:src/main/java/com/tworaveler/tlog/log/LogVO.java
