@@ -53,7 +53,7 @@ public class HomeController {
 		mav.addObject("followedUser", followedUser);
 		
 		//(3) 태그 리스트
-		List<String> tagList = service.selectTagAll();
+		List<LogVO> tagList = service.selectTagAll();
 		mav.addObject("tagList", tagList);
 		
 		mav.setViewName("/home");

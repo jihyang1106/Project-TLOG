@@ -2,6 +2,8 @@ package com.tworaveler.tlog.member;
 
 import java.util.List;
 
+import com.tworaveler.tlog.log.LogVO;
+
 public class MemberVO {
 	//user
 	private int userNum;
@@ -13,7 +15,7 @@ public class MemberVO {
 	private int status;
 	
 	//tag
-	private List<String> tagList;
+	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
 	
@@ -21,11 +23,11 @@ public class MemberVO {
 	private int followingNum;
 	private int followerNum;
 	
-	public List<String> getTagList() {
+	public List<LogVO> getTagList() {
 		return tagList;
 	}
 
-	public void setTagList(List<String> tagList) {
+	public void setTagList(List<LogVO> tagList) {
 		this.tagList = tagList;
 	}
 
