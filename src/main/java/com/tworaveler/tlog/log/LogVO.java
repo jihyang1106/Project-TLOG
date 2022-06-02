@@ -36,7 +36,7 @@ public class LogVO {
 	
 	//tagUser
 	private List<LogVO> tagUserList;
-	
+	private int tagged;	
 	
 	public int getLikeNum() {
 		return likeNum;
@@ -181,5 +181,11 @@ public class LogVO {
 	}
 	public void setTagUserList(List<LogVO> tagUserList) {
 		this.tagUserList = tagUserList;
+	}
+	public int getTagged() {
+		return tagged;
+	}
+	public void setTagged(int tagged) {
+		this.tagged = tagged;
 	}
 }

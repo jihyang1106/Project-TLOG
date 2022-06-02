@@ -48,7 +48,7 @@ public class HomeController {
 		//(2) 팔로워 많은 유저
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
-			vo.setTagList(service.selectmyTag(vo.getUserNum()));
+			vo.setTagList(service.selectMyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);
 		
