@@ -1,0 +1,42 @@
+@charset "UTF-8";
+#mypageContainer{
+	min-height:83vh;
+	overflow-y:auto;
+}
+/*=============마이페이지 슬라이드바================*/
+#mypageSlideSection{
+	width:20%;
+	height:85vh;
+	float:left;
+	background-color:lightblue;
+	position:relative;
+}
+#mypageSlidebar{
+	list-style-type:none;
+}
+#tab li{
+	width:100%;
+	text-align:center;
+}
+/*=============마이페이지 컨텐츠================*/
+#userEdit{
+	width:80%;
+	height:85vh;
+	display:inline-block;	
+	background-color:red;
+	position:relative;
+}
+#myLog{
+	width:80%;
+	height:85vh;
+	display:inline-block;	
+	background-color:green;
+	position:relative;
+}
+#myFollow{
+	width:80%;
+	height:85vh;
+	display:inline-block;	
+	background-color:blue;
+	position:relative;
+}

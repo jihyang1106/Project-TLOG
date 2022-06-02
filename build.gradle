@@ -29,6 +29,8 @@ dependencies {
 	implementation 'javax.servlet:jstl:1.2'
 	// 3) JSON
 	implementation 'org.json:json:20211205'
+	// 4) inject
+	implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 	//------------ 추가한 의존성 END --------->
 }
 

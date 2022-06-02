@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css%27');
+    font-weight:normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HaenamFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/HaenamFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+:root{
+	/* 메인컬러 */
+	--theme-lightblue : rgba(122, 140, 226,100%);
+	--theme-lightblue-80 : rgba(122, 140, 226, 80%);
+	--theme-lightblue-70 : rgba(122, 140, 226, 70%);
+	--theme-lightblue-60 : rgba(122, 140, 226, 60%);
+	--theme-lightblue-50 : rgba(122, 140, 226, 50%);
+	
+	--theme-deepblue : rgb(42, 76, 211);
+}
+.container{
+	min-height:85vh;
+	font-family:'NanumSquare';
+}

@@ -1,0 +1,100 @@
+@charset "UTF-8";
+#welcomeContainer{
+	clear:both;
+	font-family: 'NanumSquare';
+	width:50vw;
+	height:80vh;
+	position:absolute;
+	top: 50%;
+ 	left: 50%;
+ 	transform: translate(-50%, -50%);
+ 	border-radius:25px;
+ 	box-shadow:0 0 30px rgba(122, 140, 226, 60%);
+ 	text-align:center;
+}
+#welcomeTitle{
+	font-family: 'HaenamFont';
+	font-size:2.5em;
+	font-weight:900;
+	letter-spacing:5px;
+	margin: 60px 0px;
+	color:rgba(42, 76, 211, 75%);
+}
+
+#previewImg{
+	width:120px;
+	height:120px;
+	border-radius:50%;
+}
+#profileNick{
+	font-size:1.3em;
+	font-weight:700;
+	color:rgba(0,0,0,60%);
+}
+#profileInfoNick{
+	border:none;
+	outline:none;
+	border-bottom:1px solid rgba(0,0,0,60%);
+	text-align:center;
+}
+#profileSubmit{
+	text-align:center;
+}
+#profileSubmitBtn{
+	width:80px;
+	height:40px;
+	font-weight:800;
+	background-color:var(--theme-lightblue-60);
+	border:none;
+	border-radius:10px;
+	position:absolute;
+	top:90%;
+	margin-left:-40px;
+	transition:0.3s;
+}
+#profileSubmitBtn:hover{
+	top:89%;	
+}
+/*===========태그============*/
+#hr-sect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color:rgba(122, 140, 226, 80%);
+	font-size:1.3em;
+	margin: 30px 0px;
+}
+#hr-sect::before{
+	content: "";
+	flex-grow: 1;
+	background:rgba(122, 140, 226, 80%);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin:0px 20px  0px 100px;
+}
+#hr-sect::after {
+	content: "";
+	flex-grow: 1;
+	background:rgba(122, 140, 226, 80%);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin:0px 100px  0px 20px;
+}
+.tagWord{
+	padding:10px;
+	letter-spacing:1px;
+	border-radius:10px;
+	box-shadow:0 0 7px rgba(0,0,0,50%);
+	cursor:pointer;
+}
+.tagplus{
+	padding:10px;
+	letter-spacing:1px;
+	border-radius:10px;
+	box-shadow:0 0 7px rgba(0,0,0,50%);
+	cursor:pointer;
+	background-color:black;
+	color:white;
+}
