@@ -40,4 +40,12 @@ public class MemberController {
 	public String loginForm() {
 		return "member/login";
 	}
+	@GetMapping("welcomePage")
+	public String welcomePage() {
+		return "member/welcomePage";
+	}
+	@GetMapping("mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
 }
