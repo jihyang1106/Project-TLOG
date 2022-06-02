@@ -13,14 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.tworaveler.tlog.home.HomeService;
 import com.tworaveler.tlog.vo.LogVO;
 import com.tworaveler.tlog.vo.MemberVO;
+=======
+import com.tworaveler.tlog.log.LogService;
+import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
+>>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
 
 @Controller
 public class HomeController {
 	@Inject
-	HomeService service;
+	LogService service;
 	
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
@@ -48,12 +54,17 @@ public class HomeController {
 		//(2) ÆÈ·Î¿ö ¸¹Àº À¯Àú
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
-			vo.setTagList(service.selectmyTag(vo.getUserNum()));
+			vo.setTagList(service.selectMyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);
 		
+<<<<<<< HEAD
 		//(3) ÅÂ±× ¸®½ºÆ®
 		List<String> tagList = service.selectTagAll();
+=======
+		//(3) íƒœê·¸ ë¦¬ìŠ¤íŠ¸
+		List<LogVO> tagList = service.selectTagAll();
+>>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
 		mav.addObject("tagList", tagList);
 		
 		mav.setViewName("/home");
