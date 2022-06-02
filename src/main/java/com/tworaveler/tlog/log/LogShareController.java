@@ -36,11 +36,15 @@ public class LogShareController {
 	//전체 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logLists", method = RequestMethod.GET)
-	public List<LogVO> logLists(@RequestParam("startNum") int startNum) {
-		int limitNum =5;
+	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int newOrLike) {
+		int limitNum =5; //한 번에 나오는 글 수
 		
-		List<LogVO> logLists = service.selectLogLists(startNum, limitNum);
-		
+		List<LogVO> logLists = new ArrayList<LogVO>();
+		if(newOrLike==0) { //최신순
+			logLists = service.selectNewLogs(startNum, limitNum);
+		}else { //좋아요순
+			logLists = service.selectLikeLogs(startNum, limitNum);
+		}
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(service.selectLogTag(lvo.gettNum()));
@@ -50,15 +54,24 @@ public class LogShareController {
 	//검색한 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/searchLists", method = RequestMethod.GET)
-	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord) {
+	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord, int newOrLike) {
 		int limitNum = 5;
 		List<LogVO> logLists = new ArrayList<LogVO>();
-
-		if(searchKey.equals("tag")) {//태그
-			logLists = service.selectSearchListsTag("%" + searchWord + "%", startNum, limitNum);
-		}else {//제목, 작성자
-			logLists = service.selectSearchLists(searchKey, "%" + searchWord + "%", startNum, limitNum);
+		
+		if(newOrLike==0) { //최신순
+			if(searchKey.equals("tag")) {//태그
+				logLists = service.searchNewLogsTag("%" + searchWord + "%", startNum, limitNum);
+			}else {//제목, 작성자
+				logLists = service.searchNewLogs(searchKey, "%" + searchWord + "%", startNum, limitNum);
+			}
+		}else { //좋아요순
+			if(searchKey.equals("tag")) {//태그
+				logLists = service.searchLikeLogsTag("%" + searchWord + "%", startNum, limitNum);
+			}else {//제목, 작성자
+				logLists = service.searchLikeLogs(searchKey, "%" + searchWord + "%", startNum, limitNum);
+			}
 		}
+		
 		
 		//vo마다 tNum의 태그리스트 넣기
 		for(LogVO lvo : logLists) {

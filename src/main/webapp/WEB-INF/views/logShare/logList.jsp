@@ -4,17 +4,9 @@
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
 var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
+var newOrLike=0;
 
-/* 검색한 단어 띄우기 */
-window.onload = function(){
-	if('${searchKey}'!=null && '${searchKey}'!=""){
-		document.getElementById("searchKey").value = '${searchKey}';
-	}
-	if('${searchWord}'!=null && '${searchWord}'!=""){
-		document.getElementById("searchWord").value = '${searchWord}';
-	}
-}
-/* 로그 리스트 추가 */
+/* ====== 로그 리스트 추가 ====== */
 	function logLists(){
 		var url;
 		var param;
@@ -26,14 +18,16 @@ window.onload = function(){
 		if(pn=='logList'){
 			url = '/logShare/logLists';
 			param = {
-				"startNum" : startNum 
+				"startNum" : startNum,
+				"newOrLike" : newOrLike
 			};
 		}else if(pn='searchs'){
 			url = '/logShare/searchLists';
 			param = {
 				"startNum" : startNum ,
 				"searchKey" : key,
-				"searchWord" : word
+				"searchWord" : word,
+				"newOrLike" : newOrLike
 			};
 			
 		}
@@ -57,8 +51,9 @@ window.onload = function(){
 			    	  tag += "<li>"+data[i].userNick+"</li>";
 					  tag += "<li>";
 					  for(j=0; j<data[i].tagList.length; j++){
-						  tag += "<span onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j]+"'\">";
-						  tag += data[i].tagList[j]+"</span>&nbsp;";
+						  tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
+						  tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
+						  tag += data[i].tagList[j].tagName+"</span>&nbsp;";
 					  }
 					  tag += "</li></ul>";
 			    }//for
@@ -82,17 +77,7 @@ window.onload = function(){
 		});//ajax
  	}
 	
-//첫페이지 보이기
-logLists(); 
-
-//검색
-$("#searchFrm").submit(function() {
-	if ($("#searchWord").val() == "") {
-	   alert("검색어를 입력하세요");
-	   return false;
-	}
-});
-/* 스크롤 바닥 감지  */
+/* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
     if($(window).scrollTop()+200>=$(document).height() - $(window).height()){
     	console.log("바닥");
@@ -104,7 +89,27 @@ window.onscroll = function(e) {
     	}
     }
 };
-/* 클릭이벤트: 일기 상세 리스트 */
+
+//첫페이지 보이기
+logLists(); 
+
+$(document).ready(function(){
+	/* ======== 최신순 정렬 ======== */
+	$("#view_new").click(function(){
+		newOrLike=0;
+		$("#log_list_div").empty();
+		startNum=0;
+		logLists();
+	});
+	/* ======= 좋아요순 정렬 ======= */
+	$("#view_like").click(function(){
+		newOrLike=1;
+		$("#log_list_div").empty();
+		startNum=0;
+		logLists();
+	});
+})
+/* === 클릭이벤트: 일기 상세 리스트 === */
 function logDetail(tNum){
 	var param={"tNum" : tNum};	
 	$.ajax({
@@ -130,8 +135,25 @@ function logDetail(tNum){
 		}
 	})
 }
+/* ===== 검색한 단어 띄우기 ===== */
+window.onload = function(){
+	if('${searchKey}'!=null && '${searchKey}'!=""){
+		document.getElementById("searchKey").value = '${searchKey}';
+	}
+	if('${searchWord}'!=null && '${searchWord}'!=""){
+		document.getElementById("searchWord").value = '${searchWord}';
+	}
+}
 
-/* 버튼 보이는 이벤트 */
+/* ========== 검색 ========== */
+$("#searchFrm").submit(function() {
+	if ($("#searchWord").val() == "") {
+	   alert("검색어를 입력하세요");
+	   return false;
+	}
+});
+
+/* === 올라가는 버튼 보이는 이벤트 === */
 function scrollFunction() {
     var btn = document.getElementById('top_btn');
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -141,14 +163,46 @@ function scrollFunction() {
     }
 }
 
-/* 부드럽게 위로 가기 */
+/* ======= 부드럽게 위로 가기 ====== */
 function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
+<!-- ===================================== CSS ================================================================== -->
+<style>
+/* ===== 태그 ===== */
+.tags{
+	border-radius: 5px;
+	padding: 5px;
+	font-size:11px;
+}
+/* ===== 태그 색상(변경해야됨!) ===== */
+#tag1, #tag2{
+	background-color: rgb(42, 76, 211, 70%);
+}
+#tag3, #tag4, #tag5, #tag6, #tag7{
+	background-color: rgba(122, 140, 226, 80%);
+}
+#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
+	background-color: rgba(122, 140, 226, 30%);
+}
+#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
+	background-color: #C3E2DD;
+}
+#tag21, #tag22, #tag23, #tag24, #tag25{
+	background-color: #FEF5D4;
+}
+#tag26, #tag27, #tag28, #tag29{
+	background-color: #EACACB;
+}
+</style>
+<!--====================================== HTML ===================================================================-->
 <!-- 검색 -->
 <button id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>
-<div style="height:500px">
+<button id='view_new'>New</button>
+<button id='view_like'>Like</button>
+
+<div>
 	<form action="/logShare/logList/searchs" id="searchFrm">
         <select name="searchKey" id='searchKey'>
             <option value="title">제목</option>

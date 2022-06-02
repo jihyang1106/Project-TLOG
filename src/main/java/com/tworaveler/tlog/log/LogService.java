@@ -12,7 +12,7 @@ public interface LogService {
 	public List<LogVO> selectFollowLog(int userNum);
 
 	// tNum의 태그 리스트
-	public List<String> selectLogTag(int tNum);
+	public List<LogVO> selectLogTag(int tNum);
 
 	// tNum의 글내용 리스트
 	public List<LogVO> selectLogDetail(int tNum);
@@ -21,20 +21,29 @@ public interface LogService {
 	public List<LogVO> selectTagUsers(int tNum);
 
 	// tNum의 태그 리스트
-	public List<String> selectTagAll();
+	public List<LogVO> selectTagAll();
 
 	// 메인) 팔로워 많은 유저
 	public List<MemberVO> FollowedUser();
 
 	// userNum의 태그 리스트
-	public List<String> selectmyTag(int userNum);
+	public List<LogVO> selectmyTag(int userNum);
 
-	// 무한스크롤 리스트
-	public List<LogVO> selectLogLists(int startNum, int limit);
+	// 무한스크롤 리스트(최신순)
+	public List<LogVO> selectNewLogs(int startNum, int limit);
 
-	// 무한스크롤 검색 리스트 - 제목/작성자
-	public List<LogVO> selectSearchLists(String searchKey, String string, int startNum, int limitNum);
+	// 무한스크롤 리스트(좋아요순)
+	public List<LogVO> selectLikeLogs(int startNum, int limit);
 
-	// 무한스크롤 검색 리스트 - 태그
-	public List<LogVO> selectSearchListsTag(String string, int startNum, int limitNum);
+	// 무한스크롤 검색 리스트(최신순) - 제목/작성자
+	public List<LogVO> searchNewLogs(String searchKey, String string, int startNum, int limitNum);
+
+	// 무한스크롤 검색 리스트(최신순) - 태그
+	public List<LogVO> searchNewLogsTag(String string, int startNum, int limitNum);
+
+	// 무한스크롤 검색 리스트(좋아요순) - 제목/작성자
+	public List<LogVO> searchLikeLogs(String searchKey, String string, int startNum, int limitNum);
+
+	// 무한스크롤 검색 리스트(좋아요순) - 태그
+	public List<LogVO> searchLikeLogsTag(String string, int startNum, int limitNum);
 }
