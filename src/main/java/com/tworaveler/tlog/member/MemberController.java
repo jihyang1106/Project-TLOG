@@ -1,12 +1,20 @@
 package com.tworaveler.tlog.member;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tworaveler.tlog.vo.MemberVO;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
+	@Inject
+	MemberService service;
 	/*
 	 * // 로그인 폼
 	 * 
@@ -34,14 +42,24 @@ public class MemberController {
 	 * if(userInfo.getVerify()==1) { return "redirect:/admin/adminMain"; }else {
 	 * return "redirect:/"; } }else { redirect.addFlashAttribute("kakaoVO",
 	 * kakaoVO); return "redirect:signup"; } } // 구글 로그인
-<<<<<<< HEAD
-	 */}
-=======
 	 */
 	
 	@GetMapping("login")
 	public String loginForm() {
 		return "member/login";
 	}
+	@GetMapping("welcomePage")
+	public String welcomePage() {
+		return "member/welcomePage";
+	}
+	@GetMapping("mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
+	@ResponseBody // Ajax
+    @RequestMapping(value = "mypage/userEdit", method = RequestMethod.GET)
+	public MemberVO userEdit() {
+		return service.infoMember(1); //1을 userNum으로 교체 바람...... by.혜영
+		
+	}
 }
->>>>>>> 9b2b893a1531da15c8ff25fbc5d554efdba4a69c
