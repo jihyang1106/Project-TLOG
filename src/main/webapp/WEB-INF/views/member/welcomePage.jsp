@@ -14,7 +14,7 @@
 				<div id="profileSubmit"><input type="submit" value="정보등록" id="profileSubmitBtn"/></div>
 			</form>
 			<div id="hr-sect">태그선택</div>
-			<input type="checkbox" name="tagWord" value="국내">#국내</span>&emsp;
+			<span id="tagWord">#국내<input type="hidden" id="tagvalue" value="국내" ></span>&emsp;
 			</div>
 		</div>
 	</div>
@@ -37,13 +37,8 @@ function LoadImg(value){
 	}
 }
 //태그 토글 어케하누
-$(document).ready(function(){
-	$('.tagWord').click(function(){
-		$(this).toggle(function(){
-			$('.tagWord').css(backgronud-color:"yellow");
-		}, function(){
-			$('.tagWord').css(backgronud-color:"none");
-		}; 
-	)};
+$('#tagWord').click(function(){
+	$(this).toggleClass("checked");
+	
 });
 </script>

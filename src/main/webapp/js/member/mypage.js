@@ -1,14 +1,25 @@
+$(function(){
+    ajaxsend('tab1');
+    $('ul#tab li').click(function() {
+        var activeTab = $(this).attr('id');
+        $('ul#tab li').removeClass('current');
+        $('.tabcontent').removeClass('current');
+        $(this).addClass('current');
+        $('#' + activeTab).addClass('current');
+        ajaxsend(activeTab);
+    });
+});
 function ajaxsend(tab){
-	var url='/member/mypage';
+	var url='/mypage';
 	if(tab=='tab1'){
 		url+='/userEdit'
-		console.log("확인1")
+		console.log("확인1");
 	}else if (tab=='tab2'){
 		url+='/myLog'
-		console.log("확인2")
+		console.log("확인2");
 	}else if (tab=='tab3'){
 		url+='/myfollow'
-		console.log("확인3")
+		console.log("확인3");
 	}		
 	
 	$.ajax({
@@ -17,13 +28,13 @@ function ajaxsend(tab){
 		success:function(dataArr){
 			if(tab=='tab1'){
 				/*alert("회원정보수정")*/
-				showUserEdit(dataArr, tab)
+				showUserEdit(dataArr, tab);
 			}else if (tab=='tab2'){
 				/*alert("내가쓴글")*/
-				showMyLog(dataArr, tab)
+				showMyLog(dataArr, tab);
 			}else if (tab=='tab3'){
 				/*alert("팔로우")*/
-				showFollow(dataArr, tab)
+				showFollow(dataArr, tab);
 			}
 		}			
 	})
