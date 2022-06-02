@@ -26,7 +26,7 @@ public class MemberController {
 	 * if(userInfo!=null) { //블랙회원 로그인시 if(userInfo.getVerify()==9) {
 	 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
 	 * response.getWriter(); out.
-	 * println("<script>alert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>"
+	 * println("<script>aljert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>"
 	 * ); out.flush(); return "redirect:login"; } session.setAttribute("userInfo",
 	 * userInfo); session.setAttribute("accessToken", accessToken);
 	 * session.setAttribute("refreshToken", refreshToken);
@@ -47,5 +47,9 @@ public class MemberController {
 	@GetMapping("mypage")
 	public String mypage() {
 		return "member/mypage";
+	}
+	@GetMapping("myProfile")
+	public String myProfile() {
+		return "member/myProfile";
 	}
 }
