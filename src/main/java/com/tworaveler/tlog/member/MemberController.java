@@ -52,4 +52,8 @@ public class MemberController {
 	public String myProfile() {
 		return "member/myProfile";
 	}
+	@GetMapping("userEdit")
+	public String userEdit() {
+		return "member/userEdit";
+	}
 }
