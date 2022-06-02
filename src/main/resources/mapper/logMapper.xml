@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tworaveler.tlog.log.LogDAO">
+	<!-- 메인: 최신 글 리스트 -->
+	<select id='selectLikeLog' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        WHERE		isPrivate=0
+		ORDER BY 	likeNum DESC
+		LIMIT 		10
+	</select>	
+	<!-- 메인: 팔로잉 글 리스트 -->
+	<select id='selectFollowLog' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        JOIN		followUser E
+        ON			E.followingNum=A.userNum
+        WHERE		E.userNum=#{param1}
+        AND			isPrivate=0
+		ORDER BY 	tNum DESC
+		LIMIT 		10
+	</select>
+	<!-- tNum의 태그 리스트 -->
+	<select id='selectLogTag' resultType='String'>
+		SELECT 	B.tagName
+		FROM 	tagLog A
+		JOIN	tagWord B
+		ON		B.tagNum=A.tagNum
+		JOIN	travelLog C
+		ON		C.tNum=A.tNum
+		WHERE	A.tNum=#{param}
+	</select>
+	<!-- tNum의 글내용 리스트 -->
+	<select id='selectLogDetail' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT	A.*, B.tNum
+        FROM	travelDetail A
+        JOIN	travelLog B
+        ON		B.tNum=A.tNum
+        WHERE	A.tNum=#{param1}
+	</select>
+	<!-- tNum의 태그된 유저 리스트 -->
+	<select id='selectTagUsers' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT	A.userNum, B.userNick
+        FROM	tagUser A
+        JOIN	user B
+        ON		B.userNum=A.userNum
+        WHERE	A.tNum=#{param1}
+	</select>
+	<!-- 메인) 팔로워 많은 유저 -->
+	<select id='FollowedUser' resultType='MemberVO'>
+		SELECT 	COUNT(A.userNum) AS followerNum, A.followingNum AS userNum, 
+				B.userNick, B.profileImg
+        FROM 	followUser A
+        JOIN 	user B
+        ON		B.userNum=A.followingNum
+        GROUP 	BY followingNum
+        ORDER 	BY followerNum DESC
+        LIMIT 	6
+	</select>
+	<!-- userNum의 태그 리스트 -->
+	<select id='selectmyTag' resultType='String'>
+		SELECT 	B.tagName
+		FROM 	myTag A
+		JOIN	tagWord B
+		ON		B.tagNum=A.tagNum
+		WHERE	A.userNum=#{param1}
+	</select>
+	<!-- 태그 리스트 -->
+	<select id='selectTagAll' resultType='String'>
+		SELECT 	tagName
+		FROM 	tagWord
+		ORDER BY tagNum
+	</select>
+	<!-- 무한스크롤 페이징 로그리스트(최신순) -->
+	<select id='selectLogLists' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        WHERE		isPrivate=0
+		ORDER BY 	A.tNum DESC
+		LIMIT 		#{param1}, #{param2}
+	</select>
+	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 제목/작성자 -->
+	<select id='selectSearchLists' resultType='com.tworaveler.tlog.log.LogVO'>
+	    SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    WHERE		isPrivate=0
+       	<choose>
+		    <when test="param1.equals('title')">
+		        AND A.tTitle like #{param2}
+		    </when>
+		    <when test="param1.equals('userNick')">
+		        AND B.userNick like #{param2}
+		    </when>
+       	</choose>
+		ORDER BY 	A.tNum DESC
+		LIMIT 		#{param3}, #{param4}
+	</select>
+	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 태그 -->
+	<select id='selectSearchListsTag' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg, F.tagName
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    JOIN		tagLog E
+	    ON			E.tNum=A.tNum
+	    JOIN		tagWord F
+	    ON			F.tagNum=E.tagNum
+		WHERE 		F.tagName like #{param1}
+	    AND			isPrivate=0
+		ORDER BY 	A.tNum DESC
+		LIMIT 		#{param2}, #{param3}
+	</select>
+</mapper>
