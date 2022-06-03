@@ -6,6 +6,7 @@
   	<mappers>
   		<!-- 각 매퍼 주소 추가해주기 -->
         <mapper resource="mapper/memberMapper.xml"></mapper>
+        <mapper resource="mapper/logMapper.xml"></mapper>
     </mappers>
   </configuration>
 

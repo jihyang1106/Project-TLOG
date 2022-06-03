@@ -6,7 +6,7 @@
 	<div class="container">
 		<div id="loginContainer">
 			<div id="logoContainer">
-				<a href="/"><img src="/img/member/logo2.png" id="logo"></a>
+				<a href="/"><img src="/img/logo.png" id="logo"></a>
 			</div>
 			<div id="loginInfoContainer">
 				<p id="loginTitle">로그인</p>

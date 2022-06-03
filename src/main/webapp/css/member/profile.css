@@ -1,0 +1,105 @@
+@charset "UTF-8";
+#myProfileContainer{
+	width:70vw;
+	height:90vh;
+	position:relative;
+	margin:0 auto;
+	box-shadow:rgba(0,0,0,60%);
+	border-radius:15px;
+}
+/*====================프로필=====================*/
+#profile{
+	width:70vw;
+	height:25vh;
+	float:left;
+	padding:30px 200px;
+	display:block;
+}
+#profileImg{
+	width:150px;
+	height:150px;
+}
+#profileNick{
+	font-size:2em;
+	font-weight:700;
+	color:rgba(0,0,0,60%);
+}
+#userEditBtn{
+	width:120px;
+	height:40px;
+	float:right;
+	margin:5vh 0;
+	border:none;
+	border-radius:10px;
+	font-weight:900;
+	transition:0.3s;
+}
+#userEditBtn:hover{
+	background-color:rgba(0,0,0,60%);
+	color:white;
+}
+
+/*===================팔로우 영역=====================*/
+#followSection{
+	clear:both;
+	width:70vw;
+	height:2vw;
+	margin:20px 0px;
+	text-align:center;
+	position:relative;
+}
+#followSection>span{
+	padding:0 50px;
+	font-size:1.2em;
+	font-weight:500;
+}
+#follow, #follower{
+	cursor:pointer;
+}
+/*===================팔로워 모달=====================*/
+.modal-header{
+	text-align:center;
+}
+.modal-body{
+	height:300px;
+	overflow:auto;
+}
+#followerList{
+	list-style-type:none;
+}
+#followerList{
+	height:60px;
+	line-height:60px;
+}
+#followerImg{
+	width:40px;
+	height:40px;
+}
+#followerBtn{
+	background-color:rgba(122, 140, 226, 60%);
+	border-radius:10px;
+	color:white;
+}
+
+/*====================탭 설정=====================*/
+#mypageTabSection{
+	width:70vw;
+	clear:both;
+	position:relative;
+	padding:30px 200px;
+
+}
+#tab{
+	margin:0 auto;
+}
+#nav-link{
+	padding:0 !important;
+}
+.current{
+	display : block;
+}
+/*====================일기탭=====================*/
+
+/*====================태그된글=====================*/
+
+/*====================찜한글=====================*/
