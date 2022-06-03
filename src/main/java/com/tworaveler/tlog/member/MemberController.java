@@ -109,7 +109,7 @@ public class MemberController {
 		}else if(status==2){
 			logLists = logService.selectLikedLogs(userNum, isWriter, startNum, limitNum);
 		}
-				
+		System.out.println("userNum = "+userNum);
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(logService.selectLogTag(lvo.gettNum()));
