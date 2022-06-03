@@ -19,7 +19,7 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<String> selectLogTag(int tNum) {
+	public List<LogVO> selectLogTag(int tNum) {
 		return dao.selectLogTag(tNum);
 	}
 
@@ -34,7 +34,7 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<String> selectTagAll() {
+	public List<LogVO> selectTagAll() {
 		return dao.selectTagAll();
 	}
 
@@ -44,8 +44,8 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<String> selectmyTag(int userNum) {
-		return dao.selectmyTag(userNum);
+	public List<LogVO> selectMyTag(int userNum) {
+		return dao.selectMyTag(userNum);
 	}
 
 	@Override
@@ -54,18 +54,67 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<LogVO> selectLogLists(int startNum, int limit) {
-		return dao.selectLogLists(startNum, limit);
+	public List<LogVO> selectNewLogs(int startNum, int limit) {
+		return dao.selectNewLogs(startNum, limit);
 	}
 
 	@Override
-	public List<LogVO> selectSearchLists(String searchKey, String string, int startNum, int limitNum) {
-		return dao.selectSearchLists(searchKey, string, startNum, limitNum);
+	public List<LogVO> selectLikeLogs(int startNum, int limit) {
+		return dao.selectLikeLogs(startNum, limit);
 	}
 
 	@Override
-	public List<LogVO> selectSearchListsTag(String string, int startNum, int limitNum) {
-		return dao.selectSearchListsTag(string, startNum, limitNum);
+	public List<LogVO> searchNewLogs(String searchKey, String string, int startNum, int limitNum) {
+		return dao.searchNewLogs(searchKey, string, startNum, limitNum);
 	}
 
+	@Override
+	public List<LogVO> searchNewLogsTag(String string, int startNum, int limitNum) {
+		return dao.searchNewLogsTag(string, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> searchLikeLogs(String searchKey, String string, int startNum, int limitNum) {
+		return dao.searchLikeLogs(searchKey, string, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> searchLikeLogsTag(String string, int startNum, int limitNum) {
+		return dao.searchLikeLogsTag(string, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> selectMyLogs(int userNum, int isWriter, int startNum, int limitNum) {
+		return dao.selectMyLogs(userNum, isWriter, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> selectTaggedLogs(int userNum, int isWriter, int startNum, int limitNum) {
+		return dao.selectTaggedLogs(userNum, isWriter, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> selectLikedLogs(int userNum, int isWriter, int startNum, int limitNum) {
+		return dao.selectLikedLogs(userNum, isWriter, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> searchMyLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum,
+			int limitNum) {
+		return dao.searchMyLogs(userNum, isWriter, searchStart, searchEnd, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> searchTaggedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum,
+			int limitNum) {
+		return dao.searchTaggedLogs(userNum, isWriter, searchStart, searchEnd, startNum, limitNum);
+	}
+
+	@Override
+	public List<LogVO> searchLikedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum,
+			int limitNum) {
+		return dao.searchLikedLogs(userNum, isWriter, searchStart, searchEnd, startNum, limitNum);
+	}
+
+	
 }

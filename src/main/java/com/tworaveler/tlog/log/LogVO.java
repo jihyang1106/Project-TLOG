@@ -26,7 +26,7 @@ public class LogVO {
 	private int isCoverImg;
 	
 	//tag
-	private List<String> tagList;
+	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
 	
@@ -36,7 +36,7 @@ public class LogVO {
 	
 	//tagUser
 	private List<LogVO> tagUserList;
-	
+	private int tagged;	
 	
 	public int getLikeNum() {
 		return likeNum;
@@ -56,10 +56,10 @@ public class LogVO {
 	public void setIsCoverImg(int isCoverImg) {
 		this.isCoverImg = isCoverImg;
 	}
-	public List<String> getTagList() {
+	public List<LogVO> getTagList() {
 		return tagList;
 	}
-	public void setTagList(List<String> tagList) {
+	public void setTagList(List<LogVO> tagList) {
 		this.tagList = tagList;
 	}
 	public List<LogVO> getDetailList() {
@@ -181,5 +181,11 @@ public class LogVO {
 	}
 	public void setTagUserList(List<LogVO> tagUserList) {
 		this.tagUserList = tagUserList;
+	}
+	public int getTagged() {
+		return tagged;
+	}
+	public void setTagged(int tagged) {
+		this.tagged = tagged;
 	}
 }

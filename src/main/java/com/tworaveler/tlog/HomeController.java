@@ -48,14 +48,13 @@ public class HomeController {
 		//(2) 팔로워 많은 유저
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
-			vo.setTagList(service.selectmyTag(vo.getUserNum()));
+			vo.setTagList(service.selectMyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);
 		
 		//(3) 태그 리스트
-		List<String> tagList = service.selectTagAll();
+		List<LogVO> tagList = service.selectTagAll();
 		mav.addObject("tagList", tagList);
-		
 		mav.setViewName("/home");
 		return mav;
 	} 

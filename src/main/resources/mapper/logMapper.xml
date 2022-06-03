@@ -35,8 +35,8 @@
 		LIMIT 		10
 	</select>
 	<!-- tNum의 태그 리스트 -->
-	<select id='selectLogTag' resultType='String'>
-		SELECT 	B.tagName
+	<select id='selectLogTag' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 	B.tagNum, B.tagName
 		FROM 	tagLog A
 		JOIN	tagWord B
 		ON		B.tagNum=A.tagNum
@@ -72,21 +72,22 @@
         LIMIT 	6
 	</select>
 	<!-- userNum의 태그 리스트 -->
-	<select id='selectmyTag' resultType='String'>
-		SELECT 	B.tagName
+	<select id='selectMyTag' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 	B.tagNum, B.tagName
 		FROM 	myTag A
 		JOIN	tagWord B
 		ON		B.tagNum=A.tagNum
 		WHERE	A.userNum=#{param1}
 	</select>
 	<!-- 태그 리스트 -->
-	<select id='selectTagAll' resultType='String'>
-		SELECT 	tagName
+	<select id='selectTagAll' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 	tagNum, tagName
 		FROM 	tagWord
 		ORDER BY tagNum
 	</select>
+	<!-- ================= logShare ============================================================================= -->
 	<!-- 무한스크롤 페이징 로그리스트(최신순) -->
-	<select id='selectLogLists' resultType='com.tworaveler.tlog.log.LogVO'>
+	<select id='selectNewLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
 		FROM		travelLog A
         JOIN		user B
@@ -100,7 +101,7 @@
 		LIMIT 		#{param1}, #{param2}
 	</select>
 	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 제목/작성자 -->
-	<select id='selectSearchLists' resultType='com.tworaveler.tlog.log.LogVO'>
+	<select id='searchNewLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 	    SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
 		FROM		travelLog A
 	    JOIN		user B
@@ -122,7 +123,7 @@
 		LIMIT 		#{param3}, #{param4}
 	</select>
 	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 태그 -->
-	<select id='selectSearchListsTag' resultType='com.tworaveler.tlog.log.LogVO'>
+	<select id='searchNewLogsTag' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg, F.tagName
 		FROM		travelLog A
 	    JOIN		user B
@@ -139,5 +140,212 @@
 	    AND			isPrivate=0
 		ORDER BY 	A.tNum DESC
 		LIMIT 		#{param2}, #{param3}
+	</select>
+	<!-- 무한스크롤 페이징 로그리스트(최신순) -->
+	<select id='selectLikeLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        WHERE		isPrivate=0
+		ORDER BY 	likeNum DESC
+		LIMIT 		#{param1}, #{param2}
+	</select>
+	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 제목/작성자 -->
+	<select id='searchLikeLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+	    SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    WHERE		isPrivate=0
+       	<choose>
+		    <when test="param1.equals('title')">
+		        AND A.tTitle like #{param2}
+		    </when>
+		    <when test="param1.equals('userNick')">
+		        AND B.userNick like #{param2}
+		    </when>
+       	</choose>
+		ORDER BY 	likeNum DESC
+		LIMIT 		#{param3}, #{param4}
+	</select>
+	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 태그 -->
+	<select id='searchLikeLogsTag' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg, F.tagName
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    JOIN		tagLog E
+	    ON			E.tNum=A.tNum
+	    JOIN		tagWord F
+	    ON			F.tagNum=E.tagNum
+		WHERE 		F.tagName like #{param1}
+	    AND			isPrivate=0
+		ORDER BY 	likeNum DESC
+		LIMIT 		#{param2}, #{param3}
+	</select>
+	
+	<!-- ================= profile ================================================================================ -->
+	<!-- 나의 일기리스트 -->
+	<select id='selectMyLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    WHERE		A.userNum=#{param1}
+        <if test='param2==0'><!-- 로그인아이디 != 프로필 아이디 -->
+         	AND	A.isPrivate=0
+        </if>
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param3}, #{param4}
+	</select>
+	<!-- 태그된 일기리스트 -->
+	<select id='selectTaggedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+        JOIN		(select tNum, userNum from tagUser where userNum=#{param1}) E
+        ON			E.tNum=A.tNum
+        <if test='param2==0'><!-- 로그인아이디 != 프로필 아이디 -->
+         	WHERE	A.isPrivate=0
+        </if>
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param3}, #{param4}
+	</select>
+	<!-- 좋아요 누른 일기리스트 -->
+	<select id='selectLikedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+        JOIN		(select tNum, userNum from likeClicker where userNum=#{param1}) E
+        ON			E.tNum=A.tNum
+        where		A.userNum!=#{param1}  <!-- 본인 글 제외 -->
+        AND			A.isPrivate=0
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param3}, #{param4}
+	</select>
+	<!-- =================== 날짜 검색된 일기리스트 =======================================================================-->
+	<!-- 나의 일기리스트(검색) -->
+	<select id='searchMyLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+	    WHERE		A.userNum=#{param1}
+        <if test='param2==0'><!-- 로그인아이디 != 프로필 아이디 -->
+         	AND	A.isPrivate=0
+        </if>
+		<choose>
+        <when test='(param3!=null and !param3.equals("")) and (param4!=null and !param4.equals(""))'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND #{param4} 
+        	 OR 	A.endDate BETWEEN #{param3} AND #{param4})
+        </when>
+        <when test='(param3==null or param3=="") and (param4!=null and param4!="")'>
+        	 AND 	(A.startDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4} 
+        	 OR 	A.endDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4})
+        </when>
+        <when test='(param3!=null and param3!="") and (param4==null or param4=="")'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND NOW() 
+        	 OR 	A.endDate BETWEEN #{param3} AND NOW())
+        </when>
+        </choose>
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param5}, #{param6}
+	</select>
+	<!-- 태그된 일기리스트 -->
+	<select id='searchTaggedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+        JOIN		(select tNum, userNum from tagUser where userNum=#{param1}) E
+        ON			E.tNum=A.tNum
+        <if test='param2==0'><!-- 로그인아이디 != 프로필 아이디 -->
+         	WHERE	A.isPrivate=0
+        </if>
+		<choose>
+        <when test='(param3!=null and !param3.equals("")) and (param4!=null and !param4.equals(""))'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND #{param4} 
+        	 OR 	A.endDate BETWEEN #{param3} AND #{param4})
+        </when>
+        <when test='(param3==null or param3=="") and (param4!=null and param4!="")'>
+        	 AND 	(A.startDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4} 
+        	 OR 	A.endDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4})
+        </when>
+        <when test='(param3!=null and param3!="") and (param4==null or param4=="")'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND NOW() 
+        	 OR 	A.endDate BETWEEN #{param3} AND NOW())
+        </when>
+        </choose>
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param5}, #{param6}
+	</select>
+	<!-- 좋아요 누른 일기리스트 -->
+	<select id='searchLikedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+	    JOIN		user B
+	    ON 			B.userNum = A.userNum
+	    LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+	    ON			C.tNum=A.tNum
+	    JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+	    ON			D.tNum=A.tNum
+        JOIN		(select tNum, userNum from likeClicker where userNum=#{param1}) E
+        ON			E.tNum=A.tNum
+        where		A.userNum!=#{param1}  <!-- 본인 글 제외 -->
+        AND			A.isPrivate=0
+        <if test='param2==0'>  <!-- 로그인아이디 != 프로필 아이디 -->
+         	AND		A.isPrivate=0
+        </if>
+		<choose>
+        <when test='(param3!=null and !param3.equals("")) and (param4!=null and !param4.equals(""))'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND #{param4} 
+        	 OR 	A.endDate BETWEEN #{param3} AND #{param4})
+        </when>
+        <when test='(param3==null or param3=="") and (param4!=null and param4!="")'>
+        	 AND 	(A.startDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4} 
+        	 OR 	A.endDate BETWEEN DATE_SUB(NOW(),INTERVAL 3 year) AND #{param4})
+        </when>
+        <when test='(param3!=null and param3!="") and (param4==null or param4=="")'>
+        	 AND 	(A.startDate BETWEEN #{param3} AND NOW() 
+        	 OR 	A.endDate BETWEEN #{param3} AND NOW())
+        </when>
+        </choose>
+		ORDER BY 	tNum DESC
+		LIMIT 		#{param5}, #{param6}
 	</select>
 </mapper>

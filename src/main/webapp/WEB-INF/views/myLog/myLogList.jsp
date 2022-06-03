@@ -1,33 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<script>		
+<script>
+var status=0; //현재(나의 여행일기 리스트)
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
-var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
-var newOrLike=0;
+var isFinished = 0; //무한스크롤 이벤트 막기
 
-/* ====== 로그 리스트 추가 ====== */
+/* ====== 로그 리스트 추가(무한스크롤X) ====== */
 	function logLists(){
 		var url;
 		var param;
 		const params = new URL(window.location.href).searchParams;
-		var key = params.get('searchKey');
-		var word = params.get('searchWord');
+		var userNum = params.get('userNum');
+		var searchStart = params.get('searchStart');
+		var searchEnd = params.get('searchEnd');
 		var pathname = window.location.pathname;
-		var pn = pathname.substring(pathname.lastIndexOf('/')+1,7); //url 마지막/다음부분
-		if(pn=='logList'){
-			url = '/logShare/logLists';
+		var pn = pathname.substring(pathname.lastIndexOf('/')+1,9); //url 마지막'/'다음9글자
+		if(pn=='myLogList'){
+			url = '/myLog/logLists';
 			param = {
 				"startNum" : startNum,
-				"newOrLike" : newOrLike
+				"status" : status,
+				"userNum" : userNum
 			};
-		}else if(pn='searchs'){
-			url = '/logShare/searchLists';
+		}else if(pn='logSearch'){
+			url = '/myLog/searchLists';
 			param = {
 				"startNum" : startNum ,
-				"searchKey" : key,
-				"searchWord" : word,
-				"newOrLike" : newOrLike
+				"status" : status,
+				"userNum" : userNum,
+				"searchStart" : searchStart,
+				"searchEnd" : searchEnd
 			};
 			
 		}
@@ -42,6 +44,9 @@ var newOrLike=0;
 				var tag = "";
 				for(i=0; i<data.length; i++){
 			    	  tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+			    	  if(data[i].isPrivate==1){
+			    		  tag += "<li><i class='fa-solid fa-lock'></i></li>";
+			    	  }
 			    	  tag += "<li>"+data[i].coverImg+"</li>";
 			    	  tag += "<li>"+data[i].tTitle+"</li>";
 			    	  tag += "<li>"+data[i].startDate+"</li>";
@@ -57,55 +62,68 @@ var newOrLike=0;
 					  }
 					  tag += "</li></ul>";
 			    }//for
+			    
 			    $("#log_list_div").append(tag);
+			    
 			    isFetching=false; //로딩완료
 			    console.log(isFetching);
 			    $("#loading").css("display","none"); //로딩이미지 없애기
 			    
 			    startNum += data.length; //startNum 갱신
-			    
-			    //마지막 페이지일 때 첫페이지로
-				if(data.length<5){
-					startNum=0;
-					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
-						logList(); //한번 더 실행
-					}
-				} 
-				dataLength = data.length;
-				
+			    console.log("startNum > "+startNum);
+			   
+			    if(data.length<5){
+			    	isFinished=1;
+			    }
 			}//success
 		});//ajax
  	}
-	
+ 	
+//첫페이지 보이기
+logLists(); 
+
 /* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
-    if($(window).scrollTop()+200>=$(document).height() - $(window).height()){
+    if(isFinished==0 && $(window).scrollTop()+200>=$(document).height() - $(window).height()){
     	console.log("바닥");
     	if(!isFetching){
     		isFetching=true;
-    		$("#loading").css("display","block");
+    		$("#loading").css("display","block"); //로딩이미지 표시
     		console.log(isFetching);
     		logLists(); // 콘텐츠 추가
     	}
     }
 };
 
-//첫페이지 보이기
-logLists(); 
-
 $(document).ready(function(){
-	/* ======== 최신순 정렬 ======== */
-	$("#view_new").click(function(){
-		newOrLike=0;
+	/* ======== 나의 여행일기 ======== */
+	$("#view_mine").click(function(){
 		$("#log_list_div").empty();
+		status=0;
 		startNum=0;
+		isFinished=0;
+		isFetching=true;
+		$("#loading").css("display","block"); //로딩이미지 표시
 		logLists();
 	});
-	/* ======= 좋아요순 정렬 ======= */
-	$("#view_like").click(function(){
-		newOrLike=1;
+	/* ========== 태그된 글 ========== */
+	$("#view_tagged").click(function(){
 		$("#log_list_div").empty();
+		status=1;
 		startNum=0;
+		isFinished=0;
+		isFetching=true;
+		$("#loading").css("display","block"); //로딩이미지 표시
+		logLists();
+	});
+	/* ========= 좋아요 누른 글 ========= */
+	$("#view_like").click(function(){
+		$("#log_list_div").empty();
+		status=2;
+		startNum=0;
+		isFinished=0;
+		isFetching=true;
+		$("#loading").css("display","block"); //로딩이미지 표시
 		logLists();
 	});
 })
@@ -137,21 +155,16 @@ function logDetail(tNum){
 }
 /* ===== 검색한 단어 띄우기 ===== */
 window.onload = function(){
-	if('${searchKey}'!=null && '${searchKey}'!=""){
-		document.getElementById("searchKey").value = '${searchKey}';
+	if('${searchStart}'!=null && '${searchStart}'!=""){
+		document.getElementById("searchStart").value = '${searchStart}';
 	}
-	if('${searchWord}'!=null && '${searchWord}'!=""){
-		document.getElementById("searchWord").value = '${searchWord}';
+	if('${searchEnd}'!=null && '${searchEnd}'!=""){
+		document.getElementById("searchEnd").value = '${searchEnd}';
+	}
+	if('${userNum}'!=null && '${userNum}'!=""){
+		document.getElementById("userNum").value = '${userNum}';
 	}
 }
-
-/* ========== 검색 ========== */
-$("#searchFrm").submit(function() {
-	if ($("#searchWord").val() == "") {
-	   alert("검색어를 입력하세요");
-	   return false;
-	}
-});
 
 /* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)*/
 function scrollFunction() {
@@ -168,51 +181,21 @@ function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
-<!-- ===================================== CSS ================================================================== -->
-<style>
-/* ===== 태그 ===== */
-.tags{
-	border-radius: 5px;
-	padding: 5px;
-	font-size:11px;
-}
-/* ===== 태그 색상(변경해야됨!) ===== */
-#tag1, #tag2{
-	background-color: rgb(42, 76, 211, 70%);
-}
-#tag3, #tag4, #tag5, #tag6, #tag7{
-	background-color: rgba(122, 140, 226, 80%);
-}
-#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
-	background-color: rgba(122, 140, 226, 30%);
-}
-#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
-	background-color: #C3E2DD;
-}
-#tag21, #tag22, #tag23, #tag24, #tag25{
-	background-color: #FEF5D4;
-}
-#tag26, #tag27, #tag28, #tag29{
-	background-color: #EACACB;
-}
-</style>
-<!--====================================== HTML ===================================================================-->
+<!-- ============================= HTML ============================================================================= -->
 <!-- 검색 -->
-<button id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>
-<button id='view_new'>New</button>
-<button id='view_like'>Like</button>
-
 <div>
-	<form action="/logShare/logList/searchs" id="searchFrm">
-        <select name="searchKey" id='searchKey'>
-            <option value="title">제목</option>
-            <option value="tag">태그</option>
-            <option value="userNick">작성자</option>
-        </select>
-        <input type="text" name="searchWord" id="searchWord"/>
+	<form action="/myLog/myLogList/logSearch" id="searchFrm">
+        <input type="date" name="searchStart" id="searchStart"/>
+        <input type="date" name="searchEnd" id="searchEnd"/>
+        <input type="hidden" name="userNum" id="userNum"/>
         <input type="submit" value="Search"/>
     </form>
+    <button id='view_all' onclick="location.href='/myLog/myLogList?userNum=${userNum}'">전체 글 보기</button>
 </div>
+<button id='view_mine'>여행일기</button>
+<button id='view_tagged'>태그된 글</button>
+<button id='view_like'><i class="fa-solid fa-heart"></i></button>
+<br/>
 
 <!-- log리스트 -->
 <div id='log_list_div'></div>
