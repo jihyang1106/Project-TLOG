@@ -36,7 +36,7 @@
 			<div class="nav-menu">
 				<ul class="nav-list">
 					<li class="nav_item">
-						<a href="/logShare/logLists" class="nav-link top-list">여행일기</a>
+						<a href="/logShare/logList" class="nav-link top-list">여행일기</a>
 					</li>
 					<li class="nav_item">
 						<a href="/" class="nav-link top-list">자유일기</a>

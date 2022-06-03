@@ -11,7 +11,7 @@
 			<div id="loginInfoContainer">
 				<p id="loginTitle">로그인</p>
 				<div class="otherLogin">
-					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3e06893f3a47571afed7ebd080a8fd24&redirect_uri=http://localhost:8040/member/kakaologin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
+					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a7b1e2d31b1e4b9b211d09f5dcd83a80&redirect_uri=http://localhost:8025/member/kakaoLogin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
 				</div>
 				<div class="otherLogin">
 					<a href="#"><img src="/img/member/google_login.png"></a>
@@ -20,9 +20,3 @@
 		</div>
 	</div>
 </main>
-<script>
-document.addEventListener("DOMContentLoaded", function(event){
-   document.getElementById('top').style.display = "none";
-   document.getElementById('bottom').style.display = "none";
-});
-</script>
