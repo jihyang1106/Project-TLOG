@@ -9,6 +9,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -35,11 +39,12 @@ public class MemberController {
 	@Inject
 	KakaoAPI kakao;
 	
-	// 로그인 폼
+	// 로그인 	
 	@GetMapping("/member/login")
 	public String loginForm() {
 		return "member/login";
 	}
+	
 	//카카오 로그인
 	@GetMapping("/member/kakaoLogin")
 	public String kakaologin(HttpServletResponse response, String code,
@@ -128,6 +133,7 @@ public class MemberController {
 				}
 			}
 		}
+
 	//유저 프로필 페이지 LOG탭 ajax 로 데이터 넘겨주기
 	@ResponseBody
 	@RequestMapping(value = "/member/profileLogList", method = RequestMethod.GET)
@@ -151,7 +157,7 @@ public class MemberController {
 		}else if(status==2){
 			logLists = logService.selectLikedLogs(userNum, isWriter, startNum, limitNum);
 		}
-				
+		System.out.println("userNum = "+userNum);
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(logService.selectLogTag(lvo.gettNum()));
@@ -181,11 +187,15 @@ public class MemberController {
 		}else if(status==2){
 			logLists = logService.searchLikedLogs(userNum, isWriter, searchStart, searchEnd, startNum, limitNum);
 		}
-		
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(logService.selectLogTag(lvo.gettNum()));
 		}
 		return logLists;
+	}
+
+	@GetMapping("userEdit")
+	public String userEdit() {
+		return "member/userEdit";
 	}
 }

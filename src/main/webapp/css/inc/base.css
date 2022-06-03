@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
 @font-face {
     font-family: 'NanumSquare';
     src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css%27');
@@ -18,10 +21,60 @@
 	--theme-lightblue-70 : rgba(122, 140, 226, 70%);
 	--theme-lightblue-60 : rgba(122, 140, 226, 60%);
 	--theme-lightblue-50 : rgba(122, 140, 226, 50%);
+	--theme-lightblue-30 : rgba(122, 140, 226, 30%);
 	
 	--theme-deepblue : rgb(42, 76, 211);
+	
+	/* 폰트컬러 */
+	--text-color: rgba(17, 17, 17, 100%);
+	
+	/*========== Font ==========*/
+	--body-font: 'Noto Sans KR', sans-serif;
+	--biggest-font-size: 2.5rem;
+	--h1-font-size: 1.5rem;
+	--h2-font-size: 1.25rem;
+	--h3-font-size: 1rem;
+	--normal-font-size: 0.938rem;
+	--small-font-size: 0.813rem;
+	--smaller-font-size: 0.75rem;
+	
+	/*========== Font weight ==========*/
+	--font-medium: 500;
+	--font-semi-bold: 600;
+}
+
+/*=============== BASE ===============*/
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body{
+	font-family: var(--body-font);
+	color: var(--text-color);
+	font-size: var(--normal-font-size);
+}
+
+a, a:link, a:visited, a:hover {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
 }
 .container{
 	min-height:85vh;
 	font-family:'NanumSquare';
+}
+ul, li{
+	margin:0;
+	padding:0;
+	list-style-type:none;
 }

@@ -10,6 +10,8 @@
 	background-color:rgba(122, 140, 226, 60%);
 	border-top-left-radius:20px !important;
 	border-top-right-radius:20px !important;
+	font-size:1.1em;
+	font-weight:600;
 }
 </style>
 <script src="/js/member/profile.js"></script>
@@ -20,7 +22,7 @@
 		<span ><img src="/img/member/default_profile.png" id="profileImg"></span>&emsp;&emsp;&emsp;
 		<span id="profileNick">닉네임</span>
 		<c:if test="${logstatus==Y}">
-			<input type="button" id="userEditBtn" value="회원정보수정">
+			<input type="button" id="userEditBtn" value="회원정보수정" onclick="location.href='/member/userEdit'">
 		</c:if>
 	</div>
 	<div id="followSection">
@@ -86,14 +88,14 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-	      <ul id="followerList">
-	      	<c:forEach var="vo" items="${followList}">
-		      	<li>
-			      	<span ><img src="/img/member/${vo.profileImg}.png" id="followImg"></span>&emsp;
-					<span id="followNick">${vo.userNick }</span>
-		      	</li>
-		   </c:forEach>
-	      </ul>
+          <ul id="followerList">
+              <c:forEach var="vo" items="${followList}">
+                  <li>
+                      <span ><img src="/img/member/${vo.profileImg}.png" id="followImg"></span>&emsp;
+                    <span id="followNick">${vo.userNick }</span>
+                  </li>
+           </c:forEach>
+          </ul>
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">

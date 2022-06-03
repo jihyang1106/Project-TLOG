@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="url" value="<%=request.getContextPath()%>"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +18,47 @@
 	<!------------ 프로젝트 CSS, JS ------------>
 	<link rel="stylesheet" href="/css/inc/base.css" type="text/css">
 	<link rel="stylesheet" href="/css/inc/top.css" type="text/css">
+	<link rel="stylesheet" href="/css/home.css" type="text/css">
+	
 	<!-- Pavicon -->
 	<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 </head>
 <body>
+
 <div class="top" id='top'>
-	<!-- 헤더, nav바 작성하기 -->
+<!--------- 일반 아이디로 로그인 -----------> 
 	<header>
-		
+		<nav>
+			<div class="logo">
+				<a href="/"><img src="/img/TLOG1.png" ></a>
+			</div>
+			
+			<div class="nav-menu">
+				<ul class="nav-list">
+					<li class="nav_item">
+						<a href="/logShare/logList" class="nav-link top-list">여행일기</a>
+					</li>
+					<li class="nav_item">
+						<a href="/" class="nav-link top-list">자유일기</a>
+					</li>
+					<li class="nav_item">
+						<a href="/" class="nav-link top-list">지도</a>
+					</li>
+				</ul>
+				
+				<div class="nav-loginSign">
+					<c:if test="${logId == null}">
+						<a href="/member/login" class="main-login ">로그인</a>
+					</c:if>
+					<c:if test="${logId != null }">
+						<a href="/member/profile?userNum=2"><img src="/img/member/default_profile.png" style="width: 10px"></a>
+	   					<a href="${url}/" class="main-write">글쓰기</a>
+	    				<a href="${url}/" class="main-logout">로그아웃</a>
+					</c:if>
+	        	</div>
+        	</div>
+		</nav>
 	</header>
-	<nav>
-		
-	</nav>
+	
+<!--------- 관리자 아이디로 로그인 ----------->
 </div>
