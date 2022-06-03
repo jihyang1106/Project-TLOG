@@ -192,7 +192,7 @@
 					<!-- 여행일기 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">여행일기 게시판</h6>
                         </div>
                         <div class="card-body table-responsive">
                        		<div class="col-sm-12">
@@ -239,7 +239,60 @@
 							  	</ul>
 							</nav>
                         </div><!-- end of 테이블 -->
-                    </div><!-- end of 전체 게시판 -->
+                    </div><!-- end of 여행일기 게시판 -->
+                    
+                   	<!-- 자유일기 게시판  -->
+                    <div class="card shadow mb-4 col-xl-12">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">자유일기 게시판</h6>
+                        </div>
+                        <div class="card-body table-responsive">
+                       		<div class="col-sm-12">
+                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                        			Showing 1 to 10 of 57 entries
+                        		</div>
+                        	</div>
+                        	<br/>
+                            <table class="table table-bordered" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>BoardNo.</th>
+                                        <th>Content</th>
+                                        <th>Date</th>
+                                        <th>UserNo.</th>
+                                        <th>Nickname</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>ㅇㄹㄴㅇㄹㄴㅇㄻ내댜러매ㅓㅈ대ㅑㅓ매더래먀더랴ㅐㅓ대러ㅐㅁㄴㄷ럼ㄷㄴ래ㅜ누래ㅑㅁ둔루대눌먇</td>
+                                        <td>2022.06.01</td>
+                                        <td>61</td>
+                                        <td>방랑자</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>ㄴㅇㄹ머냉러ㅐㅁㄴ러맨야러맺댠루매ㅑㄷ주램ㄷ누랴ㅐㅜㅁㄹㄷ재ㅜ랟누루ㅐㅈ도랴ㅐㅁ대랴ㅜ대ㅑ루맫누ㅜㄹ매ㅑㄷ주</td>
+                                        <td>2022.06.03</td>
+                                        <td>46</td>
+                                        <td>비트위의 나그네</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                           	<!-- paging -->
+							<nav aria-label="Page navigation example">
+							    <ul class="pagination justify-content-center">
+							    	<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+							    	<li class="page-item"><a class="page-link" href="#">1</a></li>
+							    	<li class="page-item"><a class="page-link" href="#">2</a></li>
+							    	<li class="page-item"><a class="page-link" href="#">3</a></li>
+							    	<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							  	</ul>
+							</nav>
+                        </div><!-- end of 테이블 -->
+                    </div><!-- end of 자유일기 게시판 -->
+                    
 				</div><!-- end of row -->
 			</main><!-- end of container-fluid -->
 		</div><!-- End of content-wrapper(top nav포함) -->

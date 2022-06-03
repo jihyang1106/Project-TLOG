@@ -3,7 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.admin.AdminDAO">
-	<select id="selectTotalPosts" resultType="int">
-		SELECT COUNT(gatherno)count FROM report
+	<select id="selectTlogTotalPosts" resultType="int">
+		SELECT COUNT(tNum)count 
+		FROM travelLog
+	</select>
+	<select id="selectBoardTotalPosts" resultType="int">
+		SELECT COUNT(boardNum)count 
+		FROM board
 	</select>
 </mapper>
