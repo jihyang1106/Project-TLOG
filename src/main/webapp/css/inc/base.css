@@ -18,10 +18,16 @@
 	--theme-lightblue-70 : rgba(122, 140, 226, 70%);
 	--theme-lightblue-60 : rgba(122, 140, 226, 60%);
 	--theme-lightblue-50 : rgba(122, 140, 226, 50%);
+	--theme-lightblue-30 : rgba(122, 140, 226, 30%);
 	
 	--theme-deepblue : rgb(42, 76, 211);
 }
 .container{
 	min-height:85vh;
 	font-family:'NanumSquare';
+}
+ul, li{
+	margin:0;
+	padding:0;
+	list-style-type:none;
 }

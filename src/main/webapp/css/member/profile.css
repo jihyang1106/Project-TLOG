@@ -1,7 +1,6 @@
 @charset "UTF-8";
-#myProfileContainer{
+#profileContainer{
 	width:70vw;
-	height:90vh;
 	position:relative;
 	margin:0 auto;
 	box-shadow:rgba(0,0,0,60%);
@@ -44,7 +43,7 @@
 	clear:both;
 	width:70vw;
 	height:2vw;
-	margin:20px 0px;
+	margin:50px 0px;
 	text-align:center;
 	position:relative;
 }
@@ -86,20 +85,71 @@
 	width:70vw;
 	clear:both;
 	position:relative;
-	padding:30px 200px;
-
+	margin:0 auto;
 }
 #tab{
 	margin:0 auto;
 }
-#nav-link{
-	padding:0 !important;
-}
 .current{
-	display : block;
+	display:block;
 }
-/*====================일기탭=====================*/
-
-/*====================태그된글=====================*/
-
-/*====================찜한글=====================*/
+/*====================log 글====================*/
+.log_list_div{
+	clear:both;
+	float:center;
+	width:70vw;
+	position:relative;
+	margin:100px 0px !important;
+}
+.log_div{
+	margin:1vw;
+	padding:2vw;
+	width:21.3vw;
+	display:inline-block;
+	text-align:center;
+	border-radius:15px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.log_div i{
+	color:rgba(0,0,0,30%);
+}
+.log_ul{
+	list-style-type:none;
+}
+.log_ul li{
+	height:35px;
+	line-height:35px;
+}
+.log_ul li:first-child{
+	height:100%;
+	line-height:40px;
+}
+.coverImg{
+	width:16vw;
+	height:12vw;
+	margin:1vw 0;
+	border-radius:10px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.profileInfo{
+	height:40px;
+	line-height:40px;
+	text-align:left;
+	padding:0px 30px;
+}
+.logProfileImg{
+	width:40px;
+	height:40px;
+}
+.logLike{
+	float:right;
+}
+.logTitle{
+	font-size:1.1em;
+	font-weight:600;
+}
+.tags{
+	background-color:var(--theme-lightblue-30);
+	padding:3px 5px;
+	border-radius:10px;
+}

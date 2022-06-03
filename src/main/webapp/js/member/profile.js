@@ -48,24 +48,27 @@ function logLists(){
 			console.log("data.length : "+data.length);
 			var tag = "";
 			for(i=0; i<data.length; i++){
-				tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+				tag += "<div class='log_div'>"
+				tag += "<ul class='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+				tag += "<li><img src='/img/log/"+data[i].coverImg+"' class='coverImg'/></li>";
+				tag += "<li class='profileInfo'><span><img src='/img/member/"+data[i].profileImg+".png' class='logProfileImg''/></span>&emsp;";
+				tag += "<span class='logNick'>"+data[i].userNick+"</span>";
+				tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";
+				tag += "<li>";
 				if(data[i].isPrivate==1){
-					tag += "<li><i class='fa-solid fa-lock'></i></li>";
+					tag += "<span><i class='fa-solid fa-lock'></i></span>&emsp;";
 				}
-				tag += "<li>"+data[i].coverImg+"</li>";
-				tag += "<li>"+data[i].tTitle+"</li>";
-				tag += "<li>"+data[i].startDate+"</li>";
-				tag += "<li>"+data[i].endDate+"</li>";
-				tag += "<li>"+data[i].likeNum+"</li>";
-				tag += "<li>"+data[i].profileImg+"</li>";
-				tag += "<li>"+data[i].userNick+"</li>";
+				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
+				tag += "</li>";
+				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
+				
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){
 					tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
 					tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
 					tag += data[i].tagList[j].tagName+"</span>&nbsp;";
 				}
-				tag += "</li></ul>";
+				tag += "</li></ul></div>";
 			}//for
 			
 			$("#log_list_div").append(tag);

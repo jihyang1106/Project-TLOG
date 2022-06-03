@@ -10,6 +10,8 @@
 	background-color:rgba(122, 140, 226, 60%);
 	border-top-left-radius:20px !important;
 	border-top-right-radius:20px !important;
+	font-size:1.1em;
+	font-weight:600;
 }
 </style>
 <script src="/js/member/profile.js"></script>
