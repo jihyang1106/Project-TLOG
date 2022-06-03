@@ -2,7 +2,7 @@
 <script>
 var status=0; //현재(나의 여행일기 리스트)
 var startNum=0;
-var isFetching = false; //로딩 시 true(중복실행 방지)
+var isFetching = true; //로딩 시 true(중복실행 방지)
 var isFinished = 0; //무한스크롤 이벤트 막기
 
 /* ====== 로그 리스트 추가(무한스크롤X) ====== */
@@ -52,8 +52,7 @@ var isFinished = 0; //무한스크롤 이벤트 막기
 			    	  tag += "<li>"+data[i].startDate+"</li>";
 			    	  tag += "<li>"+data[i].endDate+"</li>";
 			    	  tag += "<li>"+data[i].likeNum+"</li>";
-			    	  tag += "<li>"+data[i].profileImg+"</li>";
-			    	  tag += "<li>"+data[i].userNick+"</li>";
+			    	  tag += "<li onclick=\"location.href='/myLog/myLogList?userNum="+data[i].userNum+"'\"><img src='/upload/user/"+data[i].profileImg+"' height='30px'/>"+data[i].userNick+"</li>";
 					  tag += "<li>";
 					  for(j=0; j<data[i].tagList.length; j++){
 						  tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
@@ -78,9 +77,7 @@ var isFinished = 0; //무한스크롤 이벤트 막기
 			}//success
 		});//ajax
  	}
- 	
-//첫페이지 보이기
-logLists(); 
+ 
 
 /* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
@@ -96,6 +93,8 @@ window.onscroll = function(e) {
 };
 
 $(document).ready(function(){
+	$("#loading").css("display","block"); //로딩이미지 표시
+	logLists(); //첫페이지 보이기
 	/* ======== 나의 여행일기 ======== */
 	$("#view_mine").click(function(){
 		$("#log_list_div").empty();

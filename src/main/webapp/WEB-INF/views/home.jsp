@@ -73,8 +73,9 @@ function logDetail(tNum){
 					<li>${vo.startDate}</li>
 					<li>${vo.endDate}</li>
 					<li>${vo.likeNum}</li>
-					<li>${vo.profileImg}</li>
-					<li>${vo.userNick}</li>
+					<li onclick="location.href='/myLog/myLogList?userNum=${vo.userNum}'">
+						<img src='/upload/user/${vo.profileImg}' height='30px'/>${vo.userNick}
+					</li>
 					<li>
 						<c:forEach var="t" items="${vo.tagList}">
 							<span class='tags' id='tag${t.tagNum}'
@@ -91,9 +92,9 @@ function logDetail(tNum){
 		<div>
 			<c:forEach var="vo" items="${followedUser}">
 				<ul>
-					<li>${vo.userNum}</li>
-					<li>${vo.profileImg}</li>
-					<li>${vo.userNick}</li>
+					<li onclick="location.href='/myLog/myLogList?userNum=${vo.userNum}'">
+						<img src='/upload/user/${vo.profileImg}' height='30px'/>${vo.userNick}
+					</li>
 					<li>${vo.followerNum}</li>
 					<li>
 						<c:forEach var="t" items="${vo.tagList}" end="2"><!-- 태그3개(임시) -->

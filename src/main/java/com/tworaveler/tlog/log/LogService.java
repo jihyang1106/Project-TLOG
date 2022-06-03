@@ -57,5 +57,7 @@ public interface LogService {
 	public List<LogVO> searchMyLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum, int limitNum);
 	public List<LogVO> searchTaggedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum, int limitNum);
 	public List<LogVO> searchLikedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum, int limitNum);
-
+	
+	/* =============== 글쓰기 ===================== */
+	public int logWriteOk(LogVO vo);
 }
