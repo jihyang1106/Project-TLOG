@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 //@Slf4j
 public class ServletInitializer extends SpringBootServletInitializer {
-
+	
   @Bean
   public ConfigurableServletWebServerFactory configurableServletWebServerFactory ( ) {
       return new TomcatServletWebServerFactory() {
@@ -37,4 +37,5 @@ public class ServletInitializer extends SpringBootServletInitializer {
           }
       };
    }
+
 }
