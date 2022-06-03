@@ -1,10 +1,14 @@
 package com.tworaveler.tlog.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tworaveler.tlog.KakaoAPI;
 import com.tworaveler.tlog.log.LogService;
 import com.tworaveler.tlog.log.LogVO;
 
@@ -27,6 +32,8 @@ public class MemberController {
 	LogService logService;
 	@Inject
 	MemberService memberService;
+	@Inject
+	KakaoAPI kakao;
 	
 	// 로그인 폼
 	@GetMapping("/member/login")
@@ -35,8 +42,29 @@ public class MemberController {
 	}
 	//카카오 로그인
 	@GetMapping("/member/kakaoLogin")
-	public void kakaologin() {
-		System.out.println("카톡 로그인으루 넘어옴");
+	public String kakaologin(HttpServletResponse response, String code,
+	HttpSession session, HttpServletResponse res, RedirectAttributes redirect)
+	throws IOException { /*//로그인 토큰 받아오기 JSONObject tokenJson =
+	kakao.getToken(code); String accessToken =
+	tokenJson.getString("access_token"); String refreshToken =
+	tokenJson.getString("refresh_token"); //카카오 로그인후 받아온 userInfo를 memberVO에 설정 후
+	MemberVO kakaoVO = new MemberVO(kakao.getUserInfo(accessToken)); //해당 회원정보로
+	회원 선택해 로그인 MemberVO userInfo = memberService.selectMember(kakaoVO);
+	
+	if(userInfo!=null) { //블랙회원 로그인시 if(userInfo.getStatus()==9) {
+	response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
+	response.getWriter(); out.
+	println("<script>alert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>"
+	); out.flush(); return "redirect:login"; } session.setAttribute("userInfo",
+	userInfo); session.setAttribute("accessToken", accessToken);
+	session.setAttribute("refreshToken", refreshToken);
+	session.setAttribute("kakao", "true"); setLogCookie(res, session);
+	if(userInfo.getStatus()==1) { return "redirect:/admin/adminMain"; }else {
+	return "redirect:/"; } }else { redirect.addFlashAttribute("kakaoVO",
+	kakaoVO); return "redirect:signup"; }
+	 */
+		return "member/login";
+
 	}
 	//구글 로그인
 	
@@ -72,6 +100,34 @@ public class MemberController {
 		mav.setViewName("member/profile");
 		return mav;
 	}
+	// 쿠키 생성
+		private void setLogCookie(HttpServletResponse res, HttpSession session) {
+			Iterator<String> it = session.getAttributeNames().asIterator();
+			while(it.hasNext()) {
+				String sessionAttributeName = it.next();
+				Cookie c = null;
+				if(sessionAttributeName.equals("userInfo")) {
+					
+				}else {
+					c = new Cookie(sessionAttributeName, session.getAttribute(sessionAttributeName).toString());
+				}
+				c.setMaxAge(60*60*24*30);
+				c.setPath("/");
+				res.addCookie(c);
+			}
+		}
+		
+		// 쿠키 삭제
+		private void removeCookies(HttpServletRequest req, HttpServletResponse res) {
+			Cookie[] cookies = req.getCookies();
+			if(cookies != null) {
+				for (Cookie cookie : cookies) {
+					cookie.setMaxAge(0);
+					cookie.setPath("/");
+					res.addCookie(cookie);
+				}
+			}
+		}
 	//유저 프로필 페이지 LOG탭 ajax 로 데이터 넘겨주기
 	@ResponseBody
 	@RequestMapping(value = "/member/profileLogList", method = RequestMethod.GET)
