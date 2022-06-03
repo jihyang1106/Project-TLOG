@@ -8,11 +8,7 @@ spring:
   
   datasource: # Mybatis dataSource DB 연결
     driver-class-name: com.mysql.cj.jdbc.Driver
-<<<<<<< HEAD
-    url: jdbc:mysql://database-2.ccibfzyyg2bg.us-west-1.rds.amazonaws.com
-=======
     url: jdbc:mysql://database-1.ccibfzyyg2bg.us-west-1.rds.amazonaws.com/tLogDB?characterEncoding=utf-8
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
     username: admin
     password: tlogadmin
   

@@ -58,10 +58,6 @@ function logDetail(tNum){
 </style>
 <!-- ============================ HTML ========================================================================== -->
 	<div class="container">
-<<<<<<< HEAD
-	<!-- 본문 내용 작성하기 -->
-	홈페이지ㄹㄹ
-=======
 		<!-- 본문 내용 작성하기 -->
 		홈페이지
 		<div id='detail_div'>
@@ -122,5 +118,4 @@ function logDetail(tNum){
 				</c:forEach>
 			</ul>
 		</div>
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
 	</div>

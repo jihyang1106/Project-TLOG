@@ -1,27 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- Custom fonts for this template-->
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
 <link href="/admintemplate/css/sb-admin-2.min.css" rel="stylesheet"/>
 <link href="/css/admin/main.css" rel="stylesheet"/>
 <script src="/js/admin/main.js"></script>
-<script>
-	$(function(){
-		
-		// 페이징 하기
-/* 		if('${pvo.currentPage}'==1){
-			$('.prevBtn').addClass('prevBtn disabled');
-		}
-		
-		if('${pvo.currentPage}'=='${pvo.totalPages}'){
-			$('.nextBtn').addClass('disabled');
-		} */
-		
-	});
-</script>
-<div id="page-top">
+
+<div id="page-top"><!-- end div tag xx -->
 	<!-- Page Wrapper -->
-	<div id="wrapper">
+	<div id="wrapper"><!-- end div tag xx -->
 	    <!-- Sidebar -->
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<!-- Sidebar T-LOG -->
@@ -146,50 +134,12 @@
 			<main class="container-fluid">
 				<!-- Page Heading -->
 				<div class="d-sm-flex align-items-center justify-content-between mb-4">
-					<h1 class="h3 mb-0 text-gray-800">Dash board</h1>
+					<h1 class="h3 mb-0 text-gray-800">전체 회원</h1>
 				</div>
 			
 				<!-- Dash board 내용 -->
 				<div class="row">
-					<!-- 전체 일기 수 -->
-					<div class="col-xl-3 col-md-6 mb-4">
-						<div class="card border-left-primary shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-											전체 일기 수</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-calendar fa-2x text-gray-300"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-			
-					<!-- 전체 회원 수 -->
-					<div class="col-xl-3 col-md-6 mb-4">
-						<div class="card border-left-warning shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-											전체 회원 수</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-									</div>
-									<div class="col-auto">
-										<i class="fa fa-user fa-2x text-gray-300"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-			
-					<!-- 여행일기 게시판  -->
+					<!-- 전체 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">전체 게시판</h6>
@@ -228,16 +178,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                           	<!-- paging -->
-							<nav aria-label="Page navigation example">
-							    <ul class="pagination justify-content-center">
-							    	<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">2</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">Next</a></li>
-							  	</ul>
-							</nav>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 전체 게시판 -->
 				</div><!-- end of row -->

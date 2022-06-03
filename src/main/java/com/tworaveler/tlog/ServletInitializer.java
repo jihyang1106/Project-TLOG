@@ -15,29 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 //@Slf4j
 public class ServletInitializer extends SpringBootServletInitializer {
-
-<<<<<<< HEAD
-	  @Bean
-	  public ConfigurableServletWebServerFactory configurableServletWebServerFactory ( ) {
-	      return new TomcatServletWebServerFactory() {
-	          @Override
-	          protected void postProcessContext(Context context) {
-	              super.postProcessContext(context);
-	              JspPropertyGroup jspPropertyGroup = new JspPropertyGroup();
-	              jspPropertyGroup.addUrlPattern("*.jsp");
-	              jspPropertyGroup.addUrlPattern("*.jspf");
-	              jspPropertyGroup.setPageEncoding("UTF-8");
-	              jspPropertyGroup.setScriptingInvalid("true");
-	              jspPropertyGroup.addIncludePrelude("/WEB-INF/views/inc/top.jspf");
-	              jspPropertyGroup.addIncludeCoda("/WEB-INF/views/inc/bottom.jspf");
-	              jspPropertyGroup.setTrimWhitespace("true");
-	              jspPropertyGroup.setDefaultContentType("text/html");
-	              JspPropertyGroupDescriptorImpl jspPropertyGroupDescriptor = new JspPropertyGroupDescriptorImpl(jspPropertyGroup);
-	              context.setJspConfigDescriptor(new JspConfigDescriptorImpl(Collections.singletonList(jspPropertyGroupDescriptor), Collections.emptyList()));
-	          }
-	      };
-	   }
-=======
+	
   @Bean
   public ConfigurableServletWebServerFactory configurableServletWebServerFactory ( ) {
       return new TomcatServletWebServerFactory() {
@@ -59,5 +37,5 @@ public class ServletInitializer extends SpringBootServletInitializer {
           }
       };
    }
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
+
 }

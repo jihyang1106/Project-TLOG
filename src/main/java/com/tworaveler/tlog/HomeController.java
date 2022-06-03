@@ -19,20 +19,18 @@ import com.tworaveler.tlog.member.MemberVO;
 
 @Controller
 public class HomeController {
-<<<<<<< HEAD
-=======
+
 	@Inject
 	LogService service;
->>>>>>> ec75ab9956c7671b65ec8774c1655eaed19f6b03
-	
+
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
-		session.setAttribute("logStatus", "Y"); //임시
+		session.setAttribute("logStatus", "Y"); //�엫�떆
 
 		//(1) tLog 10개
 		if(session.getAttribute("logStatus").equals("Y")) {
-			//팔로잉 tLog
+			//�뙏濡쒖엵 tLog
 			List<LogVO> logList = service.selectFollowLog(1); //임시(logId)
 			//vo마다 tNum의 태그리스트 넣기
 			for(LogVO vo : logList) {
