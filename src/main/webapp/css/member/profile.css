@@ -1,0 +1,155 @@
+@charset "UTF-8";
+#profileContainer{
+	width:70vw;
+	position:relative;
+	margin:0 auto;
+	box-shadow:rgba(0,0,0,60%);
+	border-radius:15px;
+}
+/*====================프로필=====================*/
+#profile{
+	width:70vw;
+	height:25vh;
+	float:left;
+	padding:30px 200px;
+	display:block;
+}
+#profileImg{
+	width:150px;
+	height:150px;
+}
+#profileNick{
+	font-size:2em;
+	font-weight:700;
+	color:rgba(0,0,0,60%);
+}
+#userEditBtn{
+	width:120px;
+	height:40px;
+	float:right;
+	margin:5vh 0;
+	border:none;
+	border-radius:10px;
+	font-weight:900;
+	transition:0.3s;
+}
+#userEditBtn:hover{
+	background-color:rgba(0,0,0,60%);
+	color:white;
+}
+
+/*===================팔로우 영역=====================*/
+#followSection{
+	clear:both;
+	width:70vw;
+	height:2vw;
+	margin:50px 0px;
+	text-align:center;
+	position:relative;
+}
+#followSection>span{
+	padding:0 50px;
+	font-size:1.2em;
+	font-weight:500;
+}
+#follow, #follower{
+	cursor:pointer;
+}
+/*===================팔로워 모달=====================*/
+.modal-header{
+	text-align:center;
+}
+.modal-body{
+	height:300px;
+	overflow:auto;
+}
+#followerList{
+	list-style-type:none;
+}
+#followerList{
+	height:60px;
+	line-height:60px;
+}
+#followerImg, #followImg{
+	width:40px;
+	height:40px;
+}
+.followerBtn{
+	background-color:rgba(122, 140, 226, 60%);
+	border-radius:10px;
+	color:white;
+}
+
+/*====================탭 설정=====================*/
+#mypageTabSection{
+	width:70vw;
+	clear:both;
+	position:relative;
+	margin:0 auto;
+}
+#tab{
+	margin:0 auto;
+}
+.current{
+	display:block;
+}
+/*====================log 글====================*/
+.log_list_div{
+	clear:both;
+	float:center;
+	width:70vw;
+	position:relative;
+	margin:100px 0px !important;
+}
+.log_div{
+	margin:1vw;
+	padding:2vw;
+	width:21.3vw;
+	display:inline-block;
+	text-align:center;
+	border-radius:15px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.log_div i{
+	color:rgba(0,0,0,30%);
+}
+.log_ul{
+	list-style-type:none;
+}
+.log_ul li{
+	height:35px;
+	line-height:35px;
+}
+.log_ul li:first-child{
+	height:100%;
+	line-height:40px;
+}
+.coverImg{
+	width:16vw;
+	height:12vw;
+	margin:1vw 0;
+	border-radius:10px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.profileInfo{
+	height:40px;
+	line-height:40px;
+	text-align:left;
+	padding:0px 30px;
+}
+.logProfileImg{
+	width:40px;
+	height:40px;
+}
+.logLike{
+	float:right;
+}
+.logTitle{
+	font-size:1.1em;
+	font-weight:600;
+}
+.tags{
+	background-color:var(--theme-lightblue-30);
+	padding:3px 5px;
+	border-radius:10px;
+}

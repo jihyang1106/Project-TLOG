@@ -11,4 +11,14 @@ public class MemberServiceImpl implements MemberService{
 	@Inject
 	MemberDAO dao;
 
+	@Override
+	public List<MemberVO> setFollowerInfo(int userNum) {
+		return dao.setFollowerInfo(userNum);
+	}
+
+	@Override
+	public List<MemberVO> setFollowInfo(int userNum) {
+		return dao.setFollowInfo(userNum);
+	}
+	
 }
