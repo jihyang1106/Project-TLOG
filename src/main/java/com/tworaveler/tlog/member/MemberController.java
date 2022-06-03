@@ -27,42 +27,28 @@ public class MemberController {
 	LogService logService;
 	@Inject
 	MemberService memberService;
-	/*
-	 * // 로그인 폼
-	 * 
-	 * @GetMapping("login") public String login() { return "/member/login"; } //
-	 * 카카오로그인
-	 * 
-	 * @GetMapping("kakaologin") public String kakaologin(HttpServletResponse
-	 * response, String code, HttpSession session, HttpServletResponse res,
-	 * RedirectAttributes redirect)throws IOException { JSONObject tokenJson =
-	 * kakao.getToken(code); String accessToken =
-	 * tokenJson.getString("access_token"); String refreshToken =
-	 * tokenJson.getString("refresh_token");
-	 * 
-	 * MemberVO kakaoVO = new MemberVO(kakao.getUserInfo(accessToken)); MemberVO
-	 * userInfo = service.selectMember(kakaoVO);
-	 * 
-	 * if(userInfo!=null) { //블랙회원 로그인시 if(userInfo.getVerify()==9) {
-	 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
-	 * response.getWriter(); out.
-	 * println("<script>aljert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>"
-	 * ); out.flush(); return "redirect:login"; } session.setAttribute("userInfo",
-	 * userInfo); session.setAttribute("accessToken", accessToken);
-	 * session.setAttribute("refreshToken", refreshToken);
-	 * session.setAttribute("kakao", "true"); if(userInfo.getVerify()==1) { return
-	 * "redirect:/admin/adminMain"; }else { return "redirect:/"; } }else{
-	 * redirect.addFlashAttribute("kakaoVO", kakaoVO); return "redirect:signup"; } }
-	 */
-	// 구글 로그인
+	
+	// 로그인 폼
 	@GetMapping("/member/login")
 	public String loginForm() {
 		return "member/login";
 	}
-	@GetMapping("/member/welcomePage")
-	public String welcomePage() {
-		return "member/welcomePage";
+	//카카오 로그인
+	@GetMapping("/member/kakaoLogin")
+	public void kakaologin() {
+		System.out.println("카톡 로그인으루 넘어옴");
 	}
+	//구글 로그인
+	
+	@GetMapping("/member/welcomePage")
+	public ModelAndView welcomePage() {
+		ModelAndView mav = new ModelAndView();
+		//해시태그 정보 받아오기
+		mav.addObject("allTagList", memberService.getAllHashtag());
+		mav.setViewName("member/welcomePage");
+		return mav;
+	}
+	
 	@GetMapping("/member/profile")
 	public ModelAndView myProfile(int userNum) {
 		ModelAndView mav = new ModelAndView();

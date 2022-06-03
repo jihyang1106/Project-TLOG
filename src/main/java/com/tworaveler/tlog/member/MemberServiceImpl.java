@@ -12,6 +12,11 @@ public class MemberServiceImpl implements MemberService{
 	MemberDAO dao;
 
 	@Override
+	public List<MemberVO> getAllHashtag() {
+		return dao.getAllHashtag();
+	}
+
+	@Override
 	public List<MemberVO> setFollowerInfo(int userNum) {
 		return dao.setFollowerInfo(userNum);
 	}

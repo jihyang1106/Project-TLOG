@@ -87,18 +87,12 @@
       <!-- Modal body -->
       <div class="modal-body">
 	      <ul id="followerList">
-	      	<li>
-		      	<span ><img src="/img/member/default_profile.png" id="followerImg"></span>&emsp;
-				<span id="followerNick">팔로우1</span>
-	      	</li>
-	      	<li>
-		      	<span ><img src="/img/member/default_profile.png" id="followerImg"></span>&emsp;
-				<span id="followerNick">팔로우2</span>
-	      	</li>
-	      	<li>
-		      	<span ><img src="/img/member/default_profile.png" id="followerImg"></span>&emsp;
-				<span id="followerNick">팔로우3</span>
-	      	</li>
+	      	<c:forEach var="vo" items="${followList}">
+		      	<li>
+			      	<span ><img src="/img/member/${vo.profileImg}.png" id="followImg"></span>&emsp;
+					<span id="followNick">${vo.userNick }</span>
+		      	</li>
+		   </c:forEach>
 	      </ul>
       </div>
       <!-- Modal footer -->
@@ -108,6 +102,3 @@
     </div>
   </div>
 </div>
-<script>
-
-</script>

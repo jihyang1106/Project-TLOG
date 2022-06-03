@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface MemberDAO {
+	//해시태그
+	public List<MemberVO> getAllHashtag();
 	//팔로워 받아오기
 	public List<MemberVO> setFollowerInfo(int userNum);
 	//팔로우하는 사람 받아오기

@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.member.MemberDAO">
+	<select id='getAllHashtag' resultType='com.tworaveler.tlog.member.MemberVO'>
+		SELECT 		*
+		FROM		tagWord
+	</select>
 	<select id='setFollowerInfo' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		A.*
 		FROM		user A
