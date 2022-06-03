@@ -55,7 +55,6 @@ public class HomeController {
 		//(3) 태그 리스트
 		List<LogVO> tagList = service.selectTagAll();
 		mav.addObject("tagList", tagList);
-		
 		mav.setViewName("/home");
 		return mav;
 	} 
