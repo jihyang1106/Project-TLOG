@@ -47,8 +47,8 @@ var newOrLike=0;
 			    	  tag += "<li>"+data[i].startDate+"</li>";
 			    	  tag += "<li>"+data[i].endDate+"</li>";
 			    	  tag += "<li>"+data[i].likeNum+"</li>";
-			    	  tag += "<li>"+data[i].profileImg+"</li>";
-			    	  tag += "<li>"+data[i].userNick+"</li>";
+			    	  tag += "<li onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">";
+			    	  tag += "<img src='/upload/user/"+data[i].profileImg+".png' height='30px'/>"+data[i].userNick + "</li>";
 					  tag += "<li>";
 					  for(j=0; j<data[i].tagList.length; j++){
 						  tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
