@@ -73,7 +73,7 @@ function logDetail(tNum){
 					<li>${vo.startDate}</li>
 					<li>${vo.endDate}</li>
 					<li>${vo.likeNum}</li>
-					<li onclick="location.href='/myLog/myLogList?userNum=${vo.userNum}'">
+					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
 						<img src='/upload/user/${vo.profileImg}' height='30px'/>${vo.userNick}
 					</li>
 					<li>
@@ -92,7 +92,7 @@ function logDetail(tNum){
 		<div>
 			<c:forEach var="vo" items="${followedUser}">
 				<ul>
-					<li onclick="location.href='/myLog/myLogList?userNum=${vo.userNum}'">
+					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
 						<img src='/upload/user/${vo.profileImg}' height='30px'/>${vo.userNick}
 					</li>
 					<li>${vo.followerNum}</li>
