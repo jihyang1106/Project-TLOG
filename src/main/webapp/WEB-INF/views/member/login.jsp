@@ -10,13 +10,8 @@
 			</div>
 			<div id="loginInfoContainer">
 				<p id="loginTitle">로그인</p>
-<<<<<<< HEAD
-				<div class="otherLogin" class="btn">
-					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=8299169b3aa46a93e89d0f3fe4ed0583&redirect_uri=http://localhost:8040/member/kakaologin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
-=======
 				<div class="otherLogin">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3e06893f3a47571afed7ebd080a8fd24&redirect_uri=http://localhost:8040/member/kakaologin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
->>>>>>> 15e475af67d7050673d98d9c13209d984c4852b3
 				</div>
 				<div class="otherLogin">
 					<a href="#"><img src="/img/member/google_login.png"></a>
