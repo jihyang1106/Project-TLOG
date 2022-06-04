@@ -61,7 +61,6 @@ function logLists(){
 				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 				tag += "</li>";
 				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
-				
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){
 					tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
