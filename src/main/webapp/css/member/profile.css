@@ -34,7 +34,6 @@
 	font-weight:600;
 	color:rgba(0,0,0,70%);
 	background:none;
-	box-shadow:0 0 10px rgba(0,0,0,30%);
 }
 #userEditBtn:hover{
 	background-color:rgba(122, 140, 226, 60%);
@@ -145,6 +144,7 @@
 	line-height:40px;
 	text-align:left;
 	padding:0px 30px;
+	cursor:pointer;
 }
 .logProfileImg{
 	width:40px;
@@ -156,6 +156,7 @@
 .logTitle{
 	font-size:1.1em;
 	font-weight:600;
+	cursor:pointer;
 }
 .tags{
 	background-color:var(--theme-lightblue-30);

@@ -1,0 +1,131 @@
+@charset "UTF-8";
+#logListContainer{
+	width:60vw;
+	margin:0 auto;
+}
+/*===================로그리스트 버튼, 검색부분=====================*/
+#logListTop{
+	margin:30px 0px;
+	width:60vw;
+}
+#btnArea{
+	float:left;
+}
+/*모든 버튼들*/
+.logListBtn{
+	border:none;
+	background-color:var(--theme-lightblue-60);
+	color:white;
+	border-radius:10px;
+	padding:5px 10px;
+	position:relative;
+	overflow:hidden;
+}
+/* .logListBtn::after{ */
+/* 	content:""; */
+/* 	position:absolute; */
+/* 	top:0; */
+/* 	left:0; */
+/* 	width: 30px; */
+/* 	height: 30px; */
+/* 	transform:scale(1); */
+/* 	background-color:rgba(0,0,0,50%); */
+/* 	border-radius:50%; */
+/* 	pointer-events:none; */
+/* } */
+.logListBtn:focus{
+	outline: none;
+}
+.logListBtn::before{
+	content:"";
+	position:absolute;
+	height:100%;
+	width:100%;
+	background-color:rgba(0,0,0,75%);
+	top:100%;
+	left:0;
+	transition:all 0.3s;
+	z-index:-1;
+	
+}
+.logListBtn:hover::before{
+	transform:translateY(-100%);
+}
+#searchFrm{
+	float:right;
+	display:inline-block;
+}
+#searchKey, #searchWord{
+	border-radius:10px;
+	padding:5px;
+	border:1px solid rgba(0,0,0,30%);
+	text-align:center;
+}
+/*======탑으로 가는 버튼=======*/
+#top_btn{
+	position:fixed;
+	bottom:2%;
+	right:15%;
+	z-index:100;
+}
+/*===================일기 게시물=====================*/
+.log_list_div{
+	clear:both;
+	float:center;
+	width:60vw;
+	position:relative;
+}
+.log_div{
+	margin:1vw;
+	padding:2vw;
+	width:18vw;
+	display:inline-block;
+	text-align:center;
+	border-radius:15px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.log_div i{
+	color:rgba(0,0,0,30%);
+}
+.log_ul{
+	list-style-type:none;
+}
+.log_ul li{
+	height:35px;
+	line-height:35px;
+}
+.log_ul li:first-child{
+	height:100%;
+	line-height:40px;
+}
+.coverImg{
+	width:14vw;
+	height:12vw;
+	margin-bottom:1vw;
+	border-radius:10px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.profileInfo{
+	height:40px;
+	line-height:40px;
+	text-align:left;
+	padding:0px 30px;
+	cursor:pointer;
+}
+.logProfileImg{
+	width:40px;
+	height:40px;
+}
+.logLike{
+	float:right;
+}
+.logTitle{
+	font-size:1.1em;
+	font-weight:600;
+	cursor:pointer;
+}
+.tags{
+	background-color:var(--theme-lightblue-30);
+	padding:3px 5px;
+	border-radius:10px;
+}
