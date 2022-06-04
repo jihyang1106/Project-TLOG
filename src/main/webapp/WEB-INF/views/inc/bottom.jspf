@@ -3,6 +3,14 @@
 <div class="bottom" id='bottom'>
 	<footer id='footer'>
 		<!-- 푸터 작성하기 -->
+		<div>Copyright &copy; T-LOG</div>
+	</footer>
+</div>
+<div id='adminBottom' style="display:none">
+	<footer class="sticky-footer bg-white">
+	        <div class="copyright text-center my-auto">
+	           <span>Copyright &copy; T-LOG</span>
+	       </div>
 	</footer>
 </div>
 </body>

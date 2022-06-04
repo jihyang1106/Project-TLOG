@@ -18,7 +18,7 @@ function logLists(){
 	param = {
 			"startNum" : startNum,
 			"status" : status,
-			"userNum" : 2
+			"userNum" : userNum
 		};
 	/*if(pn=='profile'){
 		url = '/member/profileLogList';
@@ -51,8 +51,8 @@ function logLists(){
 				tag += "<div class='log_div'>"
 				tag += "<ul class='log_ul' onclick='logDetail("+data[i].tNum+")'>";
 				tag += "<li><img src='/img/log/"+data[i].coverImg+"' class='coverImg'/></li>";
-				tag += "<li class='profileInfo'><span><img src='/img/member/"+data[i].profileImg+".png' class='logProfileImg''/></span>&emsp;";
-				tag += "<span class='logNick'>"+data[i].userNick+"</span>";
+				tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='/img/member/"+data[i].profileImg+".png' class='logProfileImg''/></span>&emsp;";
+				tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
 				tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";
 				tag += "<li>";
 				if(data[i].isPrivate==1){
@@ -61,7 +61,6 @@ function logLists(){
 				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 				tag += "</li>";
 				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
-				
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){
 					tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";

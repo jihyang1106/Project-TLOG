@@ -116,5 +116,10 @@ public class LogServiceImpl implements LogService{
 		return dao.searchLikedLogs(userNum, isWriter, searchStart, searchEnd, startNum, limitNum);
 	}
 
+	@Override
+	public int logWriteOk(LogVO vo) {
+		return dao.logWriteOk(vo);
+	}
+
 	
 }

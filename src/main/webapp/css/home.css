@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+.container{
+	min-height: 85vh;
+	margin-left: auto;
+    margin-right: auto;
+    padding-top: 95px;
+}
+
+/*=============== SLIDE ===============*/
+.editor_pic .wrap_slide{
+    overflow: visible;
+    width: 960px;
+}
+
+.editor_pic{
+	height: 520px;
+	margin-top: 22px;
+    position: relative;
+	/*background-color: rgb(172, 235, 255);*/
+}
+
+.wrap_slide{
+	position: relative;
+	margin: 0 auto;
+	
+}
+
+.list_slide{
+	position: absolute;
+    top: 0;
+}
+
+.wrap_slide .list_slide li {
+    float: left;
+}
+
+.wrap_pic{
+	overflow: hidden;
+	width: 960px;
+}
+
+.wrap_pic .item_pic {
+	height: 100%;
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+.wrap_pic .item_pic .link_item {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* SLIDE TYPE1 */
+.wrap_pic_type1 .item_pic_type1{
+	position: relative;
+	height: 520px;
+    width: 50%;
+}
+
+.wrap_pic_type1 .item_pic_type2, .wrap_pic_type1 .item_pic_type3{
+	position: relative;
+	height: 260px;
+    width: 50%;
+}
+
+/* SLIDE TYPE2 */
+.wrap_pic_type2 .item_pic{
+	height: 520px;
+    width: 320px;
+}
+
+/*=============== SLIDE BUTTON ===============*/
+.wrap_btn{
+	position: absolute;
+    top: 50%;
+    margin-top: -115px;
+    right: 10px;
+    z-index: 10;
+	height: 101px;
+    width: 100px;
+}
+
+/*=============== SLIDE PAGING ===============*/
+.wrap_paging {
+    margin: 22px auto 0;
+    text-align: center;
+    width: 960px;
+}
+
+/*=============== BEST FOLLOW ===============*/
+.best_follow{
+	background: #fafafa;
+    margin: 70px auto;
+    padding-top: 100px;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 65px;
+}
+
+.wrap_follow{
+	margin: 50px auto 85px;
+	width: 960px;
+}
+
+.txt_title{
+	text-align:center;
+}
+
+.txt_desc{
+	text-align:center;
+	color:rgb(138, 138, 138);
+}
+
+.list_writers li {
+	float: left;
+    height: 100%;
+    margin-bottom: 15px;
+    margin-left: 8px;
+    position: relative;
+    text-align: center;
+    width: 310px;
+}

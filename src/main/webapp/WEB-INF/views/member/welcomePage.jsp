@@ -14,7 +14,9 @@
 				<div id="profileSubmit"><input type="submit" value="정보등록" id="profileSubmitBtn"/></div>
 			</form>
 			<div id="hr-sect">태그선택</div>
-			<span id="tagWord">#국내<input type="hidden" id="tagvalue" value="국내" ></span>&emsp;
+	      	<c:forEach var="vo" items="${allTagList}">
+				<span id="tagWord">#${vo.tagName }<input type="hidden" id="tagvalue" value=${vo.tagName } ></span>&emsp;
+			</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -39,6 +41,5 @@ function LoadImg(value){
 //태그 토글 어케하누
 $('#tagWord').click(function(){
 	$(this).toggleClass("checked");
-	
 });
 </script>

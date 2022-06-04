@@ -1,5 +1,6 @@
 package com.tworaveler.tlog.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.tworaveler.tlog.log.LogVO;
@@ -22,6 +23,12 @@ public class MemberVO {
 	//follow
 	private int followingNum;
 	private int followerNum;
+	
+	/*
+	 * //카카오 public MemberVO(HashMap<String, String> kakaoInfo) { idKakao =
+	 * kakaoInfo.get("id"); userNick = kakaoInfo.get("nickname"); profileImg =
+	 * kakaoInfo.get("profile"); }
+	 */
 	
 	public List<LogVO> getTagList() {
 		return tagList;

@@ -348,4 +348,16 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param5}, #{param6}
 	</select>
+	<!-- ===================== 글쓰기 ================================================================================ -->
+	<insert id="logWriteOk">
+	    INSERT 	INTO travelLog(tNum, userNum, tTitle, startDate, endDate, placeInfo, isPrivate, ip) 
+	    VALUES (#{tNum}, #{userNum}, #{tTitle}, #{startDate}, #{endDate}, #{placeInfo}, #{isPrivate}, #{ip})
+	</insert>
+	<insert id="detailWriteOk" parameterType="java.util.List" >
+	    INSERT 	INTO travelDetail(tNum, tImg, tContent, tPlace, isCoverImg) 
+	    VALUES 
+	    <foreach collection="detailList" item="item" separator=",">
+	    		(#{item.tNum}, #{item.tImg}, #{item.tContent}, #{item.tPlace}, #{item.isCoverImg})
+	    </foreach>
+	</insert>
 </mapper>
