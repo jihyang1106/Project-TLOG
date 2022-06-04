@@ -66,7 +66,7 @@ function logLists(){
 				for(j=0; j<data[i].tagList.length; j++){
 					tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
 					tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
-					tag += data[i].tagList[j].tagName+"</span>&nbsp;";
+					tag += data[i].tagList[j].tagName+"</span>&nbsp;&nbsp;";
 				}
 				tag += "</li></ul></div>";
 			}//for

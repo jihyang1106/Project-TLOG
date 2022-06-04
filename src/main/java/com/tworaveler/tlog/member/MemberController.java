@@ -146,7 +146,7 @@ public class MemberController {
 		}
 		return logLists;
 	}
-	@GetMapping("userEdit")
+	@GetMapping("/member/userEdit")
 	public String userEdit() {
 		return "member/userEdit";
 	}
