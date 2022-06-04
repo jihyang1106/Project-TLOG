@@ -349,15 +349,47 @@
 		LIMIT 		#{param5}, #{param6}
 	</select>
 	<!-- ===================== 글쓰기 ================================================================================ -->
+	<!-- travelLog 등록 -->
 	<insert id="logWriteOk">
-	    INSERT 	INTO travelLog(tNum, userNum, tTitle, startDate, endDate, placeInfo, isPrivate, ip) 
-	    VALUES (#{tNum}, #{userNum}, #{tTitle}, #{startDate}, #{endDate}, #{placeInfo}, #{isPrivate}, #{ip})
+	    INSERT 	INTO travelLog(userNum, tTitle, startDate, endDate, placeInfo, isPrivate, ip) 
+	    VALUES (#{userNum}, #{tTitle}, #{startDate}, #{endDate}, #{placeInfo}, #{isPrivate}, #{ip})
 	</insert>
-	<insert id="detailWriteOk" parameterType="java.util.List" >
-	    INSERT 	INTO travelDetail(tNum, tImg, tContent, tPlace, isCoverImg) 
+	<!-- travelDetail 등록 -->
+	<insert id="detailWriteOk" parameterType="java.util.Map" >
+	    INSERT 	INTO travelDetail(tNum, tImg, isCoverImg, tContent, tPlace) 
 	    VALUES 
-	    <foreach collection="detailList" item="item" separator=",">
-	    		(#{item.tNum}, #{item.tImg}, #{item.tContent}, #{item.tPlace}, #{item.isCoverImg})
+	    <foreach collection="param2.list" item="item" separator=",">
+	    		(#{param1}, #{item.tImg}, #{item.isCoverImg}, #{item.tContent}, #{item.tPlace})
+	    </foreach>
+	</insert>
+	<!-- 방금 방록한 글의 tNum 가져오기 -->
+	<select id='getTNum' resultType='int'>
+		SELECT  tNum
+		FROM  	travelLog
+		WHERE 	userNum=#{param1}
+		ORDER 	BY tNum DESC
+		LIMIT 	1
+	</select>
+	<!-- 태그 등록 -->
+	<insert id='insertTagList'>
+		INSERT 	tagLog(tNum, tagNum) 
+		VALUES  
+		<foreach collection="tagNumList" item="item" separator=",">
+	        (#{tNum}, #{item})
+	    </foreach>
+    </insert>
+    <!-- 해당 닉네임의 유저 검색 -->
+    <select id='getUserListByNick' resultType='com.tworaveler.tlog.log.LogVO'>
+    	SELECT 	userNum, userNick, profileImg
+    	FROM 	user
+    	WHERE 	userNick like #{param1}
+    </select>
+    <!-- 태그한 유저 등록 -->
+	<insert id='insertUserList'>
+		INSERT 	tagUser(tNum, userNum) 
+		VALUES  
+		<foreach collection="userNumList" item="item" separator=",">
+	        (#{tNum}, #{item})
 	    </foreach>
 	</insert>
 </mapper>
