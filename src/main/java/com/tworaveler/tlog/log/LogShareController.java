@@ -23,7 +23,7 @@ public class LogShareController {
 	public ModelAndView logList(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
 		mav.setViewName("/logShare/logList");
-		System.out.println("왔나ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+
 		return mav;
 	} 
 	@GetMapping("/logShare/logList/searchs") 

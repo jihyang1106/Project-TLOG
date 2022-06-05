@@ -37,22 +37,22 @@
 	font-size:11px;
 }
 /* ===== 태그 색상(변경해야됨!투명도 많이주기) ===== */
-#tag1, #tag2{/*국내,국외*/
+#tag1, #tag2{
 	background-color: rgb(42, 76, 211, 70%);
 }
 #tag3, #tag4, #tag5, #tag6, #tag7{
-	background-color: rgba(122, 140, 226, 80%);/*국외 대륙*/
+	background-color: rgba(122, 140, 226, 80%);
 }
-#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{/*국내*/
+#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
 	background-color: rgba(122, 140, 226, 30%);
 }
-#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{/*나이대*/
+#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
 	background-color: #C3E2DD;
 }
-#tag21, #tag22, #tag23, #tag24, #tag25{ /*인원수*/
+#tag21, #tag22, #tag23, #tag24, #tag25{
 	background-color: #FEF5D4;
 }
-#tag26, #tag27, #tag28, #tag29{ /*계절*/
+#tag26, #tag27, #tag28, #tag29{
 	background-color: #EACACB;
 }
 </style>
