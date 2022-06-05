@@ -77,7 +77,7 @@ public class MemberController {
 	public ModelAndView welcomePage() {
 		ModelAndView mav = new ModelAndView();
 		//해시태그 정보 받아오기
-//		mav.addObject("allTagList", memberService.getAllHashtag());
+		mav.addObject("allTagList", memberService.getAllHashtag());
 		mav.setViewName("member/welcomePage");
 		return mav;
 	}

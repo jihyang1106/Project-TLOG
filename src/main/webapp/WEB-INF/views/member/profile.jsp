@@ -63,7 +63,7 @@
 	      <ul id="followerList">
 	      	<c:forEach var="vo" items="${followerList }">
 		      	<li>
-			      	<span ><img src="/img/member/${vo.profileImg}.png" id="followerImg"></span>&emsp;
+			      	<span ><img src="/upload/user/${vo.profileImg}" id="followerImg"></span>&emsp;
 					<span id="followerNick">${vo.userNick }</span>
 		      	</li>
 	      	</c:forEach>
@@ -92,7 +92,7 @@
           <ul id="followerList">
               <c:forEach var="vo" items="${followList}">
                   <li>
-                      <span ><img src="/img/member/${vo.profileImg}.png" id="followImg"></span>&emsp;
+                      <span ><img src="/upload/user/${vo.profileImg}" id="followImg"></span>&emsp;
                     <span id="followNick">${vo.userNick }</span>
                   </li>
            </c:forEach>
