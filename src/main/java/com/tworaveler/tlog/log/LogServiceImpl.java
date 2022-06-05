@@ -147,5 +147,10 @@ public class LogServiceImpl implements LogService{
 		return dao.insertUserList(vo);
 	}
 
+	@Override
+	public LogVO getOneLog(int tNum) {
+		return dao.getOneLog(tNum);
+	}
+
 	
 }

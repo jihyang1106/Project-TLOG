@@ -50,7 +50,7 @@ function logLists(){
 			for(i=0; i<data.length; i++){
 				tag += "<div class='log_div'>"
 				tag += "<ul class='log_ul' onclick='logDetail("+data[i].tNum+")'>";
-				tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg'/></li>";
+				tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg' onclick=\"location.href='/logShare/logView?tNum="+data[i].tNum+"'\"/></li>";
 				tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='/upload/user/"+data[i].profileImg+"' class='logProfileImg''/></span>&emsp;";
 				tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
 				tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.log.LogDAO">
-	<!-- 메인: 최신 글 리스트 -->
+	<!-- 메인: 글 리스트(좋아요순) -->
 	<select id='selectLikeLog' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
 		FROM		travelLog A
@@ -54,7 +54,7 @@
 	</select>
 	<!-- tNum의 태그된 유저 리스트 -->
 	<select id='selectTagUsers' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT	A.userNum, B.userNick
+		SELECT	A.userNum, B.userNick, B.profileImg
         FROM	tagUser A
         JOIN	user B
         ON		B.userNum=A.userNum
@@ -392,4 +392,16 @@
 	        (#{tNum}, #{item})
 	    </foreach>
 	</insert>
+	<!-- ==================== logView =========================================== -->
+	<select id='getOneLog' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        WHERE		A.tNum=#{param1}
+	</select>
 </mapper>

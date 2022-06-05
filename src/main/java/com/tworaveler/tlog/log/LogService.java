@@ -72,4 +72,7 @@ public interface LogService {
 	public List<LogVO> getUserListByNick(String userNick);
 	//태그한 유저 등록
 	public int insertUserList(LogVO vo);
+	
+	/* ================  logView ==================== */
+	public LogVO getOneLog(int tNum);
 }
