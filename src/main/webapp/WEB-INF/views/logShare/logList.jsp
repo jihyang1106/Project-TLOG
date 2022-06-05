@@ -41,7 +41,7 @@ var newOrLike=0;
 				console.log("data.length : "+data.length);
 				var tag = "";
 				for(i=0; i<data.length; i++){
-			    	  tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+			    	  tag += "<ul id='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
 			    	  tag += "<li><img src='/upload/log/"+data[i].coverImg+"' width='300px'/></li>";
 			    	  tag += "<li>"+data[i].tTitle+"</li>";
 			    	  tag += "<li>"+data[i].startDate+"</li>";
@@ -109,32 +109,7 @@ $(document).ready(function(){
 		logLists();
 	});
 })
-/* === 클릭이벤트: 일기 상세 리스트 === */
-function logDetail(tNum){
-	var param={"tNum" : tNum};	
-	$.ajax({
-		data:param,
-		url:'/home/logDetail',
-		type:'GET',
-		success:function(data){
-			var tag="";
-			for(var i=0; i<data.length; i++){
-				tag += "<ul><li>"+data[i].tDetailNum+"</li>";
-				tag += "<li>"+data[i].tNum+"</li>";
-				tag += "<li>"+data[i].tImg+"</li>";
-				tag += "<li>"+data[i].tContent+"</li>";
-				tag += "<li>"+data[i].tPlace+"</li>";
-				tag += "<li>"+data[i].isCoverImg+"</li>";
-				tag += "<li>";
-				for(j=0; j<data[i].tagUserList.length; j++){
-					tag += "<span value='"+data[i].tagUserList[j].userNum+"'>"+data[i].tagUserList[j].userNick+"&nbsp;</span>";
-				}
-				tag += "</li></ul>";
-			}
-			$("#detail_div").html(tag);
-		}
-	})
-}
+
 /* ===== 검색한 단어 띄우기 ===== */
 window.onload = function(){
 	if('${searchKey}'!=null && '${searchKey}'!=""){
@@ -153,7 +128,7 @@ $("#searchFrm").submit(function() {
 	}
 });
 
-/* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)
+/* === 올라가는 버튼 보이는 이벤트 ===
 function scrollFunction() {
     var btn = document.getElementById('top_btn');
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -178,22 +153,22 @@ function goTop() {
 }
 /* ===== 태그 색상(변경해야됨!) ===== */
 #tag1, #tag2{
-	background-color: rgb(42, 76, 211, 70%);
+	background-color: rgba(42, 76, 211, 30%);
 }
 #tag3, #tag4, #tag5, #tag6, #tag7{
-	background-color: rgba(122, 140, 226, 80%);
+	background-color: rgba(166, 198, 252, 50%);
 }
 #tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
 	background-color: rgba(122, 140, 226, 30%);
 }
 #tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
-	background-color: #C3E2DD;
+	background-color: rgba(195, 226, 221, 50%);
 }
 #tag21, #tag22, #tag23, #tag24, #tag25{
 	background-color: #FEF5D4;
 }
 #tag26, #tag27, #tag28, #tag29{
-	background-color: #EACACB;
+	background-color: rgba(234, 202, 203, 50%);
 }
 </style>
 <!--====================================== HTML ===================================================================-->

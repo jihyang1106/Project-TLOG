@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -107,5 +108,13 @@ public class myLogController {
     		return userNum;
     	}
 		return 0;
+	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 삭제 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/log/logDel", method = RequestMethod.GET)
+	public int logDel(@RequestParam("tNum") int tNum){
+		service.logDel(tNum);
+		return 2; //로그인 유저넘버
 	}
 }

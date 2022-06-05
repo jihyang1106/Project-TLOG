@@ -87,9 +87,9 @@ public class LogShareController {
 	public ModelAndView logView(HttpSession session, HttpServletRequest request, int tNum) { 
 		ModelAndView mav  = new ModelAndView();
 		int logUser = 2; //로그인 한 유저넘버
-		LogVO vo = service.getOneLog(tNum);		
-		
-		if(vo.getIsPrivate()==1 && vo.getUserNum()!=logUser) {//비밀일기일 때 작성자가 아니라면
+		LogVO vo = service.getOneLog(tNum, logUser);		
+		int isTagged = service.isTagged(tNum, logUser);
+		if(vo.getIsPrivate()==1 && isTagged==0 && vo.getUserNum()!=logUser) {//비밀일기일 때 태그된 유저가 아니고 작성자도 아니라면
 			System.out.println("나가라");
 			mav.setViewName("redirect:/member/profile?userNum="+vo.getUserNum()); //작성자 프로필로 리다이렉트	
 		}else {			
@@ -102,4 +102,24 @@ public class LogShareController {
 		}
 		return mav;
 	} 
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/log/likeUp", method = RequestMethod.POST)
+	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
+		int userNum = 2; //logNum
+		service.LikeUp(userNum, tNum);
+		
+		return service.getLikeNum(tNum);
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 취소 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/log/likeDown", method = RequestMethod.GET)
+	public LogVO likeDown(@RequestParam("tNum") int tNum, HttpSession session) {
+		int userNum = 2; //logNum
+		service.LikeDown(userNum, tNum);
+
+		return service.getLikeNum(tNum);
+	}
+	
+	
 }

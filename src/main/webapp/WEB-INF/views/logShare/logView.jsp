@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script src='/js/log/logView.js'></script>
 <style>
 /*====================log 글====================*/
 #log_big{
@@ -78,18 +79,39 @@
 }
 
 .tags{
-	background-color:var(--theme-lightblue-30);
 	padding:3px 5px;
 	border-radius:10px;
+	cursor:pointer;
+	background-color:#ddd;
+}
+/* ===== 태그 색상(변경해야됨!) ===== */
+#tag1, #tag2{
+	background-color: rgba(42, 76, 211, 30%);
+}
+#tag3, #tag4, #tag5, #tag6, #tag7{
+	background-color: rgba(166, 198, 252, 50%);
+}
+#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
+	background-color: rgba(122, 140, 226, 30%);
+}
+#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
+	background-color: rgba(195, 226, 221, 50%);
+}
+#tag21, #tag22, #tag23, #tag24, #tag25{
+	background-color: #FEF5D4;
+}
+#tag26, #tag27, #tag28, #tag29{
+	background-color: rgba(234, 202, 203, 50%);
 }
 .current{
 	display : block;
 }
 </style>
+
 <div id='log_big'>
 <div id='log_list_div'>
 	<div class='log_div'>
-		<ul class='log_ul' onclick='logDetail(${vo.tNum})'>
+		<ul class='log_ul'>
 			<li>
 				<div class='coverImgDiv'>
 					<img src='/upload/log/${vo.coverImg}' class='coverImg'/>
@@ -105,7 +127,15 @@
 				<span onclick="location.href='/member/profile?userNum=${vo.userNum}'">
 				<img src='/upload/user/${vo.profileImg}' class='logProfileImg'/></span>&emsp;
 				<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
-				<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;${vo.likeNum}</span>
+				<span class='logLike'>
+					<c:if test="${vo.likeType==0}">
+						<i class='fa-thin fa-thumbs-up' onclick='LikeUp(${vo.tNum})'></i> &emsp;${vo.likeNum}
+					</c:if>
+					<c:if test="${vo.likeType==1}">
+						<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})'></i> &emsp;${vo.likeNum}
+					</c:if>				
+					
+				</span>
 			</li>
 			<hr/>
 			<li> with &nbsp;&nbsp;&nbsp;
@@ -124,7 +154,13 @@
 							${t.tagName}
 						</span>&nbsp;
 				</c:forEach>
-			</li>			
+			</li>		
+			<c:if test="${logStatus=='Y'}">
+				<li>
+					<span class='tags'>수정</span>
+					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
+				</li>
+			</c:if>	
 		</ul>
 	</div>
 </div>
@@ -144,4 +180,3 @@
 	</div>
 </c:forEach>
 </div>	
-			
