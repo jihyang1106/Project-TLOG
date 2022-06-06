@@ -359,8 +359,14 @@
 		
 		
 		<!-- 태그 리스트 -->
-		<div>
-			
+		<div class="tag_wrap">
+			<div class="tag_list">
+				<a href="/" class="tag_item"></a>
+				<a href="/" class="tag_item"></a>
+				<a href="/" class="tag_item"></a>
+				<a href="/" class="tag_item"></a>
+				<a href="/" class="tag_item"></a>
+			</div>
 		</div>
 		
 		
