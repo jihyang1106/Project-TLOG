@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<link rel="stylesheet" href="/css/logShare/logList.css" type="text/css">
 <script>		
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)

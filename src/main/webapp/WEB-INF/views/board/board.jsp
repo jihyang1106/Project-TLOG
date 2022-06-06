@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/board/board.css" type="text/css">
-<br>
-<!-- ====== 글 작성 하는곳 ======  -->
-<form method="post" id="boardForm" action="test" onsubmit="return boardSend()">
-<textarea name="boardContent" id="content" placeholder="100글자 한도"></textarea>
-<br>
-	<c:if test="${userNick == null }">
-		<input type="submit" id="boardInsert" value="글 등록" />
-	</c:if>
-	<%-- <c:if test="${userNick == null }">
-		<input type="button" id="boardInsert" value="글 등록"
-			onclick="alert('로그인 해야 이용가능합니다.')" />
-	</c:if> --%>
-<br>
-</form>
-<br><br><br>
-<hr/>
+<section id="freeLogContainer">
+	<p id="freeLogTitle">자유일기</p>
+	<!-- ====== 글 작성 하는곳 ======  -->
+	<form method="post" id="boardForm" action="test" onsubmit="return boardSend()">
+	<textarea name="boardContent" id="freeLogContent" placeholder="자유 여행 일기 (100글자 한도)"></textarea>
+		<c:if test="${userNick == null }">
+			<button id="boardInsert">등록</button>
+		</c:if>
+		<%-- <c:if test="${userNick == null }">
+			<input type="button" id="boardInsert" value="글 등록"
+				onclick="alert('로그인 해야 이용가능합니다.')" />
+		</c:if> --%>
+	</form>
+	<br><br><br>
+	<div class="slideshow-container">
+		<div class="mySlideDiv face active"><a href="https://www.hanatour.com/" target="_blank"><img src="/img/ad/ad1.jpg"></a></div>
+		<div class="mySlideDiv face"><a href="http://www.palmfair.co.kr/main_20220611.asp?path=keyword&n=" target="_blank"><img src="/img/ad/ad2.jpg"></a></div>
+		<div class="mySlideDiv face"><a href="https://www.redcap.co.kr/page/CM_IR_0220?pgNm=MAIN" target="_blank"><img src="/img/ad/ad3.jpg"></a></div>
+	</div>
 <script>
 /* ====== 글 등록하기 ======*/
 function boardSend(){
@@ -40,9 +43,7 @@ function boardSend(){
 		});
 	}
 }
-</script>
 
-<script>		
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
 var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
@@ -61,10 +62,12 @@ var newOrLike=0;
 				console.log("data.length : "+data.length);
 				var tag = "";
 				for(i=0; i<data.length; i++){
-			    	  tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";		    	  
-			    	  tag += "<li id='info'>"+ data[i].userNick +"("+ data[i].ip  +")"+ "&nbsp;"+ data[i].writedate +"&nbsp;"+"</li>";
-			    	  tag += "<li id='maincon'>"+data[i].boardContent+"</li>";
-					  tag += "</ul>";
+			    	  tag += "<div id='freeLog_div' onclick='logDetail("+data[i].tNum+")'>";		    	  
+			    	  tag += "<div id='info'><span id='infoLeft'><img src='/img/member/"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"</span>";
+			    	  tag += "<span id='infoRight'>("+ data[i].ip  +")"+ "&nbsp;"+ data[i].writedate +"&nbsp;"+"</span></div>";
+			    	  tag += "<hr/>";
+			    	  tag += "<div id='mainContent'>"+data[i].boardContent+"</div>";
+					  tag += "</div>";
 					  tag += "<br>";
 			    }//for
 			    $("#log_list_div").append(tag);
@@ -106,6 +109,42 @@ logLists();
 function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
 }
+
+/*======광고 무한슬라이드=============*/
+$(document).ready(function () {
+	$(".mySlideDiv").not(".active").hide(); //화면 로딩 후 첫번째 div를 제외한 나머지 숨김
+	
+	setInterval(nextSlide, 5000); //4초(4000)마다 다음 슬라이드로 넘어감
+});
+
+//다음 슬라이드
+function nextSlide() {
+	$(".mySlideDiv").hide();
+	var allSlide = $(".mySlideDiv");
+	var currentIndex = 0;
+	
+	$(".mySlideDiv").each(function(index,item){
+		if($(this).hasClass("active")) {
+			currentIndex = index;
+		}
+	});
+	
+	var newIndex = 0;
+	
+	if(currentIndex >= allSlide.length-1) {
+		//현재 슬라이드 index가 마지막 순서면 0번째로 보냄(무한반복)
+		newIndex = 0;
+	} else {
+		//현재 슬라이드의 index에서 한 칸 만큼 앞으로 간 index 지정
+		newIndex = currentIndex+1;
+	}
+
+	$(".mySlideDiv").removeClass("active");
+	$(".mySlideDiv").eq(newIndex).addClass("active");
+	$(".mySlideDiv").eq(newIndex).show();
+	
+}
+
 </script>
 <!--====================================== HTML ===================================================================-->
 
@@ -113,7 +152,7 @@ function goTop() {
 <div id='log_list_div'></div>
 
 <!-- 탑으로 가는 버튼 -->
-<button id='top_btn' onclick='goTop()'>Top ^^^^^</button>
+<button id='top_btn' onclick='goTop()'><i class="fa-solid fa-angles-up"></i></button>
 
 <!-- 로딩중 이미지 -->
 <img src='/img/loading.gif' id='loading' style='height:300px; display:none;'/>
@@ -122,3 +161,4 @@ function goTop() {
 
 <!-- 상세페이지 -->
 <div id='detail_div'></div>
+</section>
