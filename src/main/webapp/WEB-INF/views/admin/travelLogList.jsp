@@ -26,27 +26,13 @@
 				<!-- Heading -->
 				<span class="sidebar-heading">게시판 및 멤버</span>
 			</div>
-			
-		    <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/main">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            
+		
 			<!-- Nav Item 전체 게시판-->
 			<li class="nav-item">
-			    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-			        aria-expanded="true" aria-controls="collapseTwo">
+			    <a class="nav-link" href="/admin/main">
 			        <i class="fas fa-fw fa-cog"></i>
 			        <span>전체 게시판</span>
 			    </a>
-			    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			        <div class="bg-white py-2 collapse-inner rounded">
-			            <a class="collapse-item" href="/admin/travelLogList">여행일기</a>
-			            <a class="collapse-item" href="/admin/boardList">자유일기</a>
-			        </div>
-			    </div>
 			</li>
 		
 			<!-- Nav Item 회원 게시판-->

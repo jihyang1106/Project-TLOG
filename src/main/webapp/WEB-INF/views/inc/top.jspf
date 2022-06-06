@@ -28,7 +28,7 @@
 <div class="top" id='top'>
 <!--------- 일반 아이디로 로그인 -----------> 
 	<header>
-		<nav>
+		<div class="nav">
 			<div class="logo">
 				<a href="/"><img src="/img/TLOG1.png" ></a>
 			</div>
@@ -57,8 +57,7 @@
 					</c:if>
 	        	</div>
         	</div>
-		</nav>
+		</div>
 	</header>
-	
 <!--------- 관리자 아이디로 로그인 ----------->
 </div>

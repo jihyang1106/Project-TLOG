@@ -18,7 +18,7 @@ header{
   	margin-bottom: -95px;
 }
 
-nav{
+#nav{
 	height: 95px;
 	width: 70%;
 	display: flex;
