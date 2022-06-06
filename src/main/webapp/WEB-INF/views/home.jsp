@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 //클릭이벤트: 일기 상세 리스트
-/* function logDetail(tNum){ 
+function logDetail(tNum){ 
 	var param={"tNum" : tNum};	
 	$.ajax({
 		data:param,
@@ -25,7 +25,7 @@
 			$("#detail_div").html(tag);
 		}
 	})
-}*/
+}
 </script>
 <style>
 /* ===== 태그 ===== */
@@ -186,7 +186,7 @@
 		</div>-->
 		
 		
-		<!-- 태그 리스트 
+		태그 리스트 
 		<div>
 			<ul>
 				<c:forEach var="t" items="${tagList}">
@@ -196,5 +196,5 @@
 					</li>
 				</c:forEach>
 			</ul>
-		</div>-->
+		</div>
 	</div>

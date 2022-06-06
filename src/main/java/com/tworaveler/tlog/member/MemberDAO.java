@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-
 @Mapper
 @Repository
 public interface MemberDAO {
@@ -17,5 +16,4 @@ public interface MemberDAO {
 	public List<MemberVO> setFollowInfo(int userNum);
 	//로그인(회원정보 선택)
 	public MemberVO selectMember(MemberVO vo);
-
 }
