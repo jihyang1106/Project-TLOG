@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tworaveler.tlog.board.BoardService;
 import com.tworaveler.tlog.board.BoardVO;
-import com.tworaveler.tlog.log.LogVO;
 
 @Controller
 public class BoardController {
@@ -31,12 +31,20 @@ public class BoardController {
 		return mav;
 	}
 	//전체 로그리스트
-		@ResponseBody // Ajax
-		@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-		public List<BoardVO> logLists(@RequestParam("startNum") int startNum) {
-			int limitNum = 10; //한 번에 나오는 글 수
-			List<BoardVO> logLists = new ArrayList<BoardVO>();
-				logLists = service.selectRecent(startNum, limitNum);
-			return logLists;
-		}
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
+	public List<BoardVO> logLists(@RequestParam("startNum") int startNum) {
+		int limitNum = 10; //한 번에 나오는 글 수
+		List<BoardVO> logLists = new ArrayList<BoardVO>();
+			logLists = service.selectRecent(startNum, limitNum);
+		return logLists;
+	}
+		
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
+	public int boardInsert(BoardVO vo, HttpServletRequest request) {
+		vo.setIp(request.getRemoteAddr());
+		vo.setUserNum(2);
+		return service.boardInsert(vo);
+	}
 }

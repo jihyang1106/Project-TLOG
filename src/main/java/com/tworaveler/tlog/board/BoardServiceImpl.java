@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.tworaveler.tlog.log.LogVO;
-
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Inject
@@ -16,6 +14,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> selectRecent(int startNum, int limitNum) {
 		return dao.selectRecent(startNum, limitNum);
+	}
+
+	@Override
+	public int boardInsert(BoardVO vo) {
+		return dao.boardInsert(vo);
 	}
 
 }

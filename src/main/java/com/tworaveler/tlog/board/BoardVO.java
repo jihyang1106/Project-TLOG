@@ -6,6 +6,7 @@ public class BoardVO {
 	private String boardContent;
 	private String writedate;
 	private int userNum;
+	private String ip;
 	
 	public int getBoardNum() {
 		return boardNum;
@@ -37,5 +38,12 @@ public class BoardVO {
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
 	
 }

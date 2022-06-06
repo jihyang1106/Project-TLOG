@@ -1,7 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<input type="text" id="comment" name='comment' placeholder='오늘 하루는 어떠셨나요?'/>
-<button>글작성</button>
+<link rel="stylesheet" href="/css/board/board.css" type="text/css">
+<br>
+<!-- ====== 글 작성 하는곳 ======  -->
+<form method="post" id="boardForm" action="test" onsubmit="return boardSend()">
+<textarea name="boardContent" id="content" placeholder="100글자 한도"></textarea>
+<br>
+	<c:if test="${userNick == null }">
+		<input type="submit" id="boardInsert" value="글 등록" />
+	</c:if>
+	<%-- <c:if test="${userNick == null }">
+		<input type="button" id="boardInsert" value="글 등록"
+			onclick="alert('로그인 해야 이용가능합니다.')" />
+	</c:if> --%>
+<br>
+</form>
+<br><br><br>
+<hr/>
+<script>
+/* ====== 글 등록하기 ======*/
+function boardSend(){
+	event.preventDefault();
+	if($("#content").val()==""){ // 글 입력 안함
+		alert("글을 입력 후에 등록해주세요2");
+	}else{ // 글 입력
+		var url = '/boardWrite';
+		var data = $("#boardForm").serialize(); // form데이터 보내기
+		$.ajax({
+			url :url,
+			data : data,
+			type : 'POST',
+			success : function(result){
+				$("#log_list_div").empty();
+				startNum=0;
+				logLists();
+			},error : function(e){
+				console.log(content);
+				alert("오류!");
+			}
+		});
+	}
+}
+</script>
 
 <script>		
 var startNum=0;
@@ -13,21 +52,20 @@ var newOrLike=0;
 	function logLists(){
 		var url = '/boardList';
 		var param = {"startNum" : startNum};
-		
 		console.log(param);
 		$.ajax({
 			url : url,
 			data :param,
 			type : 'GET',
-			
 			success : function(data){
 				console.log("data.length : "+data.length);
 				var tag = "";
 				for(i=0; i<data.length; i++){
 			    	  tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";		    	  
-			    	  tag += "<li>"+ data[i].userNick +"("+ data[i].ip +")"+ "&nbsp;"+ data[i].writedate +"&nbsp;"+"</li>";
-			    	  tag += "<li>"+data[i].boardContent+"</li>";
+			    	  tag += "<li id='info'>"+ data[i].userNick +"("+ data[i].ip  +")"+ "&nbsp;"+ data[i].writedate +"&nbsp;"+"</li>";
+			    	  tag += "<li id='maincon'>"+data[i].boardContent+"</li>";
 					  tag += "</ul>";
+					  tag += "<br>";
 			    }//for
 			    $("#log_list_div").append(tag);
 			    isFetching=false; //로딩완료
@@ -69,25 +107,11 @@ function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
-<!-- ===================================== CSS ================================================================== -->
-<style>
-/* ===== 태그 ===== */
-.tags{
-	border-radius: 5px;
-	padding: 5px;
-	font-size:11px;
-}
-li{
-text-align:center;
-}
-#loading{
-padding-left:38vw;
-}
-</style>
 <!--====================================== HTML ===================================================================-->
 
 <!-- log리스트 -->
 <div id='log_list_div'></div>
+
 <!-- 탑으로 가는 버튼 -->
 <button id='top_btn' onclick='goTop()'>Top ^^^^^</button>
 
