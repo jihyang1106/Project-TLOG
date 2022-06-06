@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/member/userEdit.css" type="text/css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -43,3 +44,17 @@ $('#tagWord').click(function(){
 	$(this).toggleClass("checked");
 });
 </script>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+>>>>>>> 98dd0822fbf0f3053c671967a11b98d1f3bfa950

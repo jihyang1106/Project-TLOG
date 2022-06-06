@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="/css/inc/base.css" type="text/css">
 	<link rel="stylesheet" href="/css/inc/top.css" type="text/css">
 	<link rel="stylesheet" href="/css/home.css" type="text/css">
-	
 	<!-- Pavicon -->
 	<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 </head>
@@ -39,7 +38,7 @@
 						<a href="/logShare/logList" class="nav-link top-list">여행일기</a>
 					</li>
 					<li class="nav_item">
-						<a href="/" class="nav-link top-list">자유일기</a>
+						<a href="/board/board" class="nav-link top-list">자유일기</a>
 					</li>
 					<li class="nav_item">
 						<a href="/" class="nav-link top-list">지도</a>

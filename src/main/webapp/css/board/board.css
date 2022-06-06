@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+hr{ /*글작성하는 곳 글나오는곳 경계선*/
+	margin-left : 20vw;
+	width : 54vw;
+}
+
+textarea{
+	width : 54vw;
+	height : 5vw;
+	margin-left : 20vw;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 14px;
+	resize: none;
+}
+
+/* 글등록 버튼 */
+[type=button]:not(:disabled),[type=submit]{
+	float:right;
+	margin-right:25.1vw;
+}
+
+/* 닉네임 ip 날짜 시간 */
+#info{
+	background : lime;
+	margin-left : 20vw;	
+	width : 54vw;
+	border-radius : 5px;
+}
+
+/* 글 내용 */
+#maincon{
+	float : center;
+    width : 20vw;
+    white-space : nowrap;
+    overflow : hidden;
+    text-overflow : ellipsis;
+	margin-left : 37vw;
+   /*여러 줄 자르기 추가 스타일*/
+    white-space : normal;
+    background : skyblue;
+    border-radius : 5px;
+    font : black;
+}
+ 
+li{
+	text-align:center;
+}
+
+#loading{
+	padding-left:38vw;
+}

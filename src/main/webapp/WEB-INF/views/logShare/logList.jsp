@@ -224,7 +224,6 @@ function goTop() {
 <div id='log_list_div'></div>
 <!-- 탑으로 가는 버튼 -->
 <button class="logListBtn" id='top_btn' onclick='goTop()'><i class="fa-solid fa-angles-up"></i></button>
-
 <!-- 로딩중 이미지 -->
 <img src='/img/loading.gif' id='loading' style='height:300px; display:none;'/>
 
