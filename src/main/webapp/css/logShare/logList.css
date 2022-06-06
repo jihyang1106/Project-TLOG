@@ -35,6 +35,7 @@
 /* } */
 .logListBtn:focus{
 	outline: none;
+	
 }
 .logListBtn::before{
 	content:"";

@@ -37,7 +37,7 @@ $(".tags").click(function(){
 var cnt=0;
 function PlusUser(){
 	if(cnt<5){
-		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/><i class='fa-solid fa-xmark'></i><ul class='search_user_ul'></ul></li>";
+		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;<ul class='search_user_ul'></ul></li>";
 		$("#tag_user_ul").append(li);
 		cnt++;
 		console.log(cnt);
@@ -153,14 +153,14 @@ function readImage(input){
 				input_content.type = 'text';
 				input_content.id = 'tContent'+index;
 				input_content.className = 'texts';
-			li_3.textContent='여행일기 : ';
+			li_3.textContent='여행일기  :  ';
 			li_3.appendChild(input_content);
 			var li_4 = document.createElement('li');
 			var input_place = document.createElement('input');
 				input_place.type = 'text';
 				input_place.id = 'tPlace'+index;
 				input_place.className = 'texts';
-			li_4.textContent = '사진 장소 : ';
+			li_4.textContent = "사진 장소'&emsp;':'&emsp;'";
 			li_4.appendChild(input_place);
 			ul.appendChild(li_1);
 			ul.appendChild(li_2);
