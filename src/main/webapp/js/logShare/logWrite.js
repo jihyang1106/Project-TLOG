@@ -1,6 +1,8 @@
+
+
 /*================ 태그 선택 ==================*/
 //.tags클릭 시 chk상태확인 후  css && chk 변화
-
+var tagCnt=0;
 $(".tags").click(function(){
 	//체크된 상태일 때
 	if($(this).next().is(":checked")){ 
@@ -48,6 +50,7 @@ $(".tags").click(function(){
 	//체크된 상태 아닐 때
 	}else{ 
 		$(this).next().prop("checked", true);
+		tagCnt++;
 		var id = $(this).attr('id');
 		switch(id){
 		case'region':
@@ -115,8 +118,11 @@ $(".tags").click(function(){
 			$(this).css("background-color", "#EACACB");
 		break
 		}
-		
-		
+	}
+	if(tagCnt>5){
+		$("#tag_alert").css("display","block");
+	}else{
+		$("#tag_alert").css("display","none");
 	}
 })
 
@@ -148,7 +154,6 @@ $(document).on("click", ".fa-xmark", function() {
 			var tagBox = $(this);
 			var ul = $(".search_user_ul"); //유저리스트 들어갈 ul
 			var data = {"userNick" : $(this).val()};
-			//console.log(data);
 			$.ajax({
 		          url: '/logShare/searchUserList',
 		          type: 'GET',
@@ -185,7 +190,6 @@ $(document).on("click", ".fa-xmark", function() {
 		}		
 	});
 	
-		
 //div 클릭 시 파일 업로드 진행
 $(".img_upload_phr").click(function(e) {
 	e.preventDefault();
