@@ -1,18 +1,164 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+로드된거는 검색안됨 유저태그
+<!-- ===================================== CSS ================================================================== -->
+<style>
+	#div_big{
+		margin:0 auto;
+		width:70vw;
+		text-align:center;
+	}
+	#div_small{	
+		padding:5vw;
+		padding-left:12vw;
+		padding-right:12vw;	
+		line-height:2vw;		
+	}
+	/* ===== text설정 ===== */
+	.texts{
+		border:none;
+		border-bottom:2px solid #ddd;
+	}
+	input[type=date] { 
+	  border:none;
+	  margin-left:2vw;
+	  margin-right:2vw;
+	}
+	/* ===== 태그 ===== */
+	.tags{
+		border-radius: 5px;
+		padding: 0.2vw;
+		padding-left:0.4vw;
+		padding-right:0.4vw;
+		font-size:0.7vw;
+		cursor:pointer;
+		background-color:#eee;
+	}
+	#tag_li{
+		line-height:1vw;
+	}
+	/* ===== 태그할 유저 =====*/
+	#plus{	
+		display:inline-block;
+		width:30px;
+		height:30px;
+		border: 4px solid #ddd;
+		border-radius: 50%;
+		padding:5px;
+		font-size:20px;
+		cursor:pointer;
+		top:0;
+	}
+	#tag_user_ul{
+		margin:30px;
+	}
+	#tag_user_ul li{
+		float:left;
+		margin-left:5px;
+		margin-right:5px;
+		font-size: 15px;
+	}
+	.tag_box{
+		width:100px;
+		height:30px;
+		border-radius:5px;
+		border:1px solid #aaa;
+	}
+	.fa-xmark{
+		width:5px;
+		cursor:pointer;
+	}
+	/*===== 검색된 유저 리스트 =====*/
+	.search_user_ul{
+		float:left;
+		text-align:left;
+	}
+	.search_user_li{
+		cursor:pointer;
+	}
+	.profile_img{
+		width:30px;
+	}
+	/* ===== 이미지 추가 =====*/
+	.log_img_top {
+		border: 1px solid rgba(118, 118, 118, 0.5);
+		width: 100px;
+		height: 30px;
+		overflow: hidden;
+		color: gray;
+		cursor: pointer;
+		text-align: center;
+		margin:0 auto;
+	}
+	.log_img_wrap {
+		border: 1px solid rgba(118, 118, 118, 0.5);
+		width: 300px;
+		height: 400px;
+		overflow: hidden;
+		color: gray;
+		cursor: pointer;
+		text-align: center;
+	}
+	.t_img{
+		max-width: 300px;
+		max-height: 400px;
+	}
+</style>
+<!--====================================== HTML ===================================================================-->
+<div id='div_big'>
+<div id='div_small'>
+	<form id='log_form' action='/myLog/logEditOk' method='POST'>
+		<ul>
+			<li>제목 : <input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
+			<li><input type='date' name='startDate' value='${vo.startDate}'/> ~ <input type='date' name='endDate' value='${vo.endDate}'/></li>
+			<li>위치정보(임시) : <input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>
+			<li>
+		      <label><input type="radio" name="isPrivate" id='isPrivate1' value="1"> 비밀일기 </label>
+		      <label><input type="radio" name="isPrivate" id='isPrivate0' value="0"> 공유일기 </label>
+		    </li>
+		    <li id='tag_li'>
+			    <c:forEach var="t" items="${tagList}" varStatus='status'>
+					<span class='tags' id='tag${t.tagNum}'>
+						${t.tagName} 
+					</span><input type='checkbox' name='tagNumList' id='chk${t.tagNum}' value='${t.tagNum}' style='display:none;'>&nbsp;
+					<c:if test='${status.index==13}'>
+						<br/><br/>
+					</c:if>
+				</c:forEach>
+		    </li>
+		    <li>
+			    <ul id='tag_user_ul'>
+					<li><img src='/img/plus.jpg' id='plus' onclick='PlusUser()'/>&nbsp;&nbsp;tagUser</li>
+					<c:forEach var='t' items='${vo.tagUserList}'>
+						<li>
+							<input type='hidden' name='userNumList' value='${t.userNum}'/>
+							<input type='text' class='tag_box' value='${t.userNick}'/>
+							<i class='fa-solid fa-xmark'></i>
+						</li>
+					</c:forEach>
+				</ul>
+		    </li>
+		</ul>
+		<br/><br/><br/><br/>
+	</form>	
+	<div id='detail_div'>
+	</div>
+    <input type='button' id='edit_btn' value='일기 수정'/>
+</div>
+</div>
+<script>
+var cnt=${cnt};
+//글 내용 보이기
 
 /*================ 태그 선택 ==================*/
 //.tags클릭 시 chk상태확인 후  css && chk 변화
-var tagCnt=0;
 $(".tags").click(function(){
 	//체크된 상태일 때
 	if($(this).next().is(":checked")){ 
 		$(this).next().prop("checked", false);
 		$(this).css("background-color", "#ddd");
-		tagCnt--;
 	//체크된 상태 아닐 때
 	}else{ 
 		$(this).next().prop("checked", true);
-		tagCnt++;
 		var id = $(this).attr('id');
 		switch(id){
 		case'tag1': case'tag2':
@@ -34,18 +180,14 @@ $(".tags").click(function(){
 			$(this).css("background-color", "#EACACB");
 		break
 		}
-	}
-	if(tagCnt>5){
-		$("#tag_alert").css("display","block");
-	}else{
-		$("#tag_alert").css("display","none");
+		
+		
 	}
 })
 /*================ 태그할 유저 선택 ==================*/
-var cnt=0;
 function PlusUser(){
 	if(cnt<5){
-		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;</li>";
+		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/><i class='fa-solid fa-xmark'></i><ul class='search_user_ul'></ul></li>";
 		$("#tag_user_ul").append(li);
 		cnt++;
 		console.log(cnt);
@@ -68,10 +210,10 @@ $(document).on("click", ".fa-xmark", function() {
 		if($(this).val().trim()!=""){
 			var ul = $(this).next().next(); //유저리스트 들어갈 ul
 			var data = {"userNick" : $(this).val()};
-			console.log(tagBox);
-			var tagBox = $(this);
+			//console.log(data);
+			
 			$.ajax({
-		          url: '/logShare/searchUserList',
+		          url: '/myLog/searchUserList',
 		          type: 'GET',
 		          data: data,
 		          success: function (data) {
@@ -86,11 +228,12 @@ $(document).on("click", ".fa-xmark", function() {
 		        	  
 		        		//검색된 유저 클릭 시====================================================================
 		        		$(".search_user_li").on('click', function(){
+							console.log("클릭");
 		        			var userNum = $(this).val();
 		        			var userNick = $(this).text();
 		        			//console.log(userNum, userNick);
-		        			tagBox.val(userNick); //inputText
-		        			tagBox.prev().val(userNum); //inputHidden
+		        			$(this).parent().prev().prev().val(userNick); //inputText
+		        			$(this).parent().prev().prev().prev().val(userNum); //inputHidden
 		        			$(this).parent().empty(); //검색리스트 지우기
 		        		})
 		        		
@@ -107,10 +250,9 @@ $(document).on("click", ".fa-xmark", function() {
 	});
 	
 		
-//버튼 클릭 시 파일 업로드 진행
-$(".img_upload_phr").click(function(e) {
-	e.preventDefault();
- 	$(this).parent().next().trigger("click");
+//div 클릭 시 파일 업로드 진행
+$(".log_img_top").click(function() {
+$(this).next().trigger("click");
 })
 
 //이미지 미리보기
@@ -141,7 +283,6 @@ function readImage(input){
 			$("#detail_div").append(tag); */
 			
 			var ul = document.createElement('ul');
-				ul.className = 'logElement';
 			var li_1 = document.createElement('li');
 			var div = document.createElement('div');
 				div.className = 'log_img_wrap';
@@ -155,23 +296,22 @@ function readImage(input){
 			var input_check = document.createElement('input');
 				input_check.type = 'checkbox';
 				input_check.id = 'isCoverImg'+index;
-			li_2.textContent = '대표이미지\u00A0\u00A0';
+			li_2.textContent = '대표이미지';
 			li_2.appendChild(input_check);
 			var li_3 = document.createElement('li');
+			var input_content = document.createElement('input');
+				input_content.type = 'text';
+				input_content.id = 'tContent'+index;
+				input_content.className = 'texts';
+			li_3.textContent='여행일기 : ';
+			li_3.appendChild(input_content);
+			var li_4 = document.createElement('li');
 			var input_place = document.createElement('input');
 				input_place.type = 'text';
 				input_place.id = 'tPlace'+index;
 				input_place.className = 'texts';
-			li_3.textContent = '사진 장소 : ';
-			li_3.appendChild(input_place);
-			var li_4 = document.createElement('li');
-			var textarea_content = document.createElement('textarea');
-				textarea_content.type = 'text';
-				textarea_content.id = 'tContent'+index;
-				textarea_content.className = 'logTextContent';
-				textarea_content.placeholder = '여행일기를 입력해주세요';
-				textarea_content.resize = 'none';
-			li_4.appendChild(textarea_content);
+			li_4.textContent = '사진 장소 : ';
+			li_4.appendChild(input_place);
 			ul.appendChild(li_1);
 			ul.appendChild(li_2);
 			ul.appendChild(li_3);
@@ -200,11 +340,11 @@ $("#write_btn").click(function(){
 	if(confirm('글을 등록하시겠습니까?')){		
 			//form 내용, detailMapList 따로 보내기(multipart & json.stringify때문에)
 			var url = $("#log_form").attr("action");
-        	var form = $('#log_form')[0];
-        	var formData = new FormData(form);
-        	//console.log(url);
-        	//console.log(form);
-        	/*======== 1번째 ajax==========================================================*/
+      	var form = $('#log_form')[0];
+      	var formData = new FormData(form);
+      	//console.log(url);
+      	//console.log(form);
+      	/*======== 1번째 ajax==========================================================*/
 			$.ajax({
 	          url: url,
 	          type: 'POST',
@@ -239,7 +379,7 @@ $("#write_btn").click(function(){
 		        		    })
 		        		    /*======== 2번째 ajax==========================================================*/
 		        		    $.ajax({
-					          url: '/logShare/detailWriteOk',
+					          url: '/myLog/detailWriteOk',
 					          type: 'POST',
 					          data: JSON.stringify(dataList),
 					          contentType: 'application/json',
@@ -265,3 +405,4 @@ $("#write_btn").click(function(){
 	}//if(confirm)
 	return false;
 })
+</script>
