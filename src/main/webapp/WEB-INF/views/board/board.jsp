@@ -45,7 +45,7 @@ function boardSend(){
 	}
 }
 
-//글 삭제하기 
+/* ===== 글 삭제하기 ===== */
 $(document).on('click', ".fa-xmark", function(){
 	if(confirm('글을 삭제하시겠어요?')){
 		let data = "boardNum="+$(this).attr("name");
