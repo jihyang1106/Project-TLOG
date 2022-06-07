@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function(){
 	   boardList();
 	   
 	   var tagList = []; 
+	   var tags = document.getElementById("tags");
+	   
 	   
 	   // 전체 게시판 통계
 	   new Chart('myChart', {
