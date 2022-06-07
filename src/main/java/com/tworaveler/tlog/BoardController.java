@@ -30,6 +30,7 @@ public class BoardController {
 		session.setAttribute("logStatus", "Y");
 		return mav;
 	}
+	
 	//전체 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
