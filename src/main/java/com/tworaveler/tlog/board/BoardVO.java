@@ -7,6 +7,7 @@ public class BoardVO {
 	private String writedate;
 	private int userNum;
 	private String ip;
+	private String profileImg;
 	
 	public int getBoardNum() {
 		return boardNum;
@@ -43,6 +44,12 @@ public class BoardVO {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 	
 	

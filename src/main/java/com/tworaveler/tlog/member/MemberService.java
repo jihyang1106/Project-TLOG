@@ -11,5 +11,4 @@ public interface MemberService {
 	public List<MemberVO> setFollowInfo(int userNum);
 	//로그인(회원정보 선택)
 	public MemberVO selectMember(MemberVO vo);
-
 }

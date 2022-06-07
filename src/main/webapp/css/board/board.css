@@ -1,54 +1,145 @@
 @charset "UTF-8";
-
-hr{ /*글작성하는 곳 글나오는곳 경계선*/
-	margin-left : 20vw;
-	width : 54vw;
+#freeLogContainer{
+	width:40vw;
+	min-height:50vh;
+	margin:0 auto;
 }
-
-textarea{
-	width : 54vw;
-	height : 5vw;
-	margin-left : 20vw;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
+#freeLogTitle{
+	font-size:2.5em;
+	font-weight:600;
+	color:var(--theme-lightblue-80);
+	letter-spacing:0.3vw;
+	text-align:center;
+	margin-top:1vw;
+}
+#freeLogContent{
+	width:40vw;
+	height:5vw;
+	margin:2vw 0vw;
+	padding:15px;
+	outline:none;
+	border:none;
+	border-radius: 15px;
+	box-shadow:0 0 10px var(--theme-lightblue-60);
 	font-size: 14px;
 	resize: none;
 }
-
 /* 글등록 버튼 */
 [type=button]:not(:disabled),[type=submit]{
 	float:right;
-	margin-right:25.1vw;
 }
-
-/* 닉네임 ip 날짜 시간 */
+#boardInsert{
+	border:none;
+	border-radius:10px;
+	background-color:var(--theme-lightblue-60);
+	color:white;
+	padding:5px 10px;
+	position:relative;
+	overflow:hidden;
+	float:right;
+}
+#boardInsert:focus{
+	outline: none;
+}
+#boardInsert::before{
+	content:"";
+	position:absolute;
+	height:100%;
+	width:100%;
+	background-color:rgba(0,0,0,75%);
+	top:100%;
+	left:0;
+	transition:all 0.3s;
+	z-index:-1;
+	
+}
+#boardInsert:hover::before{
+	transform:translateY(-100%);
+}
+/*=====댓글 섹션======*/
+#freeLog_div{
+	width:40vw;
+	padding:15px;
+	border:none;
+	border-radius:10px;
+	box-shadow:0 0 10px var(--theme-lightblue-60);
+}
 #info{
-	background : lime;
-	margin-left : 20vw;	
-	width : 54vw;
-	border-radius : 5px;
+	height:30px;
+	line-height:30px;
 }
-
-/* 글 내용 */
-#maincon{
-	float : center;
-    width : 20vw;
-    white-space : nowrap;
-    overflow : hidden;
-    text-overflow : ellipsis;
-	margin-left : 37vw;
-   /*여러 줄 자르기 추가 스타일*/
-    white-space : normal;
-    background : skyblue;
-    border-radius : 5px;
-    font : black;
+#infoLeft{
+	text-align:left;
 }
- 
-li{
-	text-align:center;
+#infoRight{
+	float:right;
+	color:rgba(0,0,0,50%);
 }
-
+#profileImg{
+	width:2vw;
+	height:2vw;
+}
 #loading{
-	padding-left:38vw;
+	padding-left:15vw;
+}
+/*스크롤 맨위로 버튼*/
+#top_btn{
+	border:none;
+	background-color:var(--theme-lightblue-60);
+	color:white;
+	border-radius:10px;
+	padding:5px 10px;
+	overflow:hidden;
+	position:fixed;
+	bottom:2%;
+	right:23%;
+	z-index:100;
+}
+#top_btn:focus{
+	outline: none;
+	
+}
+#top_btn::before{
+	content:"";
+	position:absolute;
+	height:100%;
+	width:100%;
+	background-color:rgba(0,0,0,75%);
+	top:100%;
+	left:0;
+	transition:all 0.3s;
+	z-index:-1;
+	
+}
+#top_btn:hover::before{
+	transform:translateY(-100%);
+}
+/*=========광고 슬라이드========== */
+.slideshow-container {
+	width:9vw;
+	height:24vw;
+	max-width: 1440px;
+	margin: auto;
+	margin-top: 120px;
+	position:fixed;
+	right:10vw;
+	top:10vw;
+}
+
+/* effect */
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+	from {opacity: .4} 
+	to {opacity: 1}
+}
+
+@keyframes fade {
+	from {opacity: .4} 
+	to {opacity: 1}
 }

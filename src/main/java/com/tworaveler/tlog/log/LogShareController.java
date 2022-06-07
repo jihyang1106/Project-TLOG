@@ -24,7 +24,6 @@ public class LogShareController {
 	public ModelAndView logList(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
 		mav.setViewName("/logShare/logList");
-
 		return mav;
 	} 
 	@GetMapping("/logShare/logList/searchs") 

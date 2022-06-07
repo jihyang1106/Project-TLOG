@@ -56,7 +56,16 @@ function logDetail(tNum){
 	background-color: #EACACB;
 }
 </style>
+	
 <!-- ============================ HTML ========================================================================== -->
+	<div class="introduce_g">
+		<div class="introduce_img"><img src="/img/home/10.gif"></div>
+		<!-- <div class="introduce_info">
+			<h3>기억하고 싶은 여행</h3>
+			<p>당신의 여행을 기록해보세요</p>
+			<button type="button" class="btn btn-outline-primary">기록하기</button>
+		</div> -->
+	</div>
 	<div class="container">
 		<!-- 본문 내용 작성하기 -->
 		<!--<div>
@@ -160,8 +169,6 @@ function logDetail(tNum){
 				</ul>
 			</c:forEach>
 		</div>-->
-		
-		
 		<!-- 팔로워 많은 유저 리스트 
 		<div>
 			<c:forEach var="vo" items="${followedUser}">
@@ -183,7 +190,7 @@ function logDetail(tNum){
 		</div>-->
 		
 		
-		태그 리스트 
+		<!-- 태그 리스트 
 		<div>
 			<ul>
 				<c:forEach var="t" items="${tagList}">
@@ -193,5 +200,5 @@ function logDetail(tNum){
 					</li>
 				</c:forEach>
 			</ul>
-		</div>
+		</div>-->
 	</div>
