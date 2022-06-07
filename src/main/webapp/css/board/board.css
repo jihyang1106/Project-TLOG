@@ -114,7 +114,7 @@
 #top_btn:hover::before{
 	transform:translateY(-100%);
 }
-/* Slideshow container */
+/*=========광고 슬라이드========== */
 .slideshow-container {
 	width:9vw;
 	height:24vw;

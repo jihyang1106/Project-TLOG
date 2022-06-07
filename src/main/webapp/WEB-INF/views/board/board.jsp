@@ -14,6 +14,7 @@
 		</c:if> --%>
 	</form>
 	<br><br><br>
+	<!-- ====== 광고 슬라이드 ======= -->
 	<div class="slideshow-container">
 		<div class="mySlideDiv face active"><a href="https://www.hanatour.com/" target="_blank"><img src="/img/ad/ad1.jpg"></a></div>
 		<div class="mySlideDiv face"><a href="http://www.palmfair.co.kr/main_20220611.asp?path=keyword&n=" target="_blank"><img src="/img/ad/ad2.jpg"></a></div>
