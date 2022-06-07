@@ -26,22 +26,22 @@ public class LogWriteController {
 	LogService service;
 
 	/* ===================== 글쓰기폼 ======================== */
-	@GetMapping("/myLog/logWrite")
+	@GetMapping("/logShare/logWrite")
 	public ModelAndView logWrite() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("tagList", service.selectTagAll());
-		mav.setViewName("/myLog/logWrite");
+		mav.setViewName("/logShare/logWrite");
 		return mav;
 	}
 	/* ===================== userNick으로 user검색하기 ======================== */
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/myLog/searchUserList", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/searchUserList", method = RequestMethod.GET)
 	public List<LogVO> searchUserList(String userNick) {
 		return service.getUserListByNick("%" + userNick + "%");
 	}
 	/* =============== 파일업로드/ travelLog, tagLog, tagUser 등록 ================== */
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/myLog/logWriteOk", method = RequestMethod.POST)
+	@RequestMapping(value = "/logShare/logWriteOk", method = RequestMethod.POST)
 	public List<String> logWriteOk(LogVO vo, HttpServletRequest request) {
 		vo.setUserNum(1); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
 		vo.setIp(request.getRemoteAddr()); // 접속자 아이피
@@ -90,12 +90,12 @@ public class LogWriteController {
 			e.printStackTrace();
 		}
 		System.out.println(fileNames);
-		return fileNames; // "/myLog/myLogList?userNum=" + vo.getUserNum();
+		return fileNames; // "/logShare/logShareList?userNum=" + vo.getUserNum();
 	} //파일업로드, 글등록 확인완료
 	
 	/* ===================== travelDetail 등록 ======================== */
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/myLog/detailWriteOk", method = RequestMethod.POST)
+	@RequestMapping(value = "/logShare/detailWriteOk", method = RequestMethod.POST)
 	public int detailWriteOk(HttpServletRequest request, @RequestBody List<Map<String,Object>> dataList) {
 		int userNum =1; // 로그인 userNum  ((String) request.getSession().getAttribute("logId"))
 		int tNum = service.getTNum(userNum); //방금 넣은 tNum가져오기

@@ -25,10 +25,11 @@
 			<input type="button" id="userEditBtn" value="회원정보수정" onclick="location.href='/member/userEdit'">
 		</c:if>
 	</div>
+	<!-- 게시물, 팔로워, 팔로우 -->
 	<div id="followSection">
 		<span >게시물 ${myLogCount}개</span>
-		<span  data-toggle="modal" data-target="#follower">팔로워 ${followerCount}명</span>
-		<span  data-toggle="modal" data-target="#follow">팔로우 ${followCount}명</span>
+		<span class="follow" data-toggle="modal" data-target="#follower">팔로워 ${followerCount}명</span>
+		<span class="follow" data-toggle="modal" data-target="#follow">팔로우 ${followCount}명</span>
 	</div>
 	<!-- 일기 탭, 태그된글, 찜한 글 탭 -->
 	<div id="mypageTabSection">

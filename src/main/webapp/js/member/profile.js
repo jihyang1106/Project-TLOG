@@ -60,12 +60,13 @@ function logLists(){
 				}
 				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 				tag += "</li>";
+				tag += "<li><span>국내/국외, 위치</span></li>";
 				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){
 					tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
 					tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
-					tag += data[i].tagList[j].tagName+"</span>&nbsp;";
+					tag += data[i].tagList[j].tagName+"</span>&nbsp;&nbsp;";
 				}
 				tag += "</li></ul></div>";
 			}//for
