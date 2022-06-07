@@ -3,7 +3,6 @@ package com.tworaveler.tlog.member;
 import java.util.List;
 
 public interface MemberService {
-	
 	//해시태그
 	public List<MemberVO> getAllHashtag();
 	//팔로워 받아오기
