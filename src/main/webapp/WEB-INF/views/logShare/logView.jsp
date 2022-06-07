@@ -77,7 +77,9 @@
 .logLike{
 	float:right;
 }
-
+.fa-thumbs-up{
+	font-size:2vw;
+}
 .tags{
 	padding:3px 5px;
 	border-radius:10px;
@@ -129,10 +131,10 @@
 				<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
 				<span class='logLike'>
 					<c:if test="${vo.likeType==0}">
-						<i class='fa-thin fa-thumbs-up' onclick='LikeUp(${vo.tNum})'></i> &emsp;${vo.likeNum}
+						<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 					</c:if>
 					<c:if test="${vo.likeType==1}">
-						<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})'></i> &emsp;${vo.likeNum}
+						<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 					</c:if>				
 					
 				</span>
@@ -155,12 +157,12 @@
 						</span>&nbsp;
 				</c:forEach>
 			</li>		
-			<c:if test="${logStatus=='Y'}">
+			<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
 				<li>
-					<span class='tags'>수정</span>
+					<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
 					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
 				</li>
-			</c:if>	
+				
 		</ul>
 	</div>
 </div>

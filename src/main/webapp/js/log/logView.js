@@ -40,3 +40,9 @@ function logDel(tNum){
 	   	})
    }
 }
+//글 수정~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function logEdit(tNum){
+	if(confirm('글을 수정하시겠습니까?')){
+		location.href='/logShare/logEdit?tNum='+tNum;
+   }
+}

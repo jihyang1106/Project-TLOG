@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class myLogController {
+public class LogWriteController {
 	@Inject
 	LogService service;
 
@@ -114,6 +114,38 @@ public class myLogController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/log/logDel", method = RequestMethod.GET)
 	public int logDel(@RequestParam("tNum") int tNum){
+		service.logDel(tNum);
+		return 2; //로그인 유저넘버
+	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정폼 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@GetMapping("/logShare/logEdit")
+	public ModelAndView logEdit(int tNum){
+		ModelAndView mav  = new ModelAndView();
+		int logUser = 2; //로그인 한 유저넘버
+		LogVO vo = service.getOneLog(tNum, logUser);	
+		
+		if(vo.getUserNum()!=logUser) {//작성자가 아니라면
+			System.out.println("나가라");
+			mav.setViewName("redirect:/logShare/logView?tNum="+tNum); //logView로 리다이렉트	
+		}else {			
+			vo.setTagList(service.selectLogTag(tNum)); //태그리스트 넣기
+			vo.setTagUserList(service.selectTagUsers(tNum)); //태그된 유저리스트 넣기
+			int cnt = vo.getTagUserList().size();
+			
+			mav.addObject("cnt", cnt);
+			mav.addObject("tagList", service.selectTagAll());
+			mav.addObject("vo", vo);
+			mav.addObject("detailList", service.selectLogDetail(tNum));
+			mav.setViewName("/logShare/logEdit");
+		}
+		return mav;
+	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@ResponseBody // Ajax
+	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
+	public int logEditOk(@RequestParam("tNum") int tNum){
 		service.logDel(tNum);
 		return 2; //로그인 유저넘버
 	}
