@@ -142,13 +142,10 @@ function logDetail(tNum){
 					<li><img src="/img/home/whiter2.JPG"></li>
 				</ul>
 			</div>
-		</div>
-		
+		</div>	
 		<!-- 태그 리스트 -->
 		<div>
-		
 		</div>
-		
 		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 
 		<div>
 			<c:forEach var="vo" items="${logList}">
