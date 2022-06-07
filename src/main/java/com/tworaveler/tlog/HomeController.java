@@ -28,7 +28,7 @@ public class HomeController {
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
-		session.setAttribute("logStatus", "Y"); //임시
+		session.setAttribute("logStatus", "N"); //임시
 
 		//(1) tLog 10개
 		if(session.getAttribute("logStatus").equals("Y")) {

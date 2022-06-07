@@ -69,9 +69,7 @@ $('#rightBtn').on('click', function(){
 			  console.log("클릭클릭");
 		  }
 	  }
-	
-	
-		
+	  
 		
 </script>
 
@@ -91,48 +89,44 @@ $('#rightBtn').on('click', function(){
 		</div>
 	</div>
 	
-	<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
-		<div>
-			<c:forEach var="vo" items="${logList}">
-				<ul id='log_ul' onclick="logDetail(${vo.tNum})">
-					<li>${vo.coverImg}</li>
-					<li>${vo.tTitle}</li>
-					<li>${vo.startDate}</li>
-					<li>${vo.endDate}</li>
-					<li>${vo.likeNum}</li>
-					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
-						<img src='/upload/user/${vo.profileImg}.png' height='30px'/>${vo.userNick}
-					</li>
-					<li>
-						<c:forEach var="t" items="${vo.tagList}">
-							<span class='tags' id='tag${t.tagNum}'
-							onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
-								${t.tagName}
-							</span>&nbsp;
-						</c:forEach>
-					</li>
-				</ul>
-			</c:forEach>
-		</div>
-	
-	
 	
 	<div class="container">
 		<!-- 본문 내용 작성하기 -->
 		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
 		<div class="editor_pic">
-			<h3 class="txt_tlog txt_title">B E S T &nbsp; F O L L O W E R</h3>
+			<h3 class="txt_tlog txt_title">T L O G &nbsp; P O S T</h3>
 			<p class="txt_desc">
 				<span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
 			</p>
+			
 			<div class="wrap_slide">
-				<c:forEach items="${logList}" var="vo" varStatus="status" begin="1" end="16">
-					<ul class="list_slide">
-						<c:if test="${status.index <2 }" >
+				<c:forEach items="${logList}" var="vo" varStatus="status" >
+				<div>${status.end }</div>
+				<c:out value="${status.index}" /> / <c:out value="${status.end}" />
+					<c:if test="${status.index == 0 }" >
+					
+						<ul class="list_slide">
 							<li class="testClass">
-							<div class="wrap_pic wrap_pic_type1">
-								<div class="item_pic item_pic_type1">
-									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item">${vo.coverImg}</a>
+								<div class="wrap_pic wrap_pic_type1">
+									<div class="item_pic item_pic_type1">
+									<div class="link_item" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')"><img src="/upload/log/${vo.coverImg}"></div>
+										<a href="location.href='/member/profile?userNum=${vo.userNum}'" ></a>
+										<div class="append_info">
+											<div class="info_g">
+												<strong class="info_tit">
+													${vo.tTitle}
+												</strong>
+												<span class="info_by">
+													<span class="ico_by">by</span>
+													${vo.userNick}
+												</span>
+											</div>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${status.index == 1 }" >		
+								<div class="item_pic item_pic_type2">
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
@@ -145,278 +139,242 @@ $('#rightBtn').on('click', function(){
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 2 }" >
 								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
-									<div class="append_info">
-										<div class="info_g">
-											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
-											</strong>
-											<span class="info_by">
-												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
-						
 						</c:if>
-					
-					
-						
-						<li class="testClass">
-							<div class="wrap_pic wrap_pic_type2">
+						<c:if test="${status.index == 3 }" >
+							<li class="testClass">
+								<div class="wrap_pic wrap_pic_type2">
+									<div class="item_pic item_pic_type1">
+										<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
+										<div class="append_info">
+											<div class="info_g">
+												<strong class="info_tit">
+													${vo.tTitle}
+												</strong>
+												<span class="info_by">
+													<span class="ico_by">by</span>
+													${vo.userNick}
+												</span>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							<c:if test="${status.index == 4 }" >		
 								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 5 }" >
 								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
-									<div class="append_info">
-										<div class="info_g">
-											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
-											</strong>
-											<span class="info_by">
-												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li class="testClass">
-							<div class="wrap_pic wrap_pic_type3">
+						</c:if>
+						<c:if test="${status.index == 6 }" >
+							<li class="testClass">
+								<div class="wrap_pic wrap_pic_type3">
+									<div class="item_pic item_pic_type2">
+										<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
+										<div class="append_info">
+											<div class="info_g">
+												<strong class="info_tit">
+													${vo.tTitle}
+												</strong>
+												<span class="info_by">
+													<span class="ico_by">by</span>
+													${vo.userNick}
+												</span>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							<c:if test="${status.index == 7 }" >		
 								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 8 }" >		
 								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 9 }" >
 								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
-									<div class="append_info">
-										<div class="info_g">
-											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
-											</strong>
-											<span class="info_by">
-												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li class="testClass">
-							<div class="wrap_pic wrap_pic_type1">
-								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+						</c:if>
+						<c:if test="${status.index == 10 }" >
+							<li class="testClass">
+								<div class="wrap_pic wrap_pic_type1">
+									<div class="item_pic item_pic_type1">
+										<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
+										<div class="append_info">
+											<div class="info_g">
+												<strong class="info_tit">
+													${vo.tTitle}
+												</strong>
+												<span class="info_by">
+													<span class="ico_by">by</span>
+													${vo.userNick}
+												</span>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							<c:if test="${status.index == 11 }" >		
+								<div class="item_pic item_pic_type2">
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 12 }" >
 								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="item_pic item_pic_type2">
-									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
-									<div class="append_info">
-										<div class="info_g">
-											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
-											</strong>
-											<span class="info_by">
-												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
-						<li class="testClass">
-							<div class="wrap_pic wrap_pic_type2">
+						</c:if>
+						<c:if test="${status.index == 13 }" >
+							<li class="testClass">
+								<div class="wrap_pic wrap_pic_type2">
+									<div class="item_pic item_pic_type1">
+										<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
+										<div class="append_info">
+											<div class="info_g">
+												<strong class="info_tit">
+													${vo.tTitle}
+												</strong>
+												<span class="info_by">
+													<span class="ico_by">by</span>
+													${vo.userNick}
+												</span>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							<c:if test="${status.index == 14 }" >		
 								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
 								</div>
+							</c:if>
+							<c:if test="${status.index == 15 }" >
 								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img src="/upload/log/${vo.coverImg}"></a>
 									<div class="append_info">
 										<div class="info_g">
 											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
+												${vo.tTitle}
 											</strong>
 											<span class="info_by">
 												<span class="ico_by">by</span>
-												윤뚜뚜
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="item_pic item_pic_type1">
-									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
-									<div class="append_info">
-										<div class="info_g">
-											<strong class="info_tit">
-												인생 첫 유럽
-												<br>
-												8개 국가 13개 도시
-												<br>
-											</strong>
-											<span class="info_by">
-												<span class="ico_by">by</span>
-												윤뚜뚜
+												${vo.userNick}
 											</span>
 										</div>
 									</div>
@@ -424,8 +382,9 @@ $('#rightBtn').on('click', function(){
 							</div>
 						</li>
 					</ul>
-				</c:forEach>
-			</div>
+				</c:if>
+			</c:forEach>
+		</div>
 			
 			<div class="wrap_btn">
 				<!-- <i class="fa-solid fa-chevron-left" style="font-size: 100px; "></i> 
@@ -456,7 +415,7 @@ $('#rightBtn').on('click', function(){
 					<ul class="list_wirters list_writers_group">
 						<li>
 							<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_follow">
-								<img src='/upload/user/${vo.profileImg}' width="80" height="80" class="img_witer">
+								<img src='${vo.profileImg}' width="80" height="80" class="img_witer">
 								<strong class="tit_wirter">${vo.userNick}</strong>
 							</a>
 							<p class="follow_count"><i class="bi bi-person-heart" style="font-size:15px;"></i>&nbsp;${vo.followerNum}</p>	

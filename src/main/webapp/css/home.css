@@ -99,6 +99,7 @@
 	position: relative;
 	margin: 0 auto;
 	overflow: visible;
+	background-color: rgb(172, 235, 255);
 }
 
 .list_slide{

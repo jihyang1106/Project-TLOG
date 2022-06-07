@@ -3,7 +3,8 @@
 /*====================log 글====================*/
 #log_big{
 	display:inline-block;
-	height:90vh;
+	/*height:90vh;*/
+	margin-bottom: 45px;
 }
 #log_big div{
 	display:inline-block;
