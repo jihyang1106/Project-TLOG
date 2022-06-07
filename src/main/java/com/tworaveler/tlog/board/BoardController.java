@@ -25,6 +25,8 @@ public class BoardController {
 	public ModelAndView board(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		session.setAttribute("logStatus", "Y");
+		
+		mav.setViewName("board/board");
 		return mav;
 	}
 	
@@ -45,4 +47,11 @@ public class BoardController {
 		vo.setUserNum(2);
 		return service.boardInsert(vo);
 	}
+	
+	//글 삭제하기
+		@GetMapping("/board/delOk")
+		@ResponseBody
+		public int deleteBoard(int boardNum) {
+			return service.deleteBoard(boardNum); 
+		}
 }
