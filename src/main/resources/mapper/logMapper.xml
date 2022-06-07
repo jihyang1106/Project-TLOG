@@ -383,6 +383,7 @@
     	SELECT 	userNum, userNick, profileImg
     	FROM 	user
     	WHERE 	userNick like #{param1}
+    	LIMIT 	5
     </select>
     <!-- 태그한 유저 등록 -->
 	<insert id='insertUserList'>

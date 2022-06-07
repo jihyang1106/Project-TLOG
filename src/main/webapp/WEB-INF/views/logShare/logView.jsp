@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script src='/js/log/logView.js'></script>
+<script src='/js/logShare/logView.js'></script>
 <style>
 /*====================log 글====================*/
 #log_big{

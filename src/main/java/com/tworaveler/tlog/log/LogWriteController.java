@@ -104,6 +104,7 @@ public class LogWriteController {
 		Map<String,Object> insertMap = new HashMap<String,Object>(); //MyBatis에 던질 Map
     	insertMap.put("list",dataList); //MyBatis의 foreach의 collection이름을 key(현재는"list")로 List를 put    	
     	int chk = service.detailWriteOk(tNum, insertMap); //travelDetail 테이블
+    	
     	if(chk>0) {
     		return userNum;
     	}
@@ -112,7 +113,7 @@ public class LogWriteController {
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 삭제 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/logDel", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/logDel", method = RequestMethod.GET)
 	public int logDel(@RequestParam("tNum") int tNum){
 		service.logDel(tNum);
 		return 2; //로그인 유저넘버
@@ -129,7 +130,9 @@ public class LogWriteController {
 			System.out.println("나가라");
 			mav.setViewName("redirect:/logShare/logView?tNum="+tNum); //logView로 리다이렉트	
 		}else {			
+			
 			vo.setTagList(service.selectLogTag(tNum)); //태그리스트 넣기
+			
 			vo.setTagUserList(service.selectTagUsers(tNum)); //태그된 유저리스트 넣기
 			int cnt = vo.getTagUserList().size();
 			
@@ -145,8 +148,8 @@ public class LogWriteController {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
-	public int logEditOk(@RequestParam("tNum") int tNum){
-		service.logDel(tNum);
+	public int logEditOk(LogVO vo){
+		service.logDel(vo.gettNum());
 		return 2; //로그인 유저넘버
 	}
 }

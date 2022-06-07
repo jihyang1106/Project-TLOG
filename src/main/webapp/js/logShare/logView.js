@@ -6,7 +6,7 @@ function LikeUp(tNum){
       data:param,
       type:'POST',
       success:function(r){
-    	  	var tag="<i class='fa-solid fa-thumbs-up' onclick='LikeDown("+r.tNum+")'></i> &emsp;"+r.likeNum;
+    	  	var tag="<i class='fa-solid fa-thumbs-up' onclick='LikeDown("+r.tNum+")' style='color:rgba(122, 140, 226,100%);'></i> &emsp;"+r.likeNum;
     		$(".logLike").html(tag);
       }
    });
@@ -19,7 +19,7 @@ function LikeDown(tNum){
       data:param,
       type:'GET',
       success:function(r){
-    	  var tag="<i class='fa-thin fa-thumbs-up' onclick='LikeUp("+r.tNum+")'></i> &emsp;"+r.likeNum;
+    	  var tag="<i class='fa-regular fa-thumbs-up' onclick='LikeUp("+r.tNum+")'  style='color:rgba(122, 140, 226,100%);'></i> &emsp;"+r.likeNum;
     	  $(".logLike").html(tag);
       }
    })
