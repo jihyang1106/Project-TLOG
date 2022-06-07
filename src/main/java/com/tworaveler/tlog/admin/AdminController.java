@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tworaveler.tlog.board.BoardService;
 import com.tworaveler.tlog.board.BoardVO;
+import com.tworaveler.tlog.log.LogService;
 import com.tworaveler.tlog.log.LogVO;
 import com.tworaveler.tlog.member.MemberService;
 import com.tworaveler.tlog.member.MemberVO;
@@ -26,6 +28,12 @@ public class AdminController {
 	
 	@Inject
 	MemberService memberService;
+	
+	@Inject
+	LogService logService;
+	
+	@Inject
+	BoardService boardService;
 	
 	ModelAndView mav = new ModelAndView();
 	ResponseEntity<String> entity = null;
@@ -74,19 +82,25 @@ public class AdminController {
 	// 회원게시판 전체회원
 	@GetMapping("allMemberList")
 	public ModelAndView allMemberList(PagingVO pvo, MemberVO mvo) {
-		Map<String, Object> map = new HashMap<>();
 		// 페이징 처리 회원 리스트
-		/*
-		 * pvo.setTotalPosts(service.selectTotalUser(pvo, mvo)); List<MemberVO> list =
-		 * service.selectMemberList(pvo, mvo); map.put("memberList", list);
-		 * map.put("paging", pvo);
-		 */
-		mav.addObject("mList", service.selectMemberList(pvo, mvo));
 		pvo.setTotalPosts(service.selectTotalUser(pvo, mvo));
 		mav.addObject("paging", pvo);
+		mav.addObject("mList", service.selectMemberList(pvo, mvo));
 		
 		mav.setViewName("admin/allMemberList");
 		return mav;
+	}
+	
+	// 여행일기 글 삭제 
+	@GetMapping("delTlog")
+	public int deleteTlog(int tNum) {
+		return logService.logDel(tNum);
+	}
+	
+	// 자유일기 글 삭제
+	@GetMapping("delBoard")
+	public int deleteBoard(int boardNum) {
+		return 2;
 	}
 	
 	@GetMapping("reportMemberList")

@@ -24,7 +24,7 @@
 	</select>
 	<select id="selectTlog" resultType="LogVO">
 		SELECT    l.tNum, l.tTitle, u.userNick,
-			      date_format(l.writeDate, "%Y/%m/%d %H:%i")writeDate
+			      date_format(l.writeDate, "%Y/%m/%d %H:%i") AS writeDate
 		FROM      travelLog l
 		JOIN      user u
 		ON        l.userNum = u.userNum
@@ -34,7 +34,7 @@
 	</select>
 	<select id="selectBoard" resultType="BoardVO">
 		SELECT    b.boardNum, b.boardContent, u.userNick,
-			      date_format(b.writedate, "%Y/%m/%d %H:%i")writedate
+			      date_format(b.writedate, "%Y/%m/%d %H:%i") AS writedate
 		FROM      board b
 		JOIN      user u
 		ON        b.userNum = u.userNum
@@ -43,7 +43,7 @@
 		OFFSET    ${param1.offset}
 	</select>
 	<select id="selectMemberList" resultType="MemberVO">
-		SELECT    u.userNum, u.userNick, u.registerDate,
+		SELECT    u.userNum, u.userNick, date_format(u.registerDate, "%Y/%m/%d") AS registerDate,
 				  IFNULL(tl.tNumCount,0) AS tNumCount, IFNULL(b.bCount,0) AS bCount,
 			      IFNULL(tNumCount,0) + IFNULL(bCount,0) AS sum, IFNULL(r.rCount,0) AS rCount
 		FROM      user u

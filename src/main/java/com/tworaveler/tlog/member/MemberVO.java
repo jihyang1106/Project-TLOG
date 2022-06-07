@@ -30,7 +30,6 @@ public class MemberVO {
 	private int bCount;    // 유저가 작성한 자유일기 수
 	private int sum;       // 유저가 작성한 일기 합
 	private int rCount;    // 유저가 신고받은 수
-
 	
 	/*
 	 * //카카오 public MemberVO(HashMap<String, String> kakaoInfo) { idKakao =
