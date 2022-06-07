@@ -16,7 +16,14 @@ spring:
     livereload:
       enabled: true
  
+  servlet: # multipart 설정
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      
 mybatis: 
   #mybatis에서 팩키지 생략 할 수 있도록 설정
   type-aliases-package: com.tworaveler.tlog
   mapper-locations: mapper/*Mapper.xml
+
+  

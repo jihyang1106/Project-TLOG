@@ -1,6 +1,7 @@
 package com.tworaveler.tlog.log;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -119,6 +120,36 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public int logWriteOk(LogVO vo) {
 		return dao.logWriteOk(vo);
+	}
+
+	@Override
+	public int detailWriteOk(int tNum, Map<String, Object> map) {
+		return dao.detailWriteOk(tNum, map);
+	}
+
+	@Override
+	public int getTNum(int userNum) {
+		return dao.getTNum(userNum);
+	}
+
+	@Override
+	public int insertTagList(LogVO vo) {
+		return dao.insertTagList(vo);
+	}
+
+	@Override
+	public List<LogVO> getUserListByNick(String userNick) {
+		return dao.getUserListByNick(userNick);
+	}
+
+	@Override
+	public int insertUserList(LogVO vo) {
+		return dao.insertUserList(vo);
+	}
+
+	@Override
+	public LogVO getOneLog(int tNum) {
+		return dao.getOneLog(tNum);
 	}
 
 	
