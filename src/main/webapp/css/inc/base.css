@@ -59,6 +59,7 @@ body{
 	font-family: var(--body-font);
 	color: var(--text-color);
 	font-size: var(--normal-font-size);
+	overflow-x: hidden; 
 }
 
 a, a:link, a:visited, a:hover {

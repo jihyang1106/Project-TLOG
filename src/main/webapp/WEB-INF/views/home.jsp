@@ -1,31 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
-//클릭이벤트: 일기 상세 리스트
-/* function logDetail(tNum){ 
-	var param={"tNum" : tNum};	
-	$.ajax({
-		data:param,
-		url:'/home/logDetail',
-		type:'GET',
-		success:function(data){
-			var tag="";
-			for(var i=0; i<data.length; i++){
-				tag += "<ul><li>"+data[i].tDetailNum+"</li>";
-				tag += "<li>"+data[i].tNum+"</li>";
-				tag += "<li>"+data[i].tImg+"</li>";
-				tag += "<li>"+data[i].tContent+"</li>";
-				tag += "<li>"+data[i].tPlace+"</li>";
-				tag += "<li>"+data[i].isCoverImg+"</li>";
-				tag += "<li>";
-				for(j=0; j<data[i].tagUserList.length; j++){
-					tag += "<span value='"+data[i].tagUserList[j].userNum+"'>"+data[i].tagUserList[j].userNick+"&nbsp;</span>";
-				}
-				tag += "</li></ul>";
-			}
-			$("#detail_div").html(tag);
-		}
-	})
-}*/
+	
+/*const wrap_pic = 1;
+
+$('#rightBtn').on('click', function(){
+	console.log("클릭");
+	$('.list_slide').css('transform', 'translateX(-' + wrap_pic + '00%)');
+	wrap_pic += 1;
+  })*/
+  
+	$(function () {
+		// 캐러셀
+		const leftBtn = document.querySelector('#leftBtn');
+		const rightBtn = document.querySelector('#rightBtn');
+		const carousel = document.querySelector('.list_slide');
+		
+		let index = 0;
+
+		leftBtn.addEventListener('click', () => {
+			console.log("왼쪽 클릭");
+			if (index === 0) return;
+			index -= 1;
+			console.log("왼쪽 클릭 index",index);
+			carousel.style.transform = 'translate('+(-960*index)+'px, 0)';
+		});
+	
+		rightBtn.addEventListener('click', () => {
+			console.log("오른쪽 클릭");
+			if (index === 4) return;
+			index += 1;
+			console.log("오른쪽 클릭 index", index);
+			carousel.style.transform = 'translate('+(-960*index)+'px, 0)';
+		});
+		
+		init();
+		
+	  });
+	  
+	  // 페이지 번호    
+	  
+	  var link_page = document.getElementsByClassName("link_page");
+	  
+	  function handleClick(event) {
+		  console.log(event.target);
+		  // console.log(this);
+		  // 콘솔창을 보면 둘다 동일한 값이 나온다
+		  
+		  console.log(event.target.classList);
+		  
+		  if (event.target.classList[1] === "clicked") {
+			  event.target.classList.remove("clicked");
+			  console.log("바뀌냐..?");
+		  } else {
+			  for (var i = 0; i < link_page.length; i++) {
+				  link_page[i].classList.remove("clicked");
+			  }
+			  console.log("클릭");
+			  event.target.classList.add("clicked");
+		  }
+	  }
+	  
+	  function init() {
+		  for (var i = 0; i < link_page.length; i++) {
+			  link_page[i].addEventListener("click", handleClick);
+			  console.log("클릭클릭");
+		  }
+	  }
+	
+	
+		
+		
 </script>
 
 <!-- ============================ HTML ========================================================================== -->
@@ -52,8 +96,8 @@
 				<span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
 			</p>
 			<div class="wrap_slide">
-				<ul class="list_slide" style="width: 900%;">
-					<li>
+				<ul class="list_slide">
+					<li class="testClass">
 						<div class="wrap_pic wrap_pic_type1">
 							<div class="item_pic item_pic_type1">
 								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
@@ -108,7 +152,7 @@
 							</div>
 						</div>
 					</li>
-					<li>
+					<li class="testClass">
 						<div class="wrap_pic wrap_pic_type2">
 							<div class="item_pic item_pic_type1">
 								<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
@@ -163,7 +207,7 @@
 							</div>
 						</div>
 					</li>
-					<li>
+					<li class="testClass">
 						<div class="wrap_pic wrap_pic_type3">
 							<div class="item_pic item_pic_type2">
 								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
@@ -235,19 +279,136 @@
 							</div>
 						</div>
 					</li>
+					<li class="testClass">
+						<div class="wrap_pic wrap_pic_type1">
+							<div class="item_pic item_pic_type1">
+								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="item_pic item_pic_type2">
+								<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="item_pic item_pic_type2">
+								<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="testClass">
+						<div class="wrap_pic wrap_pic_type2">
+							<div class="item_pic item_pic_type1">
+								<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="item_pic item_pic_type1">
+								<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="item_pic item_pic_type1">
+								<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
+								<div class="append_info">
+									<div class="info_g">
+										<strong class="info_tit">
+											인생 첫 유럽
+											<br>
+											8개 국가 13개 도시
+											<br>
+										</strong>
+										<span class="info_by">
+											<span class="ico_by">by</span>
+											윤뚜뚜
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 			
 			<div class="wrap_btn">
 				<!-- <i class="fa-solid fa-chevron-left" style="font-size: 100px; "></i> 
 				<a href="/"><i class="fa-solid fa-chevron-right" style="font-size: 50px; color:white;"></i></a>-->
-				<a href="/" class="slide_btn"><span class="btn_left"><i class="bi bi-arrow-left-circle-fill" style="font-size: 80px; "></i></span></a>
-				<a href="/" class="slide_btn"><span class="btn_right"><i class="bi bi-arrow-right-circle-fill" style="font-size: 80px;"></i></span></a>
+				<button class="slide_btn btn_left" id="leftBtn"><i class="bi bi-arrow-left-circle-fill" style="font-size: 80px; "></i></button>
+				<button class="slide_btn btn_right" id="rightBtn"><i class="bi bi-arrow-right-circle-fill" style="font-size: 80px;"></i></button>
 			</div>
 		</div>
 		<div class="wrap_paging">
-			<img src="/img/home/paging.jpg">
+			<ul class="paging_list">
+				<li><a href="javascript:;" class="link_page txt_page1" data-page="1">01</a></li>
+				<li><a href="javascript:;" class="link_page txt_page2" data-page="2">02</a></li>
+				<li><a href="javascript:;" class="link_page txt_page3" data-page="3">03</a></li>
+				<li><a href="javascript:;" class="link_page txt_page4" data-page="4">04</a></li>
+				<li><a href="javascript:;" class="link_page txt_page5" data-page="5">05</a></li>
+			</ul>
 		</div>
+		
 		
 		<!-- 팔로워 많은 유저 리스트 -->
 		<div class="best_follow">
@@ -256,76 +417,28 @@
 				<span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
 			</p>
 			<div class="wrap_follow">
-				<ul class="list_wirters list_writers_group">
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>							
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-					<li>
-						<a href="/" class="link_follow">
-							<img src="/img/member/default_profile.png" width="80" height="80" class="img_witer">
-							<strong class="tit_wirter">윤뚜뚜</strong>
-						</a>
-						<div class="follow_tag_wrap">
-							<span>국외</span>
-							<span>10대</span>
-							<span>북아메리카</span>
-						</div>
-					</li>
-				</ul>
+				<c:forEach var="vo" items="${followedUser}" >
+					<ul class="list_wirters list_writers_group">
+						<li>
+							<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_follow">
+								<img src='/upload/user/${vo.profileImg}.png' width="80" height="80" class="img_witer">
+								<strong class="tit_wirter">${vo.userNick}</strong>
+							</a>
+							<p class="follow_count"><i class="bi bi-person-heart" style="font-size:15px;"></i>&nbsp;${vo.followerNum}</p>	
+							<div class="follow_tag_wrap">
+								<c:forEach var="t" items="${vo.tagList}" end="2"><!-- 태그3개(임시)-->
+									<span class='tags' id='tag${t.tagNum}'
+									 onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
+										${t.tagName}
+									</span>&nbsp;
+								</c:forEach>
+							</div>
+						</li>
+					</ul>
+				</c:forEach>
 			</div>
 		</div>
+		
 		
 		<!-- 태그 리스트 -->
 		<div class="tag_wrap">
@@ -343,6 +456,8 @@
 				<li class="tag_item_end"></li>
 			</ul>
 		</div>
+		
+		
 		
 		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 
 		<div>
@@ -369,25 +484,7 @@
 		</div>-->
 		
 		
-		<!-- 팔로워 많은 유저 리스트 
-		<div>
-			<c:forEach var="vo" items="${followedUser}">
-				<ul>
-					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
-						<img src='/upload/user/${vo.profileImg}.png' height='30px'/>${vo.userNick}
-					</li>
-					<li>${vo.followerNum}</li>
-					<li>
-						<c:forEach var="t" items="${vo.tagList}" end="2"><!-- 태그3개(임시)
-							<span class='tags' id='tag${t.tagNum}'
-							 onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
-								${t.tagName}
-							</span>&nbsp;
-						</c:forEach>
-					</li>
-				</ul>
-			</c:forEach>
-		</div>-->
+		
 		
 		
 		

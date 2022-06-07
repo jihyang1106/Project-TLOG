@@ -94,13 +94,17 @@
 }
 
 .wrap_slide{
+	width: 960px;
+	height: 520px;
 	position: relative;
 	margin: 0 auto;
+	overflow: visible;
 }
 
 .list_slide{
 	position: absolute;
     top: 0;
+    width: 500%;
 }
 
 .list_slide li {
@@ -215,6 +219,7 @@
 }
 
 .wrap_btn .slide_btn{
+	cursor: pointer;
 	color: white;
 	/* color: rgba(47, 47, 47, 80%); */
 }
@@ -238,6 +243,31 @@
     margin: 22px auto 0;
     text-align: center;
     width: 960px;
+}
+
+.paging_list{
+	display: inline-block;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.paging_list>li{
+	display: inline;
+	text-align: center;
+}
+
+.link_page{
+	float: left;
+	display:block;
+	font-size: 14px;
+	padding: 5px 12px;
+	color:rgb(138, 138, 138);
+	line-height: 1.5;
+	font-weight : bold;
+}
+
+.clicked {
+	color:rgb(138, 138, 138);
 }
 
 /*=============== BEST FOLLOW ===============*/
@@ -308,11 +338,10 @@
 }
 
 .follow_tag_wrap{
-	bottom: 46px;
+	bottom: -15px;
     position: absolute;
     width: 100%;
     background: none;
-    margin-top: 43px;
     text-align: center;
 }
 
@@ -330,6 +359,11 @@
     line-height: 18px;
     margin: 0 2px;
     overflow: hidden;
+}
+
+.follow_count{
+	margin-top: -95px;
+    margin-bottom: 35px;
 }
 
 /*=============== TAG LIST ===============*/
