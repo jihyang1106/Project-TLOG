@@ -1,6 +1,7 @@
 package com.tworaveler.tlog.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public interface AdminService {
 	public int selectBoardTotalPosts(PagingVO pvo, AdminVO vo);
 	// 전체 회원 수
 	public int selectTotalUser();
+	// 전체 태그 개수
+	public List<Map<String, Object>> selectTag();
 	// 여행일기 전체 게시판
 	public List<LogVO> selectTlog(PagingVO pvo, LogVO vo); 
 	// 자유일기 전체 게시판

@@ -1,6 +1,7 @@
 package com.tworaveler.tlog.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,6 +29,11 @@ public class AdminServiceImpl implements AdminService {
 	public int selectTotalUser() {
 		return dao.selectTotalUser();
 	}
+	
+	@Override
+	public List<Map<String, Object>> selectTag() {
+		return dao.selectTag();
+	}
 
 	@Override
 	public List<LogVO> selectTlog(PagingVO pvo, LogVO vo) {
@@ -38,6 +44,8 @@ public class AdminServiceImpl implements AdminService {
 	public List<AdminVO> selectBoard(PagingVO pvo, AdminVO vo) {
 		return dao.selectBoard(pvo, vo);
 	}
+
+
 
 
 	

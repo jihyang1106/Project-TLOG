@@ -4,31 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.admin.AdminDAO">
 	<select id="selectTlogTotalPosts" resultType="int">
-		SELECT COUNT(tNum)
-		FROM travelLog
+		SELECT   COUNT(tNum)
+		FROM     travelLog
 	</select>
 	<select id="selectBoardTotalPosts" resultType="int">
-		SELECT COUNT(boardNum)
-		FROM board
-	</select>
-	<select id="selectTlog" resultType="LogVO">
-		SELECT l.tNum, l.tTitle, l.userNum, u.userNick,
-			   date_format(l.writeDate, "%Y%m/%d %H:%i")writeDate
-		FROM   travelLog l
-		JOIN   user u
-		ON     l.userNum = u.userNum
-		ORDER BY tNum desc 
-		LIMIT ${param1.postsPerPage} 
-		OFFSET ${param1.offset}
-	</select>
-	<select id="selectBoard" resultType="logVO">
-		SELECT b.boardNum, b.boardContent, b.writedate, b.userNum, u.userNick
-		FROM board b
-		JOIN user u
-		ON b.userNum = u.userNum
+		SELECT   COUNT(boardNum)
+		FROM     board
 	</select>
 	<select id="selectTotalUser" resultType="int">
-		SELECT COUNT(userNum)
-		FROM user
+		SELECT   COUNT(userNum)
+		FROM     user
 	</select>
+	<select id="selectTag" resultType="HashMap">
+		SELECT tw.tagName as tagName, COUNT(tl.tNum) as tNum
+		FROM tagWord tw 
+		JOIN tagLog tl 
+		ON tw.tagNum = tl.tagNum
+		GROUP BY tw.tagNum
+		ORDER BY tw.tagNum ASC
+	</select>
+	<select id="selectTlog" resultType="LogVO">
+		SELECT   l.tNum, l.tTitle, u.userNick,
+			     date_format(l.writeDate, "%Y/%m/%d %H:%i")writeDate
+		FROM     travelLog l
+		JOIN     user u
+		ON       l.userNum = u.userNum
+		ORDER BY tNum DESC
+		LIMIT    ${param1.postsPerPage} 
+		OFFSET   ${param1.offset}
+	</select>
+	<select id="selectBoard" resultType="AdminVO">
+		SELECT   b.boardNum, b.boardContent, u.userNick,
+			     date_format(b.writedate, "%Y/%m/%d %H:%i")writedate
+		FROM     board b
+		JOIN     user u
+		ON       b.userNum = u.userNum
+		ORDER BY boardNum DESC
+		LIMIT    ${param1.postsPerPage} 
+		OFFSET   ${param1.offset}
+	</select>
+
 </mapper>

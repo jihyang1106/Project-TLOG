@@ -5,8 +5,8 @@
     rel="stylesheet">
 <link href="/admintemplate/css/sb-admin-2.min.css" rel="stylesheet"/>
 <link href="/css/admin/main.css" rel="stylesheet"/>
+<script src="/js/admin/allMemberList.js"></script>
 <script src="/js/admin/main.js"></script>
-
 <div id="page-top"><!-- end div tag xx -->
 	<!-- Page Wrapper -->
 	<div id="wrapper"><!-- end div tag xx -->
@@ -120,31 +120,23 @@
 			<main class="container-fluid">
 				<!-- Page Heading -->
 				<div class="d-sm-flex align-items-center justify-content-between mb-4">
-					<h1 class="h3 mb-0 text-gray-800">여행 일기</h1>
+					<h1 class="h3 mb-0 text-gray-800">전체 회원</h1>
 				</div>
 			
 				<!-- Dash board 내용 -->
 				<div class="row">
-					<!-- 전체 게시판  -->
+					<!-- 회원 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판</h6>
-                        </div>
                         <div class="card-body table-responsive">
-                       		<div class="col-sm-12">
-                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                        			Showing 1 to 10 of 57 entries
-                        		</div>
-                        	</div>
                         	<br/>
-                            <table class="table table-bordered" id="dataTable">
+                            <table class="table table-bordered dataTable" id="memberTable">
                                 <thead>
                                     <tr>
-                                        <th>BoardNo.</th>
-                                        <th>Content</th>
-                                        <th>Date</th>
-                                        <th>UserNo.</th>
-                                        <th>Nickname</th>
+                                        <th>userNum</th>
+                                        <th>userNick</th>
+                                        <th>registerDate</th>
+                                        <th>쓴 글 개수</th>
+                                        <th>신고받은 횟수 reportNum(count)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -155,17 +147,14 @@
                                         <td>61</td>
                                         <td>방랑자</td>
                                     </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>ㄴㅇㄹ머냉러ㅐㅁㄴ러맨야러맺댠루매ㅑㄷ주램ㄷ누랴ㅐㅜㅁㄹㄷ재ㅜ랟누루ㅐㅈ도랴ㅐㅁ대랴ㅜ대ㅑ루맫누ㅜㄹ매ㅑㄷ주</td>
-                                        <td>2022.06.03</td>
-                                        <td>46</td>
-                                        <td>비트위의 나그네</td>
-                                    </tr>
                                 </tbody>
                             </table>
+                             <div class="dataTables_info" id="memberTable_info" role="status" aria-live="polite">
+						  	 
+						  	 </div>
                         </div><!-- end of 테이블 -->
-                    </div><!-- end of 전체 게시판 -->
+                    </div><!-- end of 회원 게시판 -->
+                    
 				</div><!-- end of row -->
 			</main><!-- end of container-fluid -->
 		</div><!-- End of content-wrapper(top nav포함) -->

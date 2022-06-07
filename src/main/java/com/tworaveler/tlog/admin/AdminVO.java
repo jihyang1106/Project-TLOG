@@ -1,5 +1,7 @@
 package com.tworaveler.tlog.admin;
 
+import java.util.Map;
+
 public class AdminVO {
 
 	// report
@@ -20,6 +22,10 @@ public class AdminVO {
 	private String writedate;
 	private String ip;
 	private String endTime;
+	private String userNick;
+	
+	// tag
+	private String tagName;
 	
 	public int getReportNum() {
 		return reportNum;
@@ -99,5 +105,18 @@ public class AdminVO {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	public String getTagName() {
+		return tagName;
+	}
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
+
 	
 }

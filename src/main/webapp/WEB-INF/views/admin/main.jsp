@@ -190,6 +190,8 @@
 	                            <h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계</h6>
 	                        </div>
 		                    <div class="card-body">
+	                          <%--  <input type="hidden" id="tagName" value="${tag.tagName}"> --%>
+	                           		<!--  <input type=hidden id="tags">${tagList}</div> -->
 	                           <div>
 	                               <canvas id="tagChart" style="margin:0 auto;"></canvas>
 	                           </div>
@@ -218,47 +220,22 @@
                             <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table table-bordered" id="dataTable">
-                                <!-- <thead>
-                                    <tr>
-                                        <th>BoardNo.</th>
-                                        <th>Content</th>
-                                        <th>Date</th>
-                                        <th>User nickname</th>
-                                        <th>삭제여부</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tBody">
-                                </tbody> -->
+                            <table class="table table-bordered dataTable" id="dataTable">
                             </table>
                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-<%--                        			 Showing ${tpvo.currentPage} to ${tpvo.postsPerPage} of ${tpvo.totalPosts} entries ${bpvo.totalPosts}
-								<ul class="pagination justify-content-center">
-									<c:if test="${tpvo.totalPages>0}">
-										<li class="page-item prevBtn">
-											<a class="page-link" href="javascript:void(0);" >
-												<i class="fa fa-angle-left"></i>
-											</a>
-										</li>
-										<c:forEach var="p" begin="${tpvo.startPage}" end="${tpvo.totalPages}">
-												<c:choose>
-													<c:when test="${p!=tpvo.currentPage}">
-														<li class="page-item">
-															<a class="page-link"href="javascript:void(0);">${p}</a>
-														</li>
-													</c:when>
-													<c:otherwise>
-														<li class="page-item disabled"><a class="page-link">${p}</a></li>
-													</c:otherwise>
-												</c:choose>
-										</c:forEach>
-										<li class="page-item nextBtn">
-											<a class="page-link" href="javascript:void(0);">
-												<i class="fa fa-angle-right"></i>
-											</a>
-										</li>
-									</c:if>
-								</ul> --%>
+						  	</div>
+                        </div><!-- end of 테이블 -->
+                    </div><!-- end of 여행일기 게시판 -->
+                    
+                   	<!-- 자유일기 게시판  -->
+                    <div class="card shadow mb-4 col-xl-12">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">자유 일기</h6>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-bordered dataTable" id="boardTable">
+                            </table>
+                       		<div class="dataTables_info" id="boardTable_info" role="status" aria-live="polite">
 						  	</div>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 자유일기 게시판 -->
