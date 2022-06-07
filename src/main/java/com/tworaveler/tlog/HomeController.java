@@ -1,6 +1,9 @@
 package com.tworaveler.tlog;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -48,6 +51,7 @@ public class HomeController {
 		//(2) 팔로워 많은 유저
 		List<MemberVO> followedUser = service.FollowedUser();
 		for(MemberVO vo : followedUser) {
+			//System.out.println(vo.getUserNick());
 			vo.setTagList(service.selectMyTag(vo.getUserNum()));
 		}
 		mav.addObject("followedUser", followedUser);

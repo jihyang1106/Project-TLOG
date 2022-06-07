@@ -9,13 +9,13 @@ $('#rightBtn').on('click', function(){
 	wrap_pic += 1;
   })*/
   
+  	var index = 1;
+	
 	$(function () {
 		// 캐러셀
 		const leftBtn = document.querySelector('#leftBtn');
 		const rightBtn = document.querySelector('#rightBtn');
 		const carousel = document.querySelector('.list_slide');
-		
-		let index = 0;
 
 		leftBtn.addEventListener('click', () => {
 			console.log("왼쪽 클릭");
@@ -34,7 +34,6 @@ $('#rightBtn').on('click', function(){
 		});
 		
 		init();
-		
 	  });
 	  
 	  // 페이지 번호    
@@ -43,10 +42,12 @@ $('#rightBtn').on('click', function(){
 	  
 	  function handleClick(event) {
 		  console.log(event.target);
-		  // console.log(this);
+		  console.log("ㄹㄹㄹㄹㄹㄹㄹ");
 		  // 콘솔창을 보면 둘다 동일한 값이 나온다
 		  
-		  console.log(event.target.classList);
+		  console.log(event.target.classList[1].substr(8,8));
+
+		  const carousel = document.querySelector('.list_slide');
 		  
 		  if (event.target.classList[1] === "clicked") {
 			  event.target.classList.remove("clicked");
@@ -57,6 +58,8 @@ $('#rightBtn').on('click', function(){
 			  }
 			  console.log("클릭");
 			  event.target.classList.add("clicked");
+			  index = event.target.classList[1].substr(8,8)-1;
+			  carousel.style.transform = 'translate('+(-960*index)+'px, 0)';
 		  }
 	  }
 	  
@@ -87,6 +90,33 @@ $('#rightBtn').on('click', function(){
 			<i class="bi bi-chevron-compact-down"></i>
 		</div>
 	</div>
+	
+	<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
+		<div>
+			<c:forEach var="vo" items="${logList}">
+				<ul id='log_ul' onclick="logDetail(${vo.tNum})">
+					<li>${vo.coverImg}</li>
+					<li>${vo.tTitle}</li>
+					<li>${vo.startDate}</li>
+					<li>${vo.endDate}</li>
+					<li>${vo.likeNum}</li>
+					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
+						<img src='/upload/user/${vo.profileImg}.png' height='30px'/>${vo.userNick}
+					</li>
+					<li>
+						<c:forEach var="t" items="${vo.tagList}">
+							<span class='tags' id='tag${t.tagNum}'
+							onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
+								${t.tagName}
+							</span>&nbsp;
+						</c:forEach>
+					</li>
+				</ul>
+			</c:forEach>
+		</div>
+	
+	
+	
 	<div class="container">
 		<!-- 본문 내용 작성하기 -->
 		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
@@ -96,300 +126,305 @@ $('#rightBtn').on('click', function(){
 				<span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
 			</p>
 			<div class="wrap_slide">
-				<ul class="list_slide">
-					<li class="testClass">
-						<div class="wrap_pic wrap_pic_type1">
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
+				<c:forEach items="${logList}" var="vo" varStatus="status" begin="1" end="16">
+					<ul class="list_slide">
+						<c:if test="${status.index <2 }" >
+							<li class="testClass">
+							<div class="wrap_pic wrap_pic_type1">
+								<div class="item_pic item_pic_type1">
+									<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item">${vo.coverImg}</a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												${vo.tTitle}
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												${vo.userNick}
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
+						</li>
+						
+						</c:if>
+					
+					
+						
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type2">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type3">
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</li>
-					<li class="testClass">
-						<div class="wrap_pic wrap_pic_type2">
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type1">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type2">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="testClass">
-						<div class="wrap_pic wrap_pic_type3">
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="testClass">
-						<div class="wrap_pic wrap_pic_type1">
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type2">
-								<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="testClass">
-						<div class="wrap_pic wrap_pic_type2">
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="item_pic item_pic_type1">
-								<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
-								<div class="append_info">
-									<div class="info_g">
-										<strong class="info_tit">
-											인생 첫 유럽
-											<br>
-											8개 국가 13개 도시
-											<br>
-										</strong>
-										<span class="info_by">
-											<span class="ico_by">by</span>
-											윤뚜뚜
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+						</li>
+					</ul>
+				</c:forEach>
 			</div>
 			
 			<div class="wrap_btn">
@@ -401,7 +436,7 @@ $('#rightBtn').on('click', function(){
 		</div>
 		<div class="wrap_paging">
 			<ul class="paging_list">
-				<li><a href="javascript:;" class="link_page txt_page1" data-page="1">01</a></li>
+				<li><a href="javascript:;" class="link_page txt_page1" data-page="2">01</a></li>
 				<li><a href="javascript:;" class="link_page txt_page2" data-page="2">02</a></li>
 				<li><a href="javascript:;" class="link_page txt_page3" data-page="3">03</a></li>
 				<li><a href="javascript:;" class="link_page txt_page4" data-page="4">04</a></li>
@@ -421,7 +456,7 @@ $('#rightBtn').on('click', function(){
 					<ul class="list_wirters list_writers_group">
 						<li>
 							<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_follow">
-								<img src='/upload/user/${vo.profileImg}.png' width="80" height="80" class="img_witer">
+								<img src='/upload/user/${vo.profileImg}' width="80" height="80" class="img_witer">
 								<strong class="tit_wirter">${vo.userNick}</strong>
 							</a>
 							<p class="follow_count"><i class="bi bi-person-heart" style="font-size:15px;"></i>&nbsp;${vo.followerNum}</p>	
@@ -457,31 +492,311 @@ $('#rightBtn').on('click', function(){
 			</ul>
 		</div>
 		
+		<!-- <div class="editor_pic">
+			<h3 class="txt_tlog txt_title">B E S T &nbsp; F O L L O W E R</h3>
+			<p class="txt_desc">
+				<span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
+			</p>
+			<div class="wrap_slide">
+				<c:forEach var="vo" items="${logList}">
+					<ul class="list_slide">
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type1">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type2">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type3">
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type1">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/00.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/01.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type2">
+									<a href="/" class="link_item"><img src="/img/home/02.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="testClass">
+							<div class="wrap_pic wrap_pic_type2">
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/03.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/04.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="item_pic item_pic_type1">
+									<a href="/" class="link_item"><img src="/img/home/05.jpg"></a>
+									<div class="append_info">
+										<div class="info_g">
+											<strong class="info_tit">
+												인생 첫 유럽
+												<br>
+												8개 국가 13개 도시
+												<br>
+											</strong>
+											<span class="info_by">
+												<span class="ico_by">by</span>
+												윤뚜뚜
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</c:forEach>
+			</div> -->
+	
 		
-		
-		<!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 
-		<div>
-			<c:forEach var="vo" items="${logList}">
-				<ul id='log_ul' onclick="logDetail(${vo.tNum})">
-					<li>${vo.coverImg}</li>
-					<li>${vo.tTitle}</li>
-					<li>${vo.startDate}</li>
-					<li>${vo.endDate}</li>
-					<li>${vo.likeNum}</li>
-					<li onclick="location.href='/member/profile?userNum=${vo.userNum}'">
-						<img src='/upload/user/${vo.profileImg}.png' height='30px'/>${vo.userNick}
-					</li>
-					<li>
-						<c:forEach var="t" items="${vo.tagList}">
-							<span class='tags' id='tag${t.tagNum}'
-							onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
-								${t.tagName}
-							</span>&nbsp;
-						</c:forEach>
-					</li>
-				</ul>
-			</c:forEach>
-		</div>-->
 		
 		
 		

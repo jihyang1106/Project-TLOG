@@ -1,6 +1,6 @@
 @charset "UTF-8";
 #profileContainer{
-	width:70vw;
+	width:60vw;
 	position:relative;
 	margin:0 auto;
 	box-shadow:rgba(0,0,0,60%);
@@ -8,7 +8,7 @@
 }
 /*====================프로필=====================*/
 #profile{
-	width:70vw;
+	width:60vw;
 	height:25vh;
 	float:left;
 	padding:30px 200px;
@@ -30,18 +30,20 @@
 	margin:5vh 0;
 	border:none;
 	border-radius:10px;
-	font-weight:900;
 	transition:0.3s;
+	font-weight:600;
+	color:rgba(0,0,0,70%);
+	background:none;
 }
 #userEditBtn:hover{
-	background-color:rgba(0,0,0,60%);
+	background-color:rgba(122, 140, 226, 60%);
 	color:white;
 }
 
 /*===================팔로우 영역=====================*/
 #followSection{
 	clear:both;
-	width:70vw;
+	width:60vw;
 	height:2vw;
 	margin:50px 0px;
 	text-align:center;
@@ -49,11 +51,18 @@
 }
 #followSection>span{
 	padding:0 50px;
-	font-size:1.2em;
-	font-weight:500;
+	font-size:1.1em;
+	font-weight:600;
+	color:rgba(0,0,0,70%);
 }
-#follow, #follower{
+.follow{
 	cursor:pointer;
+	transition:0.3s;
+}
+.follow:hover{
+	background-color:rgba(122, 140, 226, 60%);
+	color:white !important;
+	border-radius:15px;
 }
 /*===================팔로워 모달=====================*/
 .modal-header{
@@ -82,7 +91,7 @@
 
 /*====================탭 설정=====================*/
 #mypageTabSection{
-	width:70vw;
+	width:60vw;
 	clear:both;
 	position:relative;
 	margin:0 auto;
@@ -97,14 +106,13 @@
 .log_list_div{
 	clear:both;
 	float:center;
-	width:70vw;
+	width:60vw;
 	position:relative;
-	margin:100px 0px !important;
 }
 .log_div{
 	margin:1vw;
 	padding:2vw;
-	width:21.3vw;
+	width:18vw;
 	display:inline-block;
 	text-align:center;
 	border-radius:15px;
@@ -125,9 +133,9 @@
 	line-height:40px;
 }
 .coverImg{
-	width:16vw;
+	width:14vw;
 	height:12vw;
-	margin:1vw 0;
+	margin-bottom:1vw;
 	border-radius:10px;
 	box-shadow:0 0 10px rgba(0,0,0,30%);
 }
@@ -136,6 +144,7 @@
 	line-height:40px;
 	text-align:left;
 	padding:0px 30px;
+	cursor:pointer;
 }
 .logProfileImg{
 	width:40px;
@@ -147,6 +156,7 @@
 .logTitle{
 	font-size:1.1em;
 	font-weight:600;
+	cursor:pointer;
 }
 .tags{
 	background-color:var(--theme-lightblue-30);

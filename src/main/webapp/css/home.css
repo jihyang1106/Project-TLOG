@@ -105,6 +105,7 @@
 	position: absolute;
     top: 0;
     width: 500%;
+    translate : (-960px, 0);
 }
 
 .list_slide li {
@@ -223,19 +224,25 @@
 	color: white;
 	/* color: rgba(47, 47, 47, 80%); */
 }
+#leftBtn, #rightBtn{
+	box-shadow: none;
+	outline: none;
+	border: none;
+	background: none;
+	
+	height: 80px;
+	width: 80px;
+	margin-top: 28px;
+}
 
 .btn_left{
 	margin-left: -120px;
 	float: left;
-	height: 80px;
-	width: 80px;
 }
 
 .btn_right{
 	margin-right: -120px;
 	float: right;
-	height: 80px;
-	width: 80px;
 }
 
 /*=============== SLIDE PAGING ===============*/
@@ -256,6 +263,10 @@
 	text-align: center;
 }
 
+.paging_list>li>a{
+	color:rgb(138, 138, 138);
+}
+
 .link_page{
 	float: left;
 	display:block;
@@ -266,8 +277,10 @@
 	font-weight : bold;
 }
 
-.clicked {
-	color:rgb(138, 138, 138);
+
+
+.clicked  {
+	color:rgb(138, 138, 138) !important;
 }
 
 /*=============== BEST FOLLOW ===============*/
@@ -298,7 +311,7 @@
 .list_wirters li {
 	float: left;
     height: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     margin-left: 20px;
     position: relative;
     text-align: center;
