@@ -78,3 +78,6 @@ ul, li{
 	padding:0;
 	list-style-type:none;
 }
+.fa,.fab,.fad,.fal,.far,.fas{
+	font-weight: 900 !important;
+}

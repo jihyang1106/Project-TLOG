@@ -146,8 +146,8 @@ input[type=date] {
 	box-shadow:0 0 10px rgba(0,0,0,50%);
 }
 .t_img{
-	width:18vw;
-	height:24vw;
+	max-width:25vw;
+	max-height:25vw;
 	margin:2vw 0vw;
 }
 .texts{
