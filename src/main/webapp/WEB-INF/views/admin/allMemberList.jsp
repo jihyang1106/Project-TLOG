@@ -6,7 +6,8 @@
 <link href="/admintemplate/css/sb-admin-2.min.css" rel="stylesheet"/>
 <link href="/css/admin/main.css" rel="stylesheet"/>
 <script src="/js/admin/allMemberList.js"></script>
-<script src="/js/admin/main.js"></script>
+
+
 <div id="page-top"><!-- end div tag xx -->
 	<!-- Page Wrapper -->
 	<div id="wrapper"><!-- end div tag xx -->
@@ -132,25 +133,59 @@
                             <table class="table table-bordered dataTable" id="memberTable">
                                 <thead>
                                     <tr>
-                                        <th>userNum</th>
-                                        <th>userNick</th>
-                                        <th>registerDate</th>
-                                        <th>쓴 글 개수</th>
-                                        <th>신고받은 횟수 reportNum(count)</th>
+                                        <th>번호</th>
+                                        <th>닉네임</th>
+                                        <th>가입일</th>
+                                        <th>여행일기 수</th>
+                                        <th>자유일기 수</th>
+                                        <th>총 일기 수</th>
+                                        <th>신고받은 횟수</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>ㅇㄹㄴㅇㄹㄴㅇㄻ내댜러매ㅓㅈ대ㅑㅓ매더래먀더랴ㅐㅓ대러ㅐㅁㄴㄷ럼ㄷㄴ래ㅜ누래ㅑㅁ둔루대눌먇</td>
-                                        <td>2022.06.01</td>
-                                        <td>61</td>
-                                        <td>방랑자</td>
-                                    </tr>
+                                	<c:forEach var="m" items="${mList}">
+	                                	<tr>
+	                                        <td>${m.userNum}</td>
+	                                        <td>${m.userNick}</td>
+	                                        <td>${m.registerDate}</td>
+	                                        <td>${m.tNumCount}</td>
+	                                        <td>${m.bCount}</td>
+	                                        <td>${m.sum}</td>
+	                                        <td>${m.rCount}</td>
+                                    	</tr>
+                                	</c:forEach>
                                 </tbody>
                             </table>
                              <div class="dataTables_info" id="memberTable_info" role="status" aria-live="polite">
-						  	 
+						  	 	<ul class="pagination justify-content-center">
+						  	 		<c:if test="${paging.currentPage>1}">
+						  	 			<li class="page-item page" value="${paging.currentPage-1}">
+							  	 			<a class="page-link" href="javascript:void(0);" onclick="move(${paging.currentPage-1})">
+							  	 				<i class="fa fa-angle-left"></i>
+							  	 			</a>
+						  	 			</li>
+						  	 		</c:if>
+						  	 		<c:forEach var="p" begin="${paging.startPage}" end="${paging.totalPages}">
+										<c:if test="${p<=paging.totalPages}">
+											<c:choose>
+												<c:when test="${p==paging.currentPage}">
+													<li class="page-item disabled"><a class="page-link">${p}</a></li>
+												</c:when>
+												<c:when test="${p!=paging.currentPage}">
+													<li class="page-item page"><a class="page-link" href="javascript:void(0);"
+														onclick="move(${paging.currentPage})">${p}</a></li>
+												</c:when>
+											</c:choose>
+										</c:if>
+									</c:forEach>
+									<c:if test="${paging.currentPage<paging.totalPages}">
+										<li class="page-item page" value="${paging.currentPage+1}">
+							  	 			<a class="page-link" href="javascript:void(0);" onclick="move(${paging.currentPage+1})">
+							  	 				<i class="fa fa-angle-right"></i>
+							  	 			</a>
+						  	 			</li>
+						  	 		</c:if>
+						  	 	</ul>
 						  	 </div>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 회원 게시판 -->

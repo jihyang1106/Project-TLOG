@@ -3,11 +3,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	   document.getElementById('bottom').style.display = "none";
 	   document.getElementById('adminBottom').style.display ="block";
 
-		
 });// DOM loaded
 
-	
-$(function(){
-
-
-});
+// 페이징 처리
+ function move(p){
+	console.log(p)
+	location.href="/admin/allMemberList?currentPage="+p+""
+ }

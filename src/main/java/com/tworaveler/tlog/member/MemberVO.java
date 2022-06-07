@@ -19,11 +19,18 @@ public class MemberVO {
 	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
-	private int tagCount;
+	private int tagCount; // 각 태그 별 수
 	
 	//follow
 	private int followingNum;
 	private int followerNum;
+	
+	// userList
+	private int tNumCount; // 유저가 작성한 여행일기 수
+	private int bCount;    // 유저가 작성한 자유일기 수
+	private int sum;       // 유저가 작성한 일기 합
+	private int rCount;    // 유저가 신고받은 수
+
 	
 	/*
 	 * //카카오 public MemberVO(HashMap<String, String> kakaoInfo) { idKakao =
@@ -134,6 +141,37 @@ public class MemberVO {
 	public void setTagCount(int tagCount) {
 		this.tagCount = tagCount;
 	}
-	
+
+	public int gettNumCount() {
+		return tNumCount;
+	}
+
+	public void settNumCount(int tNumCount) {
+		this.tNumCount = tNumCount;
+	}
+
+	public int getbCount() {
+		return bCount;
+	}
+
+	public void setbCount(int bCount) {
+		this.bCount = bCount;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+	public int getrCount() {
+		return rCount;
+	}
+
+	public void setrCount(int rCount) {
+		this.rCount = rCount;
+	}
 	
 }

@@ -84,10 +84,14 @@ document.addEventListener("DOMContentLoaded", function(){
 		            				  "#F4EEFF", "#DCD6F7","#7E94BF", "#5357A6",
 		            				  "#FFE6E6", "#F2D1D1", "#DAEAF1", "#C6DCE4"],
 		      		data : tagCountList
-		      		
 		        }]
 		    },
 		    options: {
+				plugins:{ // 라벨 숨기기
+                        legend: {
+                            display: false
+                        },
+                 },
 				responsive: false,
 			}
 		});
@@ -106,6 +110,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		        }]
 		    },
 		    options: {
+				plugins:{ // 라벨 숨기기
+                        legend: {
+                            display: false
+                        },
+                 },
 				responsive: false,
 			}
 		});
@@ -124,6 +133,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		        }]
 		    },
 		    options: {
+				plugins:{ // 라벨 숨기기
+                        legend: {
+                            display: false
+                        },
+                 },
 				responsive: false,
 			}
 		});
@@ -142,6 +156,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		        }]
 		    },
 		    options: {
+				plugins:{ // 라벨 숨기기
+                        legend: {
+                            display: false
+                        },
+                 },
 				responsive: false,
 			}
 		});

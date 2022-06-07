@@ -1,6 +1,5 @@
 package com.tworaveler.tlog.admin;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tworaveler.tlog.board.BoardVO;
 import com.tworaveler.tlog.log.LogVO;
 import com.tworaveler.tlog.member.MemberService;
 import com.tworaveler.tlog.member.MemberVO;
@@ -31,27 +31,18 @@ public class AdminController {
 	ResponseEntity<String> entity = null;
 	
 	@GetMapping("main")
-	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, AdminVO avo, MemberVO mvo) {
-
+	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, BoardVO bvo, MemberVO mvo) {
 		// 여행일기 게시판
 		mav.addObject("tlogTotal", service.selectTlogTotalPosts(pvo, lvo));
-
 		// 자유일기 게시판
-		mav.addObject("boardTotal", service.selectBoardTotalPosts(pvo, avo));
-		
+		mav.addObject("boardTotal", service.selectBoardTotalPosts(pvo, bvo));
 		// 전체 일기 수
 		mav.addObject("total", service.selectTlogTotalPosts(pvo, lvo)
-				+ service.selectBoardTotalPosts(pvo, avo));
-		
+				+ service.selectBoardTotalPosts(pvo, bvo));
 		// 전체 회원 수
-		mav.addObject("user", service.selectTotalUser());
-		
+		mav.addObject("user", service.selectTotalUser(pvo, mvo));
 		//해시태그 정보 받아오기
 		mav.addObject("tagInfo", service.selectTag());
-
-		
-		// 전체 태그 개수
-
 		mav.setViewName("admin/main");
 		return mav;
 	}
@@ -70,18 +61,30 @@ public class AdminController {
 
 	// ajax로 자유일기 보이기
 	@GetMapping("board")
-	public Map<String, Object> board(PagingVO pvo, AdminVO avo){
+	public Map<String, Object> board(PagingVO pvo, BoardVO bvo){
 		Map<String, Object> map = new HashMap<>();
 		// 페이징 저리 및 자유일기 리스트
-		pvo.setTotalPosts(service.selectBoardTotalPosts(pvo,avo));
-		List<AdminVO> list = service.selectBoard(pvo, avo);
+		pvo.setTotalPosts(service.selectBoardTotalPosts(pvo, bvo));
+		List<BoardVO> list = service.selectBoard(pvo, bvo);
 		map.put("boardList", list);
 		map.put("paging", pvo);
 		return map;
 	}
 	
+	// 회원게시판 전체회원
 	@GetMapping("allMemberList")
-	public ModelAndView allMemberList() {
+	public ModelAndView allMemberList(PagingVO pvo, MemberVO mvo) {
+		Map<String, Object> map = new HashMap<>();
+		// 페이징 처리 회원 리스트
+		/*
+		 * pvo.setTotalPosts(service.selectTotalUser(pvo, mvo)); List<MemberVO> list =
+		 * service.selectMemberList(pvo, mvo); map.put("memberList", list);
+		 * map.put("paging", pvo);
+		 */
+		mav.addObject("mList", service.selectMemberList(pvo, mvo));
+		pvo.setTotalPosts(service.selectTotalUser(pvo, mvo));
+		mav.addObject("paging", pvo);
+		
 		mav.setViewName("admin/allMemberList");
 		return mav;
 	}

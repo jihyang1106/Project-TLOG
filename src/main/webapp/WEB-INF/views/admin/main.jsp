@@ -145,6 +145,7 @@
 	                   		</div>
                    		</div>
                    	</div>
+                   	<br/>
                    	<!-- 전체 일기 수, 회원 수 -->
                    	<div class="col-lg-6">
                    		<!-- 전체 일기 수 -->
@@ -189,52 +190,37 @@
 							</div>
 						</div>
                    	</div><!-- 전체 일기 수, 회원 수 끝 -->
-                   	
+                   	<br/>
          
                    	
                    	<!-- 태그 게시판 통계 -->
-                   	<div class="col-lg-12">
-                 		<div class="card shadow mb-4 col-12">
-	                        <div class="card-header py-3">
-	                            <h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계 </h6>
-	                        </div>
-		                    <div class="card-body">
-	                           		<c:forEach var="t" items="${tagInfo}">
-	                           			<input type="hidden" id="tags${t.tagNum}" name='${t.tagCount}' value="${t.tagName}" >
-	                           		</c:forEach>
-	                           		<div class="col-6" style="float:left">
-	                           			<canvas id="tagChart" class="chart"></canvas>
-	                           		</div>
-	                           		<div class="col-6" style="float:right"> 
-	                           			<canvas id="tagChartAge" class="chart"></canvas>
-	                           		</div>
-	                           		<div class="col-6" style="float:left">
-	                           			<canvas id="tagChartGroup" class="chart"></canvas>
-	                           		</div>
-	                           		<div class="col-6" style="float:right">
-	                           			<canvas id="tagChartSeason" class="chart"></canvas>
-	                           		</div>
-	                           </div>
-                            </div>
-                       		<br/>
+					<div class="card shadow mb-4 col-12">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계</h6>
 						</div>
-                    </div>
-<!--                  	<div class="col-lg-12">
-                 		<div class="card shadow mb-4 col-12">
-	                        <div class="card-header py-3">
-	                            <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
-	                        </div>
-		                    <div class="card-body">
-	                           <div>
-	                               <canvas id="tagChart"></canvas>
-	                           </div>
-                            </div>
-                       		<br/>
+						<div class="card-body">
+							<c:forEach var="t" items="${tagInfo}">
+								<input type="hidden" id="tags${t.tagNum}" name='${t.tagCount}'
+									value="${t.tagName}">
+							</c:forEach>
+							<div class="col-6" style="float: left">
+								<canvas id="tagChart" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: right">
+								<canvas id="tagChartAge" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: left">
+								<canvas id="tagChartGroup" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: right">
+								<canvas id="tagChartSeason" class="chart"></canvas>
+							</div>
 						</div>
-                    </div> -->
-                    
-                    
-                   	<!-- 여행일기 게시판  -->
+					</div>
+					<br />
+
+
+					<!-- 여행일기 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
