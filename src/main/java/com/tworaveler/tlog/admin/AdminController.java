@@ -1,5 +1,6 @@
 package com.tworaveler.tlog.admin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tworaveler.tlog.log.LogVO;
 import com.tworaveler.tlog.member.MemberService;
+import com.tworaveler.tlog.member.MemberVO;
 
 @RestController
 @RequestMapping("/admin/")
@@ -29,7 +31,7 @@ public class AdminController {
 	ResponseEntity<String> entity = null;
 	
 	@GetMapping("main")
-	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, AdminVO avo) {
+	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, AdminVO avo, MemberVO mvo) {
 
 		// 여행일기 게시판
 		mav.addObject("tlogTotal", service.selectTlogTotalPosts(pvo, lvo));
@@ -44,9 +46,12 @@ public class AdminController {
 		// 전체 회원 수
 		mav.addObject("user", service.selectTotalUser());
 		
+		//해시태그 정보 받아오기
+		mav.addObject("tagInfo", service.selectTag());
+
+		
 		// 전체 태그 개수
-		List<Map<String, Object>> list= service.selectTag();
-		mav.addObject("tagList", list);
+
 		mav.setViewName("admin/main");
 		return mav;
 	}

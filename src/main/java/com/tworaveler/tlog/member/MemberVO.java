@@ -19,6 +19,7 @@ public class MemberVO {
 	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
+	private int tagCount;
 	
 	//follow
 	private int followingNum;
@@ -124,6 +125,14 @@ public class MemberVO {
 
 	public void setFollowerNum(int followerNum) {
 		this.followerNum = followerNum;
+	}
+
+	public int getTagCount() {
+		return tagCount;
+	}
+
+	public void setTagCount(int tagCount) {
+		this.tagCount = tagCount;
 	}
 	
 	

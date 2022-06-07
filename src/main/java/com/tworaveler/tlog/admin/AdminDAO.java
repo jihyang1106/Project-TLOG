@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Repository
 @Mapper
@@ -19,7 +20,7 @@ public interface AdminDAO {
 	// 전체 회원 수
 	public int selectTotalUser();
 	// 전체 태그 개수
-	public List<Map<String, Object>> selectTag();
+	public List<MemberVO> selectTag();
 	// 여행일기 전체 게시판
 	public List<LogVO> selectTlog(PagingVO pvo, LogVO vo); 
 	// 자유일기 전체 게시판

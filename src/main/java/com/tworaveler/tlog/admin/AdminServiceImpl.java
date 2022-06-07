@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -31,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectTag() {
+	public List<MemberVO> selectTag() {
 		return dao.selectTag();
 	}
 

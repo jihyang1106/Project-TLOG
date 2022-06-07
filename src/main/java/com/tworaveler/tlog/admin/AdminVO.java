@@ -24,9 +24,6 @@ public class AdminVO {
 	private String endTime;
 	private String userNick;
 	
-	// tag
-	private String tagName;
-	
 	public int getReportNum() {
 		return reportNum;
 	}
@@ -110,12 +107,6 @@ public class AdminVO {
 	}
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
-	}
-	public String getTagName() {
-		return tagName;
-	}
-	public void setTagName(String tagName) {
-		this.tagName = tagName;
 	}
 
 	

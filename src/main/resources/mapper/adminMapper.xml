@@ -15,13 +15,12 @@
 		SELECT   COUNT(userNum)
 		FROM     user
 	</select>
-	<select id="selectTag" resultType="HashMap">
-		SELECT tw.tagName as tagName, COUNT(tl.tNum) as tNum
+	<select id="selectTag" resultType="MemberVO">
+		SELECT COUNT(tl.tNum) as tagCount, tw.tagNum, tw.tagName
 		FROM tagWord tw 
-		JOIN tagLog tl 
+		LEFT JOIN tagLog tl 
 		ON tw.tagNum = tl.tagNum
 		GROUP BY tw.tagNum
-		ORDER BY tw.tagNum ASC
 	</select>
 	<select id="selectTlog" resultType="LogVO">
 		SELECT   l.tNum, l.tTitle, u.userNick,

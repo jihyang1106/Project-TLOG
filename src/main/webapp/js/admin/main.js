@@ -6,8 +6,53 @@ document.addEventListener("DOMContentLoaded", function(){
 	   tlogList();
 	   boardList();
 	   
+	   // 지역별 통계
 	   var tagList = []; 
-	   var tags = document.getElementById("tags");
+	   var tagCountList = [];
+	   // 나이별 통계
+	   var tagListAge = [];
+	   var tagCountListAge = [];
+	   // 인원별 통계
+	   var tagListGroup = [];
+	   var tagCountListGroup =[];
+	   // 계절별 통계 
+	   var tagListSeason = [];
+	   var tagCountListSeason = [];
+
+
+	   // 지역별 통계
+	   for(i=3; i<15; i++){
+			var tags = document.getElementById("tags"+i).value;
+			var tagCount = document.getElementById("tags"+i).getAttribute("name");
+			tagList.push(tags);
+			tagCountList.push(tagCount);
+	   }
+	   
+	   // 나이별 통계
+	   for(i=15; i<21; i++){
+			var tags = document.getElementById("tags"+i).value;
+			var tagCount = document.getElementById("tags"+i).getAttribute("name");
+			tagListAge.push(tags);
+			tagCountListAge.push(tagCount);
+	   }
+	   
+	   // 인원별 통계
+	   for(i=21; i<26; i++){
+			var tags = document.getElementById("tags"+i).value;
+			var tagCount = document.getElementById("tags"+i).getAttribute("name");
+			tagListGroup.push(tags);
+			tagCountListGroup.push(tagCount);
+	   }
+	   
+	   // 계절별 통계
+	   for(i=26; i<30; i++){
+			var tags = document.getElementById("tags"+i).value;
+			var tagCount = document.getElementById("tags"+i).getAttribute("name");
+			tagListSeason.push(tags);
+			tagCountListSeason.push(tagCount);
+			console.log(tagCountListSeason)
+	   		
+	   }
 	   
 	   
 	   // 전체 게시판 통계
@@ -27,15 +72,73 @@ document.addEventListener("DOMContentLoaded", function(){
 			}
 		});
 		
-		// 태그 게시판 통계
+		// 태그 게시판 지역별 통계
 	   new Chart('tagChart', {
-		    type: 'doughnut', 
+		    type: 'bar', 
 		    responsive: false,
 		    data: {
-		        labels: [],
+		        labels: tagList ,
 		        datasets: [{
-		            backgroundColor: ["#DBDFFD", "#DAEAF1"],
-		            data: [ 15, 66, 45 ]
+					label : "지역",
+		            backgroundColor: ["#E7E0C9", "#C1CFC0", "#6B7AA1", "#11324D", 
+		            				  "#F4EEFF", "#DCD6F7","#7E94BF", "#5357A6",
+		            				  "#FFE6E6", "#F2D1D1", "#DAEAF1", "#C6DCE4"],
+		      		data : tagCountList
+		      		
+		        }]
+		    },
+		    options: {
+				responsive: false,
+			}
+		});
+		
+		// 태그 게시판 나이별 통계
+	   new Chart('tagChartAge', {
+		    type: 'bar', 
+		    responsive: false,
+		    data: {
+		        labels: tagListAge ,
+		        datasets: [{
+					label : "나이",
+		            backgroundColor: [
+		          	  "#7E94BF", "#5357A6", "#FFE6E6", "#F2D1D1", "#DAEAF1", "#C6DCE4"],
+		      		data : tagCountListAge
+		        }]
+		    },
+		    options: {
+				responsive: false,
+			}
+		});
+		
+		// 태그 게시판 인원별 통계
+	   new Chart('tagChartGroup', {
+		    type: 'bar', 
+		    responsive: false,
+		    data: {
+		        labels: tagListGroup ,
+		        datasets: [{
+					label : "인원",
+		            backgroundColor: [
+		          	 "#7E94BF", "#5357A6", "#FFE6E6", "#F2D1D1", "#DAEAF1", "#C6DCE4"],
+		      		data : tagCountListGroup
+		        }]
+		    },
+		    options: {
+				responsive: false,
+			}
+		});
+		
+		// 태그 게시판 계절별 통계
+	   new Chart('tagChartSeason', {
+		    type: 'bar', 
+		    responsive: false,
+		    data: {
+		        labels: tagListSeason ,
+		        datasets: [{
+					label : "계절",
+		            backgroundColor: [
+		          	 "#FFE6E6", "#F2D1D1", "#DAEAF1", "#C6DCE4"],
+		      		data : tagCountListSeason
 		        }]
 		    },
 		    options: {
