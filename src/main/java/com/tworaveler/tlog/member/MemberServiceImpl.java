@@ -15,12 +15,10 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> getAllHashtag() {
 		return dao.getAllHashtag();
 	}
-
 	@Override
 	public List<MemberVO> setFollowerInfo(int userNum) {
 		return dao.setFollowerInfo(userNum);
 	}
-
 	@Override
 	public List<MemberVO> setFollowInfo(int userNum) {
 		return dao.setFollowInfo(userNum);
@@ -30,5 +28,5 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectMember(MemberVO vo) {
 		return dao.selectMember(vo);
 	}
-	
+
 }

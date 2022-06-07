@@ -1,6 +1,8 @@
 package com.tworaveler.tlog.log;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LogVO {
 	//travelLog
@@ -27,6 +29,7 @@ public class LogVO {
 	
 	//tag
 	private List<LogVO> tagList;
+	private List<Integer> tagNumList;
 	private int tagNum;
 	private String tagName;
 	
@@ -36,8 +39,24 @@ public class LogVO {
 	
 	//tagUser
 	private List<LogVO> tagUserList;
+	private List<Integer> userNumList;
 	private int tagged;	
 	
+	private List<Map<String,Object>> dataList;
+	
+	
+	public List<Integer> getTagNumList() {
+		return tagNumList;
+	}
+	public void setTagNumList(List<Integer> tagNumList) {
+		this.tagNumList = tagNumList;
+	}
+	public List<Integer> getUserNumList() {
+		return userNumList;
+	}
+	public void setUserNumList(List<Integer> userNumList) {
+		this.userNumList = userNumList;
+	}
 	public int getLikeNum() {
 		return likeNum;
 	}
@@ -188,4 +207,11 @@ public class LogVO {
 	public void setTagged(int tagged) {
 		this.tagged = tagged;
 	}
+	public List<Map<String,Object>> getDataList() {
+		return dataList;
+	}
+	public void setDataList(List<Map<String,Object>> dataList) {
+		this.dataList = dataList;
+	}
+
 }

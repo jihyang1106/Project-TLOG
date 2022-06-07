@@ -5,11 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-
 @Mapper
 @Repository
 public interface MemberDAO {
-	
 	//해시태그
 	public List<MemberVO> getAllHashtag();
 	//팔로워 받아오기

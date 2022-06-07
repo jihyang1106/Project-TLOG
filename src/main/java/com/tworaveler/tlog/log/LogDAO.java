@@ -1,6 +1,7 @@
 package com.tworaveler.tlog.log;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public interface LogDAO {
 	// tNum의 태그된 유저 리스트
 	public List<LogVO> selectTagUsers(int tNum);
 
-	// tNum의 태그 리스트
+	// 태그 전체 리스트
 	public List<LogVO> selectTagAll();
 
 	// userNum의 태그 리스트
@@ -64,6 +65,19 @@ public interface LogDAO {
 	public List<LogVO> searchLikedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum, int limitNum);
 	
 	/* =============== 글쓰기 ===================== */
+	//travelLog 등록
 	public int logWriteOk(LogVO vo);
+	//travelDetail 등록
+	public int detailWriteOk(int tNum, Map<String, Object> map);
+	//방금 작성한 tNum 가져오기
+	public int getTNum(int userNum); 
+	//태그 등록
+	public int insertTagList(LogVO vo);
+	//해당 닉네임의 유저 검색
+	public List<LogVO> getUserListByNick(String userNick);
+	//태그한 유저 등록
+	public int insertUserList(LogVO vo); 
 	
+	/* ================  logView ==================== */
+	public LogVO getOneLog(int tNum);
 }
