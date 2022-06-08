@@ -27,7 +27,7 @@ mybatis:
   mapper-locations: mapper/*Mapper.xml
 
 # 업로드나중에 쓸 중요한 자산
-#upload-path : /upload/**
-#resource-path : file:///home/ubuntu/TLOG/upload/
-#prefix-path : /home/ubuntu/TLOG/upload/
-#logout-path : http://tlog0609.kro.kr
+upload-path : /upload/**
+resource-path : file:///home/ubuntu/TLOG/upload/
+prefix-path : /home/ubuntu/TLOG/upload/
+logout-path : http://tlog0609.kro.kr

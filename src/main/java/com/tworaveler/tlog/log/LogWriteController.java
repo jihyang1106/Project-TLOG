@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,9 @@ import com.tworaveler.tlog.member.MemberVO;
 public class LogWriteController {
 	@Inject
 	LogService service;
+	
+	@Value("${prefix-path}") 
+	private String prefixPath;
 
 	/* ===================== 글쓰기폼 ======================== */
 	@GetMapping("/logShare/logWrite")
@@ -54,7 +58,7 @@ public class LogWriteController {
 		
 		/* String path = prefixPath+memberNo+"/author/"; *//* 업로드 중요자산 */
 		//파일 업로드
-		String path = request.getSession().getServletContext().getRealPath("/upload/log");
+		String path = request.getSession().getServletContext().getRealPath(prefixPath+"/log");
 	    System.out.println("실제 경로 = "+path);
 		try {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;

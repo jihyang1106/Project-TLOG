@@ -5,10 +5,10 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.tworaveler.tlog.member.MemberVO;
@@ -16,12 +16,16 @@ import com.tworaveler.tlog.member.MemberVO;
 @SpringBootApplication
 public class TlogApplication {
 
+	@Value("${prefix-path}") 
+	private static String prefixPath;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(TlogApplication.class, args);
 	}
 	public static void profileImgUpload(MemberVO vo, HttpServletRequest request) {
 
-		String profilePath = "/upload/user/";
+		/* String profilePath = "/upload/user/"; */
+		String profilePath = prefixPath+"/user/";
 		String path = request.getSession().getServletContext().getRealPath(profilePath);
 		MultipartFile file = ((MultipartRequest) request).getFile("profileImgs");
 		if(!file.getOriginalFilename().equals("")) {
