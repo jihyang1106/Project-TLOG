@@ -15,11 +15,13 @@
 		select userNum, idKakao, idGoogle, userNick, profileImg, registerDate, status
 		from user where userNum=#{param1}
 	</select>
-	<update id="updateMember" >
-        update user set userNick=#{userNick}, profileImg=#{profileImg}
-        <if test="status != 1">
-        	where userNum=#{userNum}
-        </if>
+    <update id="updateMember" >
+        update         user
+        set         userNick=#{userNick}, profileImg=#{profileImg}
+            <if test="status != 1">
+                        status=#{status}
+            </if>
+        where         userNum=#{userNum}
     </update>
 	<select id='getAllHashtag' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		*
