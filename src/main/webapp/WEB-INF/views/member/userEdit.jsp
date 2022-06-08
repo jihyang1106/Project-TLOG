@@ -30,17 +30,17 @@
 					<span><input type="text" name="userNick" id="profileInfoNick"/></span>
 				</c:if>
 				<button type="button" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
-				<div id="profileSubmit"><input type="submit" value="정보등록" id="profileSubmitBtn"/></div>
+				<div id="profileSubmit"><input type="submit" value="정보수정" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">
-		      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
-		      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" value="N" ></span>&emsp;
-				</c:forEach>
-				</div>
-				<div id="myTagCnt" hidden="true">
-		      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
-		      		<span class="myTag${st.index }">${vo.tagNum }</span>&emsp;
-				</c:forEach>
+			      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
+			      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" class='hiddenTags' value="N" ></span>&emsp;
+					</c:forEach>
+					</div>
+					<div id="myTagCnt" hidden="true">
+			      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
+			      		<span class="myTag${st.index}">${vo.tagNum }</span>&emsp;
+					</c:forEach>
 				</div>
 			</form>
 			</div>

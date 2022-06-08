@@ -58,11 +58,16 @@
 				<div id='log_list_div'>	
 					<div class='log_div'>	
 						<ul class='log_ul'>
+							
 							<li>
+							<c:if test='${dvo.isCoverImg==1}'>
+								<span>대표 이미지</span>
+							</c:if>
 								<div class='coverImgDiv'>
 									<img src='/upload/log/${dvo.tImg}' class='coverImg'/>
 								</div>
 							</li>
+							
 							<li>${dvo.tContent}</li>
 							<li>${dvo.tPlace} 에서</li>		
 						</ul>
@@ -288,7 +293,7 @@ $(document).on("click", ".del_user", function() {
 /*=============== 일기상세 삭제 =================================================================*/
  $(document).on("click", ".del_log", function() {
 	 if($(this).next().val()==1){
-		 alert('커버이미지는 삭제할 수 없습니다.');
+		 alert('대표이미지는 삭제할 수 없습니다.');
 		 return false;
 	 }else{
 		 var tDetailNum = $(this).parent().next().val(); //input hidden에 value tDetailNum 넣기
