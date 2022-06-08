@@ -313,13 +313,15 @@
 	display:block;
 	font-size: 14px;
 	padding: 5px 12px;
-	line-height: 1.5;
+	line-height: 2;
 	font-weight : bold;
 }
 
 .clicked  {
-	background: rgb(138, 138, 138);
+	background: rgba(138, 138, 138, 80%);
 	font-weight : bold;
+	border-radius: 50%;
+	
 }
 
 /*=============== BEST FOLLOW ===============*/
