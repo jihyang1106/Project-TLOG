@@ -39,20 +39,6 @@
 	height:100%;
 	line-height:40px;
 }
-.coverImgDiv{
-	width:18vw;
-	height:24vw;
-	margin:1vw 0;
-	display:inline;
-	position:relative;
-}
-.coverImg{
-	max-width:18vw;
-	max-height:24vw;
-	border-radius:10px;
-	box-shadow:0 0 10px rgba(0,0,0,30%);
-	
-}
 .titleDiv {
   position:absolute;
  }
@@ -108,77 +94,161 @@
 .current{
 	display : block;
 }
+.carousel{
+	margin:0 auto;
+	
+}
+.carousel-caption{
+	color:black;
+	width:50vw;
+}
+.imgs{
+	max-width:25vw;
+	max-height:25vw;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+	display:block;
+	margin-bottom:300px;
+}
 </style>
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+	<c:forEach var="vo" items="${detailList}" varStatus="status">		
+		<li data-target="#demo" data-slide-to="${status.index+1}"></li>
+	</c:forEach>
+  </ul>
 
-<div id='log_big'>
-<div id='log_list_div'>
-	<div class='log_div'>
-		<ul class='log_ul'>
-			<li>
-				<div class='coverImgDiv'>
-					<img src='/upload/log/${vo.coverImg}' class='coverImg'/>
-					<div id='titleDiv'>
-						<c:if test="${vo.isPrivate==1}">
-							<span><i class='fa-solid fa-lock'></i></span>&emsp;
-						</c:if>
-						<span class='logTitle'>${vo.tTitle}</span>
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+       <img src='/upload/log/${vo.coverImg}' class='imgs'/>
+			      <div class="carousel-caption">			
+			        <ul>
+			        	<li>
+			        		<div id='titleDiv'>
+								<c:if test="${vo.isPrivate==1}">
+									<span><i class='fa-solid fa-lock'></i></span>&emsp;
+								</c:if>
+								<span class='logTitle'>${vo.tTitle}</span>
+							</div>
+						</li>
+						<li class='profileInfo'>
+							<span onclick="location.href='/member/profile?userNum=${vo.userNum}'">
+							<img src='${vo.profileImg}' class='logProfileImg'/></span>&emsp;
+							<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
+							<span class='logLike'>
+								<c:if test="${vo.likeType==0}">
+									<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
+								</c:if>
+								<c:if test="${vo.likeType==1}">
+									<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
+								</c:if>				
+								
+							</span>
+						</li>
+						<hr/>
+						<li> with &nbsp;&nbsp;&nbsp;
+							<c:forEach var='t' items='${vo.tagUserList}'>				
+									<span class='users' onclick="location.href='/member/profile?userNum=${t.userNum}'">
+										<img src='/upload/user/${t.profileImg}' class='tagProfileImg'/>
+										&nbsp;${t.userNick}
+									</span>&nbsp;
+							</c:forEach>
+						</li>
+						<li><span>${vo.startDate}</span>&nbsp;~&nbsp;<span>${vo.endDate}</span></li>
+						
+						<li>
+							<c:forEach var='t' items='${vo.tagList}'>				
+									<span class='tags' id='tag${t.tagNum}' onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
+										${t.tagName}
+									</span>&nbsp;
+							</c:forEach>
+						</li>		
+						<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
+							<li>
+								<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
+								<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
+							</li>
+						</ul>
 					</div>
-				</div>
-			</li>
-			<li class='profileInfo'>
-				<span onclick="location.href='/member/profile?userNum=${vo.userNum}'">
-				<img src='/upload/user/${vo.profileImg}' class='logProfileImg'/></span>&emsp;
-				<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
-				<span class='logLike'>
-					<c:if test="${vo.likeType==0}">
-						<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
-					</c:if>
-					<c:if test="${vo.likeType==1}">
-						<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
-					</c:if>				
-					
-				</span>
-			</li>
-			<hr/>
-			<li> with &nbsp;&nbsp;&nbsp;
-				<c:forEach var='t' items='${vo.tagUserList}'>				
-						<span class='users' onclick="location.href='/member/profile?userNum=${t.userNum}'">
-							<img src='/upload/user/${t.profileImg}' class='tagProfileImg'/>
-							&nbsp;${t.userNick}
-						</span>&nbsp;
+    </div>
+    			<c:forEach var='dvo' items='${detailList}'>		
+				    <div class="carousel-item">				
+				      <img src='/upload/log/${dvo.tImg}' class='imgs'/>				
+				      <div class="carousel-caption">				
+				        <div id='log_list_div'>
+							<div class='log_div'>
+								<ul class='log_ul'>
+									<li>${dvo.tContent}</li>
+									<li>${dvo.tPlace} 에서</li>		
+								</ul>
+							</div>
+						</div>
+				      </div>				
+				    </div>
 				</c:forEach>
-			</li>
-			<li><span>${vo.startDate}</span>&nbsp;~&nbsp;<span>${vo.endDate}</span></li>
-			
-			<li>
-				<c:forEach var='t' items='${vo.tagList}'>				
-						<span class='tags' id='tag${t.tagNum}' onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
-							${t.tagName}
-						</span>&nbsp;
-				</c:forEach>
-			</li>		
-			<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
-				<li>
-					<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
-					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
-				</li>
-				
-		</ul>
-	</div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
 </div>
-<c:forEach var='dvo' items='${detailList}'>
-	<div id='log_list_div'>
-		<div class='log_div'>
-			<ul class='log_ul'>
-				<li>
-					<div class='coverImgDiv'>
-						<img src='/upload/log/${dvo.tImg}' class='coverImg'/>
-					</div>
-				</li>
-				<li>${dvo.tContent}</li>
-				<li>${dvo.tPlace} 에서</li>		
-			</ul>
-		</div>
-	</div>
-</c:forEach>
-</div>	
+<%-- <div id='log_big' style='background-color:green;'>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->			
+			  <ol class="carousel-indicators">
+			  	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			  	<c:forEach var="vo" items="${detailList}" varStatus="status">		
+			  		<li data-target="#myCarousel" data-slide-to="${status.index+1}"></li>
+			    </c:forEach>					    			
+			  </ol>		
+			  <!-- Wrapper for slides -->			
+			  <div class="carousel-inner">			
+			    <div class="item active">			
+			     
+				</div>
+			
+				<c:forEach var='dvo' items='${detailList}'>		
+				    <div class="item">				
+				      <img src='/upload/log/${dvo.tImg}' class='imgs'/>				
+				      <div class="carousel-caption">				
+				        <div id='log_list_div'>
+							<div class='log_div'>
+								<ul class='log_ul'>
+									<li>${dvo.tContent}</li>
+									<li>${dvo.tPlace} 에서</li>		
+								</ul>
+							</div>
+						</div>
+				      </div>				
+				    </div>
+				</c:forEach>
+			  </div>
+			
+			
+			
+			  <!-- Left and right controls -->
+			
+			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			
+			    <span class="glyphicon glyphicon-chevron-left"></span>
+			
+			    <span class="sr-only">Previous</span>
+			
+			  </a>
+			
+			  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+			
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			
+			    <span class="sr-only">Next</span>
+			
+			  </a>
+			</div>
+	</div> --%>

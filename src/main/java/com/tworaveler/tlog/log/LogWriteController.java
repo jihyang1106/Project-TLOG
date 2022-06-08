@@ -43,7 +43,7 @@ public class LogWriteController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logWriteOk", method = RequestMethod.POST)
 	public List<String> logWriteOk(LogVO vo, HttpServletRequest request) {
-		vo.setUserNum(1); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
+		vo.setUserNum(2); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
 		vo.setIp(request.getRemoteAddr()); // 접속자 아이피
 		List<String> fileNames = new ArrayList<String>();//ajax로 보낼 변환된 파일명
 		

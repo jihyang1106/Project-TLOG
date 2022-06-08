@@ -2,68 +2,84 @@
 <link rel="stylesheet" href="/css/logShare/logEdit.css" type="text/css">
 <!--====================================== HTML ===================================================================-->
 <div id='div_big'>
-<div id='div_small'>
-	<form id='log_form' action='/logShare/logEditOk' method='POST'>
-	<input type='hidden' value='${vo.tNum}'/>
-		<ul>
-			<li>제목 : <input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
-			<li><input type='date' name='startDate' value='${vo.startDate}'/> ~ <input type='date' name='endDate' value='${vo.endDate}'/></li>
-			<li>위치정보(임시) : <input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>
-			<li>
-		      <label><input type="radio" name="isPrivate" id='isPrivate1' value="1"> 비밀일기 </label>
-		      <label><input type="radio" name="isPrivate" id='isPrivate0' value="0"> 공유일기 </label>
-		    </li>
-		    <div id='user_tag_div'>
-				<div id='tag_li'>
-					<span id='tag_span'>태그</span>
-					<hr/>
-				    <c:forEach var="t" items="${tagList}" varStatus='status'>
-						<c:if test='${status.index==0}'>
-							<span class='tags' id='region'>지역</span><input type='checkbox' style='display:none;'>
-						</c:if>
-						<span class='tags' id='tag${t.tagNum}' style='display:none;'>
-							${t.tagName} 
-						</span><input type='checkbox' name='tagNumList' id='chk${t.tagNum}' value='${t.tagNum}' style='display:none;'>
-						<c:if test='${status.index==13}'>
-							<br/><br/><span class='tags' id='age'>나이</span><input type='checkbox' style='display:none;'>
-						</c:if>
-						<c:if test='${status.index==19}'>
-							<br/><br/><span class='tags' id='group'>그룹</span><input type='checkbox' style='display:none;'>
-						</c:if>
-						<c:if test='${status.index==24}'>
-							<br/><br/><span class='tags' id='season'>계절</span><input type='checkbox' style='display:none;'>
-						</c:if>
-					</c:forEach>
-					<span id='tag_alert' style='display:none; color:orange'>태그를 5개 이하로 선택해주세요</span>
+	<div id='div_small'>
+		<form id='edit_form' action='/logShare/logEditOk' method='POST'>
+			<input type='hidden' value='${vo.tNum}'/>
+			<ul>
+				<li>제목 : &emsp;<input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
+				<li><input type='date' name='startDate' value='${vo.startDate}'/> &emsp;~&emsp; <input type='date' name='endDate' value='${vo.endDate}'/></li>
+				<li>위치 : &emsp;<input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>
+				<li>
+			      <label><input type="radio" name="isPrivate" id='isPrivate1' value="1"> 비밀일기 </label>
+			      <label><input type="radio" name="isPrivate" id='isPrivate0' value="0"> 공유일기 </label>
+			    </li>
+			    <div id='user_tag_div'>
+					<div id='tag_li'>
+						<span id='tag_span'>태그</span>
+						<hr/>
+					    <c:forEach var="t" items="${tagList}" varStatus='status'>
+							<c:if test='${status.index==0}'>
+								<span class='tags' id='region'>지역</span><input type='checkbox' style='display:none;'>
+							</c:if>
+							<span class='tags' id='tag${t.tagNum}' style='display:none;'>
+								${t.tagName} 
+							</span><input type='checkbox' name='tagNumList' id='chk${t.tagNum}' value='${t.tagNum}' style='display:none;'>
+							<c:if test='${status.index==13}'>
+								<br/><br/><span class='tags' id='age'>나이</span><input type='checkbox' style='display:none;'>
+							</c:if>
+							<c:if test='${status.index==19}'>
+								<br/><br/><span class='tags' id='group'>그룹</span><input type='checkbox' style='display:none;'>
+							</c:if>
+							<c:if test='${status.index==24}'>
+								<br/><br/><span class='tags' id='season'>계절</span><input type='checkbox' style='display:none;'>
+							</c:if>
+						</c:forEach>
+						<span id='tag_alert' style='display:none; color:orange'>태그를 5개 이하로 선택해주세요</span>
+					</div>
+					<div id='tag_user_div'>
+						<span id='tag_user_span'>동행인&emsp;<i class="fa-solid fa-plus" id='plus' onclick='PlusUser()' ></i></span>
+						<hr/>
+					    <ul id='tag_user_ul'>
+					    <c:forEach var='t' items='${vo.tagUserList}'>
+							<li>
+								<input type='hidden' name='userNumList' value='${t.userNum}'/>
+								<input type='text' class='tag_box' value='${t.userNick}'/>
+								<i class='fa-solid fa-xmark del_user'></i>
+							</li>
+						</c:forEach>
+						</ul>
+						<ul class='search_user_ul'></ul>
+					</div>
 				</div>
-				<div id='tag_user_div'>
-					<span id='tag_user_span'>동행인&emsp;<i class="fa-solid fa-plus" id='plus' onclick='PlusUser()' ></i></span>
-					<hr/>
-				    <ul id='tag_user_ul'>
-				    <c:forEach var='t' items='${vo.tagUserList}'>
-						<li>
-							<input type='hidden' name='userNumList' value='${t.userNum}'/>
-							<input type='text' class='tag_box' value='${t.userNick}'/>
-							<i class='fa-solid fa-xmark'></i>
-						</li>
-					</c:forEach>
-					</ul>
-					<ul class='search_user_ul'></ul>
-				</div>
-			</div>
-		</ul>
-		<br/><br/><br/><br/>
-	</form>	
-	<div id='detail_div'>
+			</ul>
+			<br/><br/><br/><br/>
+		
+		<div id='detail_div'>
+			<c:forEach var='dvo' items='${detailList}'>
+				<input type='hidden' name='dNumList'>
+				<input type='hidden' value='${dvo.tDetailNum}'>
+				<div id='log_list_div'>	
+					<div class='log_div'>	
+						<ul class='log_ul'>
+							<li>
+								<div class='coverImgDiv'>
+									<img src='/upload/log/${dvo.tImg}' class='coverImg'/>
+								</div>
+							</li>
+							<li>${dvo.tContent}</li>
+							<li>${dvo.tPlace} 에서</li>		
+						</ul>
+					</div>
+					<i class='fa-solid fa-xmark del_log'></i>
+				</div>	
+			</c:forEach>
+		</div>
+	    <input type='button' id='write_btn' value='일기 수정'/>
+	    </form>	
 	</div>
-    <input type='button' id='edit_btn' value='일기 수정'/>
-</div>
 </div>
 
 <script>
-
-//글 내용 보이기
-
 /*================ 태그 선택 ==================*/
 //.tags클릭 시 chk상태확인 후  css && chk 변화
 
@@ -188,14 +204,27 @@ $(".tags").click(function(){
 /*================ 선택했던 태그 입력===================*/
  var list = [];
 <c:forEach items="${vo.tagList}" var="t">
-
 	list.push("#tag${t.tagNum}");
+	if(1 <= ${t.tagNum} && ${t.tagNum}<=14 && !$("#region").next().is(":checked")){
+		$("#region").trigger('click');
+	}else if(15 <= ${t.tagNum} && ${t.tagNum}<=20 && !$("#age").next().is(":checked")){
+		$("#age").trigger('click');
+	}else if(21 <= ${t.tagNum} && ${t.tagNum}<=25 && !$("#group").next().is(":checked")){
+		$("#group").trigger('click');
+	}else if(26 <= ${t.tagNum} && ${t.tagNum}<=29 && !$("#season").next().is(":checked")){
+		$("#season").trigger('click');
+	}
 </c:forEach>
- 		for (var index = 0; index<list.length; index++) {
- 			console.log(list[index]);
- 			$(list[index]).trigger('click');
- 		}
-
+ for (var index = 0; index<list.length; index++) {
+ 	//console.log(list[index]);
+ 	$(list[index]).trigger('click');
+ }
+ /*================ 선택했던 비밀일기/공유일기 입력===================*/
+ if(${vo.isPrivate}==0){
+	 $("#isPrivate0").trigger('click');
+ }else{
+	 $("#isPrivate1").trigger('click');
+ }
 /*================ 태그할 유저 선택 ==================*/
 var cnt=${cnt};
 
@@ -204,17 +233,17 @@ function PlusUser(){
 		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;</li>";
 		$("#tag_user_ul").append(li);
 		cnt++;
-		console.log(cnt);
+		//console.log(cnt);
 		if(cnt>=6){
 			$("#plus").css("display","none"); //플러스버튼 지우기
 		}
 	}
 }
 //유저 박스 지우기
-$(document).on("click", ".fa-xmark", function() {
+$(document).on("click", ".del_user", function() {
 	$(this).parent().remove();
 	cnt--;
-	console.log(cnt);
+	//console.log(cnt);
 	if(cnt<5){
 		$("#plus").css("display","block"); //플러스 버튼 보이기
 	}
@@ -257,159 +286,17 @@ $(document).on("click", ".fa-xmark", function() {
 			   })
 		}		
 	});
-//div 클릭 시 파일 업로드 진행
-$(".log_img_top").click(function() {
-$(this).next().trigger("click");
-})
-
-//이미지 미리보기
-$(document).on("change", '.log_img', function() {
-	$("#detail_div").empty(); //이미지 미리보기 div 비우기
-	readImage(this);
-});
-
-function readImage(input){
-	if (input.files) { //input 태그에 파일이 있을 경우
-		
-		//forEach 사용을 위해 files를 배열화(files는 forEach 사용 불가);
-		const fArr = Array.from(input.files);
-		
-		fArr.forEach(function(file, index) {
-			//10개를 초과하여 이미지 선택시 초과분에 대해서는 작업하지 않음
-			if (index > 10) {
-				alert('이미지는 10개 이하만 업로드 가능합니다.');
-				return;
-			}
-			//엘리먼트 추가
-			
-			/* var tag = "<ul>";
-			tag += "<li><div class='log_img_wrap'><img src='' class='t_img' id='image"+index+"'/></div></li>";
-			tag += "<li><input type='checkbox' name='isCoverImg' value='1'>대표이미지</li>";
-			tag += "<li><input type='text' name='tContent'/></li>";
-			tag += "<li><input type='text' name='tPlace'/></li></ul>"; 
-			$("#detail_div").append(tag); */
-			
-			var ul = document.createElement('ul');
-			var li_1 = document.createElement('li');
-			var div = document.createElement('div');
-				div.className = 'log_img_wrap';
-			var img_tag = document.createElement('img');
-				img_tag.className = 't_img';
-				img_tag.src = "";
-				img_tag.id = 'image'+index;
-			div.appendChild(img_tag);
-			li_1.appendChild(div);
-			var li_2 = document.createElement('li');
-			var input_check = document.createElement('input');
-				input_check.type = 'checkbox';
-				input_check.id = 'isCoverImg'+index;
-			li_2.textContent = '대표이미지';
-			li_2.appendChild(input_check);
-			var li_3 = document.createElement('li');
-			var input_content = document.createElement('input');
-				input_content.type = 'text';
-				input_content.id = 'tContent'+index;
-				input_content.className = 'texts';
-			li_3.textContent='여행일기 : ';
-			li_3.appendChild(input_content);
-			var li_4 = document.createElement('li');
-			var input_place = document.createElement('input');
-				input_place.type = 'text';
-				input_place.id = 'tPlace'+index;
-				input_place.className = 'texts';
-			li_4.textContent = '사진 장소 : ';
-			li_4.appendChild(input_place);
-			ul.appendChild(li_1);
-			ul.appendChild(li_2);
-			ul.appendChild(li_3);
-			ul.appendChild(li_4);
-			
-			//이미지 미리보기 div에 append
-			var detail_div = document.getElementById('detail_div');
-			detail_div.appendChild(ul);
-			
-			//이미지 미리보기
-			const fReader = new FileReader();
-			fReader.onload = function() {
-				const img = document.getElementById("image" + index);
-				img.src = this.result;
-			}
-			fReader.readAsDataURL(file);
-		});
-	}
-}
-/*=============== 글 등록 =================================================================*/
+/*=============== 일기상세 삭제 =================================================================*/
+ $(document).on("click", ".del_log", function() {
+	 alert("클릭");
+	 $(this).parent().prev().prev().val($(this).parent().prev().val()); //input hidden에 value tDetailNum 넣기
+	 $(this).parent().remove();
+ })
+/*=============== 글 수정 =================================================================*/
 $("#write_btn").click(function(){
-	/* 유효성 검사...*/
-	
-	
-	/*글 등록 시작*/
-	if(confirm('글을 등록하시겠습니까?')){		
-			//form 내용, detailMapList 따로 보내기(multipart & json.stringify때문에)
-			var url = $("#log_form").attr("action");
-      	var form = $('#log_form')[0];
-      	var formData = new FormData(form);
-      	//console.log(url);
-      	//console.log(form);
-      	/*======== 1번째 ajax==========================================================*/
-			$.ajax({
-	          url: url,
-	          type: 'POST',
-	          data: formData,
-	          cache: false,
-	          contentType: false,
-	          processData: false,
-	          success: function (fileNames) {
-		                //alert('1번 성공');
-		                var input = document.querySelector("input[type=file]");
-		        		
-		        		if(input.files){	//input 태그에 파일이 있을 경우
-		        			//forEach 사용을 위해 files를 배열화(files는 forEach 사용 불가);
-		        			const fileArr = Array.from(input.files);
-		        			
-		        			var dataList = []; //데이터Map이 담길 List
-		        			
-		        			//Map에 데이터 담기(이미지 개수만큼 루프)
-		        			fileArr.forEach(function(file, index) { 
-		        		        var map = {}; //데이터가 담길 Map(Object) 선언
-		        		 
-		        		        map["tImg"]=fileNames[index]; //컨트롤러에서 받아온 변환된 파일명
-		        		        if($("#isCoverImg"+index).is(":checked")){
-		        		        	map["isCoverImg"] = 1;
-		        		        }else{
-		        		        	map["isCoverImg"] = 0;
-		        		        }
-		        		        map["tContent"] = $("#tContent"+index).val();
-		        		        map["tPlace"] = $("#tPlace"+index).val();
-		        		 
-		        		        dataList.push(map) ; //List에 Map 넣기
-		        		    })
-		        		    /*======== 2번째 ajax==========================================================*/
-		        		    $.ajax({
-					          url: '/myLog/detailWriteOk',
-					          type: 'POST',
-					          data: JSON.stringify(dataList),
-					          contentType: 'application/json',
-					          success: function (data) {
-					        	  if(data>0){
-					        		  location.href='/member/profile?userNum='+data;
-					        	  }else{
-					        		  alert("에러");
-					        	  }
-					          },
-					          error: function (e) {
-						            alert("error = "+ e.responseText);
-						      }
-		        		   }) //2번 ajax
-		        		}else{
-		        			alert('파일 없음');
-		        		}
-	          },
-	          error: function (e) {
-	            alert("error = "+ e.responseText);
-	          }
-	        }); //1번 ajax
-	}//if(confirm)
+	if(confirm('글을 수정하시겠습니까?')){		
+		$("#edit_form").submit();
+	}	
 	return false;
 })
 </script>

@@ -159,9 +159,13 @@
 	cursor:pointer;
 }
 .tags{
+	display:inline-block;
 	background-color:var(--theme-lightblue-30);
-	padding:3px 5px;
+	padding-left:5px;
+	padding-right:5px;
 	border-radius:10px;
+	font-size:1em;
+	line-height:1.5em;
 }
 .current{
 	display : block;
