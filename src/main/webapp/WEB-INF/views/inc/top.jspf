@@ -40,20 +40,17 @@
 					<li class="nav_item">
 						<a href="/board/board" class="nav-link top-list">자유일기</a>
 					</li>
-					<li class="nav_item">
-						<a href="/" class="nav-link top-list">지도</a>
-					</li>
 				</ul>
 				
 				<div class="nav-loginSign">
 					<c:if test="${logId == null}">
 						<a href="/logShare/logWrite" class="main-write">글쓰기</a>
-						<a href="/member/login" class="main-login ">로그인</a>
+						<a href="/member/login" class="main-login">로그인</a>
 					</c:if>
 					<c:if test="${logId != null }">
 						<a href="/member/profile?userNum=2"><img src="/img/member/default_profile.png" style="width: 10px"></a>
-	   					<a href="${url}/" class="main-write">글쓰기</a>
-	    				<a href="${url}/" class="main-logout">로그아웃</a>
+	   					<a href="/logShare/logWrite" class="main-write">글쓰기</a>
+	    				<a href="/member/logout" class="main-logout">로그아웃</a>
 					</c:if>
 	        	</div>
         	</div>
