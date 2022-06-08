@@ -5,7 +5,7 @@
 <main>
 	<div class="container">
 		<div id="welcomeContainer">
-			<p id="welcomeTitle">추가 정보 입력</p>
+			<p id="welcomeTitle">회원 정보 수정</p>
 			<div id="profile">
 			<form id="profileFrm" method="post" action="/member/userEditOk" enctype="multipart/form-data">
 				<!-- 프로필 파일 저장용 -->

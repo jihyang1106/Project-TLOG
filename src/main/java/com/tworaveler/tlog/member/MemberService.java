@@ -6,6 +6,8 @@ public interface MemberService {
 	//회원가입
 	public int insertMember(MemberVO vo);
 	//로그인(회원정보 선택)
+	public MemberVO selectMember(int userNum);
+	//로그인(회원정보 선택_카카오)
 	public MemberVO selectMemberByKakao(String idKakao);
 	//회원정보 수정
 	public void updateMember(MemberVO vo);
@@ -21,6 +23,4 @@ public interface MemberService {
 	public List<MemberVO> setFollowerInfo(int userNum);
 	//팔로우하는 사람 받아오기
 	public List<MemberVO> setFollowInfo(int userNum);
-	//로그인(회원정보 선택)
-	public MemberVO selectMember(MemberVO vo);
 }

@@ -58,7 +58,7 @@
 		</form>	
 		<!-- 엘리먼트 추가될 div -->
 		<div id='detail_div'></div>
-	    <button id='write_btn'>일기등록</button>
+	    <button id='write_btn' type="button">일기등록</button>
 	</div>
 </div>
 <script src='/js/logShare/logWrite.js'></script>
