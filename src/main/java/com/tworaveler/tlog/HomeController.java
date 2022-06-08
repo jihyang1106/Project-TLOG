@@ -26,8 +26,6 @@ public class HomeController {
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
 		
-		session.setAttribute("logStatus", "Y"); //임시
-		
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		//(1) tLog 10개
 		if(userInfo!=null) {
