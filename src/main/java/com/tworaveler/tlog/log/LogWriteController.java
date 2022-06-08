@@ -148,8 +148,8 @@ public class LogWriteController {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
-	public int logEditOk(LogVO vo){
-		service.logDel(vo.gettNum());
-		return 2; //로그인 유저넘버
+	public String logEditOk(LogVO vo){
+		
+		return "redirect:/member/profile?userNum="+2; //로그인 유저넘버
 	}
 }

@@ -439,4 +439,25 @@
 		DELETE 	FROM travelLog
 		WHERE	tNum=#{param1}
 	</delete>
+	<!-- ========================================= 글 수정 =========================================================== -->
+	<update id='logEdit'>
+		UPDATE 	travelLog 
+		SET 	tTitle=#{tTitle}, startDate=#{startDate}, endDate=#{endDate}, placeInfo=#{placeInfo}, isPrivate=#{isPrivate}
+		WHERE	tNum=#{tNum}
+	</update>
+	<delete id='tagDel'>
+		DELETE 	FROM tagLog 
+		WHERE 	tNum=#{tNum}
+	</delete>
+	<delete id='tagUserDel'>
+		DELETE 	FROM tagUser 
+		WHERE 	tNum=#{tNum}
+	</delete>
+	<delete id='detailDel'>
+		DELETE 	FROM travelDetail
+		WHERE 	
+		<foreach collection="dNumList" item="item" separator=",">
+	        tDetailNum=#{item}
+	    </foreach>
+	</delete>
 </mapper>
