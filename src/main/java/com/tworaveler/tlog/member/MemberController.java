@@ -73,7 +73,7 @@ public class MemberController {
 			session.setAttribute("refreshToken", refreshToken);
 			session.setAttribute("kakao", "true");
 			if (userInfo.getStatus() == 1) {
-				return "redirect:/admin/adminMain";
+				return "redirect:/admin/main";
 			} else {
 				return "redirect:/";
 			}

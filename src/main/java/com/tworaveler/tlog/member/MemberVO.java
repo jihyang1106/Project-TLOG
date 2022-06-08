@@ -22,12 +22,10 @@ public class MemberVO {
 	private int tagCount; // 각 태그 별 수
 	private List<Integer> tagListCl;
 
-	
 	//follow
 	private int followingNum;
 	private int followerNum;
 	
-
 	// userList
 	private int tNumCount; // 유저가 작성한 여행일기 수
 	private int bCount;    // 유저가 작성한 자유일기 수

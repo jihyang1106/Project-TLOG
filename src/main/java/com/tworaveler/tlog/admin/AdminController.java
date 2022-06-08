@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class AdminController {
 	ResponseEntity<String> entity = null;
 	
 	@GetMapping("main")
-	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, BoardVO bvo, MemberVO mvo) {
+	public ModelAndView adminPage(PagingVO pvo, LogVO lvo, BoardVO bvo, MemberVO mvo, HttpSession session) {
 		// 여행일기 게시판
 		mav.addObject("tlogTotal", service.selectTlogTotalPosts(pvo, lvo));
 		// 자유일기 게시판
@@ -52,6 +53,8 @@ public class AdminController {
 		//해시태그 정보 받아오기
 		mav.addObject("tagInfo", service.selectTag());
 		mav.setViewName("admin/main");
+		
+		mav.addObject("userInfo", (MemberVO) session.getAttribute("userInfo"));
 		return mav;
 	}
 	

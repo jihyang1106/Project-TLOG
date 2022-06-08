@@ -18,7 +18,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="#" style="color:white">로그아웃</a>
+                <a class="btn btn-primary" href="/member/logout" style="color:white">로그아웃</a>
             </div>
         </div>
     </div>
