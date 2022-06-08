@@ -38,7 +38,7 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logLists", method = RequestMethod.GET)
 	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int newOrLike) {
-		int limitNum =5; //한 번에 나오는 글 수
+		int limitNum =6; //한 번에 나오는 글 수
 		
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		if(newOrLike==0) { //최신순
@@ -56,7 +56,7 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/searchLists", method = RequestMethod.GET)
 	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord, int newOrLike) {
-		int limitNum = 5;
+		int limitNum = 6;
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		
 		if(newOrLike==0) { //최신순
@@ -103,19 +103,21 @@ public class LogShareController {
 	} 
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/likeUp", method = RequestMethod.POST)
+	@RequestMapping(value = "/logShare/likeUp", method = RequestMethod.POST)
 	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
-		int userNum = 2; //logNum
-		service.LikeUp(userNum, tNum);
+		int logNum = 2; //logNum
+		System.out.println(logNum+"+"+tNum);
+		service.LikeUp(logNum, tNum);
 		
 		return service.getLikeNum(tNum);
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 취소 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/likeDown", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/likeDown", method = RequestMethod.GET)
 	public LogVO likeDown(@RequestParam("tNum") int tNum, HttpSession session) {
-		int userNum = 2; //logNum
-		service.LikeDown(userNum, tNum);
+		int logNum = 2; //logNum
+		System.out.println(logNum+"+"+tNum);
+		service.LikeDown(logNum, tNum);
 
 		return service.getLikeNum(tNum);
 	}

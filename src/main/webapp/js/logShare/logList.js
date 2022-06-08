@@ -39,7 +39,7 @@ var newOrLike=0;
 				var tag = "";
 				for(i=0; i<data.length; i++){
 					tag += "<div class='log_div'>"
-					tag += "<ul class='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+					tag += "<ul class='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
 					tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg'/></li>";
 					tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='"+data[i].profileImg+"'' class='logProfileImg''/></span>&emsp;";
 					tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
@@ -68,10 +68,10 @@ var newOrLike=0;
 			    startNum += data.length; //startNum 갱신
 			    
 			    //마지막 페이지일 때 첫페이지로
-				if(data.length<5){
+				if(data.length<6){
 					startNum=0;
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
-						logList(); //한번 더 실행
+						logLists(); //한번 더 실행
 					}
 				} 
 				dataLength = data.length;

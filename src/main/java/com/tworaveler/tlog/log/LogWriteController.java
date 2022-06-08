@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,6 +110,7 @@ public class LogWriteController {
 		Map<String,Object> insertMap = new HashMap<String,Object>(); //MyBatis에 던질 Map
     	insertMap.put("list",dataList); //MyBatis의 foreach의 collection이름을 key(현재는"list")로 List를 put    	
     	int chk = service.detailWriteOk(tNum, insertMap); //travelDetail 테이블
+    	
     	if(chk>0) {
     		return userNum;
     	}
@@ -117,7 +119,7 @@ public class LogWriteController {
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 삭제 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/logDel", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/logDel", method = RequestMethod.GET)
 	public int logDel(@RequestParam("tNum") int tNum,HttpSession session){
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		service.logDel(tNum);
@@ -136,7 +138,9 @@ public class LogWriteController {
 			System.out.println("나가라");
 			mav.setViewName("redirect:/logShare/logView?tNum="+tNum); //logView로 리다이렉트	
 		}else {			
+			
 			vo.setTagList(service.selectLogTag(tNum)); //태그리스트 넣기
+			
 			vo.setTagUserList(service.selectTagUsers(tNum)); //태그된 유저리스트 넣기
 			int cnt = vo.getTagUserList().size();
 			
@@ -150,11 +154,14 @@ public class LogWriteController {
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	@ResponseBody // Ajax
-	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
-	public int logEditOk(@RequestParam("tNum") int tNum, HttpSession session){
-		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		service.logDel(tNum);
-		return userInfo.getUserNum();
+	@PostMapping("/logShare/logEditOk")
+	public String logEditOk(LogVO vo){
+		service.logEdit(vo);
+		service.tagDel(vo);
+		service.insertTagList(vo);
+		service.tagUserDel(vo);
+		service.insertUserList(vo);
+		service.detailDel(vo);
+		return "redirect:/logShare/logView?tNum="+vo.gettNum();
 	}
 }

@@ -28,6 +28,10 @@ public class MemberServiceImpl implements MemberService{
 		dao.updateMember(vo);
 	}
 	@Override
+	public int userDel(int userNum, int loginStatus) {
+		return dao.userDel(userNum,loginStatus);
+	}
+	@Override
 	public List<MemberVO> getAllHashtag() {
 		return dao.getAllHashtag();
 	}
@@ -42,6 +46,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<MemberVO> getMytag(int userNum) {
 		return dao.getMytag(userNum);
+	}
+	@Override
+	public void setFollow(int userNum, int loginNum) {
+		dao.setFollow(userNum, loginNum);
+	}
+	@Override
+	public void unfollow(int userNum, int loginNum) {
+		dao.unfollow(userNum, loginNum);
+	}
+	@Override
+	public int isFollowed(int userNum, int loginUserNum) {
+		return dao.isFollowed(userNum, loginUserNum);
 	}
 	@Override
 	public List<MemberVO> setFollowerInfo(int userNum) {
