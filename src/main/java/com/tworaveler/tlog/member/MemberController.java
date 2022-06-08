@@ -140,7 +140,7 @@ public class MemberController {
 		int loginUserNum;
 		
 		if(userInfo!=null) {
-			loginUserNum=userInfo.getUserNum();//로그인 한 userNum(임시)
+			loginUserNum=userInfo.getUserNum();//로그인 한 userNum
 		}else {
 			loginUserNum=0;
 		}
@@ -149,10 +149,13 @@ public class MemberController {
 		}
 		//로그인한 회원정보 전달
 		mav.addObject("loginUser", userInfo);
+		mav.addObject("loginUserNum", loginUserNum);
 		//해당회원 닉네임, 프로필사진 받아오기
 		mav.addObject("userProfile", memberService.selectMember(userNum));
 		//해당회원 쓴 글 갯수 받아오기
 		mav.addObject("myLogCount", logService.selectMyLogs(userNum, isWriter, 0, limitNum).size());
+		//팔로우 여부 받아오기
+		mav.addObject("isFollowed", memberService.isFollowed(userNum, loginUserNum));
 		//팔로워 받아오기
 		mav.addObject("followerCount", memberService.setFollowerInfo(userNum).size());
 		mav.addObject("followerList", memberService.setFollowerInfo(userNum));
@@ -166,11 +169,17 @@ public class MemberController {
 	//유저 프로필 페이지 LOG탭 ajax 로 데이터 넘겨주기
 	@ResponseBody
 	@RequestMapping(value = "/member/profileLogList", method = RequestMethod.GET)
-	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int status, int userNum) {
+	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int status, int userNum, HttpSession session) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		int limitNum =5; //한 번에 나오는 글 수
 		int isWriter=0;
-		int loginUserNum=2;//로그인 한 userNum(임시)
+		int loginUserNum;
 		
+		if(userInfo!=null) {
+			loginUserNum=userInfo.getUserNum();//로그인 한 userNum(임시)
+		}else {
+			loginUserNum=0;
+		}
 		if(userNum==loginUserNum) { //로그인 한 userNum(임시)와 현재 열람중인 프로필 num이 같다면
 			isWriter = 1;
 		}
@@ -195,13 +204,16 @@ public class MemberController {
 	//검색한 userProfile
 	@ResponseBody
 	@RequestMapping(value = "/member/searchAtProfileLogList", method = RequestMethod.GET)
-	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum, int status, int userNum, String searchStart, String searchEnd) {
+	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum, int status, int userNum, String searchStart, String searchEnd, HttpSession session) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		int limitNum = 5;
 		int isWriter=0;
-		int loginUserNum=2;//로그인 한 userNum(임시)
+		int loginUserNum;
 		
-		if(userNum==loginUserNum) { //로그인 한 userNum(임시)와 현재 열람중인 프로필 num이 같다면
-			isWriter = 1;
+		if(userInfo!=null) {
+			loginUserNum=userInfo.getUserNum();//로그인 한 userNum(임시)
+		}else {
+			loginUserNum=0;
 		}
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		
@@ -221,6 +233,26 @@ public class MemberController {
 		}
 		return logLists;
 	}
+	@GetMapping("/member/follow")
+	public ModelAndView follow(HttpSession session,int userNum) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		ModelAndView mav = new ModelAndView();
+		int loginNum = userInfo.getUserNum();//로그인한 유저 번호
+		//팔로우 정보 생성
+		memberService.setFollow(userNum, loginNum);
+		mav.setViewName("redirect:/member/profile?userNum="+userNum);
+		return mav;
+	}
+	@GetMapping("/member/unfollow")
+	public ModelAndView unfollow(HttpSession session,int userNum) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		ModelAndView mav = new ModelAndView();
+		int loginNum = userInfo.getUserNum();//로그인한 유저 번호
+		//팔로우 정보 삭제
+		memberService.unfollow(userNum, loginNum);
+		mav.setViewName("redirect:/member/profile?userNum="+userNum);
+		return mav;
+	}
 	@GetMapping("/member/userEdit")
 	public ModelAndView userEdit(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -229,7 +261,7 @@ public class MemberController {
 		//해시태그 정보 받아오기
 		mav.addObject("allTagList", memberService.getAllHashtag());
 		mav.addObject("myTagList", memberService.getMytag(userInfo.getUserNum()));
-		mav.setViewName("member/userEdit");
+		mav.setViewName("/member/userEdit");
 		return mav;
 	}
 	@PostMapping("/member/userEditOk")
@@ -251,6 +283,15 @@ public class MemberController {
 		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));
 		session.setAttribute("userNum", userInfo.getUserNum());
 		mav.setViewName("redirect:/member/profile?userNum="+userInfo.getUserNum());
+		return mav;
+	}
+	@GetMapping("/member/memberDel")
+	public ModelAndView memberDel(int userNum, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO loginuserInfo = (MemberVO) session.getAttribute("userInfo");
+		memberService.userDel(userNum,loginuserInfo.getStatus());
+		session.invalidate();
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 }

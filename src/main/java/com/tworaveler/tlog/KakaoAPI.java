@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KakaoAPI {
 	private final String REST_API_KEY = "a7b1e2d31b1e4b9b211d09f5dcd83a80";
-	private final String REDIRECT_URI = "http://localhost:8025/member/kakaoLogin";
+	private final String REDIRECT_URI = "http://localhost:8025/member/kakaoLogin";//http://ec2-13-125-250-91.ap-northeast-2.compute.amazonaws.com/member/kakaoLogin
 
 	public JSONObject getToken(String authorizeCode) {
         StringBuffer sb = new StringBuffer();

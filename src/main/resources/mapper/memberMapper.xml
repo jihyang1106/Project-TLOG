@@ -4,46 +4,66 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.member.MemberDAO">
 	<insert id="insertMember">
-		insert into user(idKakao, idGoogle, userNick, profileImg)
-		values(#{idKakao}, #{idGoogle}, #{userNick}, #{profileImg})
+		insert 		into user(idKakao, idGoogle, userNick, profileImg)
+		values		(#{idKakao}, #{idGoogle}, #{userNick}, #{profileImg})
 	</insert>
 	<select id="selectMemberByKakao" resultType="com.tworaveler.tlog.member.MemberVO">
-		select userNum, idKakao, idGoogle, userNick, profileImg, registerDate, status
-		from user where idKakao=#{param1}
+		select 		userNum, idKakao, idGoogle, userNick, profileImg, registerDate, status
+		from 		user where idKakao=#{param1}
 	</select>
 	<select id="selectMember" resultType="com.tworaveler.tlog.member.MemberVO">
-		select userNum, idKakao, idGoogle, userNick, profileImg, registerDate, status
-		from user where userNum=#{param1}
+		select 		userNum, idKakao, idGoogle, userNick, profileImg, registerDate, status
+		from 		user where userNum=#{param1}
 	</select>
 	<update id="updateMember" >
-        update user set userNick=#{userNick}, profileImg=#{profileImg}
+        update 		user
+        set 		userNick=#{userNick}, profileImg=#{profileImg}
         <if test="status != 1">
         	where userNum=#{userNum}
         </if>
     </update>
+    <delete id="userDel">
+        DELETE FROM user
+        WHERE userNum = #{param1}
+    </delete>
 	<select id='getAllHashtag' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		*
 		FROM		tagWord
 		order by tagNum
 	</select>
 	<insert id="mytagInsert">
-		insert into myTag(tagNum, userNum)
-		values(#{param1}, #{param2})
+		insert 		into myTag(tagNum, userNum)
+		values		(#{param1}, #{param2})
 	</insert>
 	<delete id="mytagDel">
-        DELETE FROM myTag
-        WHERE userNum = #{param1}
+        DELETE 		FROM myTag
+        WHERE 		userNum = #{param1}
     </delete>
 	<select id='getMytag' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		*
 		FROM		myTag
 		WHERE		userNum = #{param1}
 	</select>
+	<insert id="setFollow">
+		insert 		into followUser (userNum, followingNum)
+		values		(#{param1}, #{param2})
+	</insert>
+	<delete id="unfollow">
+		DELETE 		from followUser
+		WHERE		userNum = #{param1}
+		AND			followingNum = #{param2}
+	</delete>
+	<select id="isFollowed" resultType='int'>
+		SELECT		COUNT(*)
+		FROM		followUser
+		WHERE		userNum = #{param1}
+		AND			followingNum = #{param2}
+	</select>
 	<select id='setFollowerInfo' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		A.*
-		FROM		user A
-	    JOIN		followUser B
-	    ON 			B.userNum = A.userNum
+		FROM		followUser B
+	    JOIN		user A
+	    ON 			B.followingNum = A.userNum
 	    WHERE		B.userNum = #{param1}
 	</select>
 	<select id='setFollowInfo' resultType='com.tworaveler.tlog.member.MemberVO'>

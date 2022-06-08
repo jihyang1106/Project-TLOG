@@ -147,11 +147,6 @@ $(".tags").click(function(){
 		break
 		}
 	}
-	if(tagCnt>5){
-		$("#tag_alert").css("display","block");
-	}else{
-		$("#tag_alert").css("display","none");
-	}
 })
 
 /*================ 태그할 유저 선택 ==================*/

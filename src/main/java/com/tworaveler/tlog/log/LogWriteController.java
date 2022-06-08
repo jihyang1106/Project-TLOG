@@ -8,9 +8,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.tworaveler.tlog.member.MemberVO;
 
 @Controller
 public class LogWriteController {
@@ -42,8 +46,9 @@ public class LogWriteController {
 	/* =============== 파일업로드/ travelLog, tagLog, tagUser 등록 ================== */
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logWriteOk", method = RequestMethod.POST)
-	public List<String> logWriteOk(LogVO vo, HttpServletRequest request) {
-		vo.setUserNum(2); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
+	public List<String> logWriteOk(LogVO vo, HttpServletRequest request, HttpSession session) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		vo.setUserNum(userInfo.getUserNum());
 		vo.setIp(request.getRemoteAddr()); // 접속자 아이피
 		List<String> fileNames = new ArrayList<String>();//ajax로 보낼 변환된 파일명
 		
@@ -100,8 +105,9 @@ public class LogWriteController {
 	/* ===================== travelDetail 등록 ======================== */
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/detailWriteOk", method = RequestMethod.POST)
-	public int detailWriteOk(HttpServletRequest request, @RequestBody List<Map<String,Object>> dataList) {
-		int userNum =2; // 로그인 userNum  ((String) request.getSession().getAttribute("logId"))
+	public int detailWriteOk(HttpServletRequest request, @RequestBody List<Map<String,Object>> dataList, HttpSession session) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int userNum =  userInfo.getUserNum(); //로그인 userNum
 		int tNum = service.getTNum(userNum); //방금 넣은 tNum가져오기
 		System.out.println("tNum = "+ tNum);
 				
@@ -118,17 +124,18 @@ public class LogWriteController {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 삭제 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logDel", method = RequestMethod.GET)
-	public int logDel(@RequestParam("tNum") int tNum){
-		System.out.println("삭제 컨트롤러");
+	public int logDel(@RequestParam("tNum") int tNum,HttpSession session){
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		service.logDel(tNum);
-		return 2; //로그인 유저넘버
+		return userInfo.getUserNum(); //로그인 유저넘버
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정폼 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@GetMapping("/logShare/logEdit")
-	public ModelAndView logEdit(int tNum){
+	public ModelAndView logEdit(int tNum, HttpSession session){
 		ModelAndView mav  = new ModelAndView();
-		int logUser = 1; //로그인 한 유저넘버
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logUser = userInfo.getUserNum(); //로그인 한 유저넘버
 		LogVO vo = service.getOneLog(tNum, logUser);	
 		
 		if(vo.getUserNum()!=logUser) {//작성자가 아니라면
@@ -151,8 +158,7 @@ public class LogWriteController {
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	@ResponseBody // Ajax
-	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
+	@PostMapping("/logShare/logEditOk")
 	public String logEditOk(LogVO vo){
 		service.logEdit(vo);
 		service.tagDel(vo);
@@ -160,6 +166,6 @@ public class LogWriteController {
 		service.tagUserDel(vo);
 		service.insertUserList(vo);
 		service.detailDel(vo);
-		return "redirect:/logShare/logView?tNum="+vo.gettNum(); //로그인 유저넘버
+		return "redirect:/logShare/logView?tNum="+vo.gettNum();
 	}
 }
