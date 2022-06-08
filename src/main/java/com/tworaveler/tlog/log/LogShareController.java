@@ -20,6 +20,11 @@ public class LogShareController {
 	@Inject
 	LogService service;
 	
+	/* 업로드 중요한 자산1
+	 * @Value("${prefix-path}") 
+	 * private String prefixPath;
+	 */
+	
 	@GetMapping("/logShare/logList") 
 	public ModelAndView logList(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
