@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tworaveler.tlog.KakaoAPI;
+import com.tworaveler.tlog.TlogApplication;
 import com.tworaveler.tlog.log.LogService;
 import com.tworaveler.tlog.log.LogVO;
 
@@ -47,49 +49,99 @@ public class MemberController {
 	
 	//카카오 로그인
 	@GetMapping("/member/kakaoLogin")
-	public String kakaologin(HttpServletResponse response, String code,
-	HttpSession session, HttpServletResponse res, RedirectAttributes redirect)
-	throws IOException { /*//로그인 토큰 받아오기 JSONObject tokenJson =
-	kakao.getToken(code); String accessToken =
-	tokenJson.getString("access_token"); String refreshToken =
-	tokenJson.getString("refresh_token"); //카카오 로그인후 받아온 userInfo를 memberVO에 설정 후
-	MemberVO kakaoVO = new MemberVO(kakao.getUserInfo(accessToken)); //해당 회원정보로
-	회원 선택해 로그인 MemberVO userInfo = memberService.selectMember(kakaoVO);
-	
-	if(userInfo!=null) { //블랙회원 로그인시 if(userInfo.getStatus()==9) {
-	response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
-	response.getWriter(); out.
-	println("<script>alert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>"
-	); out.flush(); return "redirect:login"; } session.setAttribute("userInfo",
-	userInfo); session.setAttribute("accessToken", accessToken);
-	session.setAttribute("refreshToken", refreshToken);
-	session.setAttribute("kakao", "true"); setLogCookie(res, session);
-	if(userInfo.getStatus()==1) { return "redirect:/admin/adminMain"; }else {
-	return "redirect:/"; } }else { redirect.addFlashAttribute("kakaoVO",
-	kakaoVO); return "redirect:signup"; }
-	 */
-		return "member/login";
+	public String kakaologin(HttpServletResponse response, String code, HttpSession session, HttpServletResponse res, RedirectAttributes redirect, HttpServletRequest request) throws IOException { // 로그인 토큰 받아오기
+		JSONObject tokenJson = kakao.getToken(code);
+		String accessToken = tokenJson.getString("access_token");
+		String refreshToken = tokenJson.getString("refresh_token");
+		// 카카오 로그인후 받아온 userInfo를 memberVO에 설정 후
+		MemberVO kakaoVO = new MemberVO(kakao.getUserInfo(accessToken));
+		// 해당 회원정보로 회원 선택해 로그인
+		MemberVO userInfo = memberService.selectMemberByKakao(kakaoVO.getIdKakao());
 
+		if (userInfo != null) {//해당하는 회원정보가 있다면
+			// 블랙회원 로그인시
+			if (userInfo.getStatus() == 9) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('정지된 회원입니다. 정지사유는 관리자에게 문의하세요.');location.href='/member/login';</script>");
+				out.flush();
+				return "redirect:login";
+			}
+			session.setAttribute("userInfo", userInfo);
+			session.setAttribute("userNum", userInfo.getUserNum());
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("refreshToken", refreshToken);
+			session.setAttribute("kakao", "true");
+			if (userInfo.getStatus() == 1) {
+				return "redirect:/admin/adminMain";
+			} else {
+				return "redirect:/";
+			}
+		} else {//해당하는 회원정보가 없다면 회원가입 진행
+			memberService.insertMember(kakaoVO);
+			userInfo = memberService.selectMemberByKakao(kakaoVO.getIdKakao());
+			redirect.addFlashAttribute("kakaoVO", userInfo);
+			session.setAttribute("userInfo", userInfo);
+			session.setAttribute("userNum", userInfo.getUserNum());
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("refreshToken", refreshToken);
+			session.setAttribute("kakao", "true");
+			return "redirect:welcomePage";
+		}
 	}
 	//구글 로그인
 	
+	//회원가입 페이지
 	@GetMapping("/member/welcomePage")
-	public ModelAndView welcomePage() {
+	public ModelAndView signup(HttpServletRequest request, RedirectAttributes redirect) {
 		ModelAndView mav = new ModelAndView();
 		//해시태그 정보 받아오기
 		mav.addObject("allTagList", memberService.getAllHashtag());
 		mav.setViewName("member/welcomePage");
 		return mav;
 	}
-	
+	//회원가입
+	@PostMapping("/member/welcomePageOk")
+	public String welcomePageOk(MemberVO vo, HttpServletRequest request,HttpSession session) {
+		int userNum = (int) session.getAttribute("userNum");
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		TlogApplication.profileImgUpload(vo, request);
+		//회원정보 수정
+		memberService.updateMember(vo);
+		//수정된 정보로session 값 수정
+		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));
+		//myTag생성
+		for(int i : vo.getTagListCl()) {
+			int tagNum = i;
+			memberService.mytagInsert(tagNum, userNum);
+		}
+		//카카오 로그인의 경우 카카오 로그인 진행
+		if(vo.getIdKakao() != null) {
+			return "redirect:/";
+		}
+		return "redirect:login";
+	}
+	//로그아웃
+	@GetMapping("/member/logout")
+	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	//유저페이지
 	@GetMapping("/member/profile")
-	public ModelAndView myProfile(int userNum) {
+	public ModelAndView myProfile(HttpSession session,int userNum) {
 		ModelAndView mav = new ModelAndView();
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		//게시글 수 받아오기
 		int limitNum =5; //한 번에 나오는 글 수
 		int isWriter=0;
-		int loginUserNum=2;//로그인 한 userNum(임시)
+		int loginUserNum;
 		
+		if(userInfo!=null) {
+			loginUserNum=userInfo.getUserNum();//로그인 한 userNum(임시)
+		}else {
+			loginUserNum=0;
+		}
 		if(userNum==loginUserNum) { //로그인 한 userNum(임시)와 현재 열람중인 프로필 num이 같다면
 			isWriter = 1;
 		}
@@ -105,35 +157,6 @@ public class MemberController {
 		mav.setViewName("member/profile");
 		return mav;
 	}
-	// 쿠키 생성
-		private void setLogCookie(HttpServletResponse res, HttpSession session) {
-			Iterator<String> it = session.getAttributeNames().asIterator();
-			while(it.hasNext()) {
-				String sessionAttributeName = it.next();
-				Cookie c = null;
-				if(sessionAttributeName.equals("userInfo")) {
-					
-				}else {
-					c = new Cookie(sessionAttributeName, session.getAttribute(sessionAttributeName).toString());
-				}
-				c.setMaxAge(60*60*24*30);
-				c.setPath("/");
-				res.addCookie(c);
-			}
-		}
-		
-		// 쿠키 삭제
-		private void removeCookies(HttpServletRequest req, HttpServletResponse res) {
-			Cookie[] cookies = req.getCookies();
-			if(cookies != null) {
-				for (Cookie cookie : cookies) {
-					cookie.setMaxAge(0);
-					cookie.setPath("/");
-					res.addCookie(cookie);
-				}
-			}
-		}
-
 	//유저 프로필 페이지 LOG탭 ajax 로 데이터 넘겨주기
 	@ResponseBody
 	@RequestMapping(value = "/member/profileLogList", method = RequestMethod.GET)
@@ -193,9 +216,35 @@ public class MemberController {
 		}
 		return logLists;
 	}
+	@GetMapping("/member/userEdit")
+	public ModelAndView userEdit(HttpSession session,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		mav.addObject("userInfo", userInfo);
+		//해시태그 정보 받아오기
+		mav.addObject("allTagList", memberService.getAllHashtag());
+		mav.addObject("myTagList", memberService.getMytag(userInfo.getUserNum()));
+		mav.setViewName("member/userEdit");
+		return mav;
+	}
 
-	@GetMapping("userEdit")
-	public String userEdit() {
-		return "member/userEdit";
+	@PostMapping("/member/userEditOk")
+	public ModelAndView userEditOk(MemberVO vo, HttpSession session,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		TlogApplication.profileImgUpload(vo, request);
+		//회원정보 수정
+		memberService.updateMember(vo);
+		//myTag 수정(삭제 후 생성)
+		memberService.mytagDel(userInfo.getUserNum());
+		for(int i : vo.getTagListCl()) { 
+			int tagNum = i;
+			memberService.mytagInsert(tagNum, userInfo.getUserNum()); 
+		}
+		//수정된 정보로session 값 수정
+		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));
+		session.setAttribute("userNum", userInfo.getUserNum());
+		mav.setViewName("redirect:/member/profile?userNum="+userInfo.getUserNum());
+		return mav;
 	}
 }

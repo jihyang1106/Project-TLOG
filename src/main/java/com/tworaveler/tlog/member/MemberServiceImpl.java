@@ -12,29 +12,39 @@ public class MemberServiceImpl implements MemberService{
 	MemberDAO dao;
 
 	@Override
-<<<<<<< HEAD
+	public int insertMember(MemberVO vo) {
+		return dao.insertMember(vo);
+	}
+	@Override
+	public MemberVO selectMemberByKakao(String idKakao) {
+		return dao.selectMemberByKakao(idKakao);
+	}
+	@Override
+	public void updateMember(MemberVO vo) {
+		dao.updateMember(vo);
+	}
+	@Override
 	public List<MemberVO> getAllHashtag() {
 		return dao.getAllHashtag();
 	}
-
 	@Override
-=======
->>>>>>> 4dbbafcf3175ef2e7e661b5d4e95b97c3da405ef
+	public int mytagInsert(int tagNum, int userNum) {
+		return dao.mytagInsert(tagNum, userNum);
+	}
+	@Override
+	public int mytagDel(int userNum) {
+		return dao.mytagDel(userNum);
+	}
+	@Override
+	public List<MemberVO> getMytag(int userNum) {
+		return dao.getMytag(userNum);
+	}
+	@Override
 	public List<MemberVO> setFollowerInfo(int userNum) {
 		return dao.setFollowerInfo(userNum);
 	}
-
 	@Override
 	public List<MemberVO> setFollowInfo(int userNum) {
 		return dao.setFollowInfo(userNum);
 	}
-<<<<<<< HEAD
-
-	@Override
-	public MemberVO selectMember(MemberVO vo) {
-		return dao.selectMember(vo);
-	}
-=======
->>>>>>> 4dbbafcf3175ef2e7e661b5d4e95b97c3da405ef
-	
 }
