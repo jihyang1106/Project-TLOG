@@ -68,11 +68,9 @@ function logLists(){
 				tag += "<div id='freeLog_div'>";		    	  
 		    	tag += "<div id='info'><span id='infoLeft'><img src='"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
 		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
-<<<<<<< HEAD
-		    	if(data[i].userNum == 2 /*${userNum}*/){
-=======
+
 		    	if(data[i].userNum == ${userInfo.userNum}){
->>>>>>> 381101be7c7afee54f1b0ced5635dabc2a98e3d9
+
 					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";
 				}
 		    	tag += "</span></div><hr/>";

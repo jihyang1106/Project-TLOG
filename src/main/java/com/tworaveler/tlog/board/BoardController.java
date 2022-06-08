@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tworaveler.tlog.admin.AdminService;
 import com.tworaveler.tlog.member.MemberVO;
 
 @Controller
@@ -54,10 +53,6 @@ public class BoardController {
 		System.out.println("아이피"+request.getRemoteAddr());
 		vo.setUserNum(userInfo.getUserNum());
 		vo.setIp(request.getRemoteAddr());
-<<<<<<< HEAD
-		
-=======
->>>>>>> 381101be7c7afee54f1b0ced5635dabc2a98e3d9
 		return service.boardInsert(vo);
 	}
 	
