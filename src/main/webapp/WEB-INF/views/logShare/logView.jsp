@@ -3,8 +3,12 @@
 <style>
 /*====================log 글====================*/
 #log_big{
-	display:inline-block;
-	height:90vh;
+	/*display:inline-block;
+	height:90vh;*/
+	text-align: center;
+	width: 1500px;
+	margin: 90px auto;
+	background-color: aliceblue;
 }
 #log_big div{
 	display:inline-block;
