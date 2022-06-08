@@ -73,7 +73,7 @@ public class MemberController {
 			session.setAttribute("refreshToken", refreshToken);
 			session.setAttribute("kakao", "true");
 			if (userInfo.getStatus() == 1) {
-				return "redirect:/admin/adminMain";
+				return "redirect:/admin/main";
 			} else {
 				return "redirect:/";
 			}
@@ -111,9 +111,11 @@ public class MemberController {
 		//수정된 정보로session 값 수정
 		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));
 		//myTag생성
-		for(int i : vo.getTagListCl()) {
-			int tagNum = i;
-			memberService.mytagInsert(tagNum, userNum);
+		if(vo.getTagListCl()!=null) {
+			for(int i : vo.getTagListCl()) {
+				int tagNum = i;
+				memberService.mytagInsert(tagNum, userNum);
+			}
 		}
 		//카카오 로그인의 경우 카카오 로그인 진행
 		if(vo.getIdKakao() != null) {
@@ -123,7 +125,7 @@ public class MemberController {
 	}
 	//로그아웃
 	@GetMapping("/member/logout")
-	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -145,6 +147,11 @@ public class MemberController {
 		if(userNum==loginUserNum) { //로그인 한 userNum(임시)와 현재 열람중인 프로필 num이 같다면
 			isWriter = 1;
 		}
+		//로그인한 회원정보 전달
+		mav.addObject("loginUser", userInfo);
+		//해당회원 닉네임, 프로필사진 받아오기
+		mav.addObject("userProfile", memberService.selectMember(userNum));
+		//해당회원 쓴 글 갯수 받아오기
 		mav.addObject("myLogCount", logService.selectMyLogs(userNum, isWriter, 0, limitNum).size());
 		//팔로워 받아오기
 		mav.addObject("followerCount", memberService.setFollowerInfo(userNum).size());
@@ -225,7 +232,6 @@ public class MemberController {
 		mav.setViewName("member/userEdit");
 		return mav;
 	}
-
 	@PostMapping("/member/userEditOk")
 	public ModelAndView userEditOk(MemberVO vo, HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -235,9 +241,11 @@ public class MemberController {
 		memberService.updateMember(vo);
 		//myTag 수정(삭제 후 생성)
 		memberService.mytagDel(userInfo.getUserNum());
-		for(int i : vo.getTagListCl()) { 
-			int tagNum = i;
-			memberService.mytagInsert(tagNum, userInfo.getUserNum()); 
+		if(vo.getTagListCl()!=null) {
+			for(int i : vo.getTagListCl()) {
+				int tagNum = i;
+				memberService.mytagInsert(tagNum, userInfo.getUserNum());
+			}
 		}
 		//수정된 정보로session 값 수정
 		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));

@@ -12,7 +12,7 @@
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 	    <!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+		<ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar">
 			<!-- Sidebar T-LOG -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 			    <span class="sidebar-brand-icon rotate-n-15">
@@ -47,7 +47,6 @@
 			        data-parent="#accordionSidebar">
 			        <div class="bg-white py-2 collapse-inner rounded">
 			            <a class="collapse-item" href="/admin/allMemberList">전체 회원</a>
-			            <a class="collapse-item" href="/admin/reportMemberList">블랙 리스트</a>
 			        </div>
 			    </div>
 			</li>
@@ -101,8 +100,8 @@
 					 <!-- Nav Item - 관리자 이름 -->
 					 <li class="nav-item dropdown no-arrow">
 				         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-				             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				             <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자 이름</span>
+				             data-toggle="dropdown" aria-haspopup="true" aria-expanded="fase">
+				             <span class="mr-2 d-none d-lg-inline text-gray-600 small">${userInfo.userNick}</span>
 				         </a>
 			         	<!-- Dropdown : logout -->
 			            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -126,10 +125,31 @@
 			
 				<!-- Dash board 내용 -->
 				<div class="row">
-					<!-- 전체 일기 수 -->
-					<div class="col-12 d-sm-flex align-items-centers">
-						<div class="col-xl-3 mb-4 col-6">
-							<div class="card border-left-primary shadow h-100 py-2">
+
+					<!-- 전체 게시판 게시판  -->
+					<div class="col-lg-6">
+						<div class="col-12 d-sm-flex align-items-centers">
+							<div class="card shadow mb-4 col-12">
+		                        <div class="card-header py-3">
+		                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판 통계</h6>
+		                        </div>
+		                        <div class="card-body">
+		                           <input type="hidden" id="tlogTotal" value="${tlogTotal}">
+		                           <input type="hidden" id="boardTotal" value="${boardTotal}">
+		                           <div>
+		                               <canvas id="myChart" style="margin:0 auto;"></canvas>
+		                           </div>
+	                            </div>
+	                        	<br/>
+	                   		</div>
+                   		</div>
+                   	</div>
+                   	<br/>
+                   	<!-- 전체 일기 수, 회원 수 -->
+                   	<div class="col-lg-6">
+                   		<!-- 전체 일기 수 -->
+                   		<div class="col-12 d-sm-flex align-items-centers">
+							<div class="card border-left-primary shadow h-400 py-2 col-12">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
@@ -147,9 +167,10 @@
 								</div>
 							</div>
 						</div>
+						<br/>
 						<!-- 전체 회원 수 -->
-						<div class="col-xl-3 mb-4 col-6">
-							<div class="card border-left-warning shadow h-100 py-2">
+						<div class="col-12 d-sm-flex align-items-centers">
+							<div class="card border-left-warning  shadow h-400 py-2 col-12">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
@@ -161,60 +182,44 @@
 											</div>
 										</div>
 										<div class="col-auto">
-											<i class="fa fa-user fa-2x text-gray-300"></i>
+											<i class="fas fa-user fa-2x text-gray-300"></i>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+                   	</div><!-- 전체 일기 수, 회원 수 끝 -->
+                   	<br/>
+         
+                   	
+                   	<!-- 태그 게시판 통계 -->
+					<div class="card shadow mb-4 col-12">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계</h6>
+						</div>
+						<div class="card-body">
+							<c:forEach var="t" items="${tagInfo}">
+								<input type="hidden" id="tags${t.tagNum}" name='${t.tagCount}'
+									value="${t.tagName}">
+							</c:forEach>
+							<div class="col-6" style="float: left">
+								<canvas id="tagChart" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: right">
+								<canvas id="tagChartAge" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: left">
+								<canvas id="tagChartGroup" class="chart"></canvas>
+							</div>
+							<div class="col-6" style="float: right">
+								<canvas id="tagChartSeason" class="chart"></canvas>
+							</div>
+						</div>
 					</div>
+					<br />
+
+
 					<!-- 여행일기 게시판  -->
-					<div class="col-lg-6">
-						<div class="card shadow mb-4 col-12">
-	                        <div class="card-header py-3">
-	                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판 통게</h6>
-	                        </div>
-	                        <div class="card-body">
-	                           <input type="hidden" id="tlogTotal" value="${tlogTotal}">
-	                           <input type="hidden" id="boardTotal" value="${boardTotal}">
-	                           <div>
-	                               <canvas id="myChart" style="margin:0 auto;"></canvas>
-	                           </div>
-                            </div>
-                        	<br/>
-                   		</div>
-                   	</div>
-                   	<div class="col-lg-6">
-                 		<div class="card shadow mb-4 col-12">
-	                        <div class="card-header py-3">
-	                            <h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계</h6>
-	                        </div>
-		                    <div class="card-body">
-	                          <%--  <input type="hidden" id="tagName" value="${tag.tagName}"> --%>
-	                           		<!--  <input type=hidden id="tags">${tagList}</div> -->
-	                           <div>
-	                               <canvas id="tagChart" style="margin:0 auto;"></canvas>
-	                           </div>
-                            </div>
-                       		<br/>
-						</div>
-                    </div>
-<!--                  	<div class="col-lg-12">
-                 		<div class="card shadow mb-4 col-12">
-	                        <div class="card-header py-3">
-	                            <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
-	                        </div>
-		                    <div class="card-body">
-	                           <div>
-	                               <canvas id="tagChart"></canvas>
-	                           </div>
-                            </div>
-                       		<br/>
-						</div>
-                    </div> -->
-                    
-                    
-                   	<!-- 여행일기 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
@@ -246,24 +251,4 @@
 	</div><!-- End of wrapper(side bar포함) -->
 </div><!-- End of page-top -->
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            	로그아웃 하시려면 로그아웃버튼을 눌러주세요.
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="#">로그아웃</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%@ include file="/WEB-INF/views/admin/modal.jsp" %>

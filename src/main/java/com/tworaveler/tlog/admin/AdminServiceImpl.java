@@ -1,13 +1,14 @@
 package com.tworaveler.tlog.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.tworaveler.tlog.board.BoardVO;
 import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -21,17 +22,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int selectBoardTotalPosts(PagingVO pvo, AdminVO vo) {
+	public int selectBoardTotalPosts(PagingVO pvo, BoardVO vo) {
 		return dao.selectBoardTotalPosts(pvo, vo);
 	}
 	
 	@Override
-	public int selectTotalUser() {
-		return dao.selectTotalUser();
+	public int selectTotalUser(PagingVO pvo, MemberVO vo) {
+		return dao.selectTotalUser(pvo, vo);
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectTag() {
+	public List<MemberVO> selectTag() {
 		return dao.selectTag();
 	}
 
@@ -41,8 +42,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<AdminVO> selectBoard(PagingVO pvo, AdminVO vo) {
+	public List<BoardVO> selectBoard(PagingVO pvo, BoardVO vo) {
 		return dao.selectBoard(pvo, vo);
+	}
+
+	@Override
+	public List<MemberVO> selectMemberList(PagingVO pvo, MemberVO vo) {
+		return dao.selectMemberList(pvo, vo);
 	}
 
 
