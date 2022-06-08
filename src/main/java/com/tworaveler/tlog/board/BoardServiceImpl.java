@@ -21,4 +21,14 @@ public class BoardServiceImpl implements BoardService {
 		return dao.boardInsert(vo);
 	}
 
+	@Override
+	public int deleteBoard(int boardNum) {
+		return dao.deleteBoard(boardNum);
+	}
+
+	@Override
+	public int cntUserBoard(int userNum) {
+		return dao.cntUserBoard(userNum);
+	}
+
 }

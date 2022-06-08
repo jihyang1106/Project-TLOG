@@ -5,7 +5,8 @@
     rel="stylesheet">
 <link href="/admintemplate/css/sb-admin-2.min.css" rel="stylesheet"/>
 <link href="/css/admin/main.css" rel="stylesheet"/>
-<script src="/js/admin/main.js"></script>
+<script src="/js/admin/allMemberList.js"></script>
+
 
 <div id="page-top"><!-- end div tag xx -->
 	<!-- Page Wrapper -->
@@ -26,27 +27,13 @@
 				<!-- Heading -->
 				<span class="sidebar-heading">게시판 및 멤버</span>
 			</div>
-			
-		    <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/main">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            
+		
 			<!-- Nav Item 전체 게시판-->
 			<li class="nav-item">
-			    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-			        aria-expanded="true" aria-controls="collapseTwo">
+			    <a class="nav-link" href="/admin/main">
 			        <i class="fas fa-fw fa-cog"></i>
 			        <span>전체 게시판</span>
 			    </a>
-			    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			        <div class="bg-white py-2 collapse-inner rounded">
-			            <a class="collapse-item" href="/admin/travelLogList">여행일기</a>
-			            <a class="collapse-item" href="/admin/boardList">자유일기</a>
-			        </div>
-			    </div>
 			</li>
 		
 			<!-- Nav Item 회원 게시판-->
@@ -60,7 +47,6 @@
 			        data-parent="#accordionSidebar">
 			        <div class="bg-white py-2 collapse-inner rounded">
 			            <a class="collapse-item" href="/admin/allMemberList">전체 회원</a>
-			            <a class="collapse-item" href="/admin/reportMemberList">블랙 리스트</a>
 			        </div>
 			    </div>
 			</li>
@@ -115,7 +101,7 @@
 					 <li class="nav-item dropdown no-arrow">
 				         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 				             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				             <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자 이름</span>
+				             <span class="mr-2 d-none d-lg-inline text-gray-600 small">${userInfo.userNick}</span>
 				         </a>
 			         	<!-- Dropdown : logout -->
 			            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -139,71 +125,81 @@
 			
 				<!-- Dash board 내용 -->
 				<div class="row">
-					<!-- 전체 게시판  -->
+					<!-- 회원 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판</h6>
-                        </div>
                         <div class="card-body table-responsive">
-                       		<div class="col-sm-12">
-                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                        			Showing 1 to 10 of 57 entries
-                        		</div>
-                        	</div>
                         	<br/>
-                            <table class="table table-bordered" id="dataTable">
+                            <table class="table table-bordered dataTable" id="memberTable">
                                 <thead>
                                     <tr>
-                                        <th>BoardNo.</th>
-                                        <th>Content</th>
-                                        <th>Date</th>
-                                        <th>UserNo.</th>
-                                        <th>Nickname</th>
+                                        <th>번호</th>
+                                        <th>닉네임</th>
+                                        <th>가입일</th>
+                                        <th onclick=showTlog()>여행일기 수</th>
+                                        <th>자유일기 수</th>
+                                        <th>총 일기 수</th>
+                                        <th>신고받은 횟수</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>ㅇㄹㄴㅇㄹㄴㅇㄻ내댜러매ㅓㅈ대ㅑㅓ매더래먀더랴ㅐㅓ대러ㅐㅁㄴㄷ럼ㄷㄴ래ㅜ누래ㅑㅁ둔루대눌먇</td>
-                                        <td>2022.06.01</td>
-                                        <td>61</td>
-                                        <td>방랑자</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>ㄴㅇㄹ머냉러ㅐㅁㄴ러맨야러맺댠루매ㅑㄷ주램ㄷ누랴ㅐㅜㅁㄹㄷ재ㅜ랟누루ㅐㅈ도랴ㅐㅁ대랴ㅜ대ㅑ루맫누ㅜㄹ매ㅑㄷ주</td>
-                                        <td>2022.06.03</td>
-                                        <td>46</td>
-                                        <td>비트위의 나그네</td>
-                                    </tr>
+                                	<c:forEach var="m" items="${mList}">
+	                                	<tr>
+	                                        <td>${m.userNum}</td>
+	                                        <td>${m.userNick}</td>
+	                                        <td>${m.registerDate}</td>
+	                                        <td onclick=showTlog()>${m.tNumCount}</td>
+	                                        <td>${m.bCount}</td>
+	                                        <td>${m.sum}</td>
+	                                        <td>${m.rCount}</td>
+                                    	</tr>
+                                	</c:forEach>
                                 </tbody>
                             </table>
+                             <div class="dataTables_info" id="memberTable_info" role="status" aria-live="polite">
+						  	 	<ul class="pagination justify-content-center">
+						  	 		<c:if test="${paging.currentPage>1}">
+						  	 			<li class="page-item page" value="${paging.currentPage-1}">
+							  	 			<a class="page-link" href="javascript:void(0);" onclick="move(${paging.currentPage-1})">
+							  	 				<i class="fa fa-angle-left"></i>
+							  	 			</a>
+						  	 			</li>
+						  	 		</c:if>
+						  	 		<c:forEach var="p" begin="${paging.startPage}" end="${paging.totalPages}">
+										<c:if test="${p<=paging.totalPages}">
+											<c:choose>
+												<c:when test="${p==paging.currentPage}">
+													<li class="page-item disabled"><a class="page-link">${p}</a></li>
+												</c:when>
+												<c:when test="${p!=paging.currentPage}">
+													<li class="page-item page"><a class="page-link" href="javascript:void(0);"
+														onclick="move(${p})">${p}</a></li>
+												</c:when>
+											</c:choose>
+										</c:if>
+									</c:forEach>
+									<c:if test="${paging.currentPage<paging.totalPages}">
+										<li class="page-item page" value="${paging.currentPage+1}">
+							  	 			<a class="page-link" href="javascript:void(0);" onclick="move(${paging.currentPage+1})">
+							  	 				<i class="fa fa-angle-right"></i>
+							  	 			</a>
+						  	 			</li>
+						  	 		</c:if>
+						  	 	</ul>
+						  	 </div>
                         </div><!-- end of 테이블 -->
-                    </div><!-- end of 전체 게시판 -->
+                    </div><!-- end of 회원 게시판 -->
+                    <div id="memberContent" class="col-12">
+<!--                     	<div class="card shadow mb-4 col-xl-12">
+	                        <div class="card-body table-responsive">
+	                    	</div>
+                   		</div> -->
+                    </div>
+                    
+                    
 				</div><!-- end of row -->
 			</main><!-- end of container-fluid -->
 		</div><!-- End of content-wrapper(top nav포함) -->
 	</div><!-- End of wrapper(side bar포함) -->
 </div><!-- End of page-top -->
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            	로그아웃 하시려면 로그아웃버튼을 눌러주세요.
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="#">로그아웃</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%@ include file="/WEB-INF/views/admin/modal.jsp" %>

@@ -15,7 +15,7 @@
         ON			D.tNum=A.tNum
         WHERE		isPrivate=0
 		ORDER BY 	likeNum DESC
-		LIMIT 		10
+		LIMIT 		16
 	</select>	
 	<!-- 메인: 팔로잉 글 리스트 -->
 	<select id='selectFollowLog' resultType='com.tworaveler.tlog.log.LogVO'>
@@ -32,7 +32,7 @@
         WHERE		E.userNum=#{param1}
         AND			isPrivate=0
 		ORDER BY 	tNum DESC
-		LIMIT 		10
+		LIMIT 		16
 	</select>
 	<!-- tNum의 태그 리스트 -->
 	<select id='selectLogTag' resultType='com.tworaveler.tlog.log.LogVO'>
@@ -394,7 +394,8 @@
 	</insert>
 	<!-- ==================== logView =========================================== -->
 	<select id='getOneLog' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg,
+					COUNT( CASE WHEN IFNULL(E.userNum, 0)= #{param2} THEN 1 END) AS likeType
 		FROM		travelLog A
         JOIN		user B
         ON 			B.userNum = A.userNum
@@ -402,6 +403,39 @@
         ON			C.tNum=A.tNum
         JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
         ON			D.tNum=A.tNum
+        LEFT JOIN 	likeClicker E
+		ON			A.tNum = E.tNum
         WHERE		A.tNum=#{param1}
 	</select>
+	<!-- 태그된 유저인지 확인 -->
+	<select id='isTagged' resultType='int'>
+		SELECT	IFNULL(COUNT(userNum),0) AS isTagged 
+		FROM	tagUser
+		WHERE	tNum=#{param1}
+		AND		userNum=#{param2}
+	</select>
+	<!-- 좋아요 수 -->
+	<select id='getLikeNum' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.tNum, IFNULL(B.likeNum,0) AS likeNum
+        FROM 		travelLog A
+		LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) B
+        ON			B.tNum=A.tNum
+        WHERE		A.tNum=#{param1}
+	</select>
+	<!-- 좋아요 누르기 -->
+	<insert id='LikeUp'>
+		INSERT likeClicker(userNum, tNum) 
+		VALUES(#{param1}, #{param2})
+	</insert>
+	<!-- 좋아요 취소 -->
+	<delete id='LikeDown'>
+		DELETE 	FROM likeClicker
+		WHERE 	userNum=#{param1}
+		AND		tNum=#{param2}
+	</delete>
+	<!-- 글 삭제 -->
+	<delete id='logDel'>
+		DELETE 	FROM travelLog
+		WHERE	tNum=#{param1}
+	</delete>
 </mapper>

@@ -41,8 +41,12 @@ public class LogVO {
 	private List<LogVO> tagUserList;
 	private List<Integer> userNumList;
 	private int tagged;	
+	private int isTagged;
 	
 	private List<Map<String,Object>> dataList;
+	
+	//likeClicker
+	private int likeType;
 	
 	
 	public List<Integer> getTagNumList() {
@@ -212,6 +216,18 @@ public class LogVO {
 	}
 	public void setDataList(List<Map<String,Object>> dataList) {
 		this.dataList = dataList;
+	}
+	public int getLikeType() {
+		return likeType;
+	}
+	public void setLikeType(int likeType) {
+		this.likeType = likeType;
+	}
+	public int getIsTagged() {
+		return isTagged;
+	}
+	public void setIsTagged(int isTagged) {
+		this.isTagged = isTagged;
 	}
 
 }

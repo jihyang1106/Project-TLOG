@@ -4,11 +4,57 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.admin.AdminDAO">
 	<select id="selectTlogTotalPosts" resultType="int">
-		SELECT COUNT(tNum)count 
-		FROM travelLog
+		SELECT    COUNT(tNum)
+		FROM      travelLog
 	</select>
 	<select id="selectBoardTotalPosts" resultType="int">
-		SELECT COUNT(boardNum)count 
-		FROM board
+		SELECT    COUNT(boardNum)
+		FROM      board
+	</select>
+	<select id="selectTotalUser" resultType="int">
+		SELECT    COUNT(userNum)
+		FROM      user
+	</select>
+	<select id="selectTag" resultType="MemberVO">
+		SELECT    COUNT(tl.tNum) as tagCount, tw.tagNum, tw.tagName
+		FROM      tagWord tw 
+		LEFT JOIN tagLog tl 
+		ON        tw.tagNum = tl.tagNum
+		GROUP BY  tw.tagNum
+	</select>
+	<select id="selectTlog" resultType="LogVO">
+		SELECT    l.tNum, l.tTitle, u.userNick,
+			      date_format(l.writeDate, "%Y/%m/%d %H:%i") AS writeDate
+		FROM      travelLog l
+		JOIN      user u
+		ON        l.userNum = u.userNum
+		ORDER BY  tNum DESC
+		LIMIT     ${param1.postsPerPage} 
+		OFFSET    ${param1.offset}
+	</select>
+	<select id="selectBoard" resultType="BoardVO">
+		SELECT    b.boardNum, b.boardContent, u.userNick,
+			      date_format(b.writedate, "%Y/%m/%d %H:%i") AS writedate
+		FROM      board b
+		JOIN      user u
+		ON        b.userNum = u.userNum
+		ORDER BY  boardNum DESC
+		LIMIT     ${param1.postsPerPage} 
+		OFFSET    ${param1.offset}
+	</select>
+	<select id="selectMemberList" resultType="MemberVO">
+		SELECT    u.userNum, u.userNick, date_format(u.registerDate, "%Y/%m/%d") AS registerDate,
+				  IFNULL(tl.tNumCount,0) AS tNumCount, IFNULL(b.bCount,0) AS bCount,
+			      IFNULL(tNumCount,0) + IFNULL(bCount,0) AS sum, IFNULL(r.rCount,0) AS rCount
+		FROM      user u
+		LEFT JOIN (SELECT userNum, count(tNum) AS tNumCount FROM travelLog GROUP BY userNum) tl
+		ON        u.userNum = tl.userNum
+		LEFT JOIN (SELECT userNum, count(boardNum) AS bCount FROM board GROUP BY userNum) b
+		ON        u.userNum = b.userNum
+		LEFT JOIN (SELECT userNum, count(reportNum) AS rCount FROM report GROUP BY userNum) r
+        ON        u.userNum = r.userNum
+		ORDER BY  u.userNum DESC
+		LIMIT     ${param1.postsPerPage} 
+		OFFSET    ${param1.offset}
 	</select>
 </mapper>

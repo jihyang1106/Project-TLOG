@@ -1,8 +1,26 @@
 @charset "UTF-8";
-#dataTable>thead>tr>th:nth-child(2),
-#dataTable>tbody>tr>td:nth-child(2){
+
+.dataTable>thead>tr>th:nth-child(2),
+.dataTable>tbody>tr>td:nth-child(2){
 	max-width:20vw;
 	overflow: hidden;
 	white-space: nowrap; 
  	text-overflow: ellipsis;
+}
+
+.dataTable{
+	text-align:center;
+}
+.chart{
+	margin:0 auto;
+}
+.delBtn{
+	background:rgba(122, 140, 226,100%);
+	color:white;
+	text-align:center;
+}
+
+/*사이드바, 검색*/
+#accordionSidebar{
+	background:#8FBDD3;
 }

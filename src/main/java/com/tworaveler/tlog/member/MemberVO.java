@@ -19,17 +19,37 @@ public class MemberVO {
 	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
-	
+	private int tagCount; // 각 태그 별 수
+	private List<Integer> tagListCl;
+
 	//follow
 	private int followingNum;
 	private int followerNum;
 	
-	/*
-	 * //카카오 public MemberVO(HashMap<String, String> kakaoInfo) { idKakao =
-	 * kakaoInfo.get("id"); userNick = kakaoInfo.get("nickname"); profileImg =
-	 * kakaoInfo.get("profile"); }
-	 */
+	// userList
+	private int tNumCount; // 유저가 작성한 여행일기 수
+	private int bCount;    // 유저가 작성한 자유일기 수
+	private int sum;       // 유저가 작성한 일기 합
+	private int rCount;    // 유저가 신고받은 수
+
+	//일반 생성자
+	public MemberVO() {}
 	
+	//카카오 로그인 생성자
+	public MemberVO(HashMap<String, String> kakaoInfo) { 
+		idKakao = (String)kakaoInfo.get("idKakao"); 
+		userNick = kakaoInfo.get("userNick"); 
+		profileImg = kakaoInfo.get("profileImg"); 
+	}
+	
+	public List<Integer> getTagListCl() {
+		return tagListCl;
+	}
+
+	public void setTagListCl(List<Integer> tagListCl) {
+		this.tagListCl = tagListCl;
+	}
+
 	public List<LogVO> getTagList() {
 		return tagList;
 	}
@@ -125,6 +145,45 @@ public class MemberVO {
 	public void setFollowerNum(int followerNum) {
 		this.followerNum = followerNum;
 	}
-	
+
+	public int getTagCount() {
+		return tagCount;
+	}
+
+	public void setTagCount(int tagCount) {
+		this.tagCount = tagCount;
+	}
+
+	public int gettNumCount() {
+		return tNumCount;
+	}
+
+	public void settNumCount(int tNumCount) {
+		this.tNumCount = tNumCount;
+	}
+
+	public int getbCount() {
+		return bCount;
+	}
+
+	public void setbCount(int bCount) {
+		this.bCount = bCount;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+	public int getrCount() {
+		return rCount;
+	}
+
+	public void setrCount(int rCount) {
+		this.rCount = rCount;
+	}
 	
 }
