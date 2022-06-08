@@ -1,4 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!-- 푸터 작성하기 -->
+<link rel="stylesheet" href="/css/inc/bottom.css" type="text/css">
+<br/>
+<div style="clear:both"></div>
+<div class="bottom" id='bottom'>
+	<footer id='footer'>
+		<!-- 푸터 작성하기 -->
+		<div id="footerLogo"><img src="/img/TLOG1.png"/></div>
+		<div id="footerContent">
+			<div>상호 : (주) 티로그 &emsp;|&emsp; 대표자명 : 이지향</div>
+			<div>사업자등록번호 : 000-00-220615 &emsp;|&emsp; 통신판매업신고번호 : 제0000-서울강동-0000호</div>
+			<div>연락처 : 00-000-0000 &emsp;|&emsp; FAX : 000-0000-0000 &emsp;|&emsp; E-MAIL : tworaveler@tlog.com</div>
+			<div>주소 : 서울 강동구 강일동 503 리엔프라자 302호 </div>
+			<hr/>
+			<div>이용약관&emsp;&emsp;|&emsp;&emsp;<span id="footerBold">개인정보보호방침</span>&emsp;&emsp;|&emsp;&emsp;Copyright &copy; T-LOG</div>
+			
+		</div>
+		<div id="footerEtc">
+			<i class="fa-brands fa-facebook"></i>&emsp;&emsp;
+			<i class="fa-brands fa-twitter"></i>&emsp;&emsp;
+			<i class="fa-brands fa-instagram"></i>
+		</div>
+	</footer>
+</div>
+<div id='adminBottom' style="display:none">
+	<footer class="sticky-footer bg-white">
+	        <div class="copyright text-center my-auto">
+	           <span>Copyright &copy; T-LOG</span>
+	       </div>
+	</footer>
+</div>
 </body>
 </html>

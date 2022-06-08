@@ -1,0 +1,217 @@
+@charset "UTF-8";
+#div_big{
+		margin:0 auto;
+		width:58vw;
+		min-height:75vh;
+		text-align:center;
+}
+#div_small{	
+	width:58vw;
+	line-height:2vw;		
+	padding:3vw;
+}
+/* ===== text설정 ===== */
+#titleTexts{
+	width:25vw;
+	border:none;
+	border-bottom:1px solid #ddd;
+	outline:none;
+}
+#locationTexts{
+	width:15vw;
+	border:none;
+	border-bottom:1px solid #ddd;
+	outline:none;
+}
+/* ===== ul, li, span 정리 ===== */
+.logWriteUl{
+	width:100%;
+	height:9vw;
+	margin-bottom:2vh;
+}
+.logWriteLi{
+	width:100%;
+	height:3vw;
+}
+input[type=date] { 
+	border:none;
+}
+/* ===== 태그 ===== */
+#user_tag_div{
+	width:100%;
+}
+#tag_span{
+	line-height:3vh;
+	display:block;
+	text-align:center;
+}
+#tag_li{
+	clear:both;
+	line-height:1vw;
+	width:45%;
+	height:15vw;
+	text-align:left;
+	display:inline-block;
+	margin:2%;
+	padding:2%;
+	padding-right:1%;
+	border:2px solid #ddd;
+	border-radius:5px;
+	float:left;
+}
+.tags{
+	border-radius: 5px;
+	padding: 0.2vw;
+	padding-left:0.4vw;
+	padding-right:0.4vw;
+	font-size:0.7vw;
+	cursor:pointer;
+	background-color:#eee;
+}
+/* ===== 태그할 유저 =====*/
+#plus{	
+	display:inline-block;
+	border: 4px solid #bbb;
+	border-radius: 50%;
+	padding:5px;
+	padding-left:6px;
+	padding-right:6px;
+	font-size:17px;
+	cursor:pointer;
+	color:#bbb;
+}
+#tag_user_div{
+	width:45%;
+	height:15vw;
+	padding:2%;
+	padding-left:1%;
+	margin:2%;
+	display:inline-block;
+	border:2px solid #ddd;
+	border-radius:5px;
+}
+#tag_user_span{
+	padding-left:6%;
+	display:block;
+}
+#tag_user_ul{
+	width:100%;
+	height:2vw;
+	line-height:2vw;
+	text-align:center;
+}
+#tag_user_ul li{
+	float:left;
+	margin-left:5px;
+	margin-right:5px;
+	font-size: 15px;
+	height:100%;
+}
+.tag_box{
+	width:100px;
+	height:30px;
+	border-radius:5px;
+	border:1px solid #aaa;
+}
+.fa-xmark{
+	width:5px;
+	cursor:pointer;
+}
+/*===== 검색된 유저 리스트 =====*/
+.search_user_ul{
+	margin: 0 auto;
+	text-align:center;
+	display:inline-block;
+}
+.search_user_li{
+	cursor:pointer;
+	margin-right:10px;
+	display:inline-block;
+}
+.search_user_li:hover{
+	border-radius:15px;
+	background-color:var(--theme-lightblue-30);
+}
+.profile_img{
+	width:30px;
+}
+
+/* ===== 일기 =====*/
+#detail_div{
+	height:auto;
+	margin:0 auto;
+}
+.log_list_div{
+	clear:both;
+	float:center;
+	width:70vw;
+	position:relative;
+	margin:100px 0px !important;
+}
+.log_div{
+	margin:1vw;
+	padding:2vw;
+	width:22vw;
+	text-align:center;
+	border-radius:15px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+}
+.log_div i{
+	color:rgba(0,0,0,30%);
+}
+.log_ul{
+	list-style-type:none;
+}
+.log_ul li{
+	height:4vh;
+	line-height:4vh;
+}
+.log_ul li:first-child{
+	height:100%;
+	line-height:40px;
+}
+.coverImgDiv{
+	width:18vw;
+	height:24vw;
+	margin:1vw 0;
+	display:inline;
+	position:relative;
+}
+.coverImg{
+	max-width:18vw;
+	max-height:24vw;
+	border-radius:10px;
+	box-shadow:0 0 10px rgba(0,0,0,30%);
+	
+}
+/*========일기 등록 버튼=========*/
+#write_btn{
+	margin:1.5vw 0;
+	padding:2px 10px;
+	border:none;
+	background-color:var(--theme-lightblue-60);
+	color:white;
+	border-radius:10px;
+	position:relative;
+	font-weight:500;
+	overflow:hidden;
+}
+#write_btn:focus{
+	outline: none;
+	
+}
+#write_btn::before{
+	content:"";
+	position:absolute;
+	height:100%;
+	width:100%;
+	background-color:rgba(0,0,0,75%);
+	top:100%;
+	left:0;
+	transition:all 0.3s;
+	z-index:-1;
+	
+}
+#write_btn:hover::before{
+	transform:translateY(-100%);
+}
