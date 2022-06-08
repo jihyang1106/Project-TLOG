@@ -148,9 +148,35 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public LogVO getOneLog(int tNum) {
-		return dao.getOneLog(tNum);
+	public LogVO getOneLog(int tNum, int logUser) {
+		return dao.getOneLog(tNum, logUser);
 	}
 
+	@Override
+	public int LikeUp(int userNum, int tNum) {
+		return dao.LikeUp(userNum, tNum);
+	}
+
+	@Override
+	public int LikeDown(int userNum, int tNum) {
+		return dao.LikeDown(userNum, tNum);
+	}
+
+	@Override
+	public LogVO getLikeNum(int tNum) {
+		return dao.getLikeNum(tNum);
+	}
+
+	@Override
+	public int logDel(int tNum) {
+		return dao.logDel(tNum);
+	}
+
+	@Override
+	public int isTagged(int tNum, int logUser) {
+		return dao.isTagged(tNum, logUser);
+	}
+
+	
 	
 }

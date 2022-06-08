@@ -27,11 +27,13 @@
 					<br/><br/>
 				</c:if>
 			</c:forEach>
+			<span id='tag_alert' style='color:orange; display:none;'>태그를 5개 이하로 선택해주세요.</span>
 			</div>
 			<div>
 		    <ul id='tag_user_ul'>
 				<li>동행&emsp;:&emsp;<img src='/img/plus.jpg' id='plus' onclick='PlusUser()'/></li>
 			</ul>
+			<ul class='search_user_ul'></ul>
 			</div>
 			<br/>
 			<div class="log_img_top">
