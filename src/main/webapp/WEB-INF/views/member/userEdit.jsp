@@ -22,7 +22,7 @@
 					<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg}" id="previewImg"></label></span>&emsp;&emsp;
 				</c:if>
 				<span><input id="defaultProfile" type="button" value="이미지 제거"></span>
-				<span id="profileNick">닉네임</span>&emsp;&emsp;
+				<span id="profileNick">&emsp;&emsp;&emsp;&emsp;&emsp;닉네임</span>&emsp;
 				<c:if test="${userInfo.userNick!=null}">
 					<span><input type="text" name="userNick" id="profileInfoNick" value="${userInfo.userNick}"/></span>
 				</c:if>	
@@ -33,14 +33,14 @@
 				<div id="profileSubmit"><input type="submit" value="정보등록" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">
-		      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
-		      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" value="N" ></span>&emsp;
-				</c:forEach>
-				</div>
-				<div id="myTagCnt" hidden="true">
-		      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
-		      		<span class="myTag${st.index }">${vo.tagNum }</span>&emsp;
-				</c:forEach>
+			      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
+			      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" class='hiddenTags' value="N" ></span>&emsp;
+					</c:forEach>
+					</div>
+					<div id="myTagCnt" hidden="true">
+			      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
+			      		<span class="myTag${st.index}">${vo.tagNum }</span>&emsp;
+					</c:forEach>
 				</div>
 			</form>
 			</div>

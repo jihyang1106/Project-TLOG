@@ -29,6 +29,7 @@
 	<select id='getAllHashtag' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		*
 		FROM		tagWord
+		order by tagNum
 	</select>
 	<insert id="mytagInsert">
 		insert 		into myTag(tagNum, userNum)

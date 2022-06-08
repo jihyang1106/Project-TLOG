@@ -107,6 +107,8 @@
 	width:50vw;
 }
 .imgs{
+	min-width:18vw;
+	min-height:18vw;
 	max-width:25vw;
 	max-height:25vw;
 	box-shadow:0 0 10px rgba(0,0,0,30%);
@@ -187,7 +189,7 @@
 							<div class='log_div'>
 								<ul class='log_ul'>
 									<li>${dvo.tContent}</li>
-									<li>${dvo.tPlace} 에서</li>		
+									<li> - ${dvo.tPlace} 에서 - </li>		
 								</ul>
 							</div>
 						</div>
