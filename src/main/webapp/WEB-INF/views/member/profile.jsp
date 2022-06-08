@@ -24,6 +24,17 @@
 		<c:if test="${loginUser.userNum == userProfile.userNum}">
 			<input type="button" id="userEditBtn" value="회원정보수정" onclick="location.href='/member/userEdit'">
 		</c:if>
+		<c:if test="${loginUser.userNum != userProfile.userNum}">
+			<input type="hidden" id="loginUser" value="${loginUserNum}"/>
+			<input type="hidden" id="isFollowed" value="${isFollowed }"/>
+			<input type="hidden" id="selectedUserNum" value="${userProfile.userNum}"/>
+			<c:if test="${isFollowed!=0}">
+				<input type="button" id="userEditBtn" value="팔로우취소" onclick="unfollow()">
+			</c:if>
+			<c:if test="${isFollowed==0}">
+				<input type="button" id="userEditBtn" value="팔로우" onclick="follow()">
+			</c:if>
+		</c:if>
 	</div>
 	<!-- 게시물, 팔로워, 팔로우 -->
 	<div id="followSection">
@@ -36,7 +47,7 @@
 		<ul class="nav nav-tabs" id="tab">
 			<li class="nav-item col-sm-4" id="tab1"><a class="nav-link active" data-toggle="tab">여행일기</a></li>		
 			<li class="nav-item col-sm-4" id="tab2"><a class="nav-link" data-toggle="tab">태그된 글</a></li>		
-			<li class="nav-item col-sm-4" id="tab3"><a class="nav-link" data-toggle="tab">찜한 글</a></li>		
+			<li class="nav-item col-sm-4" id="tab3"><a class="nav-link" data-toggle="tab">좋아요 누른 글</a></li>		
 		</ul>
 	</div>
 	<!-- 마이페이지 컨텐츠 -->

@@ -1,4 +1,11 @@
 
+/* =============== 시작, 종료일 min/max 설정 ============ */
+$(document).on("change", 'input[name=startDate]', function() {
+	$("input[name=endDate]").prop("min", $(this).val());
+});
+$(document).on("change", 'input[name=endDate]', function() {
+	$("input[name=startDate]").prop("max", $(this).val());
+});
 
 /*================ 태그 선택 ==================*/
 //.tags클릭 시 chk상태확인 후  css && chk 변화
@@ -7,26 +14,36 @@ $(".tags").click(function(){
 	//체크된 상태일 때
 	if($(this).next().is(":checked")){ 
 		$(this).next().prop("checked", false); //체크 해제
+		tagCnt--;
 		$(this).css("background-color", "#eee");
 		if($(this).prop("id") == 'region'){
 			for(var i=1; i<=14; i++){
-				$("#tag"+i).css("display", "none");	
-				$("#tag"+i).css("background-color", "#eee");
-				$("#tag"+i).next().prop("checked", false); //체크 해제
+				if($("#tag"+i).next().is(":checked")){
+					$("#tag"+i).css("display", "none");	
+					$("#tag"+i).css("background-color", "#eee");
+					$("#tag"+i).next().prop("checked", false); //체크 해제
+					tagCnt--;
+				}				
 			}
 		}else if($(this).prop("id") == 'tag1'){
 			$("#tag2").css("display", "inline-block");
 			for(var i=3; i<=7; i++){
-				$("#tag"+i).css("display", "none");	
-				$("#tag"+i).css("background-color", "#eee");
-				$("#tag"+i).next().prop("checked", false); //체크 해제
+				if($("#tag"+i).next().is(":checked")){
+					$("#tag"+i).css("display", "none");	
+					$("#tag"+i).css("background-color", "#eee");
+					$("#tag"+i).next().prop("checked", false); //체크 해제
+					tagCnt--;
+				}
 			}
 		}else if($(this).prop("id") == 'tag2'){
 			$("#tag1").css("display", "inline-block");
 			for(var i=8; i<=14; i++){
-				$("#tag"+i).css("display", "none");	
-				$("#tag"+i).css("background-color", "#eee");
-				$("#tag"+i).next().prop("checked", false); //체크 해제
+				if($("#tag"+i).next().is(":checked")){
+					$("#tag"+i).css("display", "none");	
+					$("#tag"+i).css("background-color", "#eee");
+					$("#tag"+i).next().prop("checked", false); //체크 해제
+					tagCnt--;
+				}
 			}
 		}else if($(this).prop("id") == 'age'){
 			for(var i=15; i<=20; i++){
@@ -36,21 +53,26 @@ $(".tags").click(function(){
 			}
 		}else if($(this).prop("id") == 'group'){
 			for(var i=21; i<=25; i++){
-				$("#tag"+i).css("display", "none");	
-				$("#tag"+i).css("background-color", "#eee");
-				$("#tag"+i).next().prop("checked", false); //체크 해제
+				if($("#tag"+i).next().is(":checked")){
+					$("#tag"+i).css("display", "none");	
+					$("#tag"+i).css("background-color", "#eee");
+					$("#tag"+i).next().prop("checked", false); //체크 해제
+					tagCnt--;
+				}
 			}
 		}else if($(this).prop("id") == 'season'){
 			for(var i=26; i<=29; i++){
-				$("#tag"+i).css("display", "none");	
-				$("#tag"+i).css("background-color", "#eee");
-				$("#tag"+i).next().prop("checked", false); //체크 해제
+				if($("#tag"+i).next().is(":checked")){
+					$("#tag"+i).css("display", "none");	
+					$("#tag"+i).css("background-color", "#eee");
+					$("#tag"+i).next().prop("checked", false); //체크 해제
+					tagCnt--;
+				}
 			}
 		}
 	//체크된 상태 아닐 때
 	}else{ 
 		$(this).next().prop("checked", true);
-		tagCnt++;
 		var id = $(this).attr('id');
 		switch(id){
 		case'region':
@@ -59,6 +81,7 @@ $(".tags").click(function(){
 				$("#tag2").css("display", "inline-block");	
 		break;
 		case'tag1': case'tag2':
+			tagCnt++;
 			$(this).css("background-color", "rgb(42, 76, 211, 70%)");
 			if($(this).prop("id") == 'tag1'){
 				$("#tag2").css("display", "none");
@@ -79,9 +102,11 @@ $(".tags").click(function(){
 			}
 		break
 		case'tag3': case'tag4': case'tag5': case'tag6': case'tag7':
+			tagCnt++;
 			$(this).css("background-color", "rgba(122, 140, 226, 80%)");
 		break
 		case'tag8': case'tag9': case'tag10': case'tag11': case'tag12': case'tag13': case'tag14':
+			tagCnt++;
 			$(this).css("background-color", "rgba(122, 140, 226, 30%)");
 		break
 		case'age':
@@ -94,6 +119,7 @@ $(".tags").click(function(){
 				$("#tag20").css("display", "inline-block");	
 		break;
 		case'tag15': case'tag16': case'tag17': case'tag18': case'tag19': case'tag20':
+			tagCnt++;
 			$(this).css("background-color", "#C3E2DD");
 		break
 		case'group':
@@ -105,6 +131,7 @@ $(".tags").click(function(){
 				$("#tag25").css("display", "inline-block");	
 		break;
 		case'tag21': case'tag22': case'tag23': case'tag24': case'tag25':
+			tagCnt++;
 			$(this).css("background-color", "#FEF5D4");
 		break
 		case'season':
@@ -115,14 +142,10 @@ $(".tags").click(function(){
 				$("#tag29").css("display", "inline-block");	
 		break;
 		case'tag26': case'tag27': case'tag28': case'tag29':
+			tagCnt++;
 			$(this).css("background-color", "#EACACB");
 		break
 		}
-	}
-	if(tagCnt>5){
-		$("#tag_alert").css("display","block");
-	}else{
-		$("#tag_alert").css("display","none");
 	}
 })
 
@@ -201,7 +224,7 @@ $(document).on("change", '.log_img', function() {
 	$("#detail_div").empty(); //이미지 미리보기 div 비우기
 	readImage(this);
 });
-
+var imageLength =0;
 function readImage(input){
 	if (input.files) { //input 태그에 파일이 있을 경우
 		
@@ -209,6 +232,7 @@ function readImage(input){
 		const fArr = Array.from(input.files);
 		
 		fArr.forEach(function(file, index) {
+			imageLength = index;
 			//10개를 초과하여 이미지 선택시 초과분에 대해서는 작업하지 않음
 			if (index > 10) {
 				alert('이미지는 10개 이하만 업로드 가능합니다.');
@@ -238,6 +262,7 @@ function readImage(input){
 			var input_check = document.createElement('input');
 				input_check.type = 'checkbox';
 				input_check.id = 'isCoverImg'+index;
+				input_check.className = 'coverImgChk';
 			li_2.textContent = '대표이미지\u00A0\u00A0';
 			li_2.appendChild(input_check);
 			var li_3 = document.createElement('li');
@@ -274,13 +299,91 @@ function readImage(input){
 		});
 	}
 }
+/* 대표이미지 1개만 가능 */
+$(document).on("change", '.coverImgChk', function() {
+	if($(this).is(":checked")){
+			$(".coverImgChk").parent().css("display", "none");
+			$(this).parent().css("display", "block");
+        }else{
+           	$(".coverImgChk").parent().css("display", "block");
+        }	
+});
 /*=============== 글 등록 =================================================================*/
 $("#write_btn").click(function(){
-	/* 유효성 검사...*/
+	/* 유효성 검사*/
 	
-	
+	//비밀일기/공유일기
+	if($("input[name=isPrivate]:radio:checked").length < 1){
+		alert('비밀/공유 여부를 선택해주세요.');
+		window.scrollTo({top:0, behavior:'smooth'});
+		return false;
+	}
+	//제목
+	if($("#titleTexts").val().trim()==""){
+		alert('제목을 입력해주세요.');
+		setTimeout( function(){ $("#titleTexts").focus(); }, 1 );
+		return false;
+	}
+	//위치 
+	if($("#locationTexts").val().trim()==""){
+		alert('위치를 입력해주세요.');
+		setTimeout( function(){ $("#locationTexts").focus(); }, 1 );
+		return false;
+	}
+	//날짜 
+	if($("input[name=startDate]").val()==""){
+		alert('시작일을 입력해주세요.');
+		window.scrollTo({top:0, behavior:'smooth'});
+		return false;
+	}
+	if($("input[name=endDate]").val()==""){
+		alert('종료일을 입력해주세요.');
+		window.scrollTo({top:0, behavior:'smooth'});
+		return false;
+	}
+	//태그 개수
+	if(tagCnt>5){
+		alert('태그를 5개 이하로 선택해주세요.');
+		window.scrollTo({top:0, behavior:'smooth'});
+		return false;
+	}
+	//이미지
+	if($("input[type=file]").val()==""){
+		alert('여행 이미지를 추가해주세요.');
+		setTimeout( function(){ $(".img_upload_phr").focus(); }, 1 );
+		return false;
+	}
+	//대표이미지
+	if(!$(".coverImgChk").is(":checked")){
+		alert('대표 이미지를 선택해주세요');
+		setTimeout( function(){ $("#isCoverImg1").focus(); }, 1 );
+		return false;
+	}
+	//사진 장소
+	for(var i=0; i<=imageLength; i++){
+			if($("#tPlace"+i).val()==""){
+			alert('사진 장소를 입력해주세요.');
+			setTimeout( function(){ $("#tPlace"+i).focus(); }, 1 );
+			return false;
+		}
+	}
+	//일기
+	for(var i=0; i<=imageLength; i++){
+		if($("#tContent"+i).val()==""){
+			alert('일기 내용을 입력해주세요.');
+			setTimeout( function(){ $("#tContent"+i).focus(); }, 1 );
+			return false;
+		}
+	}
 	/*글 등록 시작*/
-	if(confirm('글을 등록하시겠습니까?')){		
+	if(confirm('글을 등록하시겠습니까?')){	
+			//빈 태그 유저 지우기
+			Array.from(document.getElementsByClassName("tag_box")).forEach(function(element){
+				if($(element).val().trim()==""){
+					$(element).prev().remove();
+				$(element).remove();
+				}
+			});
 			//form 내용, detailMapList 따로 보내기(multipart & json.stringify때문에)
 			var url = $("#log_form").attr("action");
         	var form = $('#log_form')[0];
@@ -328,6 +431,7 @@ $("#write_btn").click(function(){
 					          contentType: 'application/json',
 					          success: function (data) {
 					        	  if(data>0){
+										alert("여행일기가 등록되었습니다.");
 					        		  location.href='/member/profile?userNum='+data;
 					        	  }else{
 					        		  alert("에러");

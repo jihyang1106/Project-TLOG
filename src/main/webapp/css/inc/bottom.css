@@ -1,36 +1,36 @@
 @charset "UTF-8";
 #bottom{
+	clear:both;
+	width:100vw;
 	height:180px;
 	background-color:rgba(105, 129, 234, 50%);
 	position:relative;
-}
-#footer{
-	width:65vw;
-	margin:0 auto;
+	padding:0 !important;
+	float:left;
 }
 #footerLogo{
-	float:left;
-	margin-right:8vw;
+    float:left;
+    margin-right:8vw;
 }
 #footerLogo img{
-	margin-top:0.8vw;
-	width:8vw;
+    margin-top:0.8vw;
+    width:8vw;
 }
 #footerContent{
-	float:left;
-	margin-top:1vw;
-	margin-right:8vw;
-	display:inline-block;
-	color:white;
+    float:left;
+    margin-top:1vw;
+    margin-right:8vw;
+    display:inline-block;
+    color:white;
 }
 #footerBold{
-	font-weight:600;
+    font-weight:600;
 }
 #footerEtc{
-	display:inline-block;
+    display:inline-block;
 }
 #footerEtc i{
-	margin-top:60px;
-	font-size:2.5em;
-	color:white;
+    margin-top:60px;
+    font-size:2.5em;
+    color:white;
 }

@@ -43,7 +43,7 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logLists", method = RequestMethod.GET)
 	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int newOrLike) {
-		int limitNum =5; //한 번에 나오는 글 수
+		int limitNum =7; //한 번에 나오는 글 수
 		
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		if(newOrLike==0) { //최신순
@@ -61,7 +61,7 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/searchLists", method = RequestMethod.GET)
 	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord, int newOrLike) {
-		int limitNum = 5;
+		int limitNum = 7;
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		
 		if(newOrLike==0) { //최신순

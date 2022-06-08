@@ -14,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ServerConfigure implements WebMvcConfigurer {
 	
 	static String[] interceptorArr = {
-			"/board/*"
-		};
+			"/boardWrite","/logShare/logWrite"
+	};
 	
 	static String[] adminInterceptorArr = {"/admin/*"};
 	

@@ -60,7 +60,7 @@ function logLists(){
 				}
 				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 				tag += "</li>";
-				tag += "<li><span>국내/국외, 위치</span></li>";
+				tag += "<li><span>"+data[i].placeInfo+"</span></li>";
 				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){
@@ -133,65 +133,23 @@ $(document).ready(function(){
 	});
 })
 
-//=================================================================
-/*$(function(){
-    ajaxsend('tab1');
-    $('ul#tab li').click(function() {
-        var activeTab = $(this).attr('id');
-        $('ul#tab li').removeClass('current');
-        $('.tabcontent').removeClass('current');
-        $(this).addClass('current');
-        $('#' + activeTab).addClass('current');
-        ajaxsend(activeTab);
-    });
-});
-
-function ajaxsend(tab){
-    var url='/member';
-    if(tab=='tab1'){
-        url+='/myLog';
-    }else if (tab=='tab2'){
-        url+='/tagedLog';
-    }else if (tab=='tab3'){
-        url+='/pickLog';
-    }        
-    
-    $.ajax({
-        url:url,
-        success:function(dataArr){
-            if(tab=='tab1'){
-				$("#myLog").empty();
-                showMyLog(dataArr, tab);
-            }else if (tab=='tab2'){
-                showtagedLog(dataArr, tab)
-            }else if (tab=='tab3'){
-                showLike(dataArr, tab)
-            }
-        }            
-    })
+//팔로우
+function follow(){
+	var selectedUserNum = $("#selectedUserNum").val();
+	if($("#loginUser").val()==0){
+		alert("로그인 후 이용하세요..!");
+		location.href='/member/login';
+		return false;
+	}
+	location.href='/member/follow?userNum='+selectedUserNum;
 }
-//ajax로 받아온 데이터 set
-function showMyLog(dataArr, tab){
-    var str="";
-    str+="<p>아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아</p>";
-    $("#myLog").html(str);
-    $("#myLog").css('display','block');
-    $("#tagedLog").css('display','none');
-    $("#likeLog").css('display','none');
+//언팔로우
+function unfollow(){
+	var selectedUserNum = $("#selectedUserNum").val();
+	if($("#loginUser").val()==0){
+		alert("로그인 후 이용하세요..!");
+		location.href='/member/login';
+		return false;
+	}
+	location.href='/member/unfollow?userNum='+selectedUserNum;
 }
-function showtagedLog(dataArr, tab){
-    var str="";
-    str+="<p>dhdhdhddhdh</p>";
-    $("#tagedLog").html(str);
-    $("#myLog").css('display','none');
-    $("#tagedLog").css('display','block');
-    $("#likeLog").css('display','none');
-}
-function showLike(dataArr, tab){
-    var str="";
-    str+="<p>fhfhhffhfh</p>";
-    $("#likeLog").html(str);
-    $("#myLog").css('display','none');
-    $("#tagedLog").css('display','none');
-    $("#likeLog").css('display','block');
-}*/
