@@ -15,17 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tworaveler.tlog.admin.AdminService;
+import com.tworaveler.tlog.member.MemberVO;
+
 @Controller
 public class BoardController {
 
 	@Inject
 	BoardService service;
-
+	
 	@GetMapping("/board/board")
 	public ModelAndView board(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		session.setAttribute("logStatus", "Y");
-		
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		if (userInfo != null) {
+			mav.addObject("userInfo", userInfo);
+		}else {
+			mav.addObject("notLogined", "Y");
+		}
 		mav.setViewName("board/board");
 		return mav;
 	}
@@ -42,9 +49,11 @@ public class BoardController {
 		
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
-	public int boardInsert(BoardVO vo, HttpServletRequest request) {
+	public int boardInsert(BoardVO vo, HttpServletRequest request, HttpSession session) {
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		System.out.println("아이피"+request.getRemoteAddr());
+		vo.setUserNum(userInfo.getUserNum());
 		vo.setIp(request.getRemoteAddr());
-		vo.setUserNum(2);
 		return service.boardInsert(vo);
 	}
 	

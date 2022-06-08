@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/board/board.css" type="text/css">
-<section id="freeLogContainer">
-	<p id="freeLogTitle">자유일기</p>
-	<!-- ====== 글 작성 하는곳 ======  -->
-	<form method="post" id="boardForm" action="test" onsubmit="return boardSend()">
-	<textarea name="boardContent" id="freeLogContent" placeholder="자유 여행 일기 (100글자 한도)"></textarea>
-		<c:if test="${userNick == null }">
-			<button id="boardInsert">등록</button>
-		</c:if>
-		<%-- <c:if test="${userNick == null }">
-			<input type="button" id="boardInsert" value="글 등록"
-				onclick="alert('로그인 해야 이용가능합니다.')" />
-		</c:if> --%>
-	</form>
-	<br><br><br>
-	<!-- ====== 광고 슬라이드 ======= -->
-	<div class="slideshow-container">
-		<div class="mySlideDiv face active"><a href="https://www.hanatour.com/" target="_blank"><img src="/img/ad/ad1.jpg"></a></div>
-		<div class="mySlideDiv face"><a href="http://www.palmfair.co.kr/main_20220611.asp?path=keyword&n=" target="_blank"><img src="/img/ad/ad2.jpg"></a></div>
-		<div class="mySlideDiv face"><a href="https://www.redcap.co.kr/page/CM_IR_0220?pgNm=MAIN" target="_blank"><img src="/img/ad/ad3.jpg"></a></div>
-	</div>
+
 <script>
 /* ====== 글 등록하기 ======*/
 function boardSend(){
@@ -39,7 +20,6 @@ function boardSend(){
 				startNum=0;
 				logLists();
 			},error : function(e){
-				console.log(content);
 				alert("오류!");
 			}
 		});
@@ -71,7 +51,7 @@ var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
 var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
 var newOrLike=0;
-
+ 
 function logLists(){
 	var url = '/boardList';
 	var param = {"startNum" : startNum};
@@ -85,9 +65,9 @@ function logLists(){
 			var tag = "";
 			for(i=0; i<data.length; i++){
 				tag += "<div id='freeLog_div'>";		    	  
-		    	tag += "<div id='info'><span id='infoLeft'><img src='/img/member/"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
+		    	tag += "<div id='info'><span id='infoLeft'><img src='"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
 		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
-		    	if(data[i].userNum == 2 /*${logNo}*/){
+		    	if(data[i].userNum == ${userInfo.userNum}){
 					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";
 				}
 		    	tag += "</span></div><hr/>";
@@ -171,13 +151,33 @@ function nextSlide() {
 }
 
 </script>
+<section id="freeLogContainer">
+	<p id="freeLogTitle">자유일기</p><input type="hidden" id="loginNum" value="${userInfo.userNum }"/>
+	<!-- ====== 글 작성 하는곳 ======  -->
+	<form id="boardForm">
+		<textarea name="boardContent" id="freeLogContent" placeholder="자유 여행 일기 (100글자 한도)"></textarea>
+		<c:if test="${userNick == null }">
+			<button type="button" id="boardInsert" onclick="boardSend()">등록</button>
+		</c:if>
+		<%-- <c:if test="${userNick == null }">
+			<input type="button" id="boardInsert" value="글 등록"
+				onclick="alert('로그인 해야 이용가능합니다.')" />
+		</c:if> --%>
+	</form>
+	<br><br><br>
+	<!-- ====== 광고 슬라이드 ======= -->
+	<div class="slideshow-container">
+		<div class="mySlideDiv face active"><a href="https://www.hanatour.com/" target="_blank"><img src="/img/ad/ad1.jpg"></a></div>
+		<div class="mySlideDiv face"><a href="http://www.palmfair.co.kr/main_20220611.asp?path=keyword&n=" target="_blank"><img src="/img/ad/ad2.jpg"></a></div>
+		<div class="mySlideDiv face"><a href="https://www.redcap.co.kr/page/CM_IR_0220?pgNm=MAIN" target="_blank"><img src="/img/ad/ad3.jpg"></a></div>
+	</div>
 <!--====================================== HTML ===================================================================-->
 
 <!-- log리스트 -->
 <div id='log_list_div'></div>
 
 <!-- 탑으로 가는 버튼 -->
-<button id='top_btn' onclick='goTop()'><i class="fa-solid fa-angles-up"></i></button>
+<button id='top_btn' type="button" onclick='goTop()'><i class="fa-solid fa-angles-up"></i></button>
 
 <!-- 로딩중 이미지 -->
 <img src='/img/loading.gif' id='loading' style='height:300px; display:none;'/>

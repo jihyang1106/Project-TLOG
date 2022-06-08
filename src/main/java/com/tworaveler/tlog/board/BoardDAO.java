@@ -18,4 +18,6 @@ public interface BoardDAO {
 	// 글 삭제하기
 	public int deleteBoard(int boardNum);
 	
+	//해당 회원이 작성한 글갯수 확인
+	public int cntUserBoard(int userNum);
 }
