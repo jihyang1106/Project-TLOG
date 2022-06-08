@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KakaoAPI {
 	private final String REST_API_KEY = "a7b1e2d31b1e4b9b211d09f5dcd83a80";
-	private final String REDIRECT_URI = "http://localhost:8025/member/kakaologin";
+	private final String REDIRECT_URI = "http://localhost:8025/member/kakaoLogin";
 
 	public JSONObject getToken(String authorizeCode) {
         StringBuffer sb = new StringBuffer();
@@ -55,9 +55,11 @@ public class KakaoAPI {
 			JSONObject userJSON = new JSONObject(response.toString());
 			JSONObject profileJSON = (JSONObject)userJSON.get("properties");
 			
-			userInfo.put("id", userJSON.get("id").toString());
-			userInfo.put("nickname", profileJSON.getString("nickname"));
-			userInfo.put("profile", profileJSON.getString("profile_image"));
+			userInfo.put("idKakao", userJSON.get("id").toString());
+			//System.out.println("아이디"+userJSON.get("id").toString());
+			userInfo.put("userNick", profileJSON.getString("nickname"));
+			//System.out.println("프사프사"+profileJSON.getString("profile_image"));
+			userInfo.put("profileImg", profileJSON.getString("profile_image"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
