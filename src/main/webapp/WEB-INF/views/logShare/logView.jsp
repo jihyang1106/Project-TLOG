@@ -64,28 +64,30 @@
 			</ul>
 			</div>
 	    </div>
-		<c:forEach var='dvo' items='${detailList}'>		
-		    <div class="carousel-item">				
-		      <div class="carousel-caption">				
-		        <div id='log_list_div'>
-					<div class='log_div'>
+    			<c:forEach var='dvo' items='${detailList}'>		
+				    <div class="carousel-item">				
 				      <img src='/upload/log/${dvo.tImg}' class='imgs'/>				
-						<ul class='log_ul'>
-							<li>${dvo.tContent}</li>
-							<li> - ${dvo.tPlace} 에서 - </li>		
-						</ul>
-					</div>
-				</div>
-		      </div>				
-		    </div>
-		</c:forEach>
-	</div>
-	<!-- Left and right controls -->
-	<a class="carousel-control-prev" href="#demo" data-slide="prev">
-	    <span class="carousel-control-prev-icon"></span>
-	</a>
-	<a class="carousel-control-next" href="#demo" data-slide="next">
-		<span class="carousel-control-next-icon"></span>
-	</a>
+				      <div class="carousel-caption">				
+				        <div id='log_list_div'>
+							<div class='log_div'>
+								<ul class='log_ul'>
+									<li>${dvo.tContent}</li>
+									<li> - ${dvo.tPlace} 에서 - </li>		
+								</ul>
+							</div>
+						</div>
+				      </div>				
+				    </div>
+				</c:forEach>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
 </div>
 

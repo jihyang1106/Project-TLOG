@@ -18,9 +18,7 @@
 	<update id="updateMember" >
         update 		user
         set 		userNick=#{userNick}, profileImg=#{profileImg}
-        <if test="status != 1">
-        	where userNum=#{userNum}
-        </if>
+        where userNum=#{userNum}
     </update>
     <delete id="userDel">
         DELETE FROM user
