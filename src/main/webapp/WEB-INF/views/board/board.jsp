@@ -36,6 +36,7 @@ function boardSend(){
 			success : function(result){
 				$("#log_list_div").empty();
 				$("#freeLogContent").val("");
+				console.log(${userNum});
 				startNum=0;
 				logLists();
 			},error : function(e){
@@ -87,7 +88,7 @@ function logLists(){
 				tag += "<div id='freeLog_div'>";		    	  
 		    	tag += "<div id='info'><span id='infoLeft'><img src='/img/member/"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
 		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
-		    	if(data[i].userNum == 2 /*${logNo}*/){
+		    	if(data[i].userNum == 2 /*${userNum}*/){
 					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";
 				}
 		    	tag += "</span></div><hr/>";
@@ -95,7 +96,7 @@ function logLists(){
 				tag += "</div>";
 				tag += "<br>";
 		    }//for
-			    $("#log_list_div").append(tag);
+		        $("#log_list_div").append(tag);
 			    isFetching=false; //로딩완료
 			    console.log(isFetching);
 			    $("#loading").css("display","none"); //로딩이미지 없애기

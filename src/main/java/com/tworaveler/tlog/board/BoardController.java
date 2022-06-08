@@ -44,7 +44,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.POST)
 	public int boardInsert(BoardVO vo, HttpServletRequest request) {
 		vo.setIp(request.getRemoteAddr());
-		vo.setUserNum(2);
+		
 		return service.boardInsert(vo);
 	}
 	
