@@ -37,13 +37,13 @@
 .introduce_info{
 	color: #fff;
     position: absolute;
-    text-align: center;
-    transform: translate(0, 50%);
     top: 0;
     width: 100%;
     height: 275px;
     z-index: 3;
     margin:auto;
+    text-align: center;
+    transform: translate(0, 50%);
 }
 
 .introduce_bg{
@@ -88,12 +88,7 @@
 	height: 705px;
 	margin-top: 45px;
     position: relative;
-	/*background-color: rgb(172, 235, 255);*/
 	padding-top: 70px;
-}
-
-.editor_pic img{
-	height: 520px;
 }
 
 .wrap_slide{
@@ -102,8 +97,27 @@
 	position: relative;
 	margin: 0 auto;
 	overflow: visible;
-	background-color: rgb(172, 235, 255);
 }
+
+.not_follower{
+	background-color: rgb(250 250 250);
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	
+    text-align: center;
+}
+
+.not_follower_wrap{
+	position: absolute;
+    text-align: center;
+    top: 0;
+    margin:auto;
+    width: 100%;
+	height: 100%;
+	    margin-top: 20%;
+}
+
 
 .list_slide{
 	position: absolute;
@@ -135,6 +149,15 @@
     width: 100%;
 }
 
+.link_item_g {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(40 40 40 / 40%);
+}
+
 .append_info{
 	height: 150px;
     width: 250px;
@@ -154,6 +177,10 @@
     transform: translate(0,35%);
 }
 
+.item_pic_type1 img{
+	height: 520px;
+}
+
 /* item_pic_type2의 append_info */
 .item_pic_type2 .append_info {
     color: #fff;
@@ -165,7 +192,12 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    transform: translate(0, 30%);
+    /*transform: translate(0, 30%);*/
+    padding-top: 80px;
+}
+
+.item_pic_type2 img{
+	width: 480px;
 }
 
 .info_g{
@@ -210,6 +242,7 @@
 	height: 520px;
     width: 320px;
 }
+
 
 /* SLIDE TYPE3 */
 .wrap_pic_type3 .item_pic{
@@ -272,7 +305,7 @@
 }
 
 .paging_list>li>a{
-	color:rgb(138, 138, 138);
+	/*color:rgb(138, 138, 138);*/
 }
 
 .link_page{
@@ -280,15 +313,13 @@
 	display:block;
 	font-size: 14px;
 	padding: 5px 12px;
-	color:rgb(138, 138, 138);
 	line-height: 1.5;
 	font-weight : bold;
 }
 
-
-
 .clicked  {
-	color:rgb(138, 138, 138) !important;
+	background: rgb(138, 138, 138);
+	font-weight : bold;
 }
 
 /*=============== BEST FOLLOW ===============*/

@@ -12,6 +12,7 @@
                 index -= 1;
                 console.log("왼쪽 클릭 index", index);
                 carousel.style.transform = 'translate(' + (-960 * index) + 'px, 0)';
+                carousel.style.transitionDuration = '500ms';
             });
             rightBtn.addEventListener('click', () => {
                 console.log("오른쪽 클릭");
@@ -19,6 +20,7 @@
                 index += 1;
                 console.log("오른쪽 클릭 index", index);
                 carousel.style.transform = 'translate(' + (-960 * index) + 'px, 0)';
+                carousel.style.transitionDuration = '500ms';
             });
             init();
         });
@@ -70,23 +72,37 @@
     </div>
     <div class="container">
         <!-- 본문 내용 작성하기 -->
-        <!-- 로그인 안했을때 좋아요많은글, 로그인했을때 팔로워 최신글 -->
+        <!-- 로그인 안했을때 좋아요 많은글, 로그인했을때 팔로워 최신글 -->
         <div class="editor_pic">
             <h3 class="txt_tlog txt_title">T L O G &nbsp; P O S T</h3>
             <p class="txt_desc">
-                <span class="txt_tlog">인기있는 유저에게 팔로우해보세요!</span>
+            	<c:if test="${userInfo.userNum == null}">
+            		<span class="txt_tlog">좋아요가 많은 글을 확인해보세요!</span>
+				</c:if>
+				<c:if test="${userInfo.userNum != null }">
+					<span class="txt_tlog">팔로워 최신 글을 확인해보세요!</span>
+				</c:if>
             </p>
             <div class="wrap_slide">
+	            <div class="not_follower">
+	            	<div class="not_follower_wrap">
+		            	<i class="bi bi-patch-exclamation" style="font-size:60px;"></i>
+			            <p>팔로워 최신글이 아직 없습니다!</p>
+	            	</div>
+	            </div>
                 <c:forEach items="${logList}" var="vo" varStatus="status">
                     <!--<c:out value="${status.index}" /> /<c:out value="${status.end}" />-->
                     <c:if test="${status.index == 0 }">
                         <ul class="list_slide">
                             <li class="testClass">
                                 <div class="wrap_pic wrap_pic_type1">
-                                    <div class="item_pic item_pic_type1">
-                                        <div class="link_item"
-                                            onclick="window.open('/logShare/logView?tNum=${vo.tNum}')"><img
-                                                src="/upload/log/${vo.coverImg}"></div>
+                                    <div class="item_pic item_pic_type1"
+                                        onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                                        <div class="link_item">
+                                            <img src="/upload/log/${vo.coverImg}">
+                                            <div class="link_item_g">
+                                            </div>
+                                        </div>
                                         <a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                                         <div class="append_info">
                                             <div class="info_g">
@@ -102,9 +118,12 @@
                                     </div>
                     </c:if>
                     <c:if test="${status.index == 1 }">
-                        <div class="item_pic item_pic_type2">
-                            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                                    src="/upload/log/${vo.coverImg}"></a>
+                        <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                            <div class="link_item">
+                                <img src="/upload/log/${vo.coverImg}">
+                                <div class="link_item_g">
+                                </div>
+                            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                             <div class="append_info">
                                 <div class="info_g">
                                     <strong class="info_tit">
@@ -119,9 +138,12 @@
                         </div>
                     </c:if>
                     <c:if test="${status.index == 2 }">
-                        <div class="item_pic item_pic_type2">
-                            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                                    src="/upload/log/${vo.coverImg}"></a>
+                        <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                            <div class="link_item">
+                                <img src="/upload/log/${vo.coverImg}">
+                                <div class="link_item_g">
+                                </div>
+                            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                             <div class="append_info">
                                 <div class="info_g">
                                     <strong class="info_tit">
@@ -140,9 +162,12 @@
             <c:if test="${status.index == 3 }">
                 <li class="testClass">
                     <div class="wrap_pic wrap_pic_type2">
-                        <div class="item_pic item_pic_type1">
-                            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                                    src="/upload/log/${vo.coverImg}"></a>
+                        <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                            <div class="link_item">
+                                <img src="/upload/log/${vo.coverImg}">
+                                <div class="link_item_g">
+                                </div>
+                            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                             <div class="append_info">
                                 <div class="info_g">
                                     <strong class="info_tit">
@@ -157,9 +182,12 @@
                         </div>
             </c:if>
             <c:if test="${status.index == 4 }">
-                <div class="item_pic item_pic_type1">
-                    <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                            src="/upload/log/${vo.coverImg}"></a>
+                <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                    <div class="link_item">
+                        <img src="/upload/log/${vo.coverImg}">
+                        <div class="link_item_g">
+                        </div>
+                    </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                     <div class="append_info">
                         <div class="info_g">
                             <strong class="info_tit">
@@ -174,9 +202,12 @@
                 </div>
             </c:if>
             <c:if test="${status.index == 5 }">
-                <div class="item_pic item_pic_type1">
-                    <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                            src="/upload/log/${vo.coverImg}"></a>
+                <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                    <div class="link_item">
+                        <img src="/upload/log/${vo.coverImg}">
+                        <div class="link_item_g">
+                        </div>
+                    </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                     <div class="append_info">
                         <div class="info_g">
                             <strong class="info_tit">
@@ -195,9 +226,12 @@
         <c:if test="${status.index == 6 }">
             <li class="testClass">
                 <div class="wrap_pic wrap_pic_type3">
-                    <div class="item_pic item_pic_type2">
-                        <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                                src="/upload/log/${vo.coverImg}"></a>
+                    <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                        <div class="link_item">
+                            <img src="/upload/log/${vo.coverImg}">
+                            <div class="link_item_g">
+                            </div>
+                        </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                         <div class="append_info">
                             <div class="info_g">
                                 <strong class="info_tit">
@@ -212,9 +246,12 @@
                     </div>
         </c:if>
         <c:if test="${status.index == 7 }">
-            <div class="item_pic item_pic_type2">
-                <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                        src="/upload/log/${vo.coverImg}"></a>
+            <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                <div class="link_item">
+                    <img src="/upload/log/${vo.coverImg}">
+                    <div class="link_item_g">
+                    </div>
+                </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                 <div class="append_info">
                     <div class="info_g">
                         <strong class="info_tit">
@@ -229,9 +266,12 @@
             </div>
         </c:if>
         <c:if test="${status.index == 8 }">
-            <div class="item_pic item_pic_type2">
-                <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                        src="/upload/log/${vo.coverImg}"></a>
+            <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                <div class="link_item">
+                    <img src="/upload/log/${vo.coverImg}">
+                    <div class="link_item_g">
+                    </div>
+                </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                 <div class="append_info">
                     <div class="info_g">
                         <strong class="info_tit">
@@ -246,9 +286,12 @@
             </div>
         </c:if>
         <c:if test="${status.index == 9 }">
-            <div class="item_pic item_pic_type2">
-                <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                        src="/upload/log/${vo.coverImg}"></a>
+            <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                <div class="link_item">
+                    <img src="/upload/log/${vo.coverImg}">
+                    <div class="link_item_g">
+                    </div>
+                </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                 <div class="append_info">
                     <div class="info_g">
                         <strong class="info_tit">
@@ -267,9 +310,12 @@
     <c:if test="${status.index == 10 }">
         <li class="testClass">
             <div class="wrap_pic wrap_pic_type1">
-                <div class="item_pic item_pic_type1">
-                    <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                            src="/upload/log/${vo.coverImg}"></a>
+                <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+                    <div class="link_item">
+                        <img src="/upload/log/${vo.coverImg}">
+                        <div class="link_item_g">
+                        </div>
+                    </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                     <div class="append_info">
                         <div class="info_g">
                             <strong class="info_tit">
@@ -284,9 +330,12 @@
                 </div>
     </c:if>
     <c:if test="${status.index == 11 }">
-        <div class="item_pic item_pic_type2">
-            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                    src="/upload/log/${vo.coverImg}"></a>
+        <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+            <div class="link_item">
+                <img src="/upload/log/${vo.coverImg}">
+                <div class="link_item_g">
+                </div>
+            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
             <div class="append_info">
                 <div class="info_g">
                     <strong class="info_tit">
@@ -301,9 +350,12 @@
         </div>
     </c:if>
     <c:if test="${status.index == 12 }">
-        <div class="item_pic item_pic_type2">
-            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                    src="/upload/log/${vo.coverImg}"></a>
+        <div class="item_pic item_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+            <div class="link_item">
+                <img src="/upload/log/${vo.coverImg}">
+                <div class="link_item_g">
+                </div>
+            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
             <div class="append_info">
                 <div class="info_g">
                     <strong class="info_tit">
@@ -321,10 +373,13 @@
     </c:if>
     <c:if test="${status.index == 13 }">
         <li class="testClass">
-            <div class="wrap_pic wrap_pic_type2">
+            <div class="wrap_pic wrap_pic_type2" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
                 <div class="item_pic item_pic_type1">
-                    <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                            src="/upload/log/${vo.coverImg}"></a>
+                    <div class="link_item">
+                        <img src="/upload/log/${vo.coverImg}">
+                        <div class="link_item_g">
+                        </div>
+                    </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
                     <div class="append_info">
                         <div class="info_g">
                             <strong class="info_tit">
@@ -339,9 +394,12 @@
                 </div>
     </c:if>
     <c:if test="${status.index == 14 }">
-        <div class="item_pic item_pic_type1">
-            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                    src="/upload/log/${vo.coverImg}"></a>
+        <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+            <div class="link_item">
+                <img src="/upload/log/${vo.coverImg}">
+                <div class="link_item_g">
+                </div>
+            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
             <div class="append_info">
                 <div class="info_g">
                     <strong class="info_tit">
@@ -356,9 +414,12 @@
         </div>
     </c:if>
     <c:if test="${status.index == 15 }">
-        <div class="item_pic item_pic_type1">
-            <a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_item"><img
-                    src="/upload/log/${vo.coverImg}"></a>
+        <div class="item_pic item_pic_type1" onclick="window.open('/logShare/logView?tNum=${vo.tNum}')">
+            <div class="link_item">
+                <img src="/upload/log/${vo.coverImg}">
+                <div class="link_item_g">
+                </div>
+            </div><a href="location.href='/member/profile?userNum=${vo.userNum}'"></a>
             <div class="append_info">
                 <div class="info_g">
                     <strong class="info_tit">
