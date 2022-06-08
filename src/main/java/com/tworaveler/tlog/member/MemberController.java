@@ -268,7 +268,15 @@ public class MemberController {
 	public ModelAndView userEditOk(MemberVO vo, HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		TlogApplication.profileImgUpload(vo, request);
+		System.out.println(vo.getProfileImg()+"ddddd");
+		if(vo.getProfileImg()=="/img/profile/default_profile.png") {
+			vo.setProfileImg("/img/profile/default_profile.png");
+			System.out.println(vo.getProfileImg());
+		}else {
+			TlogApplication.profileImgUpload(vo, request);
+			System.out.println(vo.getProfileImg());
+		}
+		
 		//회원정보 수정
 		memberService.updateMember(vo);
 		//myTag 수정(삭제 후 생성)
