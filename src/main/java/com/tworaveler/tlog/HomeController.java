@@ -28,12 +28,12 @@ public class HomeController {
 	@GetMapping("/") 
 	public ModelAndView home(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
-		session.setAttribute("logStatus", "Y"); //임시
-
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		//(1) tLog 10개
-		if(session.getAttribute("logStatus").equals("Y")) {
+		if(userInfo!=null) {
+			mav.addObject("userInfo", userInfo);
 			//팔로잉 tLog
-			List<LogVO> logList = service.selectFollowLog(1); //임시(logId)
+			List<LogVO> logList = service.selectFollowLog(userInfo.getUserNum()); //임시(logId)
 			//vo마다 tNum의 태그리스트 넣기
 			for(LogVO vo : logList) {
 				vo.setTagList(service.selectLogTag(vo.gettNum()));
