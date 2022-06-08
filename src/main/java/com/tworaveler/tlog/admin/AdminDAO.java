@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.tworaveler.tlog.board.BoardVO;
 import com.tworaveler.tlog.log.LogVO;
+import com.tworaveler.tlog.member.MemberVO;
 
 @Repository
 @Mapper
@@ -15,13 +17,15 @@ public interface AdminDAO {
 	// 여행일기 레코드 개수
 	public int selectTlogTotalPosts(PagingVO pvo, LogVO vo);
 	// 자유일기 레코드 개수
-	public int selectBoardTotalPosts(PagingVO pvo, AdminVO vo);
+	public int selectBoardTotalPosts(PagingVO pvo, BoardVO vo);
 	// 전체 회원 수
-	public int selectTotalUser();
+	public int selectTotalUser(PagingVO pvo, MemberVO vo);
 	// 전체 태그 개수
-	public List<Map<String, Object>> selectTag();
+	public List<MemberVO> selectTag();
 	// 여행일기 전체 게시판
 	public List<LogVO> selectTlog(PagingVO pvo, LogVO vo); 
 	// 자유일기 전체 게시판
-	public List<AdminVO> selectBoard(PagingVO pvo, AdminVO vo);
+	public List<BoardVO> selectBoard(PagingVO pvo, BoardVO vo);
+	// 전체 회원 리스트
+	public List<MemberVO> selectMemberList(PagingVO pvo, MemberVO vo);
 }

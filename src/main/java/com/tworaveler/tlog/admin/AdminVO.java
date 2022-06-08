@@ -1,7 +1,5 @@
 package com.tworaveler.tlog.admin;
 
-import java.util.Map;
-
 public class AdminVO {
 
 	// report
@@ -16,17 +14,8 @@ public class AdminVO {
 	
 	// reportType
 	private String reportTypeName;
-	
-	// board
-	private String boardContent;
-	private String writedate;
-	private String ip;
-	private String endTime;
-	private String userNick;
-	
-	// tag
-	private String tagName;
-	
+
+
 	public int getReportNum() {
 		return reportNum;
 	}
@@ -81,42 +70,5 @@ public class AdminVO {
 	public void setReportTypeName(String reportTypeName) {
 		this.reportTypeName = reportTypeName;
 	}
-	public String getBoardContent() {
-		return boardContent;
-	}
-	public void setBoardContent(String boardContent) {
-		this.boardContent = boardContent;
-	}
-	public String getWritedate() {
-		return writedate;
-	}
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-	public String getUserNick() {
-		return userNick;
-	}
-	public void setUserNick(String userNick) {
-		this.userNick = userNick;
-	}
-	public String getTagName() {
-		return tagName;
-	}
-	public void setTagName(String tagName) {
-		this.tagName = tagName;
-	}
 
-	
 }
