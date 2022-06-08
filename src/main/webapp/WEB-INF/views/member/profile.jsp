@@ -24,6 +24,17 @@
 		<c:if test="${loginUser.userNum == userProfile.userNum}">
 			<input type="button" id="userEditBtn" value="회원정보수정" onclick="location.href='/member/userEdit'">
 		</c:if>
+		<c:if test="${loginUser.userNum != userProfile.userNum}">
+			<input type="hidden" id="loginUser" value="${loginUserNum}"/>
+			<input type="hidden" id="isFollowed" value="${isFollowed }"/>
+			<input type="hidden" id="selectedUserNum" value="${userProfile.userNum}"/>
+			<c:if test="${isFollowed!=0}">
+				<input type="button" id="userEditBtn" value="팔로우취소" onclick="unfollow()">
+			</c:if>
+			<c:if test="${isFollowed==0}">
+				<input type="button" id="userEditBtn" value="팔로우" onclick="follow()">
+			</c:if>
+		</c:if>
 	</div>
 	<!-- 게시물, 팔로워, 팔로우 -->
 	<div id="followSection">
