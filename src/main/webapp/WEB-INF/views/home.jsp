@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <script>
-        var index = 1;
+        var index = 0;
      	// 페이지 번호    	  
         var link_page = document.getElementsByClassName("link_page");
      
@@ -452,7 +452,7 @@
     </div>
     <div class="wrap_paging">
         <ul class="paging_list">
-            <li><a href="javascript:;" class="link_page txt_page1" data-page="2">01</a></li>
+            <li><a href="javascript:;" class="link_page txt_page1" data-page="1">01</a></li>
             <li><a href="javascript:;" class="link_page txt_page2" data-page="2">02</a></li>
             <li><a href="javascript:;" class="link_page txt_page3" data-page="3">03</a></li>
             <li><a href="javascript:;" class="link_page txt_page4" data-page="4">04</a></li>
