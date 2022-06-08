@@ -162,10 +162,17 @@ public class LogWriteController {
 	public String logEditOk(LogVO vo){
 		service.logEdit(vo);
 		service.tagDel(vo);
-		service.insertTagList(vo);
 		service.tagUserDel(vo);
-		service.insertUserList(vo);
-		service.detailDel(vo);
+		if(vo.getTagNumList()!=null) {
+			service.insertTagList(vo);
+		}
+		if(vo.getUserNumList()!=null) {
+			service.insertUserList(vo);
+		}	
+		if(vo.getdNumList()!=null) {
+			service.detailDel(vo);
+		}
+		
 		return "redirect:/logShare/logView?tNum="+vo.gettNum();
 	}
 }

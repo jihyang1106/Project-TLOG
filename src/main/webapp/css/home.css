@@ -114,7 +114,11 @@
     top: 0;
     margin:auto;
     width: 100%;
+<<<<<<< HEAD
 	height: 50%;
+=======
+	height: 100%;
+>>>>>>> 8487bc4fc955105310338a28f26b11b4ec56480d
 	    margin-top: 20%;
 }
 
@@ -321,7 +325,6 @@
 	background: rgba(138, 138, 138, 80%);
 	font-weight : bold;
 	border-radius: 50%;
-	
 }
 
 /*=============== BEST FOLLOW ===============*/

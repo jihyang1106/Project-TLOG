@@ -48,9 +48,12 @@
 						<a href="/member/login" class="main-login ">로그인</a>
 					</c:if>
 					<c:if test="${userInfo.userNum != null }">
-						<a href="/member/profile?userNum=${userInfo.userNum}"><img src="${userInfo.profileImg}" style="width: 10px"></a>
-	   					<a href="/logShare/logWrite" class="main-write">일기쓰기</a>
-	    				<a href="/member/logout" class="main-logout">로그아웃</a>
+						<span id="topLogInfo">
+						&emsp;&emsp;&emsp;
+							<a href="/member/profile?userNum=${userInfo.userNum}"><img src="${userInfo.profileImg}" id="topProfileImg"></a>&emsp;
+		   					<a href="/logShare/logWrite" class="main-write">일기쓰기</a>&emsp;
+		    				<a href="/member/logout" class="main-logout">로그아웃</a>
+						</span>
 					</c:if>
 	        	</div>
         	</div>
