@@ -24,9 +24,7 @@
     </update>
     <delete id="userDel">
         DELETE FROM user
-        <if test="param2 != 1">
-        	WHERE userNum = #{param1}
-        </if>
+        WHERE userNum = #{param1}
     </delete>
 	<select id='getAllHashtag' resultType='com.tworaveler.tlog.member.MemberVO'>
 		SELECT 		*
