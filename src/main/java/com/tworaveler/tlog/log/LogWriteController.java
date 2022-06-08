@@ -82,8 +82,12 @@ public class LogWriteController {
 				service.logWriteOk(vo); // travelLog 테이블
 				int tNum =service.getTNum(vo.getUserNum());//방금 넣은 tNum가져오기
 				vo.settNum(tNum); 
-				service.insertUserList(vo);
-				service.insertTagList(vo);
+				System.out.println(vo.getTagNumList());
+				System.out.println(vo.getUserNumList());
+				
+				System.out.println("insertTagList="+service.insertTagList(vo));
+				System.out.println("insertUserList="+service.insertUserList(vo));
+				
 				System.out.println("글쓰기 완료");
 			}
 		}catch(Exception e) {
@@ -97,7 +101,7 @@ public class LogWriteController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/detailWriteOk", method = RequestMethod.POST)
 	public int detailWriteOk(HttpServletRequest request, @RequestBody List<Map<String,Object>> dataList) {
-		int userNum =1; // 로그인 userNum  ((String) request.getSession().getAttribute("logId"))
+		int userNum =2; // 로그인 userNum  ((String) request.getSession().getAttribute("logId"))
 		int tNum = service.getTNum(userNum); //방금 넣은 tNum가져오기
 		System.out.println("tNum = "+ tNum);
 				

@@ -142,24 +142,26 @@
 							<img src='${vo.profileImg}' class='logProfileImg'/></span>&emsp;
 							<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
 							<span class='logLike'>
-								<c:if test="${vo.likeType==0}">
+								<c:if test="${vo.likeType==0 && logStatus=='Y'}">
 									<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 								</c:if>
-								<c:if test="${vo.likeType==1}">
+								<c:if test="${vo.likeType==1 && logStatus=='Y'}">
 									<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 								</c:if>				
 								
 							</span>
 						</li>
 						<hr/>
-						<li> with &nbsp;&nbsp;&nbsp;
-							<c:forEach var='t' items='${vo.tagUserList}'>				
-									<span class='users' onclick="location.href='/member/profile?userNum=${t.userNum}'">
-										<img src='${t.profileImg}' class='tagProfileImg'/>
-										&nbsp;${t.userNick}
-									</span>&nbsp;
-							</c:forEach>
-						</li>
+						<c:if test="${vo.tagUserList.size()>0}">
+							<li> with &nbsp;&nbsp;&nbsp;
+								<c:forEach var='t' items='${vo.tagUserList}'>				
+										<span class='users' onclick="location.href='/member/profile?userNum=${t.userNum}'">
+											<img src='${t.profileImg}' class='tagProfileImg'/>
+											&nbsp;${t.userNick}
+										</span>&nbsp;
+								</c:forEach>
+							</li>
+						</c:if>
 						<li><span>${vo.startDate}</span>&nbsp;~&nbsp;<span>${vo.endDate}</span></li>
 						
 						<li>
