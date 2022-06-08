@@ -16,6 +16,8 @@ public interface MemberDAO {
 	public MemberVO selectMemberByKakao(String idKakao);
 	//회원정보 수정
 	public void updateMember(MemberVO vo);
+	//회원탈퇴
+	public int userDel(int userNum, int loginStatus);
 	//모든 해시태그 정보 받아오기
 	public List<MemberVO> getAllHashtag();
 	//mytag 추가
@@ -24,6 +26,12 @@ public interface MemberDAO {
 	public int mytagDel(int userNum);
 	//my 정보 받아오기
 	public List<MemberVO> getMytag(int userNum);
+	//팔로우 하기
+	public void setFollow(int userNum, int loginNum);
+	//언팔로우
+	public void unfollow(int userNum, int loginNum);
+	//팔로우 여부 판단
+	public int isFollowed(int userNum, int loginUserNum);
 	//팔로워 받아오기
 	public List<MemberVO> setFollowerInfo(int userNum);
 	//팔로우하는 사람 받아오기

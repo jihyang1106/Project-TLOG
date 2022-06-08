@@ -5,24 +5,29 @@
 /* ====== 글 등록하기 ======*/
 function boardSend(){
 	event.preventDefault();
-	if($("#freeLogContent").val()==""){ // 글 입력 안함
-		alert("글을 입력 후에 등록해주세요");
-	}else{ // 글 입력
-		var url = '/boardWrite';
-		var data = $("#boardForm").serialize(); // form데이터 보내기
-		$.ajax({
-			url :url,
-			data : data,
-			type : 'POST',
-			success : function(result){
-				$("#log_list_div").empty();
-				$("#freeLogContent").val("");
-				startNum=0;
-				logLists();
-			},error : function(e){
-				alert("오류!");
-			}
-		});
+	if($("#loginNum").val()==""){//로그인 안됨
+		alert("로그인 후 이용하세요");
+		location.href = "/member/login";
+	}else{
+		if($("#freeLogContent").val()==""){ // 글 입력 안함
+			alert("글을 입력 후에 등록해주세요");
+		}else{ // 글 입력
+			var url = '/boardWrite';
+			var data = $("#boardForm").serialize(); // form데이터 보내기
+			$.ajax({
+				url :url,
+				data : data,
+				type : 'POST',
+				success : function(result){
+					$("#log_list_div").empty();
+					$("#freeLogContent").val("");
+					startNum=0;
+					logLists();
+				},error : function(e){
+					alert("오류!");
+				}
+			});
+		}
 	}
 }
 
@@ -67,7 +72,7 @@ function logLists(){
 				tag += "<div id='freeLog_div'>";		    	  
 		    	tag += "<div id='info'><span id='infoLeft'><img src='"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
 		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
-		    	if(data[i].userNum == ${userInfo.userNum}){
+		    	if(data[i].userNum == $("#loginNum").val()){
 					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";
 				}
 		    	tag += "</span></div><hr/>";
