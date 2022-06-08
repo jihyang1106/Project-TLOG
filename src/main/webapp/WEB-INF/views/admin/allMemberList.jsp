@@ -112,7 +112,7 @@
                                         <th>여행일기 수</th>
                                         <th>자유일기 수</th>
                                         <th>총 일기 수</th>
-                                        <th>수정 및 삭제</th>
+                                        <th>관리자 권한 부여 및 회원 정지 </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,11 +124,28 @@
 	                                        <td>${m.tNumCount}</td>
 	                                        <td>${m.bCount}</td>
 	                                        <td>${m.sum}</td>
-	                                        <td>
-	                                        	<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#editModal"
-	                                        		onclick="memberEdit(${m.userNum},${m.status})" value="수정">
-	                                        	<input type="button" class="btn delBtn memeberDel" value="삭제">
-	                                        </td>
+	                                        <c:if test="${m.status==0}">
+												<td>
+	                                        		<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#editModal"
+	                                        		onclick="memberAdmin(${m.userNum})" value="관리자"><hr/>
+	                                        		<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#blockModal"
+	                                        		onclick="memberBlock(${m.userNum})" value="회원정지">
+	                                        	</td>	                                        
+	                                        </c:if>
+	                                        <c:if test="${m.status==1}">
+	                                        	<td>
+	                                        		<span>관리자 입니다.</span><hr/>
+	                                        		<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#editModal"
+	                                        		onclick="memberAdmin(${m.userNum})" value="관리자">
+	                                        	</td>
+	                                        </c:if>
+	                                        <c:if test="${m.status==9}">
+	                                        	<td>
+	                                        		<span>현재 정지된 회원입니다.</span><hr/>
+	                                        		<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#blockModal"
+	                                        		onclick="memberBlock(${m.userNum})" value="회원정지">
+	                                        	</td>
+	                                        </c:if>
                                     	</tr>
                                 	</c:forEach>
                                 </tbody>

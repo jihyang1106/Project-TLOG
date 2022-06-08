@@ -57,10 +57,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateAdmin(MemberVO vo) {
-		return dao.updateAdmin(vo);
+	public int updateAdmin(int userNum, int status) {
+		return dao.updateAdmin(userNum, status);
 	}
-
-	
-
 }

@@ -24,43 +24,58 @@
     </div>
 </div>
 
+<!-- 관리자 권한 부여 modal -->
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 id="modal-title" class="modal-title">회원 정보 수정</h3>
+				<h3 id="modal-title" class="modal-title">관리자 권한 부여</h3>
 				<button data-dismiss="modal" class="delBtn btn">&times;</button>
 			</div>
 			<form class="modal-body modalBody">
 				<div>
-					<h5>관리자 권한</h5><hr/>
 					<div class="form-control col-6">
-						<input type="radio" id="updateAdmin" name="status" value="관리자권한부여">
+						<input type="hidden" id="modalUserNum" name="userNum">
+						<input type="radio" id="updateAdmin" name="status" value="1">
 	     				<label for="관리자권한부여">&nbsp;관리자권한 부여</label>
 					</div>
 					<div class="form-control col-6">
-						<input type="radio" id="updateAdminCancel" name="status" value="관리자권한없음">
+						<input type="radio" id="updateAdminCancel" name="status" value="0">
 	     				<label for="관리자권한없음">&nbsp;관리자권한 없음</label>
 					</div>
 				</div>
-				<br/>
-				<div>
-<!-- 					<h5>회원정지</h5><hr/>
-					<div id="blockMember" class="form-control col-6">
-						<input type="radio" id="modifyRecommend1" name="recommend" value="회원정지">
-	     				<label for="회원정지">&nbsp;회원정지</label>
-					</div>
-					<div id="blockMemberCancle" class="form-control col-6">
-						<input type="radio" id="modifyRecommend2" name="recommend" value="회원정지해제">
-	     				<label for="회원정지해제">&nbsp;회원정지 해제</label>
-					</div> -->
-				</div>
-				<br/>
 			</form>
 			<div class="modal-footer">
 				<button id="modalUpdate" class="delBtn btn">수정</button>
-				<button data-dismiss="modal" class="delBtn btn">닫기</button>
+				<button data-dismiss="modal" class="delBtn btn" id="modalDel">닫기</button>
 			</div>
 		</div><!-- modal-content -->
 	</div><!-- modal-dialog -->
-</div><!-- 수정 modal 끝 -->
+</div><!-- 관리자 권한 부여 modal 끝 -->
+
+<!-- 회원정지 modal -->
+<div class="modal fade" id="blockModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 id="modal-title" class="modal-title">회원 정지</h3>
+				<button data-dismiss="modal" class="delBtn btn">&times;</button>
+			</div>
+			<form class="modal-body modalBody">
+					<span class="form-control col-6">
+						<input type="hidden" id="modalUserNum" name="userNum">
+						<input type="radio" id="blockMember" name="status" value="9">
+	     				<label for="회원정지">&nbsp;회원정지</label>
+					</span>
+					<span class="form-control col-6">
+						<input type="radio" id="blockMemberCancel" name="status" value="0">
+	     				<label for="회원정지해제">&nbsp;회원정지 해제</label>
+					</span> 
+			</form>
+			<div class="modal-footer">
+				<button id="modalBlock" class="delBtn btn">수정</button>
+				<button data-dismiss="modal" class="delBtn btn" id="modalDel">닫기</button>
+			</div>
+		</div><!-- modal-content -->
+	</div><!-- modal-dialog -->
+</div><!-- 회원정지 modal 끝 -->

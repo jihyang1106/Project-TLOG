@@ -25,5 +25,5 @@ public interface AdminService {
 	// 관리자 회원 여부
 	public int selectMemberAdmin(int userNum);
 	// 관리자 권한 부여
-	public int updateAdmin(MemberVO vo);
+	public int updateAdmin(int userNum, int status);
 }

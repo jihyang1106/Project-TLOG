@@ -60,11 +60,11 @@
 	<select id="selectMemberAdmin" resultType="int">
 		SELECT    status 
 		FROM      user
-		WHERE     userNum = ${param1}
+		WHERE     userNum = #{param1}
 	</select>
 	<update id="updateAdmin">
 		UPDATE    user 
-		SET       status = ${param1.status}
-		WHERE     userNum = ${param1.userNum}
+		SET       status = #{param2}
+		WHERE     userNum = #{param1}
 	</update>
 </mapper>
