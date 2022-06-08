@@ -60,7 +60,7 @@ function logLists(){
 				}
 				tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 				tag += "</li>";
-				tag += "<li><span>국내/국외, 위치</span></li>";
+				tag += "<li><span>"+data[i].placeInfo+"</span></li>";
 				tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
 				tag += "<li>";
 				for(j=0; j<data[i].tagList.length; j++){

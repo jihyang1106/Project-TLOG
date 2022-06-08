@@ -87,8 +87,12 @@ public class LogWriteController {
 				service.logWriteOk(vo); // travelLog 테이블
 				int tNum =service.getTNum(vo.getUserNum());//방금 넣은 tNum가져오기
 				vo.settNum(tNum); 
-				service.insertUserList(vo);
-				service.insertTagList(vo);
+				System.out.println(vo.getTagNumList());
+				System.out.println(vo.getUserNumList());
+				
+				System.out.println("insertTagList="+service.insertTagList(vo));
+				System.out.println("insertUserList="+service.insertUserList(vo));
+				
 				System.out.println("글쓰기 완료");
 			}
 		}catch(Exception e) {

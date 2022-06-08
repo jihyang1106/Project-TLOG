@@ -50,7 +50,7 @@ var newOrLike=0;
 					}
 					tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 					tag += "</li>";
-					tag += "<li><span>국내/국외, 위치</span></li>";
+					tag += "<li><span>"+data[i].placeInfo+"</span></li>";
 					tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
 					tag += "<li>";
 					for(j=0; j<data[i].tagList.length; j++){
@@ -68,7 +68,7 @@ var newOrLike=0;
 			    startNum += data.length; //startNum 갱신
 			    
 			    //마지막 페이지일 때 첫페이지로
-				if(data.length<6){
+				if(data.length<7){
 					startNum=0;
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
 						logLists(); //한번 더 실행
@@ -82,7 +82,7 @@ var newOrLike=0;
 	
 /* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
-    if($(window).scrollTop()+200>=$(document).height() - $(window).height()){
+    if($(window).scrollTop()+500>=$(document).height() - $(window).height()){
     	console.log("바닥");
     	if(!isFetching){
     		isFetching=true;
@@ -121,17 +121,9 @@ $("#searchFrm").submit(function() {
 	   return false;
 	}
 });
-
-/* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)*/
-function scrollFunction() {
-    var btn = document.getElementById('top_btn');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
-    }
-}
-
+$("#view_all").click(function(e){
+	e.preventDefault();
+})
 /* ======= 부드럽게 위로 가기 ====== */
 function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
