@@ -132,7 +132,7 @@
 			</li>
 			<li class='profileInfo'>
 				<span onclick="location.href='/member/profile?userNum=${vo.userNum}'">
-				<img src='/upload/user/${vo.profileImg}' class='logProfileImg'/></span>&emsp;
+				<img src='${vo.profileImg}' class='logProfileImg'/></span>&emsp;
 				<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
 				<span class='logLike'>
 					<c:if test="${vo.likeType==0}">
