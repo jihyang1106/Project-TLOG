@@ -19,16 +19,17 @@
 					<span><label for="imgFile" title="이미지 업로드"><img src="/upload/user/default_profile.png" id="previewImg"></label></span>&emsp;&emsp;
 				</c:if>
 				<c:if test="${userInfo.profileImg!=null}">
-					<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg }" id="previewImg"></label></span>&emsp;&emsp;
+					<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg}" id="previewImg"></label></span>&emsp;&emsp;
 				</c:if>
 				<span><input id="defaultProfile" type="button" value="이미지 제거"></span>
 				<span id="profileNick">닉네임</span>&emsp;&emsp;
 				<c:if test="${userInfo.userNick!=null}">
-					<span><input type="text" name="userNick" id="profileInfoNick" value="${userInfo.userNick }"/></span>
+					<span><input type="text" name="userNick" id="profileInfoNick" value="${userInfo.userNick}"/></span>
 				</c:if>	
 				<c:if test="${userInfo.userNick==null}">
 					<span><input type="text" name="userNick" id="profileInfoNick"/></span>
 				</c:if>
+				<button type="button" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
 				<div id="profileSubmit"><input type="submit" value="정보등록" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">
