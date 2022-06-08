@@ -100,4 +100,9 @@ public interface LogDAO {
 	
 	//글 삭제
 	public int logDel(int tNum);
+	/*================== logEdit =====================*/
+	public int logEdit(LogVO vo);
+	public int tagDel(LogVO vo);
+	public int tagUserDel(LogVO vo);
+	public int detailDel(LogVO vo);
 }

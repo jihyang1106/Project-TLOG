@@ -177,6 +177,26 @@ public class LogServiceImpl implements LogService{
 		return dao.isTagged(tNum, logUser);
 	}
 
+	@Override
+	public int logEdit(LogVO vo) {
+		return dao.logEdit(vo);
+	}
+
+	@Override
+	public int tagDel(LogVO vo) {
+		return dao.tagDel(vo);
+	}
+
+	@Override
+	public int tagUserDel(LogVO vo) {
+		return dao.tagUserDel(vo);
+	}
+
+	@Override
+	public int detailDel(LogVO vo) {
+		return dao.detailDel(vo);
+	}
+
 	
 	
 }

@@ -6,17 +6,77 @@ var tagCnt=0;
 $(".tags").click(function(){
 	//체크된 상태일 때
 	if($(this).next().is(":checked")){ 
-		$(this).next().prop("checked", false);
-		$(this).css("background-color", "#ddd");
-		tagCnt--;
+		$(this).next().prop("checked", false); //체크 해제
+		$(this).css("background-color", "#eee");
+		if($(this).prop("id") == 'region'){
+			for(var i=1; i<=14; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}else if($(this).prop("id") == 'tag1'){
+			$("#tag2").css("display", "inline-block");
+			for(var i=3; i<=7; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}else if($(this).prop("id") == 'tag2'){
+			$("#tag1").css("display", "inline-block");
+			for(var i=8; i<=14; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}else if($(this).prop("id") == 'age'){
+			for(var i=15; i<=20; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}else if($(this).prop("id") == 'group'){
+			for(var i=21; i<=25; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}else if($(this).prop("id") == 'season'){
+			for(var i=26; i<=29; i++){
+				$("#tag"+i).css("display", "none");	
+				$("#tag"+i).css("background-color", "#eee");
+				$("#tag"+i).next().prop("checked", false); //체크 해제
+			}
+		}
 	//체크된 상태 아닐 때
 	}else{ 
 		$(this).next().prop("checked", true);
 		tagCnt++;
 		var id = $(this).attr('id');
 		switch(id){
+		case'region':
+			$(this).css("background-color", "#aaa");
+				$("#tag1").css("display", "inline-block");	
+				$("#tag2").css("display", "inline-block");	
+		break;
 		case'tag1': case'tag2':
 			$(this).css("background-color", "rgb(42, 76, 211, 70%)");
+			if($(this).prop("id") == 'tag1'){
+				$("#tag2").css("display", "none");
+				$("#tag3").css("display", "inline-block");	
+				$("#tag4").css("display", "inline-block");	
+				$("#tag5").css("display", "inline-block");	
+				$("#tag6").css("display", "inline-block");	
+				$("#tag7").css("display", "inline-block");	
+			}else if($(this).prop("id") == 'tag2'){
+				$("#tag1").css("display", "none");
+				$("#tag8").css("display", "inline-block");	
+				$("#tag9").css("display", "inline-block");	
+				$("#tag10").css("display", "inline-block");	
+				$("#tag11").css("display", "inline-block");	
+				$("#tag12").css("display", "inline-block");
+				$("#tag13").css("display", "inline-block");	
+				$("#tag14").css("display", "inline-block");	
+			}
 		break
 		case'tag3': case'tag4': case'tag5': case'tag6': case'tag7':
 			$(this).css("background-color", "rgba(122, 140, 226, 80%)");
@@ -24,12 +84,36 @@ $(".tags").click(function(){
 		case'tag8': case'tag9': case'tag10': case'tag11': case'tag12': case'tag13': case'tag14':
 			$(this).css("background-color", "rgba(122, 140, 226, 30%)");
 		break
+		case'age':
+			$(this).css("background-color", "#aaa");
+				$("#tag15").css("display", "inline-block");	
+				$("#tag16").css("display", "inline-block");
+				$("#tag17").css("display", "inline-block");	
+				$("#tag18").css("display", "inline-block");
+				$("#tag19").css("display", "inline-block");	
+				$("#tag20").css("display", "inline-block");	
+		break;
 		case'tag15': case'tag16': case'tag17': case'tag18': case'tag19': case'tag20':
 			$(this).css("background-color", "#C3E2DD");
 		break
+		case'group':
+			$(this).css("background-color", "#aaa");
+				$("#tag21").css("display", "inline-block");	
+				$("#tag22").css("display", "inline-block");
+				$("#tag23").css("display", "inline-block");	
+				$("#tag24").css("display", "inline-block");
+				$("#tag25").css("display", "inline-block");	
+		break;
 		case'tag21': case'tag22': case'tag23': case'tag24': case'tag25':
 			$(this).css("background-color", "#FEF5D4");
 		break
+		case'season':
+			$(this).css("background-color", "#aaa");
+				$("#tag26").css("display", "inline-block");	
+				$("#tag27").css("display", "inline-block");
+				$("#tag28").css("display", "inline-block");
+				$("#tag29").css("display", "inline-block");	
+		break;
 		case'tag26': case'tag27': case'tag28': case'tag29':
 			$(this).css("background-color", "#EACACB");
 		break
@@ -41,15 +125,16 @@ $(".tags").click(function(){
 		$("#tag_alert").css("display","none");
 	}
 })
+
 /*================ 태그할 유저 선택 ==================*/
 var cnt=0;
 function PlusUser(){
-	if(cnt<5){
+	if(cnt<6){
 		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;</li>";
 		$("#tag_user_ul").append(li);
 		cnt++;
 		console.log(cnt);
-		if(cnt>=5){
+		if(cnt>=6){
 			$("#plus").css("display","none"); //플러스버튼 지우기
 		}
 	}
@@ -66,10 +151,9 @@ $(document).on("click", ".fa-xmark", function() {
 	//태그할 유저 자동검색
 	$(document).on("keyup", ".tag_box", function() {
 		if($(this).val().trim()!=""){
-			var ul = $(this).next().next(); //유저리스트 들어갈 ul
-			var data = {"userNick" : $(this).val()};
-			console.log(tagBox);
 			var tagBox = $(this);
+			var ul = $(".search_user_ul"); //유저리스트 들어갈 ul
+			var data = {"userNick" : $(this).val()};
 			$.ajax({
 		          url: '/logShare/searchUserList',
 		          type: 'GET',
@@ -78,7 +162,7 @@ $(document).on("click", ".fa-xmark", function() {
 		        	  var list = "";
 		        	  for(var i=0; i<data.length; i++){
 		        		  list += "<li class='search_user_li' value='"+data[i].userNum+"'>";
-		        		  list += "<img src='/upload/user/"+data[i].profileImg+"' class='profile_img'/>&nbsp;"+data[i].userNick;
+		        		  list += "<img src='"+data[i].profileImg+"' class='profile_img'/>&nbsp;"+data[i].userNick;
 		        		  list += "</li>";
 		        	  }
 		        	  ul.html(list); //ul태그 안에 넣기
@@ -106,11 +190,10 @@ $(document).on("click", ".fa-xmark", function() {
 		}		
 	});
 	
-		
-//버튼 클릭 시 파일 업로드 진행
+//div 클릭 시 파일 업로드 진행
 $(".img_upload_phr").click(function(e) {
 	e.preventDefault();
- 	$(this).parent().next().trigger("click");
+ 	$(this).next().trigger("click");
 })
 
 //이미지 미리보기
