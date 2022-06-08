@@ -9,7 +9,7 @@
 			<div id="profile">
 			<form id="profileFrm" method="post" action="/member/userEditOk" enctype="multipart/form-data">
 				<!-- 프로필 파일 저장용 -->
-				<input type="hidden" name="userNum" value="${kakaoVO.userNum }"/>
+				<input type="hidden" name="userNum" value="${userInfo.userNum }"/>
 				<div id=profileImgSection>
 					<input id="imgFile" name="profileImgs" type="file" hidden="true" accept="image/jpg, image/jpeg, image/png">
 					<input id="profile" name="profileImg" type="hidden" value="${userInfo.profileImg }">
@@ -35,15 +35,15 @@
 				</div>
 				<div id="profileSubmit"><input type="submit" value="정보수정" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
-				<div id="tagSection">
+				<div id="allTagCnt">
 			      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
-		      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" value="N" ></span>&emsp;
-				</c:forEach>
-				</div>
-				<div id="myTagCnt" hidden="true">
-		      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
-		      		<span class="myTag${st.index }">${vo.tagNum }</span>&emsp;
-				</c:forEach>
+			      		<span id="tagWord${vo.tagNum }" class="tagWord" >#${vo.tagName }<input type="checkbox" name="tagListCl"  id="tagvalue${st.index }" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" class='hiddenTags' value="N" ></span>&emsp;
+					</c:forEach>
+					</div>
+					<div id="myTagCnt" hidden="true">
+			      	<c:forEach var="vo" items="${myTagList}" varStatus="st">
+			      		<span class="myTag${st.index}">${vo.tagNum }</span>&emsp;
+					</c:forEach>
 				</div>
 			</form>
 			</div>

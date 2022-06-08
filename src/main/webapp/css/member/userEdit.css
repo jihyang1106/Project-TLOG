@@ -155,6 +155,7 @@
 	background-color:black;
 	color:white;
 }
-.checked{
-	background: green;
+#allTagCnt{
+	padding:200px;
+	background-color:green;
 }

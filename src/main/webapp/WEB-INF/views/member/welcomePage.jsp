@@ -37,7 +37,7 @@
 				<div id="hr-sect">태그선택</div>
 				<div id="tagSection">
 			      	<c:forEach var="vo" items="${allTagList}" varStatus="st">
-			      		<span class="tagWord">#${vo.tagName }<input type="checkbox" name="tagListCl" class="tagvalue" hidden="true" value=${vo.tagNum } ></input><input type="hidden" id="tagStatus${vo.tagNum}" value="N" ></span>&emsp;
+			      		<span class="tagWord">#${vo.tagName}<input type="checkbox" name="tagListCl" class="tagvalue" hidden="true" value='${vo.tagNum}' ></input><input type="hidden" class='hiddenTags' id="tagStatus${vo.tagNum}" value="N" ></span>&emsp;
 					</c:forEach>
 				</div>
 			</form>

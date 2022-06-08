@@ -74,7 +74,7 @@
 							<div class='log_div'>
 								<ul class='log_ul'>
 									<li>${dvo.tContent}</li>
-									<li>${dvo.tPlace} 에서</li>		
+									<li> - ${dvo.tPlace} 에서 - </li>		
 								</ul>
 							</div>
 						</div>
