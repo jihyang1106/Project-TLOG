@@ -31,6 +31,57 @@
 	height:120px;
 	border-radius:50%;
 }
+/* #profileNick{ */
+/* 	font-size:1.3em; */
+/* 	font-weight:700; */
+/* 	color:rgba(0,0,0,60%); */
+/* } */
+/* #profileInfoNick{ */
+/* 	border:none; */
+/* 	outline:none; */
+/* 	border-bottom:1px solid rgba(0,0,0,60%); */
+/* 	text-align:center; */
+/* } */
+/* #profileSubmit{ */
+/* 	text-align:center; */
+/* } */
+/* #profileSubmitBtn{ */
+/* 	width:100px; */
+/* 	height:40px; */
+/* 	font-weight:800; */
+/* 	background-color:var(--theme-lightblue-60); */
+/* 	border:none; */
+/* 	border-radius:10px; */
+/* 	position:absolute; */
+/* 	top:90%; */
+/* 	margin-left:-40px; */
+/* 	transition:0.3s; */
+/* 	color:rgba(0,0,0,70%); */
+/* } */
+/* #profileSubmitBtn:hover{ */
+/* 	top:89%;	 */
+/* } */
+#defaultProfile{
+	width:5vw;
+	height:2vw;
+	border:none;
+	border-radius:10px;
+	background-color:var(--theme-lightblue-60);
+	color:white;
+	transition:0.3s;
+	font-weight:700;
+}
+#defaultProfile:hover{
+	background-color:rgba(42, 76, 211, 75%);
+}
+#profileNickSection{
+	width:50%;
+	height:150px;
+	display:inline-block;
+	float:right;
+	margin-bottom:0px;
+	padding-top:40px;
+}
 #profileNick{
 	font-size:1.3em;
 	font-weight:700;
@@ -46,7 +97,7 @@
 	text-align:center;
 }
 #profileSubmitBtn{
-	width:100px;
+	width:80px;
 	height:40px;
 	font-weight:800;
 	background-color:var(--theme-lightblue-60);
@@ -56,7 +107,7 @@
 	top:90%;
 	margin-left:-40px;
 	transition:0.3s;
-	color:rgba(0,0,0,70%);
+	color:white;
 }
 #profileSubmitBtn:hover{
 	top:89%;	

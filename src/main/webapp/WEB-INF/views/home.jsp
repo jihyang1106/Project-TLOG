@@ -400,7 +400,6 @@
 				<button class="slide_btn btn_left" id="leftBtn"><i class="bi bi-arrow-left-circle-fill" style="font-size: 80px; "></i></button>
 				<button class="slide_btn btn_right" id="rightBtn"><i class="bi bi-arrow-right-circle-fill" style="font-size: 80px;"></i></button>
 			</div>
-		</div>
 		<div class="wrap_paging">
 			<ul class="paging_list">
 				<li><a href="javascript:;" class="link_page txt_page1" data-page="2">01</a></li>
@@ -454,4 +453,3 @@
 				<li class="tag_item_end"></li>
 			</ul>
 		</div>
-	</div>
