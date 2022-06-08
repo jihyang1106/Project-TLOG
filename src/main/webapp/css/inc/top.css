@@ -18,7 +18,7 @@ header{
   	margin-bottom: -95px;
 }
 
-#nav{
+nav{
 	height: 95px;
 	width: 70%;
 	display: flex;
@@ -34,7 +34,7 @@ header{
 
 .nav-menu{
 	/*background-color: rgb(0, 128, 128);*/
-	width: 350px;
+	width: 445px;
 }
 
 .nav-list{
@@ -52,5 +52,5 @@ header{
 }
 
 .nav-loginSign>a{
-	padding-right:15px;
+	padding-right:22px;
 }

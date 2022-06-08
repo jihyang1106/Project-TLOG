@@ -133,8 +133,8 @@
 	line-height:40px;
 }
 .coverImg{
-	width:14vw;
-	height:12vw;
+	max-width:14vw;
+	max-height:12vw;
 	margin-bottom:1vw;
 	border-radius:10px;
 	box-shadow:0 0 10px rgba(0,0,0,30%);

@@ -27,21 +27,23 @@
 					<br/><br/>
 				</c:if>
 			</c:forEach>
+			<span id='tag_alert' style='color:orange; display:none;'>태그를 5개 이하로 선택해주세요.</span>
 			</div>
 			<div>
 		    <ul id='tag_user_ul'>
 				<li>동행&emsp;:&emsp;<img src='/img/plus.jpg' id='plus' onclick='PlusUser()'/></li>
 			</ul>
+			<ul class='search_user_ul'></ul>
 			</div>
 			<br/>
 			<div class="log_img_top">
-				<button class="img_upload_phr">여행 일기 추가</button> 
+				<button class="img_upload_phr" type="button">여행 일기 추가</button> 
 			</div>
 		    <input type="file" name="images" class="log_img" style="display: none" multiple required/>
 		</form>	
 		<!-- 엘리먼트 추가될 div -->
 		<div id='detail_div'></div>
-	    <button id='write_btn'>일기등록</button>
+	    <button id='write_btn' type="button">일기등록</button>
 	</div>
 </div>
 <script src='/js/logShare/logWrite.js'></script>
