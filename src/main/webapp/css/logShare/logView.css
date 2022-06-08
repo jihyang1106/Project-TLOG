@@ -1,4 +1,68 @@
 @charset "UTF-8";
+/* ===== 태그 색상(변경해야됨!) ===== */
+#tag1, #tag2{
+	background-color: rgba(42, 76, 211, 30%);
+}
+#tag3, #tag4, #tag5, #tag6, #tag7{
+	background-color: rgba(166, 198, 252, 50%);
+}
+#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
+	background-color: rgba(122, 140, 226, 30%);
+}
+#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
+	background-color: rgba(195, 226, 221, 50%);
+}
+#tag21, #tag22, #tag23, #tag24, #tag25{
+	background-color: #FEF5D4;
+}
+#tag26, #tag27, #tag28, #tag29{
+	background-color: rgba(234, 202, 203, 50%);
+}
+
+.carousel{
+    margin: 0 auto;
+    width: 70%;
+    height: 1090px;
+    
+}
+
+.carousel-inner{
+	position: relative;
+    overflow: hidden;
+    width: 800px;
+    height: 100%;
+    margin: auto;
+}
+
+
+
+
+.logtag_wrap, .del_edit_btn{
+	margin-top: 10px;
+}
+
+.carousel-caption{
+	color: black;
+    position: relative;
+    top: 17px;
+    left: 17.5%;
+    width: 519px;
+    height: 220px;
+}
+
+.imgs{
+	padding-top: 50px;
+    max-width: 40vw;
+    max-height: 40vw;
+    
+    min-width: 25vw;
+    min-height: 25vw;
+    /* box-shadow: 0 0 10px rgb(0 0 0 / 30%); */
+    display: block;
+    margin-bottom: 300px;
+    margin: auto;
+}
+
 #log_big{
 	/*display:inline-block;
 	height:90vh;*/
@@ -73,40 +137,8 @@
 	cursor:pointer;
 	background-color:#ddd;
 }
-/* ===== 태그 색상(변경해야됨!) ===== */
-#tag1, #tag2{
-	background-color: rgba(42, 76, 211, 30%);
-}
-#tag3, #tag4, #tag5, #tag6, #tag7{
-	background-color: rgba(166, 198, 252, 50%);
-}
-#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
-	background-color: rgba(122, 140, 226, 30%);
-}
-#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
-	background-color: rgba(195, 226, 221, 50%);
-}
-#tag21, #tag22, #tag23, #tag24, #tag25{
-	background-color: #FEF5D4;
-}
-#tag26, #tag27, #tag28, #tag29{
-	background-color: rgba(234, 202, 203, 50%);
-}
+
 .current{
 	display : block;
 }
-.carousel{
-	margin:0 auto;
-	
-}
-.carousel-caption{
-	color:black;
-	width:50vw;
-}
-.imgs{
-	max-width:25vw;
-	max-height:25vw;
-	box-shadow:0 0 10px rgba(0,0,0,30%);
-	display:block;
-	margin-bottom:300px;
-}
+
