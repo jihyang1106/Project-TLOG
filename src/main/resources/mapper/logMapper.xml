@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tworaveler.tlog.log.LogDAO">
-	<!-- 메인: 최신 글 리스트 -->
+	<!-- 메인: 글 리스트(좋아요순) -->
 	<select id='selectLikeLog' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
 		FROM		travelLog A
@@ -54,7 +54,7 @@
 	</select>
 	<!-- tNum의 태그된 유저 리스트 -->
 	<select id='selectTagUsers' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT	A.userNum, B.userNick
+		SELECT	A.userNum, B.userNick, B.profileImg
         FROM	tagUser A
         JOIN	user B
         ON		B.userNum=A.userNum
@@ -349,15 +349,59 @@
 		LIMIT 		#{param5}, #{param6}
 	</select>
 	<!-- ===================== 글쓰기 ================================================================================ -->
+	<!-- travelLog 등록 -->
 	<insert id="logWriteOk">
-	    INSERT 	INTO travelLog(tNum, userNum, tTitle, startDate, endDate, placeInfo, isPrivate, ip) 
-	    VALUES (#{tNum}, #{userNum}, #{tTitle}, #{startDate}, #{endDate}, #{placeInfo}, #{isPrivate}, #{ip})
+	    INSERT 	INTO travelLog(userNum, tTitle, startDate, endDate, placeInfo, isPrivate, ip) 
+	    VALUES (#{userNum}, #{tTitle}, #{startDate}, #{endDate}, #{placeInfo}, #{isPrivate}, #{ip})
 	</insert>
-	<insert id="detailWriteOk" parameterType="java.util.List" >
-	    INSERT 	INTO travelDetail(tNum, tImg, tContent, tPlace, isCoverImg) 
+	<!-- travelDetail 등록 -->
+	<insert id="detailWriteOk" parameterType="java.util.Map" >
+	    INSERT 	INTO travelDetail(tNum, tImg, isCoverImg, tContent, tPlace) 
 	    VALUES 
-	    <foreach collection="detailList" item="item" separator=",">
-	    		(#{item.tNum}, #{item.tImg}, #{item.tContent}, #{item.tPlace}, #{item.isCoverImg})
+	    <foreach collection="param2.list" item="item" separator=",">
+	    		(#{param1}, #{item.tImg}, #{item.isCoverImg}, #{item.tContent}, #{item.tPlace})
 	    </foreach>
 	</insert>
+	<!-- 방금 방록한 글의 tNum 가져오기 -->
+	<select id='getTNum' resultType='int'>
+		SELECT  tNum
+		FROM  	travelLog
+		WHERE 	userNum=#{param1}
+		ORDER 	BY tNum DESC
+		LIMIT 	1
+	</select>
+	<!-- 태그 등록 -->
+	<insert id='insertTagList'>
+		INSERT 	tagLog(tNum, tagNum) 
+		VALUES  
+		<foreach collection="tagNumList" item="item" separator=",">
+	        (#{tNum}, #{item})
+	    </foreach>
+    </insert>
+    <!-- 해당 닉네임의 유저 검색 -->
+    <select id='getUserListByNick' resultType='com.tworaveler.tlog.log.LogVO'>
+    	SELECT 	userNum, userNick, profileImg
+    	FROM 	user
+    	WHERE 	userNick like #{param1}
+    </select>
+    <!-- 태그한 유저 등록 -->
+	<insert id='insertUserList'>
+		INSERT 	tagUser(tNum, userNum) 
+		VALUES  
+		<foreach collection="userNumList" item="item" separator=",">
+	        (#{tNum}, #{item})
+	    </foreach>
+	</insert>
+	<!-- ==================== logView =========================================== -->
+	<select id='getOneLog' resultType='com.tworaveler.tlog.log.LogVO'>
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		FROM		travelLog A
+        JOIN		user B
+        ON 			B.userNum = A.userNum
+        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON			C.tNum=A.tNum
+        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON			D.tNum=A.tNum
+        WHERE		A.tNum=#{param1}
+	</select>
 </mapper>

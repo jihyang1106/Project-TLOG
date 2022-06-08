@@ -5,19 +5,8 @@
 <link href="/admintemplate/css/sb-admin-2.min.css" rel="stylesheet"/>
 <link href="/css/admin/main.css" rel="stylesheet"/>
 <script src="/js/admin/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-	$(function(){
-		
-		// 페이징 하기
-/* 		if('${pvo.currentPage}'==1){
-			$('.prevBtn').addClass('prevBtn disabled');
-		}
-		
-		if('${pvo.currentPage}'=='${pvo.totalPages}'){
-			$('.nextBtn').addClass('disabled');
-		} */
-		
-	});
 </script>
 <div id="page-top">
 	<!-- Page Wrapper -->
@@ -39,26 +28,12 @@
 				<span class="sidebar-heading">게시판 및 멤버</span>
 			</div>
 			
-		    <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/main">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            
 			<!-- Nav Item 전체 게시판-->
 			<li class="nav-item">
-			    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-			        aria-expanded="true" aria-controls="collapseTwo">
+			    <a class="nav-link" href="/admin/main">
 			        <i class="fas fa-fw fa-cog"></i>
 			        <span>전체 게시판</span>
 			    </a>
-			    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			        <div class="bg-white py-2 collapse-inner rounded">
-			            <a class="collapse-item" href="/admin/travelLogList">여행일기</a>
-			            <a class="collapse-item" href="/admin/boardList">자유일기</a>
-			        </div>
-			    </div>
 			</li>
 		
 			<!-- Nav Item 회원 게시판-->
@@ -123,7 +98,7 @@
 					 </li>
 					 <!-- 관리자 이름 옆에 작대기 -->
 				     <span class="topbar-divider d-none d-sm-block"></span>
-					     <!-- Nav Item - 관리자 이름 -->
+					 <!-- Nav Item - 관리자 이름 -->
 					 <li class="nav-item dropdown no-arrow">
 				         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 				             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,150 +121,122 @@
 			<main class="container-fluid">
 				<!-- Page Heading -->
 				<div class="d-sm-flex align-items-center justify-content-between mb-4">
-					<h1 class="h3 mb-0 text-gray-800">Dash board</h1>
+					<h1 class="h3 mb-0 text-gray-800">전체 게시판</h1>
 				</div>
 			
 				<!-- Dash board 내용 -->
 				<div class="row">
 					<!-- 전체 일기 수 -->
-					<div class="col-xl-3 col-md-6 mb-4">
-						<div class="card border-left-primary shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-											전체 일기 수</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
+					<div class="col-12 d-sm-flex align-items-centers">
+						<div class="col-xl-3 mb-4 col-6">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												전체 일기 수
+											</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<c:out value="${total}"></c:out>
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
 									</div>
-									<div class="col-auto">
-										<i class="fas fa-calendar fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+						<!-- 전체 회원 수 -->
+						<div class="col-xl-3 mb-4 col-6">
+							<div class="card border-left-warning shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+												전체 회원 수
+											</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<c:out value="${user}"></c:out>
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fa fa-user fa-2x text-gray-300"></i>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-			
-					<!-- 전체 회원 수 -->
-					<div class="col-xl-3 col-md-6 mb-4">
-						<div class="card border-left-warning shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div
-											class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-											전체 회원 수</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-									</div>
-									<div class="col-auto">
-										<i class="fa fa-user fa-2x text-gray-300"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-			
 					<!-- 여행일기 게시판  -->
+					<div class="col-lg-6">
+						<div class="card shadow mb-4 col-12">
+	                        <div class="card-header py-3">
+	                            <h6 class="m-0 font-weight-bold text-primary">전체 게시판 통게</h6>
+	                        </div>
+	                        <div class="card-body">
+	                           <input type="hidden" id="tlogTotal" value="${tlogTotal}">
+	                           <input type="hidden" id="boardTotal" value="${boardTotal}">
+	                           <div>
+	                               <canvas id="myChart" style="margin:0 auto;"></canvas>
+	                           </div>
+                            </div>
+                        	<br/>
+                   		</div>
+                   	</div>
+                   	<div class="col-lg-6">
+                 		<div class="card shadow mb-4 col-12">
+	                        <div class="card-header py-3">
+	                            <h6 class="m-0 font-weight-bold text-primary">태그 게시판 통계</h6>
+	                        </div>
+		                    <div class="card-body">
+	                          <%--  <input type="hidden" id="tagName" value="${tag.tagName}"> --%>
+	                           		<!--  <input type=hidden id="tags">${tagList}</div> -->
+	                           <div>
+	                               <canvas id="tagChart" style="margin:0 auto;"></canvas>
+	                           </div>
+                            </div>
+                       		<br/>
+						</div>
+                    </div>
+<!--                  	<div class="col-lg-12">
+                 		<div class="card shadow mb-4 col-12">
+	                        <div class="card-header py-3">
+	                            <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
+	                        </div>
+		                    <div class="card-body">
+	                           <div>
+	                               <canvas id="tagChart"></canvas>
+	                           </div>
+                            </div>
+                       		<br/>
+						</div>
+                    </div> -->
+                    
+                    
+                   	<!-- 여행일기 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">여행일기 게시판</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">여행 일기</h6>
                         </div>
                         <div class="card-body table-responsive">
-                       		<div class="col-sm-12">
-                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                        			Showing 1 to 10 of 57 entries
-                        		</div>
-                        	</div>
-                        	<br/>
-                            <table class="table table-bordered" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>BoardNo.</th>
-                                        <th>Content</th>
-                                        <th>Date</th>
-                                        <th>UserNo.</th>
-                                        <th>Nickname</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>ㅇㄹㄴㅇㄹㄴㅇㄻ내댜러매ㅓㅈ대ㅑㅓ매더래먀더랴ㅐㅓ대러ㅐㅁㄴㄷ럼ㄷㄴ래ㅜ누래ㅑㅁ둔루대눌먇</td>
-                                        <td>2022.06.01</td>
-                                        <td>61</td>
-                                        <td>방랑자</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>ㄴㅇㄹ머냉러ㅐㅁㄴ러맨야러맺댠루매ㅑㄷ주램ㄷ누랴ㅐㅜㅁㄹㄷ재ㅜ랟누루ㅐㅈ도랴ㅐㅁ대랴ㅜ대ㅑ루맫누ㅜㄹ매ㅑㄷ주</td>
-                                        <td>2022.06.03</td>
-                                        <td>46</td>
-                                        <td>비트위의 나그네</td>
-                                    </tr>
-                                </tbody>
+                            <table class="table table-bordered dataTable" id="dataTable">
                             </table>
-                           	<!-- paging -->
-							<nav aria-label="Page navigation example">
-							    <ul class="pagination justify-content-center">
-							    	<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">2</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">Next</a></li>
-							  	</ul>
-							</nav>
+                       		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+						  	</div>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 여행일기 게시판 -->
                     
                    	<!-- 자유일기 게시판  -->
                     <div class="card shadow mb-4 col-xl-12">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">자유일기 게시판</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">자유 일기</h6>
                         </div>
                         <div class="card-body table-responsive">
-                       		<div class="col-sm-12">
-                        		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                        			Showing 1 to 10 of 57 entries
-                        		</div>
-                        	</div>
-                        	<br/>
-                            <table class="table table-bordered" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>BoardNo.</th>
-                                        <th>Content</th>
-                                        <th>Date</th>
-                                        <th>UserNo.</th>
-                                        <th>Nickname</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>ㅇㄹㄴㅇㄹㄴㅇㄻ내댜러매ㅓㅈ대ㅑㅓ매더래먀더랴ㅐㅓ대러ㅐㅁㄴㄷ럼ㄷㄴ래ㅜ누래ㅑㅁ둔루대눌먇</td>
-                                        <td>2022.06.01</td>
-                                        <td>61</td>
-                                        <td>방랑자</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>ㄴㅇㄹ머냉러ㅐㅁㄴ러맨야러맺댠루매ㅑㄷ주램ㄷ누랴ㅐㅜㅁㄹㄷ재ㅜ랟누루ㅐㅈ도랴ㅐㅁ대랴ㅜ대ㅑ루맫누ㅜㄹ매ㅑㄷ주</td>
-                                        <td>2022.06.03</td>
-                                        <td>46</td>
-                                        <td>비트위의 나그네</td>
-                                    </tr>
-                                </tbody>
+                            <table class="table table-bordered dataTable" id="boardTable">
                             </table>
-                           	<!-- paging -->
-							<nav aria-label="Page navigation example">
-							    <ul class="pagination justify-content-center">
-							    	<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">1</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">2</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">3</a></li>
-							    	<li class="page-item"><a class="page-link" href="#">Next</a></li>
-							  	</ul>
-							</nav>
+                       		<div class="dataTables_info" id="boardTable_info" role="status" aria-live="polite">
+						  	</div>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 자유일기 게시판 -->
                     

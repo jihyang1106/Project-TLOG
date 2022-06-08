@@ -19,16 +19,17 @@
 <div id="profileContainer">
 	<!-- 프로필 사진, 닉네임, 회원정보 수정 버튼 -->
 	<div id="profile">
-		<span ><img src="/img/member/default_profile.png" id="profileImg"></span>&emsp;&emsp;&emsp;
-		<span id="profileNick">닉네임</span>
-		<c:if test="${logstatus==Y}">
+		<span ><img src="${userProfile.profileImg}" id="profileImg"></span>&emsp;&emsp;&emsp;
+		<span id="profileNick">${userProfile.userNick}</span>
+		<c:if test="${loginUser.userNum == userProfile.userNum}">
 			<input type="button" id="userEditBtn" value="회원정보수정" onclick="location.href='/member/userEdit'">
 		</c:if>
 	</div>
+	<!-- 게시물, 팔로워, 팔로우 -->
 	<div id="followSection">
 		<span >게시물 ${myLogCount}개</span>
-		<span  data-toggle="modal" data-target="#follower">팔로워 ${followerCount}명</span>
-		<span  data-toggle="modal" data-target="#follow">팔로우 ${followCount}명</span>
+		<span class="follow" data-toggle="modal" data-target="#follower">팔로워 ${followerCount}명</span>
+		<span class="follow" data-toggle="modal" data-target="#follow">팔로우 ${followCount}명</span>
 	</div>
 	<!-- 일기 탭, 태그된글, 찜한 글 탭 -->
 	<div id="mypageTabSection">
@@ -62,7 +63,7 @@
 	      <ul id="followerList">
 	      	<c:forEach var="vo" items="${followerList }">
 		      	<li>
-			      	<span ><img src="/img/member/${vo.profileImg}.png" id="followerImg"></span>&emsp;
+			      	<span ><img src="/upload/user/${vo.profileImg}" id="followerImg"></span>&emsp;
 					<span id="followerNick">${vo.userNick }</span>
 		      	</li>
 	      	</c:forEach>
@@ -91,7 +92,7 @@
           <ul id="followerList">
               <c:forEach var="vo" items="${followList}">
                   <li>
-                      <span ><img src="/img/member/${vo.profileImg}.png" id="followImg"></span>&emsp;
+                      <span ><img src="/upload/user/${vo.profileImg}" id="followImg"></span>&emsp;
                     <span id="followNick">${vo.userNick }</span>
                   </li>
            </c:forEach>

@@ -1,32 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script>
-//클릭이벤트: 일기 상세 리스트
-/* function logDetail(tNum){ 
-	var param={"tNum" : tNum};	
-	$.ajax({
-		data:param,
-		url:'/home/logDetail',
-		type:'GET',
-		success:function(data){
-			var tag="";
-			for(var i=0; i<data.length; i++){
-				tag += "<ul><li>"+data[i].tDetailNum+"</li>";
-				tag += "<li>"+data[i].tNum+"</li>";
-				tag += "<li>"+data[i].tImg+"</li>";
-				tag += "<li>"+data[i].tContent+"</li>";
-				tag += "<li>"+data[i].tPlace+"</li>";
-				tag += "<li>"+data[i].isCoverImg+"</li>";
-				tag += "<li>";
-				for(j=0; j<data[i].tagUserList.length; j++){
-					tag += "<span value='"+data[i].tagUserList[j].userNum+"'>"+data[i].tagUserList[j].userNick+"&nbsp;</span>";
-				}
-				tag += "</li></ul>";
-			}
-			$("#detail_div").html(tag);
-		}
-	})
-}*/
-</script>
 <style>
 /* ===== 태그 ===== */
 .tags{
@@ -56,7 +28,16 @@
 	background-color: #EACACB;
 }
 </style>
+	
 <!-- ============================ HTML ========================================================================== -->
+	<div class="introduce_g">
+		<div class="introduce_img"><img src="/img/home/10.gif"></div>
+		<!-- <div class="introduce_info">
+			<h3>기억하고 싶은 여행</h3>
+			<p>당신의 여행을 기록해보세요</p>
+			<button type="button" class="btn btn-outline-primary">기록하기</button>
+		</div> -->
+	</div>
 	<div class="container">
 		<!-- 본문 내용 작성하기 -->
 		<!--<div>
@@ -163,8 +144,6 @@
 				</ul>
 			</c:forEach>
 		</div>-->
-		
-		
 		<!-- 팔로워 많은 유저 리스트 
 		<div>
 			<c:forEach var="vo" items="${followedUser}">
