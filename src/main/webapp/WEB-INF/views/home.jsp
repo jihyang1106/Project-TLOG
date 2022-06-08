@@ -1,36 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<style>
-/* ===== 태그 ===== */
-.tags{
-	border-radius: 5px;
-	padding: 5px;
-	padding-left:7px;
-	padding-right:7px;
-	font-size:11px;
-}
-/* ===== 태그 색상(변경해야됨!투명도 많이주기) ===== */
-#tag1, #tag2{
-	background-color: rgb(42, 76, 211, 70%);
-}
-#tag3, #tag4, #tag5, #tag6, #tag7{
-	background-color: rgba(122, 140, 226, 80%);
-}
-#tag8, #tag9, #tag10, #tag11, #tag12, #tag13, #tag14{
-	background-color: rgba(122, 140, 226, 30%);
-}
-#tag15, #tag16, #tag17, #tag18, #tag19, #tag20{
-	background-color: #C3E2DD;
-}
-#tag21, #tag22, #tag23, #tag24, #tag25{
-	background-color: #FEF5D4;
-}
-#tag26, #tag27, #tag28, #tag29{
-	background-color: #EACACB;
-}
-</style>
-	
-=======
 <script>
   	var index = 1;	
 	$(function () {
@@ -85,7 +53,6 @@
 		  }
 	  }
 </script>
->>>>>>> 93a8170acc79f002220ba488c7f07e11bfca3ecc
 <!-- ============================ HTML ========================================================================== -->
 	<div class="introduce_wrap">
 		<div class="introduce_b">
@@ -420,10 +387,10 @@
 				<c:forEach var="vo" items="${followedUser}" >
 					<ul class="list_wirters list_writers_group">
 						<li>
-							<a href="location.href='/member/profile?userNum=${vo.userNum}'" class="link_follow">
+							<div onclick="location.href='/member/profile?userNum=${vo.userNum}'" class="link_follow">
 								<img src='${vo.profileImg}' width="80" height="80" class="img_witer">
 								<strong class="tit_wirter">${vo.userNick}</strong>
-							</a>
+							</div>
 							<p class="follow_count"><i class="bi bi-person-heart" style="font-size:15px;"></i>&nbsp;${vo.followerNum}</p>	
 							<div class="follow_tag_wrap">
 								<c:forEach var="t" items="${vo.tagList}" end="2"><!-- 태그3개(임시)-->
