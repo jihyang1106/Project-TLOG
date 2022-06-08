@@ -24,8 +24,8 @@
 /* ====== 글 등록하기 ======*/
 function boardSend(){
 	event.preventDefault();
-	if($("#content").val()==""){ // 글 입력 안함
-		alert("글을 입력 후에 등록해주세요2");
+	if($("#freeLogContent").val()==""){ // 글 입력 안함
+		alert("글을 입력 후에 등록해주세요");
 	}else{ // 글 입력
 		var url = '/boardWrite';
 		var data = $("#boardForm").serialize(); // form데이터 보내기
@@ -35,6 +35,7 @@ function boardSend(){
 			type : 'POST',
 			success : function(result){
 				$("#log_list_div").empty();
+				$("#freeLogContent").val("");
 				startNum=0;
 				logLists();
 			},error : function(e){
@@ -45,32 +46,55 @@ function boardSend(){
 	}
 }
 
+/* ===== 글 삭제하기 ===== */
+$(document).on('click', ".fa-xmark", function(){
+	if(confirm('글을 삭제하시겠어요?')){
+		let data = "boardNum="+$(this).attr("name");
+		console.log(data);
+		$.ajax({
+			url:'/board/delOk',
+			data:data,
+			success:function(){
+				$("#log_list_div").empty();
+				startNum=0;
+				logLists();
+				alert('삭제되었습니다');
+			},error:function(){
+				console.log('삭제에러');
+			}
+		});
+	}
+});
+
+/* ====== 보드 리스트 추가 ====== */
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
 var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
 var newOrLike=0;
 
-/* ====== 보드 리스트 추가 ====== */
-	function logLists(){
-		var url = '/boardList';
-		var param = {"startNum" : startNum};
-		console.log(param);
-		$.ajax({
-			url : url,
-			data :param,
-			type : 'GET',
-			success : function(data){
-				console.log("data.length : "+data.length);
-				var tag = "";
-				for(i=0; i<data.length; i++){
-			    	  tag += "<div id='freeLog_div' onclick='logDetail("+data[i].tNum+")'>";		    	  
-			    	  tag += "<div id='info'><span id='infoLeft'><img src='/img/member/"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"</span>";
-			    	  tag += "<span id='infoRight'>("+ data[i].ip  +")"+ "&nbsp;"+ data[i].writedate +"&nbsp;"+"</span></div>";
-			    	  tag += "<hr/>";
-			    	  tag += "<div id='mainContent'>"+data[i].boardContent+"</div>";
-					  tag += "</div>";
-					  tag += "<br>";
-			    }//for
+function logLists(){
+	var url = '/boardList';
+	var param = {"startNum" : startNum};
+	console.log(param);
+	$.ajax({
+		url : url,
+		data :param,
+		type : 'GET',
+		success : function(data){
+			console.log("data.length : "+data.length);
+			var tag = "";
+			for(i=0; i<data.length; i++){
+				tag += "<div id='freeLog_div'>";		    	  
+		    	tag += "<div id='info'><span id='infoLeft'><img src='/img/member/"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
+		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
+		    	if(data[i].userNum == 2 /*${logNo}*/){
+					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";
+				}
+		    	tag += "</span></div><hr/>";
+		    	tag += "<div id='mainContent'>"+data[i].boardContent+"</div>";
+				tag += "</div>";
+				tag += "<br>";
+		    }//for
 			    $("#log_list_div").append(tag);
 			    isFetching=false; //로딩완료
 			    console.log(isFetching);
@@ -82,7 +106,7 @@ var newOrLike=0;
 				if(data.length<5){
 					startNum=0;
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
-						logList(); //한번 더 실행
+						logLists(); //한번 더 실행
 					}
 				} 
 				dataLength = data.length;
@@ -108,7 +132,7 @@ logLists();
 
 /* ======= 부드럽게 위로 가기 ====== */
 function goTop() {
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'auto'});
 }
 
 /*======광고 무한슬라이드=============*/
