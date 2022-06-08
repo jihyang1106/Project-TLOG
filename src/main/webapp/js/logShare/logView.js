@@ -2,7 +2,7 @@
 function LikeUp(tNum){
    var param = {"tNum":tNum};
    $.ajax({
-      url:'/log/likeUp',
+      url:'/logShare/likeUp',
       data:param,
       type:'POST',
       success:function(r){
@@ -15,7 +15,7 @@ function LikeUp(tNum){
 function LikeDown(tNum){
    var param = {"tNum":tNum};
    $.ajax({
-      url:'/log/likeDown',
+      url:'/logShare/likeDown',
       data:param,
       type:'GET',
       success:function(r){
@@ -28,10 +28,11 @@ function LikeDown(tNum){
 //글 삭제~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function logDel(tNum){
 	if(confirm('글을 삭제하시겠습니까?')){
-		var param = {"tNum" : tNum};
+		var param2 = {"tNum" : tNum};
+		console.log(param2);
 	   	$.ajax({
-	      url:'/log/logDel',
-	      data:param,
+	      url:'/logShare/logDel',
+	      data:param2,
 	      type:'GET',
 	      success:function(userNum){
 				alert('글이 삭제되었습니다.');

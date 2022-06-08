@@ -4,7 +4,7 @@
 <div id='div_big'>
 	<div id='div_small'>
 		<form id='edit_form' action='/logShare/logEditOk' method='POST'>
-			<input type='hidden' value='${vo.tNum}'/>
+			<input type='hidden' name='tNum' value='${vo.tNum}'/>
 			<ul>
 				<li>제목 : &emsp;<input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
 				<li><input type='date' name='startDate' value='${vo.startDate}'/> &emsp;~&emsp; <input type='date' name='endDate' value='${vo.endDate}'/></li>
@@ -55,9 +55,7 @@
 			<br/><br/><br/><br/>
 		
 		<div id='detail_div'>
-			<c:forEach var='dvo' items='${detailList}'>
-				<input type='hidden' name='dNumList'>
-				<input type='hidden' value='${dvo.tDetailNum}'>
+			<c:forEach var='dvo' items='${detailList}'>				
 				<div id='log_list_div'>	
 					<div class='log_div'>	
 						<ul class='log_ul'>
@@ -71,7 +69,9 @@
 						</ul>
 					</div>
 					<i class='fa-solid fa-xmark del_log'></i>
+					<input type='hidden' value='${dvo.isCoverImg}'>
 				</div>	
+				<input type='hidden' value='${dvo.tDetailNum}'>
 			</c:forEach>
 		</div>
 	    <input type='button' id='write_btn' value='일기 수정'/>
@@ -288,9 +288,16 @@ $(document).on("click", ".del_user", function() {
 	});
 /*=============== 일기상세 삭제 =================================================================*/
  $(document).on("click", ".del_log", function() {
-	 alert("클릭");
-	 $(this).parent().prev().prev().val($(this).parent().prev().val()); //input hidden에 value tDetailNum 넣기
-	 $(this).parent().remove();
+	 if($(this).next().val()==1){
+		 alert('커버이미지는 삭제할 수 없습니다.');
+		 return false;
+	 }else{
+		 var tDetailNum = $(this).parent().next().val(); //input hidden에 value tDetailNum 넣기
+		 var tag = "<input type='hidden' name='dNumList' value='"+tDetailNum+"'>";
+		 $(this).parent().parent().append(tag);
+		 $(this).parent().remove();
+	 }
+	 
  })
 /*=============== 글 수정 =================================================================*/
 $("#write_btn").click(function(){

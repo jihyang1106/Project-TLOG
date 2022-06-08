@@ -115,6 +115,7 @@ public class LogWriteController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logDel", method = RequestMethod.GET)
 	public int logDel(@RequestParam("tNum") int tNum){
+		System.out.println("삭제 컨트롤러");
 		service.logDel(tNum);
 		return 2; //로그인 유저넘버
 	}
@@ -123,7 +124,7 @@ public class LogWriteController {
 	@GetMapping("/logShare/logEdit")
 	public ModelAndView logEdit(int tNum){
 		ModelAndView mav  = new ModelAndView();
-		int logUser = 2; //로그인 한 유저넘버
+		int logUser = 1; //로그인 한 유저넘버
 		LogVO vo = service.getOneLog(tNum, logUser);	
 		
 		if(vo.getUserNum()!=logUser) {//작성자가 아니라면
@@ -149,7 +150,12 @@ public class LogWriteController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
 	public String logEditOk(LogVO vo){
-		
-		return "redirect:/member/profile?userNum="+2; //로그인 유저넘버
+		service.logEdit(vo);
+		service.tagDel(vo);
+		service.insertTagList(vo);
+		service.tagUserDel(vo);
+		service.insertUserList(vo);
+		service.detailDel(vo);
+		return "redirect:/logShare/logView?tNum="+vo.gettNum(); //로그인 유저넘버
 	}
 }

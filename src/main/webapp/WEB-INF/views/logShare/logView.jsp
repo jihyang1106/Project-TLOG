@@ -151,7 +151,7 @@
 						<li> with &nbsp;&nbsp;&nbsp;
 							<c:forEach var='t' items='${vo.tagUserList}'>				
 									<span class='users' onclick="location.href='/member/profile?userNum=${t.userNum}'">
-										<img src='/upload/user/${t.profileImg}' class='tagProfileImg'/>
+										<img src='${t.profileImg}' class='tagProfileImg'/>
 										&nbsp;${t.userNick}
 									</span>&nbsp;
 							</c:forEach>
@@ -199,56 +199,4 @@
   </a>
 
 </div>
-<%-- <div id='log_big' style='background-color:green;'>
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->			
-			  <ol class="carousel-indicators">
-			  	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			  	<c:forEach var="vo" items="${detailList}" varStatus="status">		
-			  		<li data-target="#myCarousel" data-slide-to="${status.index+1}"></li>
-			    </c:forEach>					    			
-			  </ol>		
-			  <!-- Wrapper for slides -->			
-			  <div class="carousel-inner">			
-			    <div class="item active">			
-			     
-				</div>
-			
-				<c:forEach var='dvo' items='${detailList}'>		
-				    <div class="item">				
-				      <img src='/upload/log/${dvo.tImg}' class='imgs'/>				
-				      <div class="carousel-caption">				
-				        <div id='log_list_div'>
-							<div class='log_div'>
-								<ul class='log_ul'>
-									<li>${dvo.tContent}</li>
-									<li>${dvo.tPlace} 에서</li>		
-								</ul>
-							</div>
-						</div>
-				      </div>				
-				    </div>
-				</c:forEach>
-			  </div>
-			
-			
-			
-			  <!-- Left and right controls -->
-			
-			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-			
-			    <span class="glyphicon glyphicon-chevron-left"></span>
-			
-			    <span class="sr-only">Previous</span>
-			
-			  </a>
-			
-			  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-			
-			    <span class="glyphicon glyphicon-chevron-right"></span>
-			
-			    <span class="sr-only">Next</span>
-			
-			  </a>
-			</div>
-	</div> --%>
+

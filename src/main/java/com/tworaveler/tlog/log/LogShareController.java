@@ -103,7 +103,7 @@ public class LogShareController {
 	} 
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/likeUp", method = RequestMethod.POST)
+	@RequestMapping(value = "/logShare/likeUp", method = RequestMethod.POST)
 	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
 		int logNum = 2; //logNum
 		System.out.println(logNum+"+"+tNum);
@@ -113,7 +113,7 @@ public class LogShareController {
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 좋아요 취소 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/likeDown", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/likeDown", method = RequestMethod.GET)
 	public LogVO likeDown(@RequestParam("tNum") int tNum, HttpSession session) {
 		int logNum = 2; //logNum
 		System.out.println(logNum+"+"+tNum);

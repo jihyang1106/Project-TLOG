@@ -455,9 +455,10 @@
 	</delete>
 	<delete id='detailDel'>
 		DELETE 	FROM travelDetail
-		WHERE 	
-		<foreach collection="dNumList" item="item" separator=",">
-	        tDetailNum=#{item}
-	    </foreach>
+		<where>	
+			<foreach collection="dNumList" item="item" separator="or">
+		        (tDetailNum=#{item})
+		    </foreach>
+	    </where>
 	</delete>
 </mapper>
