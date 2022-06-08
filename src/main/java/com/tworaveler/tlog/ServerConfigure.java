@@ -21,7 +21,6 @@ public class ServerConfigure implements WebMvcConfigurer {
 	
 	private static final List<String> URL_PATERRNS = Arrays.asList(interceptorArr);
 	private static final List<String> ADMIN_URL_PATERRNS = Arrays.asList(adminInterceptorArr);
-	private static final List<String> URL_PATERRNS_RESET_PWD = Arrays.asList("/member/codeCheck", "/member/resetPwd", "resetPwdOk");
 	
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginInterceptor()).addPathPatterns(URL_PATERRNS);
