@@ -43,7 +43,7 @@ public class LogWriteController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logWriteOk", method = RequestMethod.POST)
 	public List<String> logWriteOk(LogVO vo, HttpServletRequest request) {
-		vo.setUserNum(1); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
+		vo.setUserNum(2); // 로그인 userNum((String) request.getSession().getAttribute("logId"))
 		vo.setIp(request.getRemoteAddr()); // 접속자 아이피
 		List<String> fileNames = new ArrayList<String>();//ajax로 보낼 변환된 파일명
 		
@@ -104,6 +104,7 @@ public class LogWriteController {
 		Map<String,Object> insertMap = new HashMap<String,Object>(); //MyBatis에 던질 Map
     	insertMap.put("list",dataList); //MyBatis의 foreach의 collection이름을 key(현재는"list")로 List를 put    	
     	int chk = service.detailWriteOk(tNum, insertMap); //travelDetail 테이블
+    	
     	if(chk>0) {
     		return userNum;
     	}
@@ -112,8 +113,9 @@ public class LogWriteController {
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 삭제 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
-	@RequestMapping(value = "/log/logDel", method = RequestMethod.GET)
+	@RequestMapping(value = "/logShare/logDel", method = RequestMethod.GET)
 	public int logDel(@RequestParam("tNum") int tNum){
+		System.out.println("삭제 컨트롤러");
 		service.logDel(tNum);
 		return 2; //로그인 유저넘버
 	}
@@ -122,14 +124,16 @@ public class LogWriteController {
 	@GetMapping("/logShare/logEdit")
 	public ModelAndView logEdit(int tNum){
 		ModelAndView mav  = new ModelAndView();
-		int logUser = 2; //로그인 한 유저넘버
+		int logUser = 1; //로그인 한 유저넘버
 		LogVO vo = service.getOneLog(tNum, logUser);	
 		
 		if(vo.getUserNum()!=logUser) {//작성자가 아니라면
 			System.out.println("나가라");
 			mav.setViewName("redirect:/logShare/logView?tNum="+tNum); //logView로 리다이렉트	
 		}else {			
+			
 			vo.setTagList(service.selectLogTag(tNum)); //태그리스트 넣기
+			
 			vo.setTagUserList(service.selectTagUsers(tNum)); //태그된 유저리스트 넣기
 			int cnt = vo.getTagUserList().size();
 			
@@ -145,8 +149,13 @@ public class LogWriteController {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~ 글 수정 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logEditOk", method = RequestMethod.POST)
-	public int logEditOk(@RequestParam("tNum") int tNum){
-		service.logDel(tNum);
-		return 2; //로그인 유저넘버
+	public String logEditOk(LogVO vo){
+		service.logEdit(vo);
+		service.tagDel(vo);
+		service.insertTagList(vo);
+		service.tagUserDel(vo);
+		service.insertUserList(vo);
+		service.detailDel(vo);
+		return "redirect:/logShare/logView?tNum="+vo.gettNum(); //로그인 유저넘버
 	}
 }

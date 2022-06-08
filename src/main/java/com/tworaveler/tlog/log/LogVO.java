@@ -26,6 +26,7 @@ public class LogVO {
 	private String tContent;
 	private String tPlace;
 	private int isCoverImg;
+	private List<Integer> dNumList;
 	
 	//tag
 	private List<LogVO> tagList;
@@ -228,6 +229,12 @@ public class LogVO {
 	}
 	public void setIsTagged(int isTagged) {
 		this.isTagged = isTagged;
+	}
+	public List<Integer> getdNumList() {
+		return dNumList;
+	}
+	public void setdNumList(List<Integer> dNumList) {
+		this.dNumList = dNumList;
 	}
 
 }

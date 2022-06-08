@@ -26,4 +26,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.deleteBoard(boardNum);
 	}
 
+	@Override
+	public int cntUserBoard(int userNum) {
+		return dao.cntUserBoard(userNum);
+	}
+
 }

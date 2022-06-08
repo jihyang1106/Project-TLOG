@@ -21,5 +21,4 @@
 	<delete id="deleteBoard">
 		delete from board where boardNum=#{param1}
 	</delete>
-	
 </mapper>
