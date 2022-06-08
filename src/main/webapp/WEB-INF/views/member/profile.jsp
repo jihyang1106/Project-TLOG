@@ -36,7 +36,7 @@
 		<ul class="nav nav-tabs" id="tab">
 			<li class="nav-item col-sm-4" id="tab1"><a class="nav-link active" data-toggle="tab">여행일기</a></li>		
 			<li class="nav-item col-sm-4" id="tab2"><a class="nav-link" data-toggle="tab">태그된 글</a></li>		
-			<li class="nav-item col-sm-4" id="tab3"><a class="nav-link" data-toggle="tab">찜한 글</a></li>		
+			<li class="nav-item col-sm-4" id="tab3"><a class="nav-link" data-toggle="tab">좋아요 누른 글</a></li>		
 		</ul>
 	</div>
 	<!-- 마이페이지 컨텐츠 -->
