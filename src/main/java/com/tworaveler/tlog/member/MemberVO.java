@@ -19,17 +19,33 @@ public class MemberVO {
 	private List<LogVO> tagList;
 	private int tagNum;
 	private String tagName;
+	private List<Integer> tagListCl;
 	
 	//follow
 	private int followingNum;
 	private int followerNum;
 	
-	/*
-	 * //카카오 public MemberVO(HashMap<String, String> kakaoInfo) { idKakao =
-	 * kakaoInfo.get("id"); userNick = kakaoInfo.get("nickname"); profileImg =
-	 * kakaoInfo.get("profile"); }
-	 */
+	//일반 생성자
+	public MemberVO() {}
 	
+	//카카오 로그인 생성자
+	public MemberVO(HashMap<String, String> kakaoInfo) { 
+		idKakao = (String)kakaoInfo.get("idKakao"); 
+		userNick = kakaoInfo.get("userNick"); 
+		profileImg = kakaoInfo.get("profileImg"); 
+	}
+	 
+	
+	
+
+	public List<Integer> getTagListCl() {
+		return tagListCl;
+	}
+
+	public void setTagListCl(List<Integer> tagListCl) {
+		this.tagListCl = tagListCl;
+	}
+
 	public List<LogVO> getTagList() {
 		return tagList;
 	}

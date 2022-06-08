@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/member/login.css" type="text/css">
+<script type="module" src="/js/member/login.js"></script>
 <!-- 카카오 JavaScript SDK 최신버전 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <main>
