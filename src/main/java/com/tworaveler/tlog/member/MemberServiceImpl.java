@@ -47,4 +47,8 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> setFollowInfo(int userNum) {
 		return dao.setFollowInfo(userNum);
 	}
+	@Override
+	public MemberVO selectMember(MemberVO vo) {
+		return dao.selectMember(vo);
+	}
 }

@@ -15,7 +15,7 @@
         ON			D.tNum=A.tNum
         WHERE		isPrivate=0
 		ORDER BY 	likeNum DESC
-		LIMIT 		10
+		LIMIT 		16
 	</select>	
 	<!-- 메인: 팔로잉 글 리스트 -->
 	<select id='selectFollowLog' resultType='com.tworaveler.tlog.log.LogVO'>
@@ -32,7 +32,7 @@
         WHERE		E.userNum=#{param1}
         AND			isPrivate=0
 		ORDER BY 	tNum DESC
-		LIMIT 		10
+		LIMIT 		16
 	</select>
 	<!-- tNum의 태그 리스트 -->
 	<select id='selectLogTag' resultType='com.tworaveler.tlog.log.LogVO'>

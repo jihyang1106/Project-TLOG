@@ -3,8 +3,12 @@
 <style>
 /*====================log 글====================*/
 #log_big{
-	display:inline-block;
-	height:90vh;
+	/*display:inline-block;
+	height:90vh;*/
+	text-align: center;
+	width: 1500px;
+	margin: 90px auto;
+	background-color: aliceblue;
 }
 #log_big div{
 	display:inline-block;
@@ -116,12 +120,13 @@
 		<ul class='log_ul'>
 			<li>
 				<div class='coverImgDiv'>
+				<span class='logTitle'>${vo.tTitle}</span>
 					<img src='/upload/log/${vo.coverImg}' class='coverImg'/>
 					<div id='titleDiv'>
 						<c:if test="${vo.isPrivate==1}">
 							<span><i class='fa-solid fa-lock'></i></span>&emsp;
 						</c:if>
-						<span class='logTitle'>${vo.tTitle}</span>
+						
 					</div>
 				</div>
 			</li>
