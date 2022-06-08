@@ -22,4 +22,8 @@ public interface AdminService {
 	public List<BoardVO> selectBoard(PagingVO pvo, BoardVO vo);
 	// 전체 회원 리스트
 	public List<MemberVO> selectMemberList(PagingVO pvo, MemberVO vo);
+	// 관리자 회원 여부
+	public int selectMemberAdmin(int userNum);
+	// 관리자 권한 부여
+	public int updateAdmin(MemberVO vo);
 }

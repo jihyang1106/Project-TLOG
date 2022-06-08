@@ -51,8 +51,15 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectMemberList(pvo, vo);
 	}
 
+	@Override
+	public int selectMemberAdmin(int userNum) {
+		return dao.selectMemberAdmin(userNum);
+	}
 
-
+	@Override
+	public int updateAdmin(MemberVO vo) {
+		return dao.updateAdmin(vo);
+	}
 
 	
 

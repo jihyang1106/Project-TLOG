@@ -50,14 +50,6 @@
 			        </div>
 			    </div>
 			</li>
-		
-			<!-- Nav Item 신고관리 -->
-			<li class="nav-item">
-			    <a class="nav-link" href="/admin/reportList">
-			        <i class="fas fa-fw fa-chart-area"></i>
-			        <span>신고관리</span></a>
-			</li>
-	
 			<!-- Divider -->
 		    <hr class="sidebar-divider d-none d-md-block">
 		</ul>
@@ -67,24 +59,6 @@
 		<div id="content-wrapper" class="d-flex flex-column"><!-- end div tag xx -->
 			<!-- Topbar -->
 			<div class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-				<!-- Sidebar Toggle (Topbar) -->
-				<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-					<i class="fa fa-bars"></i>
-				</button>
-		
-				<!-- Topbar Search (검색 버튼) -->
-				<form
-				   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-					<div class="input-group">
-				    	<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-				             aria-label="Search" aria-describedby="basic-addon2">
-				         <div class="input-group-append">
-				             <button class="btn btn-primary" type="button">
-				                 <i class="fas fa-search fa-sm"></i>
-				             </button>
-				         </div>
-				     </div>
-				 </form>
 		
 				 <!-- Topbar Navbar -->
 				 <ul class="navbar-nav ml-auto">
@@ -135,10 +109,10 @@
                                         <th>번호</th>
                                         <th>닉네임</th>
                                         <th>가입일</th>
-                                        <th onclick=showTlog()>여행일기 수</th>
+                                        <th>여행일기 수</th>
                                         <th>자유일기 수</th>
                                         <th>총 일기 수</th>
-                                        <th>신고받은 횟수</th>
+                                        <th>수정 및 삭제</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,10 +121,14 @@
 	                                        <td>${m.userNum}</td>
 	                                        <td>${m.userNick}</td>
 	                                        <td>${m.registerDate}</td>
-	                                        <td onclick=showTlog()>${m.tNumCount}</td>
+	                                        <td>${m.tNumCount}</td>
 	                                        <td>${m.bCount}</td>
 	                                        <td>${m.sum}</td>
-	                                        <td>${m.rCount}</td>
+	                                        <td>
+	                                        	<input type="button" class="btn delBtn memberEdit" data-toggle="modal" data-target="#editModal"
+	                                        		onclick="memberEdit(${m.userNum},${m.status})" value="수정">
+	                                        	<input type="button" class="btn delBtn memeberDel" value="삭제">
+	                                        </td>
                                     	</tr>
                                 	</c:forEach>
                                 </tbody>

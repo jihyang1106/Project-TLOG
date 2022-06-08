@@ -43,7 +43,7 @@
 		OFFSET    ${param1.offset}
 	</select>
 	<select id="selectMemberList" resultType="MemberVO">
-		SELECT    u.userNum, u.userNick, date_format(u.registerDate, "%Y/%m/%d") AS registerDate,
+		SELECT    u.userNum, u.userNick, u.status, date_format(u.registerDate, "%Y/%m/%d") AS registerDate,
 				  IFNULL(tl.tNumCount,0) AS tNumCount, IFNULL(b.bCount,0) AS bCount,
 			      IFNULL(tNumCount,0) + IFNULL(bCount,0) AS sum, IFNULL(r.rCount,0) AS rCount
 		FROM      user u
@@ -57,4 +57,14 @@
 		LIMIT     ${param1.postsPerPage} 
 		OFFSET    ${param1.offset}
 	</select>
+	<select id="selectMemberAdmin" resultType="int">
+		SELECT    status 
+		FROM      user
+		WHERE     userNum = ${param1}
+	</select>
+	<update id="updateAdmin">
+		UPDATE    user 
+		SET       status = ${param1.status}
+		WHERE     userNum = ${param1.userNum}
+	</update>
 </mapper>

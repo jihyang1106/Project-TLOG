@@ -11,6 +11,36 @@ document.addEventListener("DOMContentLoaded", function(){
 	location.href="/admin/allMemberList?currentPage="+p+""
  }
  
- function showTlog(){
-	alert('여행일기 눌렀어요!')
+// 수정버튼 클릭 시 수정 내용 표시
+function memberEdit(userNum,status){
+	$("#editModal").show();
+
+	$.ajax({
+		url:"/admin/memberAdmin",
+		data:"userNum="+userNum,
+		success:function(result){
+			if(result==0){
+				$("#updateAdminCancel").prop("checked", true);
+				$("#updateAdmin").prop("checked", false);
+			}else{
+				$("#updateAdmin").prop("checked", true);
+				$("#updateAdminCancel").prop("checked", false);
+			}
+		}
+	});
 }
+
+// 모달 창 수정버튼 클릭 시 update
+$(document).on("click", "#modalUpdate" , function(event){
+	event.preventDefault();
+
+		$.ajax({
+			url:"/admin/updateAdmin",
+			data:$(".modalBody").serialize(),
+			success:function(){
+				alert("해당 회원에게 관리자 권한이 부여되었습니다.")
+			}
+		})
+
+})
+

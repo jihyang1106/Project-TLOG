@@ -50,13 +50,6 @@
 			        </div>
 			    </div>
 			</li>
-		
-			<!-- Nav Item 신고관리 -->
-			<li class="nav-item">
-			    <a class="nav-link" href="/admin/reportList">
-			        <i class="fas fa-fw fa-chart-area"></i>
-			        <span>신고관리</span></a>
-			</li>
 	
 			<!-- Divider -->
 		    <hr class="sidebar-divider d-none d-md-block">
@@ -190,7 +183,6 @@
 						</div>
                    	</div><!-- 전체 일기 수, 회원 수 끝 -->
                    	<br/>
-         
                    	
                    	<!-- 태그 게시판 통계 -->
 					<div class="card shadow mb-4 col-12">
