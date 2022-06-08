@@ -24,8 +24,8 @@
 /* ====== 글 등록하기 ======*/
 function boardSend(){
 	event.preventDefault();
-	if($("#content").val()==""){ // 글 입력 안함
-		alert("글을 입력 후에 등록해주세요2");
+	if($("#freeLogContent").val()==""){ // 글 입력 안함
+		alert("글을 입력 후에 등록해주세요");
 	}else{ // 글 입력
 		var url = '/boardWrite';
 		var data = $("#boardForm").serialize(); // form데이터 보내기
@@ -35,6 +35,7 @@ function boardSend(){
 			type : 'POST',
 			success : function(result){
 				$("#log_list_div").empty();
+				$("#freeLogContent").val("");
 				startNum=0;
 				logLists();
 			},error : function(e){
