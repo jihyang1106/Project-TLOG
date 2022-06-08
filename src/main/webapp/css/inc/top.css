@@ -54,3 +54,12 @@ nav{
 .nav-loginSign>a{
 	padding-right:22px;
 }
+#topLogInfo{
+	border-left:2px solid rgba(0,0,0,50%);
+}
+/* 로그인시 나오는 프로필 사진*/
+#topProfileImg{
+	width:2vw;
+	height:2vw;
+	border-radius:50%;
+}
