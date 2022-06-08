@@ -43,11 +43,13 @@ input[type=date] {
 #tag_span{
 	line-height:3vh;
 	display:block;
+	text-align:center;
 }
 #tag_li{
 	clear:both;
 	line-height:1vw;
 	width:45%;
+	height:15vw;
 	text-align:left;
 	display:inline-block;
 	margin:2%;
@@ -55,6 +57,7 @@ input[type=date] {
 	padding-right:1%;
 	border:2px solid #ddd;
 	border-radius:5px;
+	float:left;
 }
 .tags{
 	border-radius: 5px;
@@ -79,6 +82,7 @@ input[type=date] {
 }
 #tag_user_div{
 	width:45%;
+	height:15vw;
 	padding:2%;
 	padding-left:1%;
 	margin:2%;
@@ -135,7 +139,7 @@ input[type=date] {
 /* ===== 일기 =====*/
 #detail_div{
 	height:auto;
-	margin-left:14.5vw;
+	margin:0 auto;
 }
 .log_list_div{
 	clear:both;
@@ -148,7 +152,6 @@ input[type=date] {
 	margin:1vw;
 	padding:2vw;
 	width:22vw;
-	display:inline-block;
 	text-align:center;
 	border-radius:15px;
 	box-shadow:0 0 10px rgba(0,0,0,30%);

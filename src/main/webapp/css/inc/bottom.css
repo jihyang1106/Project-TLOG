@@ -1,12 +1,12 @@
 @charset "UTF-8";
 #bottom{
-    clear:both;
-    width:100vw;
-    height:180px;
-    background-color:rgba(105, 129, 234, 50%);
-    position:relative;
-    padding:0 !important;
-    float:left;
+	clear:both;
+	width:100vw;
+	height:180px;
+	background-color:rgba(105, 129, 234, 50%);
+	position:relative;
+	padding:0 !important;
+	float:left;
 }
 #footerLogo{
     float:left;
