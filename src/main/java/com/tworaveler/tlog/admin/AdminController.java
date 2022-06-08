@@ -100,7 +100,7 @@ public class AdminController {
 	// 자유일기 글 삭제
 	@GetMapping("delBoard")
 	public int deleteBoard(int boardNum) {
-		return 2;
+		return boardService.deleteBoard(boardNum);
 	}
 	
 	@GetMapping("reportMemberList")

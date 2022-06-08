@@ -10,3 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	console.log(p)
 	location.href="/admin/allMemberList?currentPage="+p+""
  }
+ 
+ function showTlog(){
+	alert('여행일기 눌렀어요!')
+}

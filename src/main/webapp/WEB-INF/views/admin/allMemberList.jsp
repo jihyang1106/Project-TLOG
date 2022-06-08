@@ -47,7 +47,6 @@
 			        data-parent="#accordionSidebar">
 			        <div class="bg-white py-2 collapse-inner rounded">
 			            <a class="collapse-item" href="/admin/allMemberList">전체 회원</a>
-			            <a class="collapse-item" href="/admin/reportMemberList">블랙 리스트</a>
 			        </div>
 			    </div>
 			</li>
@@ -136,7 +135,7 @@
                                         <th>번호</th>
                                         <th>닉네임</th>
                                         <th>가입일</th>
-                                        <th>여행일기 수</th>
+                                        <th onclick=showTlog()>여행일기 수</th>
                                         <th>자유일기 수</th>
                                         <th>총 일기 수</th>
                                         <th>신고받은 횟수</th>
@@ -148,7 +147,7 @@
 	                                        <td>${m.userNum}</td>
 	                                        <td>${m.userNick}</td>
 	                                        <td>${m.registerDate}</td>
-	                                        <td>${m.tNumCount}</td>
+	                                        <td onclick=showTlog()>${m.tNumCount}</td>
 	                                        <td>${m.bCount}</td>
 	                                        <td>${m.sum}</td>
 	                                        <td>${m.rCount}</td>
@@ -173,7 +172,7 @@
 												</c:when>
 												<c:when test="${p!=paging.currentPage}">
 													<li class="page-item page"><a class="page-link" href="javascript:void(0);"
-														onclick="move(${paging.currentPage})">${p}</a></li>
+														onclick="move(${p})">${p}</a></li>
 												</c:when>
 											</c:choose>
 										</c:if>
@@ -189,11 +188,13 @@
 						  	 </div>
                         </div><!-- end of 테이블 -->
                     </div><!-- end of 회원 게시판 -->
-                    
-                    <div class="card shadow mb-4 col-xl-12" style="display:none;">
-                        <div class="card-body table-responsive">
-                    	</div>
+                    <div id="memberContent" class="col-12">
+<!--                     	<div class="card shadow mb-4 col-xl-12">
+	                        <div class="card-body table-responsive">
+	                    	</div>
+                   		</div> -->
                     </div>
+                    
                     
 				</div><!-- end of row -->
 			</main><!-- end of container-fluid -->
