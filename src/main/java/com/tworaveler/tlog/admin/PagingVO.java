@@ -4,7 +4,7 @@ public class PagingVO {
 
 	private int currentPage = 1;     // 현재페이지
 	private int startPage = 1;       // 시작페이지
-	private int postsPerPage = 4;    // 한 페이지당 표시할 글 개수
+	private int postsPerPage = 5;    // 한 페이지당 표시할 글 개수
 	private int displayPageNum = 5;  // 하단에 한 번에 표시할 페이지 수
 	private int totalPosts;          // 모든 글 개수(DB)
 	private int totalPages;          // 총 페이지 수

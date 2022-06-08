@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="/css/inc/base.css" type="text/css">
 	<link rel="stylesheet" href="/css/inc/top.css" type="text/css">
 	<link rel="stylesheet" href="/css/home.css" type="text/css">
-	
 	<!-- Pavicon -->
 	<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 </head>
@@ -28,7 +27,7 @@
 <div class="top" id='top'>
 <!--------- 일반 아이디로 로그인 -----------> 
 	<header>
-		<nav>
+		<div class="nav">
 			<div class="logo">
 				<a href="/"><img src="/img/TLOG1.png" ></a>
 			</div>
@@ -39,7 +38,7 @@
 						<a href="/logShare/logList" class="nav-link top-list">여행일기</a>
 					</li>
 					<li class="nav_item">
-						<a href="/" class="nav-link top-list">자유일기</a>
+						<a href="/board/board" class="nav-link top-list">자유일기</a>
 					</li>
 					<li class="nav_item">
 						<a href="/" class="nav-link top-list">지도</a>
@@ -57,8 +56,7 @@
 					</c:if>
 	        	</div>
         	</div>
-		</nav>
+		</div>
 	</header>
-	
 <!--------- 관리자 아이디로 로그인 ----------->
 </div>

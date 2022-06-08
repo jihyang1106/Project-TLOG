@@ -148,7 +148,6 @@ public class MemberController {
 		mav.addObject("myLogCount", logService.selectMyLogs(userNum, isWriter, 0, limitNum).size());
 		//팔로워 받아오기
 		mav.addObject("followerCount", memberService.setFollowerInfo(userNum).size());
-		System.out.println(memberService.setFollowerInfo(userNum).size()+"GGGGGGGG");
 		mav.addObject("followerList", memberService.setFollowerInfo(userNum));
 		//팔로우하는 사람 받아오기
 		mav.addObject("followCount", memberService.setFollowInfo(userNum).size());
@@ -180,7 +179,6 @@ public class MemberController {
 		}else if(status==2){
 			logLists = logService.selectLikedLogs(userNum, isWriter, startNum, limitNum);
 		}
-		System.out.println("userNum = "+userNum);
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(logService.selectLogTag(lvo.gettNum()));

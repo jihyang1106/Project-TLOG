@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<link rel="stylesheet" href="/css/logShare/logList.css" type="text/css">
 <script>		
 var startNum=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
@@ -42,13 +42,13 @@ var newOrLike=0;
 				var tag = "";
 				for(i=0; i<data.length; i++){
 			    	  tag += "<ul id='log_ul' onclick='logDetail("+data[i].tNum+")'>";
-			    	  tag += "<li>"+data[i].coverImg+"</li>";
+			    	  tag += "<li><img src='/upload/log/"+data[i].coverImg+"' width='300px'/></li>";
 			    	  tag += "<li>"+data[i].tTitle+"</li>";
 			    	  tag += "<li>"+data[i].startDate+"</li>";
 			    	  tag += "<li>"+data[i].endDate+"</li>";
 			    	  tag += "<li>"+data[i].likeNum+"</li>";
 			    	  tag += "<li onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">";
-			    	  tag += "<img src='/upload/user/"+data[i].profileImg+".png' height='30px'/>"+data[i].userNick + "</li>";
+			    	  tag += "<img src='/upload/user/"+data[i].profileImg+"' style=\"height:30px\"/>"+data[i].userNick + "</li>";
 					  tag += "<li>";
 					  for(j=0; j<data[i].tagList.length; j++){
 						  tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
@@ -153,7 +153,7 @@ $("#searchFrm").submit(function() {
 	}
 });
 
-/* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)*/
+/* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)
 function scrollFunction() {
     var btn = document.getElementById('top_btn');
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -161,7 +161,7 @@ function scrollFunction() {
     } else {
         btn.style.display = "none";
     }
-}
+} */
 
 /* ======= 부드럽게 위로 가기 ====== */
 function goTop() {
@@ -197,28 +197,33 @@ function goTop() {
 }
 </style>
 <!--====================================== HTML ===================================================================-->
+<div id="logListContainer">
 <!-- 검색 -->
-<button id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>
-<button id='view_new'>New</button>
-<button id='view_like'>Like</button>
-
-<div>
+<section id="logListTop">
+<div id="btnArea">
+<button class="logListBtn" id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>&nbsp;
+<button class="logListBtn" id='view_new'>New</button>&nbsp;
+<button class="logListBtn" id='view_like'>Like</button>
+</div>
+<div id="searchFrm">
 	<form action="/logShare/logList/searchs" id="searchFrm">
         <select name="searchKey" id='searchKey'>
             <option value="title">제목</option>
             <option value="tag">태그</option>
             <option value="userNick">작성자</option>
-        </select>
-        <input type="text" name="searchWord" id="searchWord"/>
-        <input type="submit" value="Search"/>
+        </select>&nbsp;
+        <input type="text" name="searchWord" id="searchWord"/>&nbsp;
+        <input class="logListBtn" type="submit" value="검색"/>
     </form>
 </div>
-
+</section>
+<br/>
+<br/>
+<br/>
 <!-- log리스트 -->
 <div id='log_list_div'></div>
 <!-- 탑으로 가는 버튼 -->
-<button id='top_btn' onclick='goTop()' style='display:none'>Top ^^^^^</button>
-
+<button class="logListBtn" id='top_btn' onclick='goTop()'><i class="fa-solid fa-angles-up"></i></button>
 <!-- 로딩중 이미지 -->
 <img src='/img/loading.gif' id='loading' style='height:300px; display:none;'/>
 
@@ -226,3 +231,4 @@ function goTop() {
 
 <!-- 상세페이지 -->
 <div id='detail_div'></div>
+</div>

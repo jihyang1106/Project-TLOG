@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ public class LogShareController {
 	public ModelAndView logList(HttpSession session) { 
 		ModelAndView mav  = new ModelAndView();
 		mav.setViewName("/logShare/logList");
-		System.out.println("왔나ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 		return mav;
 	} 
 	@GetMapping("/logShare/logList/searchs") 
@@ -80,4 +80,25 @@ public class LogShareController {
 		}
 		return logLists;
 	}
+	
+	/*======================= LogView ===========================================*/
+	@GetMapping("/logShare/logView") 
+	public ModelAndView logView(HttpSession session, HttpServletRequest request, int tNum) { 
+		ModelAndView mav  = new ModelAndView();
+		int logUser = 2; //로그인 한 유저넘버
+		LogVO vo = service.getOneLog(tNum);		
+		
+		if(vo.getIsPrivate()==1 && vo.getUserNum()!=logUser) {//비밀일기일 때 작성자가 아니라면
+			System.out.println("나가라");
+			mav.setViewName("redirect:/member/profile?userNum="+vo.getUserNum()); //작성자 프로필로 리다이렉트	
+		}else {			
+			vo.setTagList(service.selectLogTag(tNum)); //태그리스트 넣기
+			vo.setTagUserList(service.selectTagUsers(tNum)); //태그된 유저리스트 넣기
+
+			mav.addObject("vo", vo);
+			mav.addObject("detailList", service.selectLogDetail(tNum));
+			mav.setViewName("/logShare/logView");
+		}
+		return mav;
+	} 
 }
