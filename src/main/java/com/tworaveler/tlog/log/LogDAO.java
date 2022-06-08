@@ -65,19 +65,39 @@ public interface LogDAO {
 	public List<LogVO> searchLikedLogs(int userNum, int isWriter, String searchStart, String searchEnd, int startNum, int limitNum);
 	
 	/* =============== 글쓰기 ===================== */
-	//travelLog 등록
+	// travelLog 등록
 	public int logWriteOk(LogVO vo);
-	//travelDetail 등록
+
+	// travelDetail 등록
 	public int detailWriteOk(int tNum, Map<String, Object> map);
-	//방금 작성한 tNum 가져오기
-	public int getTNum(int userNum); 
-	//태그 등록
+
+	// 방금 작성한 tNum 가져오기
+	public int getTNum(int userNum);
+
+	// 태그 등록
 	public int insertTagList(LogVO vo);
-	//해당 닉네임의 유저 검색
+
+	// 해당 닉네임의 유저 검색
 	public List<LogVO> getUserListByNick(String userNick);
-	//태그한 유저 등록
-	public int insertUserList(LogVO vo); 
+
+	// 태그한 유저 등록
+	public int insertUserList(LogVO vo);
 	
 	/* ================  logView ==================== */
-	public LogVO getOneLog(int tNum);
+	public LogVO getOneLog(int tNum, int logUser);
+	
+	//태그된 유저인지 확인
+	public int isTagged(int tNum, int logUser);
+	
+	// 좋아요 수
+	public LogVO getLikeNum(int tNum);
+
+	// 좋아요 누르기
+	public int LikeUp(int userNum, int tNum);
+
+	// 좋아요 취소
+	public int LikeDown(int userNum, int tNum);
+	
+	//글 삭제
+	public int logDel(int tNum);
 }

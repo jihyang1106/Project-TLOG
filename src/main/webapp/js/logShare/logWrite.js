@@ -1,13 +1,18 @@
+
+
 /*================ 태그 선택 ==================*/
 //.tags클릭 시 chk상태확인 후  css && chk 변화
+var tagCnt=0;
 $(".tags").click(function(){
 	//체크된 상태일 때
 	if($(this).next().is(":checked")){ 
 		$(this).next().prop("checked", false);
 		$(this).css("background-color", "#ddd");
+		tagCnt--;
 	//체크된 상태 아닐 때
 	}else{ 
 		$(this).next().prop("checked", true);
+		tagCnt++;
 		var id = $(this).attr('id');
 		switch(id){
 		case'tag1': case'tag2':
@@ -29,15 +34,18 @@ $(".tags").click(function(){
 			$(this).css("background-color", "#EACACB");
 		break
 		}
-		
-		
+	}
+	if(tagCnt>5){
+		$("#tag_alert").css("display","block");
+	}else{
+		$("#tag_alert").css("display","none");
 	}
 })
 /*================ 태그할 유저 선택 ==================*/
 var cnt=0;
 function PlusUser(){
 	if(cnt<5){
-		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;<ul class='search_user_ul'></ul></li>";
+		var li ="<li><input type='hidden' name='userNumList'/><input type='text' class='tag_box'/>&nbsp;&nbsp;<i class='fa-solid fa-xmark'></i>&nbsp;&nbsp;&nbsp;</li>";
 		$("#tag_user_ul").append(li);
 		cnt++;
 		console.log(cnt);
@@ -60,8 +68,8 @@ $(document).on("click", ".fa-xmark", function() {
 		if($(this).val().trim()!=""){
 			var ul = $(this).next().next(); //유저리스트 들어갈 ul
 			var data = {"userNick" : $(this).val()};
-			//console.log(data);
-			
+			console.log(tagBox);
+			var tagBox = $(this);
 			$.ajax({
 		          url: '/logShare/searchUserList',
 		          type: 'GET',
@@ -81,8 +89,8 @@ $(document).on("click", ".fa-xmark", function() {
 		        			var userNum = $(this).val();
 		        			var userNick = $(this).text();
 		        			//console.log(userNum, userNick);
-		        			$(this).parent().prev().prev().val(userNick); //inputText
-		        			$(this).parent().prev().prev().prev().val(userNum); //inputHidden
+		        			tagBox.val(userNick); //inputText
+		        			tagBox.prev().val(userNum); //inputHidden
 		        			$(this).parent().empty(); //검색리스트 지우기
 		        		})
 		        		
@@ -99,9 +107,10 @@ $(document).on("click", ".fa-xmark", function() {
 	});
 	
 		
-//div 클릭 시 파일 업로드 진행
-$(".log_img_top").click(function() {
- $(this).next().trigger("click");
+//버튼 클릭 시 파일 업로드 진행
+$(".img_upload_phr").click(function(e) {
+	e.preventDefault();
+ 	$(this).parent().next().trigger("click");
 })
 
 //이미지 미리보기
