@@ -395,14 +395,14 @@
 	</insert>
 	<!-- ==================== logView =========================================== -->
 	<select id='getOneLog' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg,
-					COUNT( CASE WHEN IFNULL(E.userNum, 0)= #{param2} THEN 1 END) AS likeType
+		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, IFNULL(D.coverImg,'logDefault.png') as coverImg,
+					COUNT( CASE WHEN IFNULL(E.userNum, 0)=#{param2} THEN 1 END) AS likeType
 		FROM		travelLog A
         JOIN		user B
         ON 			B.userNum = A.userNum
         LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
         ON			C.tNum=A.tNum
-        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        left JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
         ON			D.tNum=A.tNum
         LEFT JOIN 	likeClicker E
 		ON			A.tNum = E.tNum

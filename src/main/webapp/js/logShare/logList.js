@@ -39,9 +39,9 @@ var newOrLike=0;
 				var tag = "";
 				for(i=0; i<data.length; i++){
 					tag += "<div class='log_div'>"
-					tag += "<ul class='log_ul' onclick='logDetail("+data[i].tNum+")'>";
+					tag += "<ul class='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
 					tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg'/></li>";
-					tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='/upload/user/"+data[i].profileImg+"'' class='logProfileImg''/></span>&emsp;";
+					tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='"+data[i].profileImg+"'' class='logProfileImg''/></span>&emsp;";
 					tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
 					tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";
 					tag += "<li>";
@@ -50,7 +50,7 @@ var newOrLike=0;
 					}
 					tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
 					tag += "</li>";
-					tag += "<li><span>국내/국외, 위치</span></li>";
+					tag += "<li><span>"+data[i].placeInfo+"</span></li>";
 					tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
 					tag += "<li>";
 					for(j=0; j<data[i].tagList.length; j++){
@@ -68,10 +68,10 @@ var newOrLike=0;
 			    startNum += data.length; //startNum 갱신
 			    
 			    //마지막 페이지일 때 첫페이지로
-				if(data.length<5){
+				if(data.length<7){
 					startNum=0;
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
-						logList(); //한번 더 실행
+						logLists(); //한번 더 실행
 					}
 				} 
 				dataLength = data.length;
@@ -82,7 +82,7 @@ var newOrLike=0;
 	
 /* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
-    if($(window).scrollTop()+200>=$(document).height() - $(window).height()){
+    if($(window).scrollTop()+500>=$(document).height() - $(window).height()){
     	console.log("바닥");
     	if(!isFetching){
     		isFetching=true;
@@ -121,17 +121,9 @@ $("#searchFrm").submit(function() {
 	   return false;
 	}
 });
-
-/* === 올라가는 버튼 보이는 이벤트 === (에러있음!!)*/
-function scrollFunction() {
-    var btn = document.getElementById('top_btn');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
-    }
-}
-
+$("#view_all").click(function(e){
+	e.preventDefault();
+})
 /* ======= 부드럽게 위로 가기 ====== */
 function goTop() {
     window.scrollTo({top:0, behavior:'smooth'});
