@@ -43,7 +43,7 @@ input[type=date] {
 #tag_span{
 	line-height:3vh;
 	display:block;
-	margin-left:10vw;
+	text-align:center;
 }
 #tag_li{
 	clear:both;
@@ -139,7 +139,7 @@ input[type=date] {
 /* ===== 일기 =====*/
 #detail_div{
 	height:auto;
-	margin-left:14.5vw;
+	margin:0 auto;
 }
 .log_list_div{
 	clear:both;
@@ -152,7 +152,6 @@ input[type=date] {
 	margin:1vw;
 	padding:2vw;
 	width:22vw;
-	display:inline-block;
 	text-align:center;
 	border-radius:15px;
 	box-shadow:0 0 10px rgba(0,0,0,30%);
