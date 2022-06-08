@@ -33,7 +33,6 @@
 <!-- 검색 -->
 <section id="logListTop">
 <div id="btnArea">
-<button class="logListBtn" id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>&nbsp;
 <button class="logListBtn" id='view_new'>New</button>&nbsp;
 <button class="logListBtn" id='view_like'>Like</button>
 </div>
@@ -46,7 +45,9 @@
         </select>&nbsp;
         <input type="text" name="searchWord" id="searchWord"/>&nbsp;
         <input class="logListBtn" type="submit" value="검색"/>
+        <button class="logListBtn" id='view_all' onclick="location.href='/logShare/logList'">전체 글 보기</button>&nbsp;
     </form>
+    
 </div>
 </section>
 <br/>

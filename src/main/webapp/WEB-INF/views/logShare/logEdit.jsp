@@ -34,7 +34,6 @@
 								<br/><br/><span class='tags' id='season'>계절</span><input type='checkbox' style='display:none;'>
 							</c:if>
 						</c:forEach>
-						<span id='tag_alert' style='display:none; color:orange'>태그를 5개 이하로 선택해주세요</span>
 					</div>
 					<div id='tag_user_div'>
 						<span id='tag_user_span'>동행인&emsp;<i class="fa-solid fa-plus" id='plus' onclick='PlusUser()' ></i></span>

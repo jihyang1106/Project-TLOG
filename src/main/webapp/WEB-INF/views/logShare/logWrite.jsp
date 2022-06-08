@@ -14,8 +14,8 @@
 					<span class="logWriteLiLeft">제목 : &emsp;<input type='text' name='tTitle' id='titleTexts'/></span>
 				</li>
 				<li class="logWriteLi">
-					<span class="logWriteLiLeft">위치정보 : &emsp;<input type='text' name='placeInfo' id='locationTexts'/></span>&emsp;&emsp;
-					<span class="logWriteLiRight"><input type='date' name='startDate'/> ~ <input type='date' name='endDate'/></span>
+					<span class="logWriteLiLeft">위치 : &emsp;<input type='text' name='placeInfo' id='locationTexts'/></span>&emsp;&emsp;
+					<span class="logWriteLiRight"><input type='date' name='startDate'/> &emsp;~&emsp; <input type='date' name='endDate'/></span>
 				</li>
 			</ul>
 			<div id='user_tag_div'>
@@ -39,7 +39,8 @@
 							<br/><br/><span class='tags' id='season'>계절</span><input type='checkbox' style='display:none;'>
 						</c:if>
 					</c:forEach>
-					<span id='tag_alert' style='display:none; color:orange'>태그를 5개 이하로 선택해주세요</span>
+					<br/><br/>
+					<span id='tag_alert' style='display:none; color:orange; text-align:center;'>태그를 5개 이하로 선택해주세요</span>
 				</div>
 				<div id='tag_user_div'>
 					<span id='tag_user_span'>동행인&emsp;<i class="fa-solid fa-plus" id='plus' onclick='PlusUser()' ></i></span>
@@ -54,7 +55,6 @@
 				<button class="img_upload_phr">여행 일기 추가</button>
 				<input type="file" name="images" class="log_img" style="display: none" multiple required/> 
 			</div>
-		    
 		</form>	
 		<!-- 엘리먼트 추가될 div -->
 		<div id='detail_div'></div>
