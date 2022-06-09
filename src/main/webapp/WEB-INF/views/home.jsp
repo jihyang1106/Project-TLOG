@@ -1,48 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <script>
-        var index = 1;
+        var index = 0;
+     	// 페이지 번호    	  
+        var link_page = document.getElementsByClassName("link_page");
+     
         $(function () {
             // 캐러셀
             const leftBtn = document.querySelector('#leftBtn');
             const rightBtn = document.querySelector('#rightBtn');
             const carousel = document.querySelector('.list_slide');
             leftBtn.addEventListener('click', () => {
-                console.log("왼쪽 클릭");
+                //console.log("왼쪽 클릭");
                 if (index === 0) return;
-                index -= 1;
-                console.log("왼쪽 클릭 index", index);
+                link_page[index].classList.remove("clicked");
+                link_page[--index].classList.add("clicked");
+                //console.log("왼쪽 클릭 index", index);
                 carousel.style.transform = 'translate(' + (-960 * index) + 'px, 0)';
                 carousel.style.transitionDuration = '500ms';
+                
             });
             rightBtn.addEventListener('click', () => {
-                console.log("오른쪽 클릭");
+                //console.log("오른쪽 클릭");
                 if (index === 4) return;
-                index += 1;
-                console.log("오른쪽 클릭 index", index);
+                link_page[index].classList.remove("clicked");
+                link_page[++index].classList.add("clicked");
+                //console.log("오른쪽 클릭 index", index);
                 carousel.style.transform = 'translate(' + (-960 * index) + 'px, 0)';
                 carousel.style.transitionDuration = '500ms';
             });
             init();
         });
-        // 페이지 번호    	  
-        var link_page = document.getElementsByClassName("link_page");
+        
         function handleClick(event) {
-            console.log(event.target);
-            console.log("ㄹㄹㄹㄹㄹㄹㄹ");
+            //console.log(event.target);
+            //console.log("ㄹㄹㄹㄹㄹㄹㄹ");
             // 콘솔창을 보면 둘다 동일한 값이 나온다
-
-            console.log(event.target.classList[1].substr(8, 8));
+            //console.log(event.target.classList[1].substr(8, 8));
 
             const carousel = document.querySelector('.list_slide');
-
             if (event.target.classList[1] === "clicked") {
                 event.target.classList.remove("clicked");
-                console.log("바뀌냐..?");
+                //console.log("바뀌냐..?");
             } else {
                 for (var i = 0; i < link_page.length; i++) {
                     link_page[i].classList.remove("clicked");
                 }
-                console.log("클릭");
+                //console.log("클릭");
                 event.target.classList.add("clicked");
                 index = event.target.classList[1].substr(8, 8) - 1;
                 carousel.style.transform = 'translate(' + (-960 * index) + 'px, 0)';
@@ -51,7 +54,7 @@
         function init() {
             for (var i = 0; i < link_page.length; i++) {
                 link_page[i].addEventListener("click", handleClick);
-                console.log("클릭클릭");
+                //console.log("클릭클릭");
             }
         }
     </script>
@@ -449,7 +452,7 @@
     </div>
     <div class="wrap_paging">
         <ul class="paging_list">
-            <li><a href="javascript:;" class="link_page txt_page1" data-page="2">01</a></li>
+            <li><a href="javascript:;" class="link_page txt_page1" data-page="1">01</a></li>
             <li><a href="javascript:;" class="link_page txt_page2" data-page="2">02</a></li>
             <li><a href="javascript:;" class="link_page txt_page3" data-page="3">03</a></li>
             <li><a href="javascript:;" class="link_page txt_page4" data-page="4">04</a></li>
