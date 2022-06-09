@@ -6,11 +6,17 @@
 	background-color:rgba(105, 129, 234, 50%);
 	position:relative;
 	padding:0 !important;
-	float:left;
+}
+#footer{
+	width:90vw;
+	padding-left:20vw;
 }
 #footerLogo{
     float:left;
-    margin-right:20vw;
+    margin-right:6vw;
+/* ======= */
+/*     margin-right:20vw; */
+/* >>>>>>> ff359d0e13ef48dbe54143552e78a3ad32871733 */
 }
 #footerLogo img{
     margin-top:0.8vw;
@@ -19,7 +25,7 @@
 #footerContent{
     float:left;
     margin-top:1vw;
-    margin-right:8vw;
+    margin-right:6vw;
     display:inline-block;
     color:white;
 }
