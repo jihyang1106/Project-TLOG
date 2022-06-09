@@ -6,13 +6,13 @@
 		<form id='edit_form' action='/logShare/logEditOk' method='POST'>
 			<input type='hidden' name='tNum' value='${vo.tNum}'/>
 			<ul>
-				<li>제목 : &emsp;<input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
-				<li><input type='date' name='startDate' value='${vo.startDate}'/> &emsp;~&emsp; <input type='date' name='endDate' value='${vo.endDate}'/></li>
-				<li>위치 : &emsp;<input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>
 				<li>
 			      <label><input type="radio" name="isPrivate" id='isPrivate1' value="1"> 비밀일기 </label>
 			      <label><input type="radio" name="isPrivate" id='isPrivate0' value="0"> 공유일기 </label>
 			    </li>
+				<li>제목 : &emsp;<input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
+				<li><input type='date' name='startDate' value='${vo.startDate}'/> &emsp;~&emsp; <input type='date' name='endDate' value='${vo.endDate}'/></li>
+				<li>위치 : &emsp;<input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>			
 			    <div id='user_tag_div'>
 					<div id='tag_li'>
 						<span id='tag_span'>태그</span>
@@ -56,9 +56,10 @@
 		<div id='detail_div'>
 			<c:forEach var='dvo' items='${detailList}'>				
 				<div id='log_list_div'>	
+					<i class='fa-solid fa-xmark del_log'></i>
+					<input type='hidden' value='${dvo.isCoverImg}'>
 					<div class='log_div'>	
 						<ul class='log_ul'>
-							
 							<li>
 							<c:if test='${dvo.isCoverImg==1}'>
 								<span>대표 이미지</span>
@@ -67,13 +68,10 @@
 									<img src='/upload/log/${dvo.tImg}' class='coverImg'/>
 								</div>
 							</li>
-							
 							<li>${dvo.tContent}</li>
 							<li>${dvo.tPlace} 에서</li>		
 						</ul>
-					</div>
-					<i class='fa-solid fa-xmark del_log'></i>
-					<input type='hidden' value='${dvo.isCoverImg}'>
+					</div>					
 				</div>	
 				<input type='hidden' value='${dvo.tDetailNum}'>
 			</c:forEach>
@@ -239,7 +237,7 @@ function PlusUser(){
 		cnt++;
 		//console.log(cnt);
 		if(cnt>=6){
-			$("#plus").css("display","none"); //플러스버튼 지우기
+			$("#plus").css("display","inline-block"); //플러스버튼 지우기
 		}
 	}
 }

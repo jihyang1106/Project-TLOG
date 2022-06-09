@@ -24,7 +24,7 @@ function boardSend(){
 					startNum=0;
 					logLists();
 				},error : function(e){
-					alert("오류!");
+					alert("100자 이하로 작성해주세요.");
 				}
 			});
 		}
