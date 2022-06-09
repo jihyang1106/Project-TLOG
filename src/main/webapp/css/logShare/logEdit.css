@@ -140,6 +140,8 @@ input[type=date] {
 #detail_div{
 	height:auto;
 	margin:0 auto;
+	display:inline-block;
+	
 }
 .log_list_div{
 	clear:both;
@@ -184,17 +186,24 @@ input[type=date] {
 	box-shadow:0 0 10px rgba(0,0,0,30%);
 	
 }
+.del_log{
+	margin-bottom:50px;
+	float:right;
+}
 /*========일기 등록 버튼=========*/
 #write_btn{
-	margin:1.5vw 0;
-	padding:2px 10px;
-	border:none;
-	background-color:var(--theme-lightblue-60);
-	color:white;
-	border-radius:10px;
-	position:relative;
-	font-weight:500;
-	overflow:hidden;
+	margin: 1.5vw 0;
+    padding: 2px 10px;
+    border: none;
+    background-color: var(--theme-lightblue-60);
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    margin-top:50px;
 }
 #write_btn:focus{
 	outline: none;

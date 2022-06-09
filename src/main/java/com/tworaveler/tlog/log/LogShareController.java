@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tworaveler.tlog.member.MemberVO;
+
 @Controller
 public class LogShareController {
 	@Inject
@@ -85,7 +87,8 @@ public class LogShareController {
 	@GetMapping("/logShare/logView") 
 	public ModelAndView logView(HttpSession session, HttpServletRequest request, int tNum) { 
 		ModelAndView mav  = new ModelAndView();
-		int logUser = (int)session.getAttribute("userNum"); //로그인 한 유저넘버
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logUser = userInfo.getUserNum(); //로그인 한 유저넘버
 		LogVO vo = service.getOneLog(tNum, logUser);		
 		int isTagged = service.isTagged(tNum, logUser);
 		if(vo.getIsPrivate()==1 && isTagged==0 && vo.getUserNum()!=logUser) {//비밀일기일 때 태그된 유저가 아니고 작성자도 아니라면
@@ -105,7 +108,8 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/likeUp", method = RequestMethod.POST)
 	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
-		int logNum = (int)session.getAttribute("userNum"); //logNum
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logNum = userInfo.getUserNum(); //로그인 한 유저넘버
 		System.out.println(logNum+"+"+tNum);
 		service.LikeUp(logNum, tNum);
 		
@@ -115,7 +119,8 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/likeDown", method = RequestMethod.GET)
 	public LogVO likeDown(@RequestParam("tNum") int tNum, HttpSession session) {
-		int logNum = (int)session.getAttribute("userNum"); //logNum
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logNum = userInfo.getUserNum(); //로그인 한 유저넘버
 		System.out.println(logNum+"+"+tNum);
 		service.LikeDown(logNum, tNum);
 

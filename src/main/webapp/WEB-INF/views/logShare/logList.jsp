@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/logShare/logList.css" type="text/css">
 <!-- ===================================== CSS ================================================================== -->
+<script>
+/* ===== 검색한 단어 띄우기 ===== */
+window.onload = function(){
+	if('${searchKey}'!=null && '${searchKey}'!=""){
+		document.getElementById("searchKey").value = '${searchKey}';
+	}
+	if('${searchWord}'!=null && '${searchWord}'!=""){
+		document.getElementById("searchWord").value = '${searchWord}';
+	}
+}
+</script>
 <style>
 /* ===== 태그 ===== */
 .tags{

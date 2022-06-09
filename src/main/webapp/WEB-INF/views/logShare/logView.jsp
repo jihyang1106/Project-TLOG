@@ -29,10 +29,10 @@
 					<img src='${vo.profileImg}' class='logProfileImg'/></span>&emsp;
 					<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
 					<span class='logLike'>
-						<c:if test="${vo.likeType==0 && logStatus=='Y'}">
+						<c:if test="${vo.likeType==0 && userNum!=null}">
 							<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 						</c:if>
-						<c:if test="${vo.likeType==1 && logStatus=='Y'}">
+						<c:if test="${vo.likeType==1 && userNum!=null}">
 							<i class='fa-solid fa-thumbs-up' onclick='LikeDown(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 						</c:if>				
 					</span>
