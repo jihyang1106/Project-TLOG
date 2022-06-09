@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-.nav-item{
+.profileItem{
 	padding:0;
 }
-.nav-link{
+.profileLink{
 	text-align:center;
 	color:white;
 	background-color:rgba(122, 140, 226, 60%);
@@ -45,9 +45,9 @@
 	<!-- 일기 탭, 태그된글, 찜한 글 탭 -->
 	<div id="mypageTabSection">
 		<ul class="nav nav-tabs" id="tab">
-			<li class="nav-item col-sm-4" id="tab1"><a class="nav-link active" data-toggle="tab">여행일기</a></li>		
-			<li class="nav-item col-sm-4" id="tab2"><a class="nav-link" data-toggle="tab">태그된 글</a></li>		
-			<li class="nav-item col-sm-4" id="tab3"><a class="nav-link" data-toggle="tab">좋아요 누른 글</a></li>		
+			<li class="nav-item col-sm-4 profileItem" id="tab1"><a class="nav-link active profileLink" data-toggle="tab">여행일기</a></li>		
+			<li class="nav-item col-sm-4 profileItem" id="tab2"><a class="nav-link profileLink" data-toggle="tab">태그된 글</a></li>		
+			<li class="nav-item col-sm-4 profileItem" id="tab3"><a class="nav-link profileLink" data-toggle="tab">좋아요 누른 글</a></li>		
 		</ul>
 	</div>
 	<!-- 마이페이지 컨텐츠 -->

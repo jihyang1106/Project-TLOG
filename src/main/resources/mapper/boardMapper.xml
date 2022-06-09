@@ -11,7 +11,7 @@
 	
 	<!-- 최신순으로 글 리스트 보이기 자유일기 -->
 	<select id="selectRecent" resultType='com.tworaveler.tlog.board.BoardVO'>
-		select a.boardNum, a.boardContent, substring_index(ip,':','2') ip, b.profileImg, b.userNick, b.userNum, date_format(a.writedate,'%y-%m-%d %H:%i') writedate from board a 
+		select a.boardNum, a.boardContent, b.profileImg, b.userNick, b.userNum, date_format(a.writedate,'%y-%m-%d %H:%i') writedate from board a 
 		join user b on b.userNum = a.userNum 
 		order by boardNum desc 
 		limit #{param1},#{param2}

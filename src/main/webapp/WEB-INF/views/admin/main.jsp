@@ -50,42 +50,17 @@
 			        </div>
 			    </div>
 			</li>
-		
-			<!-- Nav Item 신고관리 -->
-			<li class="nav-item">
-			    <a class="nav-link" href="/admin/reportList">
-			        <i class="fas fa-fw fa-chart-area"></i>
-			        <span>신고관리</span></a>
-			</li>
 	
 			<!-- Divider -->
 		    <hr class="sidebar-divider d-none d-md-block">
 		</ul>
 		<!-- End of Sidebar -->
 	
-		<!-- Content Wrapper (검색창) -->
+		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column"><!-- end div tag xx -->
 			<!-- Topbar -->
-			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-				<!-- Sidebar Toggle (Topbar) -->
-				<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-					<i class="fa fa-bars"></i>
-				</button>
-		
-				<!-- Topbar Search (검색 버튼) -->
-				<form
-				   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-					<div class="input-group">
-				    	<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-				             aria-label="Search" aria-describedby="basic-addon2">
-				         <div class="input-group-append">
-				             <button class="btn btn-primary" type="button">
-				                 <i class="fas fa-search fa-sm"></i>
-				             </button>
-				         </div>
-				     </div>
-				 </form>
-		
+			<div class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
 				 <!-- Topbar Navbar -->
 				 <ul class="navbar-nav ml-auto">
 			     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -113,7 +88,7 @@
 			            </div>
 				     </li>
 				 </ul><!-- End of Topbar Navbar -->
-			</nav>
+			</div>
 			<!-- End of Topbar -->
 			
 			<!-- main page Content -->
@@ -190,7 +165,6 @@
 						</div>
                    	</div><!-- 전체 일기 수, 회원 수 끝 -->
                    	<br/>
-         
                    	
                    	<!-- 태그 게시판 통계 -->
 					<div class="card shadow mb-4 col-12">

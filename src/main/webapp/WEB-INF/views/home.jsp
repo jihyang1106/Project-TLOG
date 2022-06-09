@@ -36,7 +36,6 @@
             //console.log("ㄹㄹㄹㄹㄹㄹㄹ");
             // 콘솔창을 보면 둘다 동일한 값이 나온다
             //console.log(event.target.classList[1].substr(8, 8));
-
             const carousel = document.querySelector('.list_slide');
             if (event.target.classList[1] === "clicked") {
                 event.target.classList.remove("clicked");
