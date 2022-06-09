@@ -32,8 +32,8 @@
 	border-radius:50%;
 }
 #defaultProfile{
-	width:5vw;
-	height:2vw;
+	width:5.5vw;
+	height:2.3vw;
 	border:none;
 	border-radius:10px;
 	background-color:var(--theme-lightblue-60);
@@ -41,7 +41,6 @@
 	transition:0.3s;
 	font-weight:700;
 	line-height: 2vw;
-    margin-right: 10vw;
 }
 #defaultProfile:hover{
 	background-color:rgba(42, 76, 211, 75%);
@@ -135,7 +134,7 @@
 	border-radius:10px;
 	box-shadow:0 0 7px rgba(0,0,0,50%);
 	cursor:pointer;
-	margin-bottom:30px;
+	margin-bottom:20px;
 	display:inline-block;
 }
 .tagplus{
