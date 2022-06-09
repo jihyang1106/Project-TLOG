@@ -33,7 +33,7 @@
 						<span><input type="text" name="userNick" id="profileInfoNick"/></span>
 					</c:if>
 				</div>
-				<button type="button" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
+				<button type="button" class="btn btn-warning delbtn" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
 				<div id="profileSubmit"><input type="submit" value="정보수정" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">

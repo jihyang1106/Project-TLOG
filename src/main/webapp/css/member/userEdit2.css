@@ -3,8 +3,6 @@
 	width:80vw;
 	height:83vh;
 	margin:0 auto;
-}
-#userEditContainer{
 	clear:both;
 	font-family: 'NanumSquare';
 	width:50vw;
@@ -25,42 +23,17 @@
 	margin: 60px 0px;
 	color:rgba(42, 76, 211, 75%);
 }
-
+#profileImgSection{
+	width:50%;
+	height:150px;
+	float:left;
+	margin-bottom:0px;
+}
 #previewImg{
 	width:120px;
 	height:120px;
 	border-radius:50%;
 }
-/* #profileNick{ */
-/* 	font-size:1.3em; */
-/* 	font-weight:700; */
-/* 	color:rgba(0,0,0,60%); */
-/* } */
-/* #profileInfoNick{ */
-/* 	border:none; */
-/* 	outline:none; */
-/* 	border-bottom:1px solid rgba(0,0,0,60%); */
-/* 	text-align:center; */
-/* } */
-/* #profileSubmit{ */
-/* 	text-align:center; */
-/* } */
-/* #profileSubmitBtn{ */
-/* 	width:100px; */
-/* 	height:40px; */
-/* 	font-weight:800; */
-/* 	background-color:var(--theme-lightblue-60); */
-/* 	border:none; */
-/* 	border-radius:10px; */
-/* 	position:absolute; */
-/* 	top:90%; */
-/* 	margin-left:-40px; */
-/* 	transition:0.3s; */
-/* 	color:rgba(0,0,0,70%); */
-/* } */
-/* #profileSubmitBtn:hover{ */
-/* 	top:89%;	 */
-/* } */
 #defaultProfile{
 	width:5vw;
 	height:2vw;
@@ -114,12 +87,14 @@
 }
 /*===========태그============*/
 #hr-sect {
+	clear:both;
 	display: flex;
 	flex-basis: 100%;
 	align-items: center;
 	color:rgba(122, 140, 226, 80%);
 	font-size:1.3em;
-	margin: 30px 0px;
+	margin-top:30px;
+	position:relative;
 }
 #hr-sect::before{
 	content: "";
@@ -139,12 +114,24 @@
 	line-height: 0px;
 	margin:0px 100px  0px 20px;
 }
+#tagSection{
+	clear:both;
+	width:100%;
+	height:15vw;
+	padding:2vw;
+	margin:0;
+}
 .tagWord{
-	padding:10px;
+/* 	width:5vw; */
+/* 	height:2vw; */
+/* 	border:none; */
+	padding:5px 12px;
 	letter-spacing:1px;
 	border-radius:10px;
 	box-shadow:0 0 7px rgba(0,0,0,50%);
 	cursor:pointer;
+	margin-bottom:30px;
+	display:inline-block;
 }
 .tagplus{
 	padding:10px;
@@ -156,9 +143,6 @@
 	color:white;
 }
 #allTagCnt{
-	padding:200px;
-	background-color:green;
-}
-.delbtn{
-	color:white;
+	padding:60px;
+	padding-top:30px;
 }
