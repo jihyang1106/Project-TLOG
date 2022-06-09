@@ -40,10 +40,18 @@
 	color:white;
 	transition:0.3s;
 	font-weight:700;
+	line-height: 2vw;
+    margin-right: 10vw;
 }
 #defaultProfile:hover{
 	background-color:rgba(42, 76, 211, 75%);
 }
+#memberDel{
+	color:white;
+	border-radius:10px;
+	margin-left:1vw;
+}
+
 #profileNickSection{
 	width:50%;
 	height:150px;

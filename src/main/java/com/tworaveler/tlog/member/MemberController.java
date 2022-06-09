@@ -105,8 +105,13 @@ public class MemberController {
 	public String welcomePageOk(MemberVO vo, HttpServletRequest request,HttpSession session) {
 		int userNum = (int) session.getAttribute("userNum");
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		TlogApplication.profileImgUpload(vo, request);
-		//회원정보 수정
+		if(vo.getProfileImg()=="/img/profile/default_profile.png") {
+            vo.setProfileImg("/img/profile/default_profile.png");
+            System.out.println(vo.getProfileImg());
+        }else {
+            TlogApplication.profileImgUpload(vo, request);
+            System.out.println(vo.getProfileImg());
+        }		//회원정보 수정
 		memberService.updateMember(vo);
 		//수정된 정보로session 값 수정
 		session.setAttribute("userInfo", memberService.selectMemberByKakao(userInfo.getIdKakao()));

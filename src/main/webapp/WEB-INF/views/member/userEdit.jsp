@@ -29,7 +29,8 @@
 				<c:if test="${userInfo.userNick==null}">
 					<span><input type="text" name="userNick" id="profileInfoNick"/></span>
 				</c:if>
-				<button type="button" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
+				<button type="button" id="memberDel" class="btn btn-warning"
+				onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
 				<div id="profileSubmit"><input type="submit" value="정보수정" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">
