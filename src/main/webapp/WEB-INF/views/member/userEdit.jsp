@@ -2,6 +2,12 @@
 <link rel="stylesheet" href="/css/member/welcomePage.css" type="text/css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="module" src="/js/member/userEdit.js"></script>
+<style>
+	.btn-warning{
+		color:white;
+		border-radius:10px;
+	}
+</style>
 <main>
 	<div class="container">
 		<div id="welcomeContainer">
@@ -13,14 +19,14 @@
 				<div id=profileImgSection>
 					<input id="imgFile" name="profileImgs" type="file" hidden="true" accept="image/jpg, image/jpeg, image/png">
 					<input id="profile" name="profileImg" type="hidden" value="${userInfo.profileImg }">
-					<c:if test="${userInfo.idKakao!=null}">
+					<c:if test="${userInfo.3`	idKakao!=null}">
 						<span><input type="hidden" name="idKakao" value="${userInfo.idKakao }"/></span>&emsp;&emsp;
 					</c:if>
 					<c:if test="${userInfo.profileImg==null}">
-						<span><label for="imgFile" title="이미지 업로드"><img src="/upload/user/default_profile.png" id="previewImg"></label></span>&emsp;&emsp;
+						<span><label for="imgFile" title="이미지 업로드"><img src="/upload/user/default_profile.png" id="previewImg"></label></span>&emsp;
 					</c:if>
 					<c:if test="${userInfo.profileImg!=null}">
-						<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg }" id="previewImg"></label></span>&emsp;&emsp;
+						<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg }" id="previewImg"></label></span>&emsp;
 					</c:if>
 					<span><input id="defaultProfile" type="button" value="이미지 제거"></span>
 				</div>
