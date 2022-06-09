@@ -70,7 +70,7 @@ function logLists(){
 			var tag = "";
 			for(i=0; i<data.length; i++){
 				tag += "<div id='freeLog_div'>";		    	  
-		    	tag += "<div id='info'><span id='infoLeft'><img src='"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"("+ data[i].ip +")" +"</span>";
+		    	tag += "<div id='info'><span id='infoLeft'><img src='"+data[i].profileImg+"' id='profileImg'/>&nbsp;&nbsp;"+ data[i].userNick +"</span>";
 		    	tag += "<span id='infoRight'>"+ data[i].writedate +"&nbsp;&nbsp;&nbsp;&nbsp;";
 		    	if(data[i].userNum == $("#loginNum").val()){
 					tag += "<i class='fa-solid fa-xmark' name= '" + data[i].boardNum + "' ></i>";

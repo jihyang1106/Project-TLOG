@@ -17,6 +17,7 @@
 #profileImg{
 	width:150px;
 	height:150px;
+	border-radius:50%;
 }
 #profileNick{
 	font-size:2em;

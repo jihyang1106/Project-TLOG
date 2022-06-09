@@ -77,6 +77,11 @@ ul, li{
 	padding:0;
 	list-style-type:none;
 }
+
+strong{
+	font-weight: bolder;
+}
+
 .fa,.fab,.fad,.fal,.far,.fas{
 	font-weight: 900 !important;
 }

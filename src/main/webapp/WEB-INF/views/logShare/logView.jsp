@@ -49,7 +49,7 @@
 					</li>
 				</c:if>
 				<li><span>${vo.startDate}</span>&nbsp;~&nbsp;<span>${vo.endDate}</span></li>
-				<li>
+				<li class="logtag_wrap">
 					<c:forEach var='t' items='${vo.tagList}'>				
 							<span class='tags' id='tag${t.tagNum}' onclick="location.href='/logShare/logList/searchs?searchKey=tag&searchWord=${t.tagName}'">
 								${t.tagName}
@@ -57,7 +57,7 @@
 					</c:forEach>
 				</li>		
 				<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
-				<li>
+				<li class="del_edit_btn">
 					<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
 					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
 				</li>
@@ -82,12 +82,30 @@
   </div>
 
   <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
+  	<a class="carousel-control-prev" href="#demo" data-slide="prev" style="background-color: #d7d7d7;
+    padding: 2px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    margin-top: 25%;">
+  		<span class="carousel-control-prev-icon" ></span>
+	</a>
+  	<a class="carousel-control-next" href="#demo" data-slide="next" style="background-color: #d7d7d7;
+    padding: 2px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    margin-top: 25%;">
+    	<span class="carousel-control-next-icon"></span>
+  	</a>
+  
+  
 
 </div>
+<script>
+$('.carousel').carousel({
+	  interval: false,
+	});
+</script>
+
 

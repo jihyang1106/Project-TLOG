@@ -12,7 +12,7 @@
 				<input type="hidden" name="userNum" value="${kakaoVO.userNum }"/>
 				<div id=profileImgSection>
 					<input id="imgFile" name="profileImgs" type="file" hidden="true" accept="image/jpg, image/jpeg, image/png">
-					<input id="profile" name="profileImg" type="hidden" value="${kakaoVO.profileImg }">
+					<input id="profileImg" name="profileImg" type="hidden" value="${kakaoVO.profileImg }">
 					<c:if test="${kakaoVO.idKakao!=null}">
 						<span><input type="hidden" name="idKakao" value="${kakaoVO.idKakao }"/></span>&emsp;&emsp;
 					</c:if>
