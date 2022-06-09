@@ -14,7 +14,7 @@ $(function() {
 	$('#defaultProfile').click(function() {
 		$('#previewImg').attr('src', '/img/profile/default_profile.png');
 		$('#imgFile').val('');
-		$('#profile').val('');
+		$('#profileImg').val('/img/profile/default_profile.png');
 	});
 });
 //top bottom 안보이게 하기
