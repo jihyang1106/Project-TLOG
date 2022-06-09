@@ -147,6 +147,11 @@ $(".tags").click(function(){
 		break
 		}
 	}
+	if(tagCnt>5){
+		$("#tag_alert").css("display","block");
+	}else{
+		$("#tag_alert").css("display","none");
+	}
 })
 
 /*================ 태그할 유저 선택 ==================*/
@@ -168,7 +173,7 @@ $(document).on("click", ".fa-xmark", function() {
 	cnt--;
 	console.log(cnt);
 	if(cnt<5){
-		$("#plus").css("display","block"); //플러스 버튼 보이기
+		$("#plus").css("display","inline-block"); //플러스 버튼 보이기
 	}
 })
 	//태그할 유저 자동검색
@@ -239,14 +244,6 @@ function readImage(input){
 				return;
 			}
 			//엘리먼트 추가
-			
-			/* var tag = "<ul>";
-			tag += "<li><div class='log_img_wrap'><img src='' class='t_img' id='image"+index+"'/></div></li>";
-			tag += "<li><input type='checkbox' name='isCoverImg' value='1'>대표이미지</li>";
-			tag += "<li><input type='text' name='tContent'/></li>";
-			tag += "<li><input type='text' name='tPlace'/></li></ul>"; 
-			$("#detail_div").append(tag); */
-			
 			var ul = document.createElement('ul');
 				ul.className = 'logElement';
 			var li_1 = document.createElement('li');
