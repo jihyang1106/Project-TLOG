@@ -132,13 +132,15 @@
 .log_ul li:first-child{
 	height:100%;
 	line-height:40px;
+	overflow:hidden;
 }
 .coverImg{
-	max-width:14vw;
-	max-height:12vw;
+	width:14vw;
+	height:10vw;
 	margin-bottom:1vw;
 	border-radius:10px;
 	box-shadow:0 0 10px rgba(0,0,0,30%);
+	
 }
 .profileInfo{
 	height:40px;

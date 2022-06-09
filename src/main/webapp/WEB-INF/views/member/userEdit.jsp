@@ -19,7 +19,7 @@
 				<div id=profileImgSection>
 					<input id="imgFile" name="profileImgs" type="file" hidden="true" accept="image/jpg, image/jpeg, image/png">
 					<input id="profile" name="profileImg" type="hidden" value="${userInfo.profileImg }">
-					<c:if test="${userInfo.3`	idKakao!=null}">
+					<c:if test="${userInfo.idKakao!=null}">
 						<span><input type="hidden" name="idKakao" value="${userInfo.idKakao }"/></span>&emsp;&emsp;
 					</c:if>
 					<c:if test="${userInfo.profileImg==null}">
