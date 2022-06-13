@@ -32,18 +32,25 @@
 	border-radius:50%;
 }
 #defaultProfile{
-	width:5vw;
-	height:2vw;
+	width:5.5vw;
+	height:2.3vw;
 	border:none;
 	border-radius:10px;
 	background-color:var(--theme-lightblue-60);
 	color:white;
 	transition:0.3s;
 	font-weight:700;
+	line-height: 2vw;
 }
 #defaultProfile:hover{
 	background-color:rgba(42, 76, 211, 75%);
 }
+#memberDel{
+	color:white;
+	border-radius:10px;
+	margin-left:1vw;
+}
+
 #profileNickSection{
 	width:50%;
 	height:150px;
@@ -127,7 +134,7 @@
 	border-radius:10px;
 	box-shadow:0 0 7px rgba(0,0,0,50%);
 	cursor:pointer;
-	margin-bottom:30px;
+	margin-bottom:20px;
 	display:inline-block;
 }
 .tagplus{

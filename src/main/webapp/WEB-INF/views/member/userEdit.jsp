@@ -2,6 +2,12 @@
 <link rel="stylesheet" href="/css/member/welcomePage.css" type="text/css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="module" src="/js/member/userEdit.js"></script>
+<style>
+	.btn-warning{
+		color:white;
+		border-radius:10px;
+	}
+</style>
 <main>
 	<div class="container">
 		<div id="welcomeContainer">
@@ -17,10 +23,10 @@
 						<span><input type="hidden" name="idKakao" value="${userInfo.idKakao }"/></span>&emsp;&emsp;
 					</c:if>
 					<c:if test="${userInfo.profileImg==null}">
-						<span><label for="imgFile" title="이미지 업로드"><img src="/upload/user/default_profile.png" id="previewImg"></label></span>&emsp;&emsp;
+						<span><label for="imgFile" title="이미지 업로드"><img src="/upload/user/default_profile.png" id="previewImg"></label></span>&emsp;
 					</c:if>
 					<c:if test="${userInfo.profileImg!=null}">
-						<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg }" id="previewImg"></label></span>&emsp;&emsp;
+						<span><label for="imgFile" title="이미지 업로드"><img src="${userInfo.profileImg }" id="previewImg"></label></span>&emsp;
 					</c:if>
 					<span><input id="defaultProfile" type="button" value="이미지 제거"></span>
 				</div>
@@ -33,7 +39,7 @@
 						<span><input type="text" name="userNick" id="profileInfoNick"/></span>
 					</c:if>
 				</div>
-				<button type="button" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
+				<button type="button" class="btn btn-warning delbtn" onclick="location.href='/member/memberDel?userNum=${userInfo.userNum}'">회원탈퇴</button>
 				<div id="profileSubmit"><input type="submit" value="정보수정" id="profileSubmitBtn"/></div>
 				<div id="hr-sect">태그선택</div>
 				<div id="allTagCnt">

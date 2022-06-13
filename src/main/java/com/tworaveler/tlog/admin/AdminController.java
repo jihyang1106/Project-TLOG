@@ -106,16 +106,17 @@ public class AdminController {
 		return boardService.deleteBoard(boardNum);
 	}
 	
-	@GetMapping("reportMemberList")
-	public ModelAndView reportMemberList() {
-		mav.setViewName("admin/reportMemberList");
-		return mav;
+	// 관리자 회원 여부
+	@GetMapping("memberAdmin")
+	public int selectMemberAdmin(int userNum) {
+		return  service.selectMemberAdmin(userNum);
 	}
 	
-	@GetMapping("reportList")
-	public ModelAndView reportList() {
-		mav.setViewName("admin/reportList");
-		return mav;
+	// 관리자 권한 부여 및 취소
+	@GetMapping("updateAdmin")
+	public int updateMemberAdmin(int userNum, int status, PagingVO pvo, MemberVO mvo) {
+		mav.addObject("mList", service.selectMemberList(pvo, mvo));
+		return service.updateAdmin(userNum, status);
 	}
-	
+
 }

@@ -88,12 +88,7 @@ public class LogShareController {
 	public ModelAndView logView(HttpSession session, HttpServletRequest request, int tNum) { 
 		ModelAndView mav  = new ModelAndView();
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		int logUser;
-		if(userInfo!=null) {
-			logUser = userInfo.getUserNum(); //로그인 한 유저넘버
-		}else {
-			logUser = 0; //로그인 한 유저넘버
-		}
+		int logUser = userInfo.getUserNum(); //로그인 한 유저넘버
 		LogVO vo = service.getOneLog(tNum, logUser);		
 		int isTagged = service.isTagged(tNum, logUser);
 		if(vo.getIsPrivate()==1 && isTagged==0 && vo.getUserNum()!=logUser) {//비밀일기일 때 태그된 유저가 아니고 작성자도 아니라면
@@ -114,7 +109,7 @@ public class LogShareController {
 	@RequestMapping(value = "/logShare/likeUp", method = RequestMethod.POST)
 	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		int logNum = userInfo.getUserNum(); //logNum
+		int logNum = userInfo.getUserNum(); //로그인 한 유저넘버
 		System.out.println(logNum+"+"+tNum);
 		service.LikeUp(logNum, tNum);
 		
