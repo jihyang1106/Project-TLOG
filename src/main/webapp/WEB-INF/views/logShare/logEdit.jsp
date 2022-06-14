@@ -10,9 +10,9 @@
 			      <label><input type="radio" name="isPrivate" id='isPrivate1' value="1"> 비밀일기 </label>
 			      <label><input type="radio" name="isPrivate" id='isPrivate0' value="0"> 공유일기 </label>
 			    </li>
-				<li>제목 : &emsp;<input type='text' name='tTitle' class='texts' value='${vo.tTitle}'/></li>
+				<li>제목 : &emsp;<input type='text'  id='titleTexts'name='tTitle' class='texts' value='${vo.tTitle}'/></li>
 				<li><input type='date' name='startDate' value='${vo.startDate}'/> &emsp;~&emsp; <input type='date' name='endDate' value='${vo.endDate}'/></li>
-				<li>위치 : &emsp;<input type='text' name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>			
+				<li>위치 : &emsp;<input type='text'  id='locationTexts'name='placeInfo' class='texts' value='${vo.placeInfo}'/></li>			
 			    <div id='user_tag_div'>
 					<div id='tag_li'>
 						<span id='tag_span'>태그</span>
@@ -47,11 +47,12 @@
 							</li>
 						</c:forEach>
 						</ul>
+						<br/><hr/>
 						<ul class='search_user_ul'></ul>
 					</div>
 				</div>
 			</ul>
-			<br/><br/><br/><br/>
+			<br/>
 		
 		<div id='detail_div'>
 			<c:forEach var='dvo' items='${detailList}'>				
@@ -68,8 +69,8 @@
 									<img src='/upload/log/${dvo.tImg}' class='coverImg'/>
 								</div>
 							</li>
-							<li>${dvo.tContent}</li>
-							<li>${dvo.tPlace} 에서</li>		
+							<li><br/>${dvo.tContent}</li>
+							<li><br/>${dvo.tPlace} 에서</li>		
 						</ul>
 					</div>					
 				</div>	

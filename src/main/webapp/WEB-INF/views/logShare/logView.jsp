@@ -29,6 +29,9 @@
 					<img src='${vo.profileImg}' class='logProfileImg'/></span>&emsp;
 					<span class='logNick' onclick="location.href='/member/profile?userNum=${vo.userNum}'">${vo.userNick}</span>
 					<span class='logLike'>
+						<c:if test="${userNum==null}">
+							<i class='fa-regular fa-thumbs-up' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
+						</c:if>
 						<c:if test="${vo.likeType==0 && userNum!=null}">
 							<i class='fa-regular fa-thumbs-up' onclick='LikeUp(${vo.tNum})' style='color:rgba(122, 140, 226,100%);'></i> &emsp;${vo.likeNum}
 						</c:if>
@@ -56,11 +59,12 @@
 							</span>&nbsp;
 					</c:forEach>
 				</li>		
-				<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
-				<li class="del_edit_btn">
-					<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
-					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
-				</li>
+				<c:if test="${userNum!=null && userNum==vo.userNum}">
+					<li class="del_edit_btn">
+						<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
+						<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
+					</li>
+				</c:if>
 			</ul>
 			</div>
 	    </div>

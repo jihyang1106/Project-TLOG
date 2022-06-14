@@ -15,13 +15,13 @@
 	width:25vw;
 	border:none;
 	border-bottom:1px solid #ddd;
-	outline:none;
+	text-align:center;
 }
 #locationTexts{
 	width:15vw;
 	border:none;
 	border-bottom:1px solid #ddd;
-	outline:none;
+	text-align:center;
 }
 /* ===== ul, li, span 정리 ===== */
 .logWriteUl{
@@ -147,6 +147,7 @@ input[type=date] {
 	clear:both;
 	float:center;
 	width:70vw;
+	height:auto;
 	position:relative;
 	margin:100px 0px !important;
 }
@@ -165,7 +166,7 @@ input[type=date] {
 	list-style-type:none;
 }
 .log_ul li{
-	height:4vh;
+	height:auto;
 	line-height:4vh;
 }
 .log_ul li:first-child{

@@ -76,8 +76,8 @@
 }
 .log_list_div{
 	position: relative;
-	width: 750px;
-    height: 265px;
+	width: 820px;
+    height: 300px;
     margin: 0 auto;
     text-align: center;
 }
@@ -109,6 +109,9 @@
 .log_ul li:first-child{
 	height:100%;
 	line-height:40px;
+	padding: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 .titleDiv {
   position:absolute;

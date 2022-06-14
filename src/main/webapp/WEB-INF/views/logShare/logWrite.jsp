@@ -47,6 +47,8 @@
 					<hr/>
 				    <ul id='tag_user_ul'>
 					</ul>
+					<br/>
+					<hr/>
 					<ul class='search_user_ul'></ul>
 				</div>
 			</div>
