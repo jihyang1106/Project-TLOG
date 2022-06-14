@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/css/inc/bottom.css" type="text/css">
 <br/>
 <div style="clear:both"></div>
+</div>
 <div class="bottom" id='bottom'>
 	<footer id='footer'>
 		<!-- 푸터 작성하기 -->
