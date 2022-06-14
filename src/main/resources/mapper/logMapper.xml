@@ -27,9 +27,9 @@
         ON			C.tNum=A.tNum
         JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
         ON			D.tNum=A.tNum
-        JOIN		followUser E
-        ON			E.followingNum=A.userNum
-        WHERE		E.userNum=#{param1}
+        left JOIN		followUser E
+        ON			E.userNum=A.userNum
+        WHERE		E.followingNum=#{param1}
         AND			isPrivate=0
 		ORDER BY 	tNum DESC
 		LIMIT 		16
@@ -62,13 +62,13 @@
 	</select>
 	<!-- 메인) 팔로워 많은 유저 -->
 	<select id='FollowedUser' resultType='MemberVO'>
-		SELECT 	COUNT(A.userNum) AS followerNum, A.followingNum AS userNum, 
+		SELECT 	ifnull(COUNT(A.followingNum),0) AS followerNum, A.followingNum AS userNum, 
 				B.userNick, B.profileImg
-        FROM 	followUser A
-        JOIN 	user B
+        FROM 	user B
+        left JOIN 	followUser A
         ON		B.userNum=A.followingNum
         GROUP 	BY followingNum
-        ORDER 	BY followerNum DESC
+        ORDER 	BY followerNum DESC, userNum
         LIMIT 	6
 	</select>
 	<!-- userNum의 태그 리스트 -->
