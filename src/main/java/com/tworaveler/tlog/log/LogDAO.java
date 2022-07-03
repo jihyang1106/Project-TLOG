@@ -38,22 +38,22 @@ public interface LogDAO {
 
 	/* =============== logShare ===================== */
 	// 무한스크롤 리스트(최신순)
-	public List<LogVO> selectNewLogs(int startNum, int limit);
+	public List<LogVO> selectNewLogs(int limit, int tNum);
 
 	// 무한스크롤 리스트(좋아요순)
-	public List<LogVO> selectLikeLogs(int startNum, int limit);
+	public List<LogVO> selectLikeLogs(int limitNum, long cursor);
 
 	// 무한스크롤 검색 리스트(최신순) - 제목/작성자
-	public List<LogVO> searchNewLogs(String searchKey, String string, int startNum, int limitNum);
+	public List<LogVO> searchNewLogs(String searchKey, String string, int tNum, int limitNum);
 
 	// 무한스크롤 검색 리스트(최신순) - 태그
-	public List<LogVO> searchNewLogsTag(String string, int startNum, int limitNum);
+	public List<LogVO> searchNewLogsTag(String string, int tNum, int limitNum);
 
 	// 무한스크롤 검색 리스트(좋아요순) - 제목/작성자
-	public List<LogVO> searchLikeLogs(String searchKey, String string, int startNum, int limitNum);
+	public List<LogVO> searchLikeLogs(String searchKey, String string, long cursor, int limitNum);
 
 	// 무한스크롤 검색 리스트(좋아요순) - 태그
-	public List<LogVO> searchLikeLogsTag(String string, int startNum, int limitNum);
+	public List<LogVO> searchLikeLogsTag(String string, long cursor, int limitNum);
 
 	/* =============== 프로필 ===================== */
 	public List<LogVO> selectMyLogs(int userNum, int isWriter, int startNum, int limitNum);

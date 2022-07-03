@@ -39,42 +39,44 @@ public class LogShareController {
 	//전체 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/logLists", method = RequestMethod.GET)
-	public List<LogVO> logLists(@RequestParam("startNum") int startNum, int newOrLike) {
+	public List<LogVO> logLists(@RequestParam("tNum") int tNum, @RequestParam("cursor") long cursor, int newOrLike) {
 		int limitNum =7; //한 번에 나오는 글 수
 		
 		List<LogVO> logLists = new ArrayList<LogVO>();
+		
 		if(newOrLike==0) { //최신순
-			logLists = service.selectNewLogs(startNum, limitNum);
+			logLists = service.selectNewLogs(limitNum, tNum);
 		}else { //좋아요순
-			logLists = service.selectLikeLogs(startNum, limitNum);
+			logLists = service.selectLikeLogs(limitNum, cursor);
 		}
+		
 		//vo마다 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(service.selectLogTag(lvo.gettNum()));
 		}
 		return logLists;
 	}
+	
 	//검색한 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/searchLists", method = RequestMethod.GET)
-	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord, int newOrLike) {
+	public List<LogVO> searchLists(@RequestParam(value = "tNum") int tNum, @RequestParam(value = "cursor") long cursor,String searchKey, String searchWord, int newOrLike) {
 		int limitNum = 7;
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		
 		if(newOrLike==0) { //최신순
 			if(searchKey.equals("tag")) {//태그
-				logLists = service.searchNewLogsTag("%" + searchWord + "%", startNum, limitNum);
+				logLists = service.searchNewLogsTag("%" + searchWord + "%", tNum, limitNum);
 			}else {//제목, 작성자
-				logLists = service.searchNewLogs(searchKey, "%" + searchWord + "%", startNum, limitNum);
+				logLists = service.searchNewLogs(searchKey, "%" + searchWord + "%", tNum, limitNum);
 			}
 		}else { //좋아요순
 			if(searchKey.equals("tag")) {//태그
-				logLists = service.searchLikeLogsTag("%" + searchWord + "%", startNum, limitNum);
+				logLists = service.searchLikeLogsTag("%" + searchWord + "%", cursor, limitNum);
 			}else {//제목, 작성자
-				logLists = service.searchLikeLogs(searchKey, "%" + searchWord + "%", startNum, limitNum);
+				logLists = service.searchLikeLogs(searchKey, "%" + searchWord + "%", cursor, limitNum);
 			}
 		}
-		
 		
 		//vo마다 tNum의 태그리스트 넣기
 		for(LogVO lvo : logLists) {

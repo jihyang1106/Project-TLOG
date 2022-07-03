@@ -55,13 +55,8 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<LogVO> selectNewLogs(int startNum, int limit) {
-		return dao.selectNewLogs(startNum, limit);
-	}
-
-	@Override
-	public List<LogVO> selectLikeLogs(int startNum, int limit) {
-		return dao.selectLikeLogs(startNum, limit);
+	public List<LogVO> selectNewLogs(int limit, int startNum) {
+		return dao.selectNewLogs(limit, startNum);
 	}
 
 	@Override
@@ -75,13 +70,13 @@ public class LogServiceImpl implements LogService{
 	}
 
 	@Override
-	public List<LogVO> searchLikeLogs(String searchKey, String string, int startNum, int limitNum) {
-		return dao.searchLikeLogs(searchKey, string, startNum, limitNum);
+	public List<LogVO> searchLikeLogs(String searchKey, String string, long cursor, int limitNum) {
+		return dao.searchLikeLogs(searchKey, string, cursor, limitNum);
 	}
 
 	@Override
-	public List<LogVO> searchLikeLogsTag(String string, int startNum, int limitNum) {
-		return dao.searchLikeLogsTag(string, startNum, limitNum);
+	public List<LogVO> searchLikeLogsTag(String string, long cursor, int limitNum) {
+		return dao.searchLikeLogsTag(string, cursor, limitNum);
 	}
 
 	@Override
@@ -195,6 +190,11 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public int detailDel(LogVO vo) {
 		return dao.detailDel(vo);
+	}
+
+	@Override
+	public List<LogVO> selectLikeLogs(int limitNum, long cursor) {
+		return dao.selectLikeLog();
 	}
 
 	

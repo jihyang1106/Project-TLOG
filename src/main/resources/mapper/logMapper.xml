@@ -18,22 +18,22 @@
 		LIMIT 		16
 	</select>	
 	<!-- 메인: 팔로잉 글 리스트 -->
-	<select id='selectFollowLog' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
-		FROM		travelLog A
-        JOIN		user B
-        ON 			B.userNum = A.userNum
-        LEFT JOIN	(SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
-        ON			C.tNum=A.tNum
-        JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
-        ON			D.tNum=A.tNum
-        left JOIN		followUser E
-        ON			E.userNum=A.userNum
-        WHERE		E.followingNum=#{param1}
-        AND			isPrivate=0
-		ORDER BY 	tNum DESC
-		LIMIT 		16
-	</select>
+   <select id='selectFollowLog' resultType='com.tworaveler.tlog.log.LogVO'>
+      SELECT       A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+      FROM      travelLog A
+        JOIN      user B
+        ON          B.userNum = A.userNum
+        LEFT JOIN   (SELECT tNum, COUNT(userNum) AS likeNum FROM likeClicker GROUP BY tNum) C
+        ON         C.tNum=A.tNum
+        JOIN      (SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
+        ON         D.tNum=A.tNum
+        left JOIN      followUser E
+        ON         E.userNum=A.userNum
+        WHERE      E.followingNum=#{param1}
+        AND         isPrivate=0
+      ORDER BY    tNum DESC
+      LIMIT       16
+   </select>
 	<!-- tNum의 태그 리스트 -->
 	<select id='selectLogTag' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 	B.tagNum, B.tagName
@@ -61,16 +61,16 @@
         WHERE	A.tNum=#{param1}
 	</select>
 	<!-- 메인) 팔로워 많은 유저 -->
-	<select id='FollowedUser' resultType='MemberVO'>
-		SELECT 	ifnull(COUNT(A.followingNum),0) AS followerNum, A.followingNum AS userNum, 
-				B.userNick, B.profileImg
-        FROM 	user B
-        left JOIN 	followUser A
-        ON		B.userNum=A.followingNum
-        GROUP 	BY followingNum
-        ORDER 	BY followerNum DESC, userNum
-        LIMIT 	6
-	</select>
+   <select id='FollowedUser' resultType='MemberVO'>
+      SELECT    ifnull(COUNT(A.followingNum),0) AS followerNum, A.followingNum AS userNum, 
+            B.userNick, B.profileImg
+        FROM    user B
+        left JOIN    followUser A
+        ON      B.userNum=A.followingNum
+        GROUP    BY followingNum
+        ORDER    BY followerNum DESC, userNum
+        LIMIT    6
+   </select>
 	<!-- userNum의 태그 리스트 -->
 	<select id='selectMyTag' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 	B.tagNum, B.tagName
@@ -97,9 +97,13 @@
         JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
         ON			D.tNum=A.tNum
         WHERE		isPrivate=0
+		<if test="param2 != 0">
+		    AND		A.tNum <![CDATA[<]]> #{param2}
+		</if>        
 		ORDER BY 	A.tNum DESC
-		LIMIT 		#{param1}, #{param2}
+		LIMIT 		#{param1}
 	</select>
+	
 	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 제목/작성자 -->
 	<select id='searchNewLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 	    SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
@@ -119,9 +123,13 @@
 		        AND B.userNick like #{param2}
 		    </when>
        	</choose>
+       	<if test="param3 != 0">
+		    AND		A.tNum <![CDATA[<]]> #{param3}
+		</if>
 		ORDER BY 	A.tNum DESC
-		LIMIT 		#{param3}, #{param4}
+		LIMIT 		#{param4}
 	</select>
+	
 	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 태그 -->
 	<select id='searchNewLogsTag' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg, F.tagName
@@ -138,12 +146,17 @@
 	    ON			F.tagNum=E.tagNum
 		WHERE 		F.tagName like #{param1}
 	    AND			isPrivate=0
+	    <if test="param2 != 0">
+		    AND		A.tNum <![CDATA[<]]> #{param2}
+		</if>
 		ORDER BY 	A.tNum DESC
-		LIMIT 		#{param2}, #{param3}
+		LIMIT 		#{param3}
 	</select>
-	<!-- 무한스크롤 페이징 로그리스트(최신순) -->
+	
+	<!-- 무한스크롤 페이징 로그리스트(좋아요순) -->
 	<select id='selectLikeLogs' resultType='com.tworaveler.tlog.log.LogVO'>
-		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
+		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg,
+					CONCAT(LPAD(C.likeNum, 10, '0'), LPAD(A.tNum, 10, '0')) as cursor
 		FROM		travelLog A
         JOIN		user B
         ON 			B.userNum = A.userNum
@@ -152,10 +165,14 @@
         JOIN		(SELECT tNum, tImg AS coverImg FROM travelDetail WHERE isCoverImg=1) D
         ON			D.tNum=A.tNum
         WHERE		isPrivate=0
-		ORDER BY 	likeNum DESC
-		LIMIT 		#{param1}, #{param2}
+        <if test="param2 != 0">
+		    AND		CONCAT(LPAD(C.likeNum, 10, '0'), LPAD(A.tNum, 10, '0')) <![CDATA[<]]> #{param2}
+		</if>
+		ORDER BY 	likeNum DESC, A.tNum DESC
+		LIMIT 		#{param1}
 	</select>
-	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 제목/작성자 -->
+	
+	<!-- 무한스크롤 페이징 검색 리스트(좋아요순) - 제목/작성자 -->
 	<select id='searchLikeLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 	    SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg
 		FROM		travelLog A
@@ -174,10 +191,14 @@
 		        AND B.userNick like #{param2}
 		    </when>
        	</choose>
-		ORDER BY 	likeNum DESC
-		LIMIT 		#{param3}, #{param4}
+       	<if test="param3 != 0">
+		    AND		CONCAT(LPAD(C.likeNum, 10, '0'), LPAD(A.tNum, 10, '0')) <![CDATA[<]]> #{param3}
+		</if>
+		ORDER BY 	likeNum DESC, tNum DESC
+		LIMIT 		#{param4}
 	</select>
-	<!-- 무한스크롤 페이징 검색 리스트(최신순) - 태그 -->
+	
+	<!-- 무한스크롤 페이징 검색 리스트(좋아요순) - 태그 -->
 	<select id='searchLikeLogsTag' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, ifnull(C.likeNum,0) AS likeNum, D.coverImg, F.tagName
 		FROM		travelLog A
@@ -193,8 +214,11 @@
 	    ON			F.tagNum=E.tagNum
 		WHERE 		F.tagName like #{param1}
 	    AND			isPrivate=0
-		ORDER BY 	likeNum DESC
-		LIMIT 		#{param2}, #{param3}
+	    <if test="param2 != 0">
+		    AND		CONCAT(LPAD(C.likeNum, 10, '0'), LPAD(A.tNum, 10, '0')) <![CDATA[<]]> #{param2}
+		</if>
+		ORDER BY 	likeNum DESC, tNum DESC
+		LIMIT 		#{param3}
 	</select>
 	
 	<!-- ================= profile ================================================================================ -->
@@ -215,6 +239,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param3}, #{param4}
 	</select>
+	
 	<!-- 태그된 일기리스트 -->
 	<select id='selectTaggedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
@@ -233,6 +258,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param3}, #{param4}
 	</select>
+	
 	<!-- 좋아요 누른 일기리스트 -->
 	<select id='selectLikedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
@@ -250,6 +276,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param3}, #{param4}
 	</select>
+	
 	<!-- =================== 날짜 검색된 일기리스트 =======================================================================-->
 	<!-- 나의 일기리스트(검색) -->
 	<select id='searchMyLogs' resultType='com.tworaveler.tlog.log.LogVO'>
@@ -282,6 +309,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param5}, #{param6}
 	</select>
+	
 	<!-- 태그된 일기리스트 -->
 	<select id='searchTaggedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
@@ -314,6 +342,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param5}, #{param6}
 	</select>
+	
 	<!-- 좋아요 누른 일기리스트 -->
 	<select id='searchLikedLogs' resultType='com.tworaveler.tlog.log.LogVO'>
 		SELECT 		A.*, B.userNick, B.profileImg, IFNULL(C.likeNum,0) AS likeNum, D.coverImg
@@ -348,6 +377,7 @@
 		ORDER BY 	tNum DESC
 		LIMIT 		#{param5}, #{param6}
 	</select>
+	
 	<!-- ===================== 글쓰기 ================================================================================ -->
 	<!-- travelLog 등록 -->
 	<insert id="logWriteOk">

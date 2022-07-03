@@ -1,4 +1,5 @@
-var startNum=0;
+var tNum=0;
+var cursor=0;
 var isFetching = false; //로딩 시 true(중복실행 방지)
 var dataLength=0; //이전에 불러온 데이터길이(무한 재귀 방지용)
 var newOrLike=0;
@@ -7,35 +8,34 @@ var newOrLike=0;
 	function logLists(){
 		var url;
 		var param;
-		const params = new URL(window.location.href).searchParams;
-		var key = params.get('searchKey');
-		var word = params.get('searchWord');
 		var pathname = window.location.pathname;
-		var pn = pathname.substring(pathname.lastIndexOf('/')+1,7); //url 마지막/다음부분
+		var pn = pathname.substring(pathname.lastIndexOf('/')+1,pathname.lastIndexOf('/')+8); //url 마지막/다음부분
 		if(pn=='logList'){
 			url = '/logShare/logLists';
 			param = {
-				"startNum" : startNum,
+				"tNum" : tNum,
+				"cursor" : cursor,
 				"newOrLike" : newOrLike
 			};
 		}else if(pn='searchs'){
+			const params = new URL(window.location.href).searchParams;
+			var key = params.get('searchKey');
+			var word = params.get('searchWord');
 			url = '/logShare/searchLists';
 			param = {
-				"startNum" : startNum ,
+				"tNum" : tNum ,
+				"cursor" : cursor,
+				"newOrLike" : newOrLike,
 				"searchKey" : key,
-				"searchWord" : word,
-				"newOrLike" : newOrLike
-			};
-			
+				"searchWord" : word				
+			};		
 		}
-		console.log(param);
 		$.ajax({
 			url : url,
 			type : 'GET',
 			dataType : 'json',
 			data :param,
 			success : function(data){
-				console.log("data.length : "+data.length);
 				var tag = "";
 				for(i=0; i<data.length; i++){
 					tag += "<div class='log_div'>"
@@ -59,23 +59,32 @@ var newOrLike=0;
 						tag += data[i].tagList[j].tagName+"</span>&nbsp;&nbsp;";
 					}
 					tag += "</li></ul></div>";
+					
+					//마지막 데이터의 커서 저장
+					if(i==data.length-1){
+						if(newOrLike==0){//최신순
+							tNum = data[i].tNum;
+						}else{ //좋아요순
+							cursor = data[i].cursor;
+						}
+					}
 				}//for
 			    $("#log_list_div").append(tag);
 			    isFetching=false; //로딩완료
-			    console.log(isFetching);
 			    $("#loading").css("display","none"); //로딩이미지 없애기
-			    
-			    startNum += data.length; //startNum 갱신
 			    
 			    //마지막 페이지일 때 첫페이지로
 				if(data.length<7){
-					startNum=0;
+					if(newOrLike==0){//최신순
+						tNum = 0;
+					}else{ //좋아요순
+						cursor = 0;
+					}
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
 						logLists(); //한번 더 실행
 					}
 				} 
 				dataLength = data.length;
-				
 			}//success
 		});//ajax
  	}
@@ -83,11 +92,9 @@ var newOrLike=0;
 /* ======== 스크롤 바닥 감지 ======== */
 window.onscroll = function(e) {
     if($(window).scrollTop()+500>=$(document).height() - $(window).height()){
-    	console.log("바닥");
     	if(!isFetching){
     		isFetching=true;
     		$("#loading").css("display","block");
-    		console.log(isFetching);
     		logLists(); // 콘텐츠 추가
     	}
     }
@@ -101,14 +108,16 @@ $(document).ready(function(){
 	$("#view_new").click(function(){
 		newOrLike=0;
 		$("#log_list_div").empty();
-		startNum=0;
+		tNum=0;
+		cursor=0;
 		logLists();
 	});
 	/* ======= 좋아요순 정렬 ======= */
 	$("#view_like").click(function(){
 		newOrLike=1;
 		$("#log_list_div").empty();
-		startNum=0;
+		tNum=0;
+		cursor=0;
 		logLists();
 	});
 })

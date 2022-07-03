@@ -49,6 +49,8 @@ public class LogVO {
 	//likeClicker
 	private int likeType;
 	
+	private long cursor;
+	
 	
 	public List<Integer> getTagNumList() {
 		return tagNumList;
@@ -235,6 +237,12 @@ public class LogVO {
 	}
 	public void setdNumList(List<Integer> dNumList) {
 		this.dNumList = dNumList;
+	}
+	public long getCursor() {
+		return cursor;
+	}
+	public void setCursor(long cursor) {
+		this.cursor = cursor;
 	}
 
 }
