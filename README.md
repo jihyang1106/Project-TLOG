@@ -42,12 +42,12 @@
 
 ## 프로젝트 사용 방법
 ### 설치
-PAINTRAVEL 폴더, paintravel-frontend 폴더에서 패키지 및 라이브러리 설치
+
 ```
 npm install
 ```
 
-PAINTRAVEL 폴더에서 프로젝트 시작
+
 ```
 npm run dev
 ```
