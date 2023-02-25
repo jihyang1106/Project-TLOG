@@ -66,7 +66,7 @@
 	    </div>
     			<c:forEach var='dvo' items='${detailList}'>		
 				    <div class="carousel-item">				
-				      <img src='/upload/log/${dvo.tImg}' class='imgs'/>				
+				      <img src='/var/lib/apache-tomcat-8.5.86/webapps/upload/log/${dvo.tImg}' class='imgs'/>
 				      <div class="carousel-caption">				
 				        <div id='log_list_div'>
 							<div class='log_div'>
