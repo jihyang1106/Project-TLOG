@@ -58,7 +58,7 @@ public class KakaoAPI {
 			userInfo.put("idKakao", userJSON.get("id").toString());
 			//System.out.println("아이디"+userJSON.get("id").toString());
 			userInfo.put("userNick", profileJSON.getString("nickname"));
-			//System.out.println("프사프사"+profileJSON.getString("profile_image"));
+			System.out.println("프사프사"+profileJSON.getString("profile_image"));
 			userInfo.put("profileImg", profileJSON.getString("profile_image"));
 			
 		} catch (Exception e) {
