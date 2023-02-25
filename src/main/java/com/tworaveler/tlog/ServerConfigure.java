@@ -3,10 +3,12 @@ package com.tworaveler.tlog;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
@@ -26,7 +28,21 @@ public class ServerConfigure implements WebMvcConfigurer {
 		registry.addInterceptor(new LoginInterceptor()).addPathPatterns(URL_PATERRNS);
 		registry.addInterceptor(new AdminLoginInterceptor()).addPathPatterns(ADMIN_URL_PATERRNS);
 	}
-	
+
+	private final String uploadPath;
+
+	public ServerConfigure(@Value("${servlet.multipart.location}") String uploadPath){
+		this.uploadPath = uploadPath;
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry){
+		registry.addResourceHandler("/upload/log/**")
+				.addResourceLocations("file:///"+uploadPath+"log/");
+		registry.addResourceHandler("/upload/user/**")
+				.addResourceLocations("file:///"+uploadPath+"user/");
+	}
+
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();

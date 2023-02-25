@@ -20,7 +20,6 @@ public class TlogApplication {
 		SpringApplication.run(TlogApplication.class, args);
 	}
 	public static void profileImgUpload(MemberVO vo, HttpServletRequest request) {
-
 		String profilePath = "/upload/user/";
 		String path = request.getSession().getServletContext().getRealPath(profilePath);
 		MultipartFile file = ((MultipartRequest) request).getFile("profileImgs");
