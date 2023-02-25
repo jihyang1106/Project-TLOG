@@ -57,7 +57,7 @@ public class LogWriteController {
 		
 		//파일 업로드
 		String path = uploadPath +"log/";
-	    System.out.println("실제 경로 = "+path);
+	    //System.out.println("실제 경로 = "+path);
 		try {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
 
@@ -85,17 +85,17 @@ public class LogWriteController {
 						ee.printStackTrace();
 					}
 				}
-		    	
+
 				//DB UPDATE
 				service.logWriteOk(vo); // travelLog 테이블
 				int tNum =service.getTNum(vo.getUserNum());//방금 넣은 tNum가져오기
 				vo.settNum(tNum); 
-				System.out.println(vo.getTagNumList());
-				System.out.println(vo.getUserNumList());
-				
-				System.out.println("insertTagList="+service.insertTagList(vo));
-				System.out.println("insertUserList="+service.insertUserList(vo));
-				
+				vo.getTagNumList();
+				vo.getUserNumList();
+
+				service.insertTagList(vo);
+				service.insertUserList(vo);
+//
 				System.out.println("글쓰기 완료");
 			}
 		}catch(Exception e) {
