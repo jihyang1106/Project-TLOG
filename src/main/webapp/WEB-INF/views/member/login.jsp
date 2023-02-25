@@ -12,7 +12,7 @@
 			<div id="loginInfoContainer">
 				<p id="loginTitle">로그인</p>
 				<div class="otherLogin">
-					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a7b1e2d31b1e4b9b211d09f5dcd83a80&redirect_uri=http://3.37.146.72:8025/member/kakaoLogin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
+					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a7b1e2d31b1e4b9b211d09f5dcd83a80&redirect_uri=http://t-log.pe.kr/member/kakaoLogin"><img class="kakao-login-img" src="/img/member/kakao_login.png" id="kakaoLogo"></a>
 				</div>
 				<div class="otherLogin">
 					<a href="#"><img src="/img/member/google_login.png"></a>
