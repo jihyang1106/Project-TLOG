@@ -46,7 +46,7 @@ public class TlogApplication {
 				e.printStackTrace();
 			}
 			
-			vo.setProfileImg(profilePath+orgFileName);
+			vo.setProfileImg("/upload/user/"+orgFileName);
 		}
 	}
 	
