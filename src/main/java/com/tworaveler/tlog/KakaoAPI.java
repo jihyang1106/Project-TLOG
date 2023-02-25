@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KakaoAPI {
-	private final String REST_API_KEY = "a7b1e2d31b1e4b9b211d09f5dcd83a80";
+	private final String REST_API_KEY = "########";
 	private final String REDIRECT_URI = "http://3.37.146.72/member/kakaoLogin";//http://ec2-13-125-250-91.ap-northeast-2.compute.amazonaws.com/member/kakaoLogin
 
 	public JSONObject getToken(String authorizeCode) {
         StringBuffer sb = new StringBuffer();
         sb.append("grant_type=authorization_code");
-		sb.append("&client_id="+REST_API_KEY);
+		sb.append("&client_id=##########");
 		sb.append("&redirect_uri="+"http://3.37.146.72/member/kakaoLogin");
 		sb.append("&code="+authorizeCode);
 		System.out.println(REDIRECT_URI+"카카오로그인");
