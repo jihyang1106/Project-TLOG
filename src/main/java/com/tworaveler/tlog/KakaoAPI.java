@@ -21,7 +21,7 @@ public class KakaoAPI {
         StringBuffer sb = new StringBuffer();
         sb.append("grant_type=authorization_code");
 		sb.append("&client_id="+REST_API_KEY);
-		sb.append("&redirect_uri="+REDIRECT_URI);
+		sb.append("&redirect_uri="+"http://3.37.146.72/member/kakaoLogin");
 		sb.append("&code="+authorizeCode);
 		
 		return getTokenJson(sb);
