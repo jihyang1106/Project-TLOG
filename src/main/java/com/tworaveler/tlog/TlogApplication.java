@@ -20,8 +20,11 @@ public class TlogApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TlogApplication.class, args);
 	}
-	@Value("${spring.servlet.multipart.location}")
 	private static String uploadPath;
+
+	public TlogApplication(@Value("${spring.servlet.multipart.location}") String uploadPath){
+		this.uploadPath = uploadPath;
+	}
 
 	public static void profileImgUpload(MemberVO vo, HttpServletRequest request) {
 		String profilePath = uploadPath+"user/";
