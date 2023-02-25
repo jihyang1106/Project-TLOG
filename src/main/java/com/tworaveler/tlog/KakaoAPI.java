@@ -23,7 +23,7 @@ public class KakaoAPI {
 		sb.append("&client_id="+REST_API_KEY);
 		sb.append("&redirect_uri="+"http://3.37.146.72/member/kakaoLogin");
 		sb.append("&code="+authorizeCode);
-		
+		System.out.println(REDIRECT_URI+"카카오로그인");
 		return getTokenJson(sb);
 	}
 
