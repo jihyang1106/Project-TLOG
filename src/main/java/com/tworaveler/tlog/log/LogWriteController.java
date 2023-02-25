@@ -29,7 +29,8 @@ import com.tworaveler.tlog.member.MemberVO;
 public class LogWriteController {
 	@Inject
 	LogService service;
-
+	@Value("${spring.servlet.multipart.location}")
+	private String uploadPath;
 
 	/* ===================== 글쓰기폼 ======================== */
 	@GetMapping("/logShare/logWrite")
@@ -55,7 +56,7 @@ public class LogWriteController {
 		List<String> fileNames = new ArrayList<String>();//ajax로 보낼 변환된 파일명
 		
 		//파일 업로드
-		String path = "/upload/log";
+		String path = uploadPath;
 	    System.out.println("실제 경로 = "+path);
 		try {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
