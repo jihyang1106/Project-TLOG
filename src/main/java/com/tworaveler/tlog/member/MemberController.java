@@ -275,7 +275,7 @@ public class MemberController {
 	public ModelAndView userEditOk(MemberVO vo, HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
-		System.out.println(vo.getProfileImg()+"ddddd");
+		System.out.println(vo.getProfileImg()+"변경 전 프로필사진");
 		if(vo.getProfileImg()=="/img/profile/default_profile.png") {
 			vo.setProfileImg("/img/profile/default_profile.png");
 			System.out.println(vo.getProfileImg());
