@@ -55,7 +55,7 @@ public class LogWriteController {
 		List<String> fileNames = new ArrayList<String>();//ajax로 보낼 변환된 파일명
 		
 		//파일 업로드
-		String path = request.getSession().getServletContext().getRealPath("/upload/log");
+		String path = "/upload/log";
 	    System.out.println("실제 경로 = "+path);
 		try {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;

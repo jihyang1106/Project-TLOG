@@ -38,9 +38,9 @@ public class ServerConfigure implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry){
-		registry.addResourceHandler("/upload/log/**")
+		registry.addResourceHandler("/upload/log")
 				.addResourceLocations("file:///"+uploadPath+"log/");
-		registry.addResourceHandler("/upload/user/**")
+		registry.addResourceHandler("/upload/user")
 				.addResourceLocations("file:///"+uploadPath+"user/");
 	}
 
