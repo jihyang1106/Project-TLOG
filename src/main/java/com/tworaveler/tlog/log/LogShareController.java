@@ -113,7 +113,8 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/likeUp", method = RequestMethod.POST)
 	public LogVO likeUp(@RequestParam("tNum") int tNum, HttpSession session) {
-		int logNum = 2; //logNum
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logNum = userInfo.getUserNum(); //logNum
 		System.out.println(logNum+"+"+tNum);
 		service.LikeUp(logNum, tNum);
 		
@@ -123,7 +124,8 @@ public class LogShareController {
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/likeDown", method = RequestMethod.GET)
 	public LogVO likeDown(@RequestParam("tNum") int tNum, HttpSession session) {
-		int logNum = 2; //logNum
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		int logNum = userInfo.getUserNum(); //logNum
 		System.out.println(logNum+"+"+tNum);
 		service.LikeDown(logNum, tNum);
 
