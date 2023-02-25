@@ -24,7 +24,7 @@ public class TlogApplication {
 	private static String uploadPath;
 
 	public static void profileImgUpload(MemberVO vo, HttpServletRequest request) {
-		String profilePath = uploadPath;
+		String profilePath = uploadPath+"user/";
 		String path = request.getSession().getServletContext().getRealPath(profilePath);
 		MultipartFile file = ((MultipartRequest) request).getFile("profileImgs");
 		if(!file.getOriginalFilename().equals("")) {
