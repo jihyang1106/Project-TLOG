@@ -13,8 +13,8 @@
   <!-- The slideshow -->
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src='/upload/log/${vo.coverImg}' class='imgs'/>
-			<div class="carousel-caption">			
+			<img src='/var/lib/apache-tomcat-8.5.86/webapps/upload/log/${vo.coverImg}' class='imgs'/>
+			<div class="carousel-caption">
 			<ul>
 				<li>
 					<div id='titleDiv'>
