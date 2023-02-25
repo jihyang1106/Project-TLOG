@@ -78,6 +78,7 @@
 #profileImg{
 	width:2vw;
 	height:2vw;
+	border-radius:50%;
 }
 #loading{
 	padding-left:15vw;
