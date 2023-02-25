@@ -90,12 +90,15 @@ public class LogWriteController {
 				service.logWriteOk(vo); // travelLog 테이블
 				int tNum =service.getTNum(vo.getUserNum());//방금 넣은 tNum가져오기
 				vo.settNum(tNum); 
-				vo.getTagNumList();
-				vo.getUserNumList();
+//				vo.getTagNumList();
+//				vo.getUserNumList();
+				if(vo.getTagNumList()!=null){
+					service.insertTagList(vo);
+				}
+				if(vo.getUserNumList()!=null){
+					service.insertUserList(vo);
+				}
 
-				service.insertTagList(vo);
-				service.insertUserList(vo);
-//
 				System.out.println("글쓰기 완료");
 			}
 		}catch(Exception e) {
