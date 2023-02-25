@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-@PropertySource()
 public class ServerConfigure implements WebMvcConfigurer {
 	
 	static String[] interceptorArr = {
