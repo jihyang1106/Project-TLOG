@@ -44,12 +44,14 @@ public class MemberController {
 	// 로그인 	
 	@GetMapping("/member/login")
 	public String loginForm() {
+		System.out.println("로그인하러옴");
 		return "member/login";
 	}
 	
 	//카카오 로그인
 	@GetMapping("/member/kakaoLogin")
 	public String kakaologin(HttpServletResponse response, String code, HttpSession session, HttpServletResponse res, RedirectAttributes redirect, HttpServletRequest request) throws IOException { // 로그인 토큰 받아오기
+		System.out.println("카카오로그인");
 		JSONObject tokenJson = kakao.getToken(code);
 		String accessToken = tokenJson.getString("access_token");
 		String refreshToken = tokenJson.getString("refresh_token");
