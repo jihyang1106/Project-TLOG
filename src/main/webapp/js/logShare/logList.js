@@ -37,7 +37,7 @@ var newOrLike=0;
 			success : function(data){
 				console.log("data.length : "+data.length);
 				if(data.length == 0){
-					<div> 해당하는 게시글이 없어요..! </div>
+					tag += <div> 해당하는 게시글이 없어요..! </div>
 				}
 				var tag = "";
 				for(i=0; i<data.length; i++){
