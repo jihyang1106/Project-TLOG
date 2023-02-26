@@ -37,8 +37,9 @@ var newOrLike=0;
 			success : function(data){
 				console.log("data.length : "+data.length);
 				var tag = "";
-				if(data.length == 0){
+				if(window.location.href.slice(-7) == "searchs" && data.length == 0){
 					tag += "<div> 해당하는 게시글이 없어요..! </div>";
+					isFetching=true;
 				}
 				for(i=0; i<data.length; i++){
 					tag += "<div class='log_div'>"
