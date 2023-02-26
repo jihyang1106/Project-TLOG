@@ -36,10 +36,10 @@ var newOrLike=0;
 			data :param,
 			success : function(data){
 				console.log("data.length : "+data.length);
+				var tag = "";
 				if(data.length == 0){
 					tag += "<div> 해당하는 게시글이 없어요..! </div>";
 				}
-				var tag = "";
 				for(i=0; i<data.length; i++){
 					tag += "<div class='log_div'>"
 					tag += "<ul class='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
