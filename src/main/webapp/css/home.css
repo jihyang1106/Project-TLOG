@@ -422,7 +422,7 @@
 /*=============== TAG LIST ===============*/
 .tag_wrap{
 	width: 100%;
-	height: 850px;
+	//height: 850px;
 	/*background-color: #959595;*/
 	margin-bottom: 75px;
 }

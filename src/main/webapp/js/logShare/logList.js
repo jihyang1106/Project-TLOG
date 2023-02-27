@@ -10,8 +10,7 @@ var newOrLike=0;
 		const params = new URL(window.location.href).searchParams;
 		var key = params.get('searchKey');
 		var word = params.get('searchWord');
-		var pathname = window.location.pathname;
-		var pn = pathname.substring(pathname.lastIndexOf('/')+1,7); //url 마지막/다음부분
+		var pn = window.location.pathname.slice(-7); //url 마지막/다음부분
 		if(pn=='logList'){
 			url = '/logShare/logLists';
 			param = {
@@ -28,7 +27,8 @@ var newOrLike=0;
 			};
 			
 		}
-		console.log(param);
+		console.log(param)
+		console.log(url)
 		$.ajax({
 			url : url,
 			type : 'GET',
@@ -37,7 +37,7 @@ var newOrLike=0;
 			success : function(data){
 				var tag = "";
 				if( pn == "searchs" && data[0].tTitle == null){//불러온 데이터가 게시글에 대한 데이터가 아닌 경우, 검색된 게시글 없음 안내 이미지와 태그리스트 띄우기
-					tag += "<img src=\"/img/log/no_result.png\"/>";
+					tag += "<img width='100%' style='padding-top: 25px' src=\"/img/log/no_result.png\"/>";
 					tag += "<div class=\"tag_wrap\">";
 					tag += "<h3 class=\"txt_tlog txt_title\">T L O G &nbsp; K E Y W O R D</h3>";
 					tag += "<p class=\"txt_desc\">";
@@ -51,9 +51,9 @@ var newOrLike=0;
 						tag += "</li>";
 					}
 
-						tag += "<li class=\"tag_item_end\"></li>";
-						tag += "</ul>";
-						tag += "</div>";
+					tag += "<li class=\"tag_item_end\"></li>";
+					tag += "</ul>";
+					tag += "</div>";
 					isFetching=true;
 				}else{
 					for(i=0; i<data.length; i++){
@@ -92,6 +92,7 @@ var newOrLike=0;
 				if(data.length<7){
 					startNum=0;
 					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로
+						console.log()
 						logLists(); //한번 더 실행
 					}
 				}
