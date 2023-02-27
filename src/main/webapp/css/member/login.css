@@ -60,7 +60,7 @@
 	list-style-type:none;
 }
 .otherLogin img{
- 	width:300px; 
+ 	width:80%;
  	height:50px;
  	margin:20px 0px;
  	border-radius:10px;
@@ -68,6 +68,6 @@
  	transition:0.3s;
 }
 .otherLogin img:hover{
-	width:310px; 
+	width:90%;
  	height:55px;
 }

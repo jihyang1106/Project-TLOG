@@ -66,7 +66,7 @@
             <div class="introduce_info">
                 <h3>&#128747;기억하고 싶은 여행&#128747;</h3>
                 <p>당신의 여행을 기록해보세요</p>
-                <button type="button" class="btn btn-outline-light">기록하기</button>
+                <a href="/logShare/logWrite" class="main-write"><button type="button" class="btn btn-outline-light")>기록하기</button></a>
             </div>
             <div class="introduce_bg"></div>
             <i class="bi bi-chevron-compact-down"></i>
