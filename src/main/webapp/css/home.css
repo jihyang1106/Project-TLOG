@@ -98,6 +98,7 @@
 	position: relative;
 	margin: 0 auto;
 	overflow: visible;
+    object-fit: cover;
 }
 
 .not_follower{
@@ -124,7 +125,7 @@
 	position: absolute;
     top: 0;
     width: 500%;
-    translate : (-960px, 0px);
+    transform: translate(-20%, 0px);
 }
 
 .list_slide li {
@@ -264,8 +265,7 @@
 
 .wrap_btn .slide_btn{
 	cursor: pointer;
-	/*color: white;*/
-	color: rgba(47, 47, 47, 80%);
+	color: white;
 }
 #leftBtn, #rightBtn{
 	box-shadow: none;

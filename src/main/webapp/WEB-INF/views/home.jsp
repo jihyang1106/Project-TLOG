@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script>
-    var index = 0;
+    var index = 1;
     // 페이지 번호
     var link_page = document.getElementsByClassName("link_page");
 
@@ -9,21 +9,32 @@
         const leftBtn = document.querySelector('#leftBtn');
         const rightBtn = document.querySelector('#rightBtn');
         const carousel = document.querySelector('.list_slide');
+        link_page[1].classList.add("clicked");
         leftBtn.addEventListener('click', () => {
-            //console.log("왼쪽 클릭");
-            if (index === 0) return;
-            link_page[index].classList.remove("clicked");
-            link_page[--index].classList.add("clicked");
-            //console.log("왼쪽 클릭 index", index);
+            console.log("왼쪽 클릭",index);
+            if (index !== 0) {
+                link_page[index].classList.remove("clicked");
+                link_page[--index].classList.add("clicked");
+                //console.log("왼쪽 클릭 index", index);
+            } else {
+                link_page[index].classList.remove("clicked");
+                index = ${cntLogListPage} -1;
+                link_page[index].classList.add("clicked");
+            }
             carousel.style.transform = 'translate(' + (-70 * index) + 'vw, 0)';
             carousel.style.transitionDuration = '500ms';
         });
         rightBtn.addEventListener('click', () => {
-            //console.log("오른쪽 클릭");
-            if (index === ${cntLogListPage}-1) return;
-            link_page[index].classList.remove("clicked");
-            link_page[++index].classList.add("clicked");
-            //console.log("오른쪽 클릭 index", index);
+            console.log("오른쪽 클릭",index);
+            if (index !== ${cntLogListPage} -1) {
+                link_page[index].classList.remove("clicked");
+                link_page[++index].classList.add("clicked");
+                //console.log("오른쪽 클릭 index", index);
+            } else {
+                link_page[index].classList.remove("clicked");
+                index = 0;
+                link_page[index].classList.add("clicked");
+            }
             carousel.style.transform = 'translate(' + (-70 * index) + 'vw, 0)';
             carousel.style.transitionDuration = '500ms';
         });
