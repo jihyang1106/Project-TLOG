@@ -1,6 +1,7 @@
 @charset "UTF-8";
 #profileContainer{
 	width:60vw;
+	min-height: 42vw;
 	position:relative;
 	margin:0 auto;
 	box-shadow:rgba(0,0,0,60%);
