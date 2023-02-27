@@ -98,6 +98,10 @@
 	position: relative;
 	margin: 0 auto;
 	overflow: visible;
+}
+.wrap_slide img{
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
