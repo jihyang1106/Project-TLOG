@@ -56,7 +56,7 @@ public class LogShareController {
 	//검색한 로그리스트
 	@ResponseBody // Ajax
 	@RequestMapping(value = "/logShare/searchLists", method = RequestMethod.GET)
-	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum,String searchKey, String searchWord, int newOrLike) {
+	public List<LogVO> searchLists(@RequestParam(value = "startNum") int startNum, String searchKey, String searchWord, int newOrLike) {
 		int limitNum = 7;
 		List<LogVO> logLists = new ArrayList<LogVO>();
 		
@@ -73,15 +73,21 @@ public class LogShareController {
 				logLists = service.searchLikeLogs(searchKey, "%" + searchWord + "%", startNum, limitNum);
 			}
 		}
-		
+
+		if(logLists.size()== 0){
+			//비었을 경우 태그리시트 띄워주기 위한 함수
+			List<LogVO> tagList = service.selectTagAll();
+			return tagList;
+		}
 		
 		//vo마다 tNum의 태그리스트 넣기
 		for(LogVO lvo : logLists) {
 			lvo.setTagList(service.selectLogTag(lvo.gettNum()));
 		}
+
 		return logLists;
 	}
-	
+
 	/*======================= LogView ===========================================*/
 	@GetMapping("/logShare/logView") 
 	public ModelAndView logView(HttpSession session, HttpServletRequest request, int tNum) { 

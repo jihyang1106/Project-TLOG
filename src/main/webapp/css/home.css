@@ -123,7 +123,7 @@
 	position: absolute;
     top: 0;
     width: 500%;
-    translate : (-960px, 0);
+    translate : (-960px, 0px);
 }
 
 .list_slide li {

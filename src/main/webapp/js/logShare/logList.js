@@ -35,51 +35,67 @@ var newOrLike=0;
 			dataType : 'json',
 			data :param,
 			success : function(data){
-				console.log("data.length : "+data.length);
 				var tag = "";
-				if(window.location.href.slice(-7) == "searchs" && data.length == 0){
-					tag += "<div> 해당하는 게시글이 없어요..! </div>";
+				if( pn == "searchs" && data[0].tTitle == null){//불러온 데이터가 게시글에 대한 데이터가 아닌 경우, 검색된 게시글 없음 안내 이미지와 태그리스트 띄우기
+					tag += "<img src=\"/img/log/no_result.png\"/>";
+					tag += "<div class=\"tag_wrap\">";
+					tag += "<h3 class=\"txt_tlog txt_title\">T L O G &nbsp; K E Y W O R D</h3>";
+					tag += "<p class=\"txt_desc\">";
+					tag += "<span class=\"txt_tlog\">TLOG의 태그별 다른 글들을 찾아보세요!</span>";
+					tag += "</p>";
+					tag += "<ul class=\"tag_list\">";
+
+					for(i=0; i<data.length; i++){
+						tag += "<li class=\"tag_item\" id='"+data[i].tagNum+"'onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagName+"'\">";
+						tag += "<p>"+data[i].tagName+"</p>";
+						tag += "</li>";
+					}
+
+						tag += "<li class=\"tag_item_end\"></li>";
+						tag += "</ul>";
+						tag += "</div>";
 					isFetching=true;
+				}else{
+					for(i=0; i<data.length; i++){
+						tag += "<div class='log_div'>"
+						tag += "<ul class='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
+						tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg'/></li>";
+						tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='"+data[i].profileImg+"'' class='logProfileImg''/></span>&emsp;";
+						tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
+						tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";
+						tag += "<li>";
+						if(data[i].isPrivate==1){
+							tag += "<span><i class='fa-solid fa-lock'></i></span>&emsp;";
+						}
+						tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
+						tag += "</li>";
+						tag += "<li><span>"+data[i].placeInfo+"</span></li>";
+						tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
+						tag += "<li>";
+						for(j=0; j<data[i].tagList.length; j++){
+							tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
+							tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
+							tag += data[i].tagList[j].tagName+"</span>&nbsp;&nbsp;";
+						}
+						tag += "</li></ul></div>";
+					}//for
+					isFetching=false; //로딩완료
+					//console.log(isFetching);
+
 				}
-				for(i=0; i<data.length; i++){
-					tag += "<div class='log_div'>"
-					tag += "<ul class='log_ul' onclick=\"window.open('/logShare/logView?tNum="+data[i].tNum+"')\">";
-					tag += "<li><img src='/upload/log/"+data[i].coverImg+"' class='coverImg'/></li>";
-					tag += "<li class='profileInfo'><span onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\"><img src='"+data[i].profileImg+"'' class='logProfileImg''/></span>&emsp;";
-					tag += "<span class='logNick' onclick=\"location.href='/member/profile?userNum="+data[i].userNum+"'\">"+data[i].userNick+"</span>";
-					tag += "<span class='logLike'><i class='fa-solid fa-thumbs-up'></i>&emsp;"+data[i].likeNum+"</span></li><hr/>";
-					tag += "<li>";
-					if(data[i].isPrivate==1){
-						tag += "<span><i class='fa-solid fa-lock'></i></span>&emsp;";
-					}
-					tag += "<span class='logTitle'>"+data[i].tTitle+"</span>";
-					tag += "</li>";
-					tag += "<li><span>"+data[i].placeInfo+"</span></li>";
-					tag += "<li><span>"+data[i].startDate+"</span>&nbsp;~&nbsp;<span>"+data[i].endDate+"</span></li>";
-					tag += "<li>";
-					for(j=0; j<data[i].tagList.length; j++){
-						tag += "<span class='tags' id='tag"+data[i].tagList[j].tagNum+"'";
-						tag += "onclick=\"location.href='/logShare/logList/searchs?searchKey=tag&searchWord="+data[i].tagList[j].tagName+"'\">";
-						tag += data[i].tagList[j].tagName+"</span>&nbsp;&nbsp;";
-					}
-					tag += "</li></ul></div>";
-				}//for
-			    $("#log_list_div").append(tag);
-			    isFetching=false; //로딩완료
-			    console.log(isFetching);
-			    $("#loading").css("display","none"); //로딩이미지 없애기
-			    
-			    startNum += data.length; //startNum 갱신
-			    
-			    //마지막 페이지일 때 첫페이지로
+
+				$("#log_list_div").append(tag);
+				$("#loading").css("display","none"); //로딩이미지 없애기
+				startNum += data.length; //startNum 갱신
+
+				//마지막 페이지일 때 첫페이지로
 				if(data.length<7){
 					startNum=0;
-					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로 
+					if(dataLength!=0 && data.length==0){ //전체데이터가 0개가 아니고 현재 0개 불러와졌을때 스크롤이벤트가 없으므로
 						logLists(); //한번 더 실행
 					}
-				} 
+				}
 				dataLength = data.length;
-				
 			}//success
 		});//ajax
  	}
