@@ -62,7 +62,7 @@
 	</select>
 	<!-- 메인) 팔로워 많은 유저 -->
 	<select id='FollowedUser' resultType='MemberVO'>
-		SELECT 	COUNT(A.userNum) AS followerNum, A.followingNum AS userNum, 
+		SELECT 	COUNT(B.userNum) AS followerNum, A.followingNum AS userNum,
 				B.userNick, B.profileImg
         FROM 	followUser A
         JOIN 	user B
