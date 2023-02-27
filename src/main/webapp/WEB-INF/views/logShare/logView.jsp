@@ -55,12 +55,13 @@
 								${t.tagName}
 							</span>&nbsp;
 					</c:forEach>
-				</li>		
-				<!-- <c:if test="${logNum==vo.userNum}"></c:if>-->
-				<li class="del_edit_btn">
-					<span class='tags' onclick='logEdit(${vo.tNum})'>수정</span>
-					<span class='tags' onclick='logDel(${vo.tNum})'>삭제</span>
 				</li>
+				<c:if test="${sessionStorage.getItem('userNum')==vo.userNum}">
+					<li class="del_edit_btn">
+						<span class='tags' onclick='logEdit(${vo.tNum}, ${vo.userNum})'>수정</span>
+						<span class='tags' onclick='logDel(${vo.tNum}), ${vo.userNum}'>삭제</span>
+					</li>
+				</c:if>
 			</ul>
 			</div>
 	    </div>
